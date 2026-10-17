@@ -1,0 +1,14 @@
+node_modules
+.next
+dist
+.git
+.env*
+.dev-cookies.txt
+tests
+docs
+.verification
+coverage
+*.tsbuildinfo
+*.log
+scripts/verify-*.ts
+scripts/setup-dev.ts

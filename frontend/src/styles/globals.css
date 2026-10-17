@@ -1,0 +1,238 @@
+@import "@fontsource/manrope/400.css";
+@import "@fontsource/manrope/600.css";
+@import "@fontsource/manrope/700.css";
+@import "./tokens.css";
+* {
+  box-sizing: border-box;
+}
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  background: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+}
+input,
+select,
+textarea {
+  background: #101822;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  width: 100%;
+  min-height: 46px;
+}
+textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--brand-primary);
+}
+:focus-visible {
+  outline: 2px solid var(--focus-ring);
+  outline-offset: 3px;
+}
+h1,
+h2,
+h3,
+p {
+  overflow-wrap: anywhere;
+}
+h1,
+h2,
+h3 {
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+}
+h1 {
+  font-size: var(--text-h1);
+}
+p {
+  line-height: 1.7;
+}
+img {
+  max-width: 100%;
+}
+.page {
+  max-width: 1600px;
+  margin: auto;
+  padding: 36px var(--page-gutter) 24px;
+  min-height: 65vh;
+}
+.button {
+  min-height: 46px;
+  padding: 12px 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--brand-primary);
+  color: var(--background);
+  border: 1px solid var(--brand-primary);
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.button.secondary {
+  background: #ffffff05;
+  border-color: #526176;
+  color: var(--text-primary);
+}
+.button.ghost {
+  background: transparent;
+  color: var(--text-primary);
+  border-color: transparent;
+}
+.button.danger {
+  background: #ffa5a510;
+  color: var(--error);
+  border-color: var(--error);
+}
+.button[aria-pressed="true"] {
+  border-color: var(--brand-primary);
+  color: var(--brand-primary);
+  background: #f4c46b12;
+}
+.eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  color: var(--brand-primary);
+}
+.muted {
+  color: var(--text-secondary);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.field {
+  display: block;
+  margin: 18px 0;
+}
+.field > span,
+.field > label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.hint {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 12px;
+  margin-top: 7px;
+}
+.error {
+  color: var(--error);
+  background: #ffa5a508;
+  border: 1px solid #ffa5a544;
+  padding: 14px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+}
+.success {
+  color: var(--success);
+  font-size: 13px;
+}
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.skip {
+  position: fixed;
+  top: -100px;
+  left: 16px;
+  z-index: 100;
+  background: var(--brand-primary);
+  color: #0b1017;
+  padding: 12px;
+}
+.skip:focus {
+  top: 12px;
+}
+.skeleton {
+  background: #1d2938;
+  border-radius: 8px;
+  min-height: 160px;
+}
+.divider {
+  border: 0;
+  border-top: 1px solid #334155;
+  margin: 32px 0;
+}
+label:has(input[type="checkbox"]) {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+input[type="checkbox"] {
+  width: 18px;
+  min-height: 18px;
+}
+progress {
+  accent-color: var(--brand-primary);
+}
+@media (max-width: 767px) {
+  .page {
+    padding-top: 24px;
+  }
+  .button {
+    min-height: 48px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *:before,
+  *:after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

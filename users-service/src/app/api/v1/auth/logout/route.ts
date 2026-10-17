@@ -1,0 +1,13 @@
+import { route, cookie } from "../../../../../shared/http";
+import { logout } from "../../../../../modules/users/interfaces/http/handlers";
+import { container } from "../../../../../bootstrap/container";
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+const endpoint = route("/api/v1/auth/logout", { POST: logout }, () => cookie(container().config));
+export const GET = endpoint.GET;
+export const POST = endpoint.POST;
+export const PATCH = endpoint.PATCH;
+export const PUT = endpoint.PUT;
+export const DELETE = endpoint.DELETE;
+export const HEAD = endpoint.HEAD;
+export const OPTIONS = endpoint.OPTIONS;

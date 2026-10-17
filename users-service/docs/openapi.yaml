@@ -1,0 +1,1903 @@
+openapi: 3.0.3
+info:
+  title: Users Service
+  version: 1.0.0
+  description: "Bounded Context Usuarios. JWT Bearer para operaciones propias. Refresh opaco solo en
+    cookie HttpOnly. Las escrituras validan Origin; no hay CORS entre orígenes por defecto. Todos
+    los objetos JSON son estrictos. Se rechazan queries repetidas/desconocidas. Body máximo 16 KiB
+    configurable. Logs sin datos de entrada ni tokens. GET admite HEAD, rutas admiten OPTIONS (204).
+    Todas las respuestas incluyen x-request-id y Cache-Control: no-store."
+servers:
+  - url: http://127.0.0.1:3001
+tags:
+  - name: Auth
+  - name: Users
+  - name: Watchlist
+  - name: Preferences
+  - name: Infrastructure
+paths:
+  /api/v1/auth/register:
+    post:
+      operationId: registerUser
+      tags:
+        - Auth
+      summary: Registra usuario y perfil en una transacción
+      description: Email normalizado con trim/lowercase. Rol USER asignado por servidor. No inicia sesión
+        automáticamente.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+            example:
+              email: samuel@example.com
+              password: PasswordSegura123!
+              displayName: Samuel
+      responses:
+        "201":
+          description: Usuario creado.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RegisterOutput"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: EMAIL_ALREADY_EXISTS o WATCHLIST_ITEM_ALREADY_EXISTS.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: PAYLOAD_TOO_LARGE.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: "UNSUPPORTED_MEDIA_TYPE: requiere JSON UTF-8 sin compresión."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMIT_EXCEEDED; Retry-After indica segundos restantes.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Retry-After:
+              schema:
+                type: integer
+                minimum: 1
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/auth/login:
+    post:
+      operationId: loginUser
+      tags:
+        - Auth
+      summary: Inicia sesión
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+            example:
+              email: samuel@example.com
+              password: PasswordSegura123!
+      responses:
+        "200":
+          description: JWT de acceso y usuario. Refresh solo en cookie, nunca en el body.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Set-Cookie:
+              schema:
+                type: string
+              description: users_refresh; HttpOnly; SameSite=Strict; Path=/api/v1/auth; Secure en
+                APP_ENV=production. Sin Domain.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: PAYLOAD_TOO_LARGE.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: "UNSUPPORTED_MEDIA_TYPE: requiere JSON UTF-8 sin compresión."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMIT_EXCEEDED; Retry-After indica segundos restantes.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Retry-After:
+              schema:
+                type: integer
+                minimum: 1
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/auth/refresh:
+    post:
+      operationId: refreshSession
+      tags:
+        - Auth
+      summary: Rota refresh y emite access token
+      description: Cookie users_refresh requerida. Rotación de un solo uso con caducidad absoluta fija.
+        Reutilizar un token consumido/revocado invalida su familia y responde 401. El frontend debe
+        serializar los refresh; dos solicitudes simultáneas se consideran replay. Ante 401 se borra
+        la cookie.
+      security:
+        - refreshCookie: []
+      parameters:
+        - name: X-CSRF-Protection
+          in: header
+          schema:
+            type: string
+            enum:
+              - "1"
+          description: Obligatoria con valor 1 cuando no se envía Origin. Si se envía Origin, debe coincidir
+            exactamente con APP_ORIGIN.
+      responses:
+        "200":
+          description: JWT de acceso y usuario. Refresh solo en cookie, nunca en el body.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Set-Cookie:
+              schema:
+                type: string
+              description: users_refresh; HttpOnly; SameSite=Strict; Path=/api/v1/auth; Secure en
+                APP_ENV=production. Sin Domain.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Session"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMIT_EXCEEDED; Retry-After indica segundos restantes.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Retry-After:
+              schema:
+                type: integer
+                minimum: 1
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/auth/logout:
+    post:
+      operationId: logoutUser
+      tags:
+        - Auth
+      summary: Revoca la familia de sesión y borra la cookie
+      description: Idempotente sin cookie o con token desconocido bien formado. Los access tokens ya
+        emitidos conservan su validez hasta expirar; el cliente debe descartarlos.
+      parameters:
+        - name: X-CSRF-Protection
+          in: header
+          schema:
+            type: string
+            enum:
+              - "1"
+          description: Obligatoria con valor 1 cuando no se envía Origin. Si se envía Origin, debe coincidir
+            exactamente con APP_ORIGIN.
+      responses:
+        "204":
+          description: Sesión revocada, sin contenido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Set-Cookie:
+              schema:
+                type: string
+              description: Elimina users_refresh mediante Max-Age=0.
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMIT_EXCEEDED; Retry-After indica segundos restantes.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Retry-After:
+              schema:
+                type: integer
+                minimum: 1
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/users/me:
+    get:
+      operationId: getCurrentUser
+      tags:
+        - Users
+      summary: Obtiene el usuario autenticado
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Usuario y perfil.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    patch:
+      operationId: updateProfile
+      tags:
+        - Users
+      summary: Actualiza parcialmente el perfil
+      security:
+        - bearerAuth: []
+      description: Solo displayName, avatarUrl y preferredLanguage. avatarUrl=null elimina el campo.
+        Campos ausentes se conservan; PATCH idéntico no modifica updatedAt.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProfilePatch"
+            example:
+              displayName: Samuel actualizado
+              avatarUrl: null
+      responses:
+        "200":
+          description: Perfil actualizado.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: PAYLOAD_TOO_LARGE.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: "UNSUPPORTED_MEDIA_TYPE: requiere JSON UTF-8 sin compresión."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/users/me/change-password:
+    post:
+      operationId: changePassword
+      tags:
+        - Users
+      summary: Cambia contraseña y revoca todas las sesiones
+      security:
+        - bearerAuth: []
+      description: "Verifica la contraseña actual, cambia el hash y revoca todos los refresh en una
+        transacción. Incrementa authVersion: Users rechaza JWT anteriores inmediatamente. Otros
+        servicios que solo verifican firma los aceptan hasta exp, salvo una política futura de
+        revocación distribuida."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangePassword"
+            example:
+              currentPassword: PasswordSegura123!
+              newPassword: NuevaPasswordSegura456!
+      responses:
+        "204":
+          description: Contraseña cambiada; volver a iniciar sesión. Se borra cookie.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: PAYLOAD_TOO_LARGE.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: "UNSUPPORTED_MEDIA_TYPE: requiere JSON UTF-8 sin compresión."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMIT_EXCEEDED; Retry-After indica segundos restantes.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+            Retry-After:
+              schema:
+                type: integer
+                minimum: 1
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/users/me/watchlist:
+    get:
+      operationId: getWatchlist
+      tags:
+        - Watchlist
+      summary: Lista referencias para ver después
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      description: Orden addedAt descendente, tituloId ascendente. Offset máximo 10000. Conteo y página
+        son lecturas separadas.
+      responses:
+        "200":
+          description: Referencias sin metadata de Catálogo.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Watchlist"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/users/me/watchlist/{tituloId}:
+    parameters:
+      - name: tituloId
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/TituloId"
+    post:
+      operationId: addToWatchlist
+      tags:
+        - Watchlist
+      summary: Agrega una referencia a Mi Lista
+      security:
+        - bearerAuth: []
+      responses:
+        "201":
+          description: Referencia agregada.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WatchlistItem"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: USER_NOT_FOUND.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: EMAIL_ALREADY_EXISTS o WATCHLIST_ITEM_ALREADY_EXISTS.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: removeFromWatchlist
+      tags:
+        - Watchlist
+      summary: Elimina una referencia de Mi Lista
+      security:
+        - bearerAuth: []
+      description: "Idempotente: devuelve 204 aunque no exista."
+      responses:
+        "204":
+          description: Referencia eliminada.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: USER_NOT_FOUND.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/users/me/preferences:
+    get:
+      operationId: getContentPreferences
+      tags:
+        - Preferences
+      summary: Lista señales explícitas del usuario
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      description: Orden updatedAt descendente, tituloId ascendente; offset máximo 10000. No calcula
+        recomendaciones.
+      responses:
+        "200":
+          description: Preferencias del usuario autenticado.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Preferences"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/users/me/preferences/{tituloId}:
+    parameters:
+      - name: tituloId
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/TituloId"
+    put:
+      operationId: setContentPreference
+      tags:
+        - Preferences
+      summary: Crea o cambia LIKE/DISLIKE
+      security:
+        - bearerAuth: []
+      description: "PUT idempotente: repetir valor conserva updatedAt; cambiarlo conserva createdAt. No
+        admite usuarioId en entrada."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PreferenceInput"
+            example:
+              value: LIKE
+      responses:
+        "200":
+          description: Preferencia guardada.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContentPreference"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: USER_NOT_FOUND.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: PAYLOAD_TOO_LARGE.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: "UNSUPPORTED_MEDIA_TYPE: requiere JSON UTF-8 sin compresión."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: removeContentPreference
+      tags:
+        - Preferences
+      summary: Elimina una señal explícita
+      security:
+        - bearerAuth: []
+      description: Idempotente, incluso si no existía.
+      responses:
+        "204":
+          description: Preferencia eliminada.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+            inactivo o refresh inválido.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: "FORBIDDEN: origen/CSRF o permisos insuficientes."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: USER_NOT_FOUND.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/health:
+    get:
+      operationId: health
+      tags:
+        - Infrastructure
+      summary: Comprueba PostgreSQL y par de claves JWT
+      responses:
+        "200":
+          description: Servicio disponible.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: SERVICE_UNAVAILABLE.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /.well-known/jwks.json:
+    get:
+      operationId: jwks
+      tags:
+        - Infrastructure
+      summary: Publica solo clave pública RSA
+      description: Consumidores fijan issuer, audience, RS256 y exp y seleccionan kid; no siguen jku del
+        token. En esta versión se publica una única clave activa.
+      responses:
+        "200":
+          description: JSON Web Key Set público.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/JWKS"
+        "400":
+          description: "VALIDATION_ERROR: JSON, campos, identificadores o paginación inválidos."
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR; sin stack ni mensajes internos.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        default:
+          description: Error general; métodos no permitidos devuelven 405 con Allow.
+          headers:
+            x-request-id:
+              schema:
+                type: string
+                format: uuid
+              description: ID generado por el servidor y correlacionado con logs.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT RS256
+    refreshCookie:
+      type: apiKey
+      in: cookie
+      name: users_refresh
+  schemas:
+    UserId:
+      type: string
+      pattern: ^usr_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: usr_00000000-0000-4000-8000-000000000001
+    TituloId:
+      type: string
+      pattern: ^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      example: ttl_00000000-0000-4000-8000-000000000001
+      description: Referencia externa del contrato de Catálogo; sin FK ni consulta síncrona a Catalog.
+    Status:
+      type: string
+      enum:
+        - ACTIVE
+        - INACTIVE
+    Role:
+      type: string
+      enum:
+        - USER
+        - ADMIN
+    PreferenceValue:
+      type: string
+      enum:
+        - LIKE
+        - DISLIKE
+    Password:
+      type: string
+      minLength: 12
+      maxLength: 128
+      writeOnly: true
+      description: 12–128 caracteres Unicode, sin NUL. No se recorta ni se normaliza; admite frases.
+    Profile:
+      type: object
+      additionalProperties: false
+      required:
+        - displayName
+        - avatarUrl
+        - preferredLanguage
+      properties:
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        avatarUrl:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 2048
+          pattern: ^https?://
+          description: URL HTTP(S) sin credenciales. null elimina el avatar; no se descarga desde el servidor.
+        preferredLanguage:
+          type: string
+          pattern: ^[a-z]{2}(-[A-Z]{2})?$
+          example: es
+    ProfilePatch:
+      type: object
+      additionalProperties: false
+      properties:
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        avatarUrl:
+          type: string
+          format: uri
+          nullable: true
+          maxLength: 2048
+          pattern: ^https?://
+          description: URL HTTP(S) sin credenciales. null elimina el avatar; no se descarga desde el servidor.
+        preferredLanguage:
+          type: string
+          pattern: ^[a-z]{2}(-[A-Z]{2})?$
+          example: es
+      minProperties: 1
+    AuthUser:
+      type: object
+      additionalProperties: false
+      required:
+        - userId
+        - email
+        - displayName
+        - status
+        - role
+      properties:
+        userId:
+          $ref: "#/components/schemas/UserId"
+        email:
+          type: string
+          format: email
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 100
+        status:
+          $ref: "#/components/schemas/Status"
+        role:
+          $ref: "#/components/schemas/Role"
+    User:
+      type: object
+      additionalProperties: false
+      required:
+        - userId
+        - email
+        - status
+        - role
+        - profile
+        - createdAt
+        - updatedAt
+      properties:
+        userId:
+          $ref: "#/components/schemas/UserId"
+        email:
+          type: string
+          format: email
+        status:
+          $ref: "#/components/schemas/Status"
+        role:
+          $ref: "#/components/schemas/Role"
+        profile:
+          $ref: "#/components/schemas/Profile"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    RegisterInput:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - password
+        - displayName
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          $ref: "#/components/schemas/Password"
+        displayName:
+          type: string
+          minLength: 1
+          maxLength: 100
+    RegisterOutput:
+      type: object
+      additionalProperties: false
+      required:
+        - user
+      properties:
+        user:
+          $ref: "#/components/schemas/AuthUser"
+    LoginInput:
+      type: object
+      additionalProperties: false
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          maxLength: 254
+        password:
+          type: string
+          minLength: 1
+          maxLength: 256
+          writeOnly: true
+    Session:
+      type: object
+      additionalProperties: false
+      required:
+        - accessToken
+        - expiresIn
+        - user
+      properties:
+        accessToken:
+          type: string
+          description: JWT RS256. Mantener en memoria del cliente; no contiene email ni passwordHash.
+        expiresIn:
+          type: integer
+          example: 900
+        user:
+          $ref: "#/components/schemas/AuthUser"
+    ChangePassword:
+      type: object
+      additionalProperties: false
+      required:
+        - currentPassword
+        - newPassword
+      properties:
+        currentPassword:
+          type: string
+          minLength: 1
+          maxLength: 256
+          writeOnly: true
+        newPassword:
+          $ref: "#/components/schemas/Password"
+    WatchlistItem:
+      type: object
+      additionalProperties: false
+      required:
+        - tituloId
+        - addedAt
+      properties:
+        tituloId:
+          $ref: "#/components/schemas/TituloId"
+        addedAt:
+          type: string
+          format: date-time
+    ContentPreference:
+      type: object
+      additionalProperties: false
+      required:
+        - tituloId
+        - value
+        - createdAt
+        - updatedAt
+      properties:
+        tituloId:
+          $ref: "#/components/schemas/TituloId"
+        value:
+          $ref: "#/components/schemas/PreferenceValue"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    PreferenceInput:
+      type: object
+      additionalProperties: false
+      required:
+        - value
+      properties:
+        value:
+          $ref: "#/components/schemas/PreferenceValue"
+    Pagination:
+      type: object
+      additionalProperties: false
+      required:
+        - page
+        - limit
+        - total
+        - totalPages
+      properties:
+        page:
+          type: integer
+          minimum: 1
+        limit:
+          type: integer
+          minimum: 1
+          maximum: 100
+        total:
+          type: integer
+          minimum: 0
+        totalPages:
+          type: integer
+          minimum: 0
+    Watchlist:
+      type: object
+      additionalProperties: false
+      required:
+        - items
+        - pagination
+      properties:
+        items:
+          type: array
+          maxItems: 100
+          items:
+            $ref: "#/components/schemas/WatchlistItem"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    Preferences:
+      type: object
+      additionalProperties: false
+      required:
+        - items
+        - pagination
+      properties:
+        items:
+          type: array
+          maxItems: 100
+          items:
+            $ref: "#/components/schemas/ContentPreference"
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    Health:
+      type: object
+      additionalProperties: false
+      required:
+        - status
+        - service
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+        service:
+          type: string
+          enum:
+            - users-service
+    JWKS:
+      type: object
+      additionalProperties: false
+      required:
+        - keys
+      properties:
+        keys:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - kty
+              - n
+              - e
+              - kid
+              - alg
+              - use
+            properties:
+              kty:
+                type: string
+                enum:
+                  - RSA
+              n:
+                type: string
+              e:
+                type: string
+              kid:
+                type: string
+              alg:
+                type: string
+                enum:
+                  - RS256
+              use:
+                type: string
+                enum:
+                  - sig
+    Error:
+      type: object
+      additionalProperties: false
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          additionalProperties: false
+          required:
+            - code
+            - message
+            - requestId
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+            requestId:
+              type: string
+              format: uuid

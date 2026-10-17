@@ -1,0 +1,11 @@
+node_modules/
+.next/
+dist/
+coverage/
+*.tsbuildinfo
+.env*
+!.env.example
+.verification/
+*.log
+.dev-cookies.txt
+docs/demo-local.json

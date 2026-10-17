@@ -1,0 +1,5 @@
+# Solo para ejecutar Next.js en el host con el MongoDB local de Compose.
+services:
+  mongo:
+    ports:
+      - "127.0.0.1:27017:27017"

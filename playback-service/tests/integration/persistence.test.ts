@@ -1,0 +1,20 @@
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { MongoClient } from "mongodb";
+import { randomUUID } from "node:crypto";
+import { initializeMongo, MongoUnitOfWork, repositories } from "../../src/modules/playback/infrastructure/mongo";
+import { asset, fixture, tituloId, user } from "../helpers";
+import * as U from "../../src/modules/playback/application/use-cases";
+const uri = process.env.TEST_MONGODB_URI;
+if (!uri || !/^mongodb:\/\/(127\.0\.0\.1|localhost):\d+\//.test(uri)) throw new Error("TEST_MONGODB_URI must explicitly target a local test replica set.");
+const client = new MongoClient(uri, { serverSelectionTimeoutMS: 5000 });
+const db = client.db(`playback_test_${randomUUID().replaceAll("-", "")}`);
+const r = repositories(db), unit = new MongoUnitOfWork(client, db);
+beforeAll(async () => { await initializeMongo(db); await r.assets.insert(asset); });
+afterAll(async () => { if (!db.databaseName.startsWith("playback_test_")) throw new Error("Unsafe cleanup"); await db.dropDatabase(); await client.close(); });
+describe("Real MongoDB replica set", () => {
+  it("creates unique and query indexes reproducibly", async () => { await initializeMongo(db); expect((await db.collection("playback_progress").indexes()).filter(i => i.unique)).toHaveLength(1); });
+  it("enforces unique assets", async () => { await expect(r.assets.insert(asset)).rejects.toMatchObject({ code: 11000 }); });
+  it("rolls back all writes when outbox publication fails", async () => { const f = fixture(); f.d.repositories = r; f.d.unit = unit; f.d.events.publish = async () => { throw new Error("outbox unavailable"); }; await expect(new U.StartPlaybackSession(f.d).execute(user, tituloId)).rejects.toThrow("outbox unavailable"); expect(await db.collection("playback_sessions").countDocuments()).toBe(0); expect(await db.collection("playback_progress").countDocuments()).toBe(0); });
+  it("serializes progress and persists completion only once under concurrency", async () => { const f = fixture(); f.d.repositories = r; f.d.unit = unit; const { session } = await new U.StartPlaybackSession(f.d).execute(user, tituloId); await new U.UpdatePlaybackProgress(f.d).execute(user, session.sessionId, 30); await Promise.all([new U.CompletePlayback(f.d).execute(user, session.sessionId), new U.CompletePlayback(f.d).execute(user, session.sessionId)]); expect(await db.collection("outbox_events").countDocuments({ eventType: "PLAYBACK_COMPLETED" })).toBe(1); expect((await r.progress.find(user.userId, tituloId))?.progress.percentage).toBe(100); });
+  it("uses the continue-watching index without collection scan", async () => { const plan = await db.collection("playback_progress").find({ userId: user.userId, continueWatching: true }).sort({ lastActivityAt: -1, tituloId: 1 }).explain("executionStats"); expect(JSON.stringify(plan.queryPlanner.winningPlan)).not.toContain("COLLSCAN"); });
+});

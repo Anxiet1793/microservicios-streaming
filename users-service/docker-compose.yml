@@ -1,0 +1,49 @@
+x-app: &app
+  image: users-service:${USERS_IMAGE_TAG:-local}
+  build:
+    context: .
+    target: runner
+  init: true
+  env_file:
+    - ${USERS_ENV_FILE:-.env}
+  environment:
+    DATABASE_URL: postgresql://users:${POSTGRES_PASSWORD:?Ejecuta npm run dev:setup}@postgres:5432/users_service
+
+services:
+  postgres:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_USER: users
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Ejecuta npm run dev:setup}
+      POSTGRES_DB: users_service
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - users_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U users -d users_service"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+  users-migrate:
+    <<: *app
+    command: ["node", "dist/migrate.mjs"]
+    healthcheck:
+      disable: true
+    restart: "no"
+    depends_on:
+      postgres:
+        condition: service_healthy
+  users-service:
+    <<: *app
+    ports:
+      - "127.0.0.1:${USERS_PORT:-3001}:3001"
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+      users-migrate:
+        condition: service_completed_successfully
+volumes:
+  users_postgres_data:

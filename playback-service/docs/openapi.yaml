@@ -1,0 +1,1303 @@
+openapi: 3.0.3
+info:
+  title: Playback Service
+  version: 0.1.0
+  description: JWT RS256 emitido por Users Service. Todas las sesiones se limitan
+    al propietario. Los MP4 se sirven desde MinIO con URLs firmadas, no desde
+    esta API.
+servers:
+  - url: http://localhost:3002
+paths:
+  /api/health:
+    get:
+      operationId: health
+      summary: Estado de MongoDB y MinIO
+      security: []
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Health"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/media/assets:
+    post:
+      operationId: uploadAsset
+      summary: "ADMIN: cargar MP4 H.264/AAC; máximo configurable 256 MiB"
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        "201":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - asset
+                properties:
+                  asset:
+                    $ref: "#/components/schemas/Asset"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/media/assets/{assetId}:
+    get:
+      operationId: getAsset
+      summary: "ADMIN: consultar metadata técnica"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: assetId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^ast_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - asset
+                properties:
+                  asset:
+                    $ref: "#/components/schemas/Asset"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    delete:
+      operationId: deleteAsset
+      summary: "ADMIN: eliminación lógica; 409 si existen sesiones ACTIVE/PAUSED"
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: assetId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^ast_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      responses:
+        "204":
+          description: Sin contenido
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/sessions:
+    post:
+      operationId: startSession
+      summary: Iniciar sesión desde el progreso anterior; reemplaza la sesión abierta
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - tituloId
+              properties:
+                tituloId:
+                  type: string
+                  pattern: ^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      responses:
+        "201":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlaybackResponse"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/sessions/{sessionId}/progress:
+    patch:
+      operationId: updateProgress
+      summary: Guardar posición absoluta; repetir posición es idempotente
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^ses_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - positionSeconds
+              properties:
+                positionSeconds: &a1
+                  type: number
+                  minimum: 0
+                  description: Segundos absolutos; máximo durationSeconds + 2, normalizado a la
+                    duración.
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/sessions/{sessionId}/pause:
+    post:
+      operationId: pausePlayback
+      summary: Pausar; posición opcional
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^ses_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              properties:
+                positionSeconds: *a1
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/sessions/{sessionId}/resume:
+    post:
+      operationId: resumePlayback
+      summary: Reanudar sesión pausada y entregar URL nueva
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^ses_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlaybackResponse"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/sessions/{sessionId}/complete:
+    post:
+      operationId: completePlayback
+      summary: Completar una sola vez; posición final igual a duración
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^ses_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SessionResponse"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/sessions/{sessionId}/refresh-url:
+    post:
+      operationId: refreshPlaybackUrl
+      summary: Renovar URL de una sesión propia abierta
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+            pattern: ^ses_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: false
+                required:
+                  - playback
+                properties:
+                  playback:
+                    $ref: "#/components/schemas/PlaybackUrl"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/me/continue-watching:
+    get:
+      operationId: continueWatching
+      summary: Títulos sin completar y con porcentaje menor a 90
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ContinuePage"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  /api/v1/playback/me/history:
+    get:
+      operationId: history
+      summary: Última reproducción por título; paginación
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10000
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        "200":
+          description: Operación completada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HistoryPage"
+        "400":
+          description: VALIDATION_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "401":
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "403":
+          description: FORBIDDEN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "404":
+          description: TITLE_NOT_FOUND / MEDIA_ASSET_NOT_FOUND / PLAYBACK_SESSION_NOT_FOUND
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "409":
+          description: INVALID_PLAYBACK_TRANSITION / TITLE_NOT_PUBLISHED /
+            MEDIA_ASSET_IN_USE / SESSION_SUPERSEDED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "413":
+          description: FILE_TOO_LARGE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "415":
+          description: UNSUPPORTED_MEDIA_TYPE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "429":
+          description: RATE_LIMITED
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: INTERNAL_SERVER_ERROR
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "503":
+          description: CATALOG_SERVICE_UNAVAILABLE / STORAGE_UNAVAILABLE
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    Error:
+      type: object
+      additionalProperties: false
+      required:
+        - error
+      properties:
+        error:
+          type: object
+          additionalProperties: false
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+    Progress:
+      type: object
+      additionalProperties: false
+      required:
+        - positionSeconds
+        - durationSeconds
+        - percentage
+        - updatedAt
+      properties:
+        positionSeconds: *a1
+        durationSeconds:
+          type: number
+          exclusiveMinimum: true
+          minimum: 0
+        percentage:
+          type: number
+          minimum: 0
+          maximum: 100
+          readOnly: true
+        updatedAt: &a2
+          type: string
+          format: date-time
+    Asset:
+      type: object
+      additionalProperties: false
+      required:
+        - assetId
+        - contentType
+        - originalFilename
+        - sizeBytes
+        - durationSeconds
+        - codec
+        - width
+        - height
+        - status
+        - createdAt
+        - updatedAt
+      properties:
+        assetId:
+          type: string
+          pattern: ^ast_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        contentType:
+          type: string
+          enum:
+            - video/mp4
+        originalFilename:
+          type: string
+        sizeBytes:
+          type: integer
+          minimum: 1
+        durationSeconds:
+          type: number
+        codec:
+          type: string
+          enum:
+            - h264
+        width:
+          type: integer
+        height:
+          type: integer
+        status:
+          type: string
+          enum:
+            - READY
+            - DELETED
+        createdAt: *a2
+        updatedAt: *a2
+    Session:
+      type: object
+      additionalProperties: false
+      required:
+        - sessionId
+        - tituloId
+        - assetId
+        - status
+        - progress
+        - startedAt
+        - lastActivityAt
+        - completedAt
+      properties:
+        sessionId:
+          type: string
+          pattern: ^ses_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        tituloId:
+          type: string
+          pattern: ^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        assetId:
+          type: string
+          pattern: ^ast_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+        status:
+          type: string
+          enum:
+            - REQUESTED
+            - ACTIVE
+            - PAUSED
+            - COMPLETED
+            - FAILED
+        progress:
+          $ref: "#/components/schemas/Progress"
+        startedAt: *a2
+        lastActivityAt: *a2
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+    PlaybackUrl:
+      type: object
+      additionalProperties: false
+      required:
+        - url
+        - expiresIn
+      properties:
+        url:
+          type: string
+          format: uri
+          description: URL S3 privada firmada; no guardar ni registrar en logs.
+        expiresIn:
+          type: integer
+          minimum: 60
+          maximum: 3600
+    PlaybackResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - session
+        - playback
+      properties:
+        session:
+          $ref: "#/components/schemas/Session"
+        playback:
+          $ref: "#/components/schemas/PlaybackUrl"
+    SessionResponse:
+      type: object
+      additionalProperties: false
+      required:
+        - session
+      properties:
+        session:
+          $ref: "#/components/schemas/Session"
+    Pagination:
+      type: object
+      additionalProperties: false
+      required:
+        - page
+        - limit
+        - total
+        - totalPages
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        totalPages:
+          type: integer
+    ContinuePage:
+      type: object
+      additionalProperties: false
+      required:
+        - data
+        - pagination
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - tituloId
+              - progress
+              - lastPlayedAt
+            properties:
+              tituloId:
+                type: string
+                pattern: ^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              progress:
+                $ref: "#/components/schemas/Progress"
+              lastPlayedAt: *a2
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    HistoryPage:
+      type: object
+      additionalProperties: false
+      required:
+        - data
+        - pagination
+      properties:
+        data:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required:
+              - tituloId
+              - lastPlayedAt
+              - completed
+            properties:
+              tituloId:
+                type: string
+                pattern: ^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$
+              lastPlayedAt: *a2
+              completed:
+                type: boolean
+        pagination:
+          $ref: "#/components/schemas/Pagination"
+    Health:
+      type: object
+      additionalProperties: false
+      required:
+        - status
+        - service
+        - dependencies
+      properties:
+        status:
+          type: string
+          enum:
+            - ok
+            - unavailable
+        service:
+          type: string
+          enum:
+            - playback-service
+        dependencies:
+          type: object
+          additionalProperties: false
+          required:
+            - mongodb
+            - objectStorage
+          properties:
+            mongodb:
+              type: string
+              enum:
+                - up
+                - down
+            objectStorage:
+              type: string
+              enum:
+                - up
+                - down

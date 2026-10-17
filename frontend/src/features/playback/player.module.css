@@ -1,0 +1,148 @@
+.page {
+  min-height: 100svh;
+  background: #05080c;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  gap: 20px;
+  border-bottom: 1px solid #263142;
+}
+.header > span:nth-child(2) {
+  font-size: 13px;
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.stage {
+  position: relative;
+  aspect-ratio: 16/9;
+  max-height: calc(100svh - 220px);
+  min-height: 220px;
+  background: #000;
+  margin: auto;
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+.stage video {
+  width: 100%;
+  height: 100%;
+  max-height: calc(100svh - 220px);
+  object-fit: contain;
+}
+.cover,
+.complete {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  background: #0b1017e8;
+}
+.cover h1 {
+  font-size: clamp(28px, 5vw, 60px);
+  max-width: 800px;
+  margin: 22px 0;
+}
+.cover p {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+.cover button {
+  margin-top: 18px;
+}
+.complete {
+  background: #0b1017ed;
+}
+.controls {
+  padding: 16px 32px 0;
+  max-width: 1440px;
+  width: 100%;
+  margin: 0 auto;
+}
+.timeline {
+  display: block;
+}
+.timeline input {
+  padding: 0;
+  border: 0;
+  width: 100%;
+  min-height: 44px;
+  accent-color: var(--brand-primary);
+  background: transparent;
+}
+.controlRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.controlRow > button:last-child {
+  margin-left: auto;
+}
+.volume {
+  width: 90px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  accent-color: var(--text-primary);
+}
+.time {
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+}
+.time span {
+  color: var(--text-secondary);
+}
+.feedback {
+  min-height: 52px;
+  padding: 4px 32px 20px;
+  color: var(--text-secondary);
+  font-size: 11px;
+  text-align: center;
+}
+.feedback .error {
+  text-align: left;
+}
+@media (max-width: 767px) {
+  .header {
+    padding: 0 12px;
+    height: 64px;
+  }
+  .header > span:nth-child(2) {
+    display: none;
+  }
+  .header > button {
+    font-size: 12px;
+  }
+  .stage {
+    max-height: none;
+  }
+  .stage video {
+    max-height: 60svh;
+  }
+  .controls {
+    padding: 8px 12px 0;
+  }
+  .volume {
+    display: none;
+  }
+  .feedback {
+    padding: 12px;
+  }
+  .cover p {
+    max-width: 260px;
+  }
+  .cover h1 {
+    font-size: 28px;
+  }
+}

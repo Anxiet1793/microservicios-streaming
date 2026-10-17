@@ -1,0 +1,49 @@
+{
+  "name": "catalog-service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24.0.0 <25"
+  },
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1",
+    "build": "next build",
+    "build:init": "esbuild scripts/init-mongo.ts --bundle --platform=node --target=node24 --format=esm --external:mongodb --outfile=dist/init-mongo.mjs",
+    "start": "next start --hostname 127.0.0.1",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "test:e2e": "npm run build && npm run verify:phase6",
+    "docs:check": "node --import tsx scripts/verify-openapi.ts",
+    "check": "npm run typecheck && npm run lint && npm test && npm run docs:check && npm run build && npm run build:init",
+    "db:init": "node --env-file-if-exists=.env --import tsx scripts/init-mongo.ts",
+    "verify:phase4": "node --import tsx scripts/verify-phase4.ts",
+    "verify:phase5": "node --import tsx scripts/verify-phase5.ts",
+    "verify:phase6": "node --import tsx scripts/verify-phase6.ts",
+    "verify:phase7": "node --import tsx scripts/verify-phase7.ts"
+  },
+  "dependencies": {
+    "mongodb": "7.6.0",
+    "next": "16.3.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@apidevtools/swagger-parser": "13.1.0",
+    "@eslint/js": "10.0.1",
+    "@types/node": "24.13.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "esbuild": "0.28.2",
+    "eslint": "10.12.0",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0",
+    "vitest": "5.0.3",
+    "yaml": "2.9.1"
+  }
+}

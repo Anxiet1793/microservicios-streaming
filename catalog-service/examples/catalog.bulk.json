@@ -1,0 +1,84 @@
+{
+  "items": [
+    {
+      "importKey": "demo:movie:orbita-de-papel",
+      "typeId": 1,
+      "ficha": {
+        "title": "Órbita de papel",
+        "synopsis": "Una expedición encuentra un archivo que transforma su misión.",
+        "releaseYear": 2025,
+        "durationMinutes": 108,
+        "genres": [1, 2],
+        "languages": [1, 2],
+        "ageRatingId": 4
+      },
+      "playbackReference": {
+        "providerId": 1,
+        "assetId": "orbita-de-papel",
+        "manifestKey": "movies/orbita-de-papel/master.m3u8"
+      }
+    },
+    {
+      "importKey": "demo:movie:el-ultimo-faro",
+      "typeId": 1,
+      "ficha": {
+        "title": "El último faro",
+        "synopsis": "Dos hermanas restauran un faro y descubren la historia de su comunidad.",
+        "releaseYear": 2024,
+        "durationMinutes": 96,
+        "genres": [2, 12],
+        "languages": [1],
+        "ageRatingId": 3
+      },
+      "playbackReference": {
+        "providerId": 1,
+        "assetId": "el-ultimo-faro",
+        "manifestKey": "movies/el-ultimo-faro/master.m3u8"
+      }
+    },
+    {
+      "importKey": "demo:movie:mapas-del-viento",
+      "typeId": 1,
+      "ficha": {
+        "title": "Mapas del viento",
+        "synopsis": "Un equipo documenta los paisajes y relatos de una ruta imaginaria.",
+        "releaseYear": 2026,
+        "durationMinutes": 82,
+        "genres": [5, 10],
+        "languages": [1, 10],
+        "ageRatingId": 1
+      },
+      "playbackReference": {
+        "providerId": 1,
+        "assetId": "mapas-del-viento",
+        "manifestKey": "movies/mapas-del-viento/master.m3u8"
+      }
+    },
+    {
+      "importKey": "demo:series:bitacoras-del-manana",
+      "typeId": 2,
+      "ficha": {
+        "title": "Bitácoras del mañana",
+        "synopsis": "Historias de una estación de investigación fuera de la Tierra.",
+        "releaseYear": 2026,
+        "genres": [1, 2],
+        "languages": [1, 2],
+        "ageRatingId": 1
+      },
+      "playbackReference": null
+    },
+    {
+      "importKey": "demo:series:la-plaza-de-los-inventos",
+      "typeId": 2,
+      "ficha": {
+        "title": "La plaza de los inventos",
+        "synopsis": "Un grupo de vecinos resuelve problemas cotidianos con ideas inesperadas.",
+        "releaseYear": 2025,
+        "genres": [3, 13],
+        "languages": [1],
+        "ageRatingId": 1
+      },
+      "playbackReference": null
+    }
+  ]
+}

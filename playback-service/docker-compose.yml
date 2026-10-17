@@ -1,0 +1,62 @@
+x-app: &app
+  image: playback-service:local
+  build: .
+  init: true
+  env_file: .env
+  environment: &environment
+    MONGODB_URI: mongodb://mongodb:27017/?replicaSet=rs0
+    MINIO_ENDPOINT: minio
+    MINIO_PORT: 9000
+    CATALOG_SERVICE_URL: http://host.docker.internal:3000
+    USERS_JWKS_URL: http://host.docker.internal:3001/.well-known/jwks.json
+  extra_hosts:
+    - host.docker.internal:host-gateway
+  networks: [default, data]
+services:
+  mongodb:
+    image: mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2
+    command: [mongod, --replSet, rs0, --bind_ip_all]
+    ports: ["127.0.0.1:27019:27017"]
+    volumes: [playback_mongo_data:/data/db]
+    networks: [data]
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, 'try { quit(rs.status().ok ? 0 : 1) } catch { rs.initiate({_id:"rs0",members:[{_id:0,host:"mongodb:27017"}]}); quit(1) }']
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  minio:
+    image: playback-minio:2025-10-15
+    build:
+      context: .
+      dockerfile: docker/minio.Dockerfile
+    command: [server, /data, --console-address, ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:?Run npm run dev:setup}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:?Run npm run dev:setup}
+    ports: ["127.0.0.1:9000:9000", "127.0.0.1:9001:9001"]
+    volumes: [playback_minio_data:/data]
+    healthcheck:
+      test: [CMD, curl, -f, http://localhost:9000/minio/health/live]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  playback-init:
+    <<: *app
+    command: [node, dist/init.mjs]
+    restart: "no"
+    healthcheck: { disable: true }
+    depends_on:
+      mongodb: { condition: service_healthy }
+      minio: { condition: service_healthy }
+  playback-service:
+    <<: *app
+    restart: unless-stopped
+    ports: ["127.0.0.1:3002:3002"]
+    depends_on:
+      playback-init: { condition: service_completed_successfully }
+volumes:
+  playback_mongo_data:
+  playback_minio_data:
+networks:
+  data:
+    internal: true

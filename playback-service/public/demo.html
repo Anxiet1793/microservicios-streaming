@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Streaming · Reproducción</title>
+<style>body{margin:0;background:#101114;color:#f3f3f5;font:16px system-ui}main{max-width:1050px;margin:auto;padding:28px}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:36px}strong{letter-spacing:.2em;color:#ff485b}h1{font-size:clamp(26px,4vw,44px);margin-bottom:10px}p{color:#b8bbc4}section{background:#191b21;padding:22px;border:1px solid #2d303b;border-radius:12px;margin:20px 0}label{display:block;margin:14px 0 6px}input{box-sizing:border-box;width:100%;padding:12px;border:1px solid #424650;background:#101114;color:white;border-radius:6px}button{background:#ed2842;color:white;border:0;border-radius:6px;padding:12px 18px;margin:16px 8px 0 0;cursor:pointer}button.secondary{background:#333742}video{width:100%;max-height:580px;background:black;border-radius:10px}#status{min-height:24px;color:#d1d6e3}li{margin:12px 0;overflow-wrap:anywhere}small{color:#a7adba}code{overflow-wrap:anywhere}</style></head>
+<body><main><header><strong>STREAMING</strong><span>Tu espacio de reproducción</span></header><h1>Continúa donde lo dejaste</h1><p>Abre tu video, pausa y vuelve cuando quieras.</p>
+<section><label for="token">Access token de tu cuenta</label><input id="token" type="password" autocomplete="off" placeholder="Pega el accessToken obtenido al iniciar sesión"><small>Se mantiene solo en esta página. Al recargar, vuelve a introducirlo.</small><label for="title">Identificador del título</label><input id="title" placeholder="ttl_…"><button id="start">Reproducir</button><button id="load" class="secondary">Continuar viendo / Historial</button></section>
+<p id="status" role="status" aria-live="polite">Selecciona un título para comenzar.</p><video id="video" controls preload="metadata" playsinline></video><section><h2>Continuar viendo</h2><ul id="continuing"></ul><h2>Historial</h2><ul id="history"></ul></section></main>
+<script type="module">
+const $ = id => document.getElementById(id), video = $('video');
+let session, state, replacing = false, refreshTimer, queue = Promise.resolve();
+function report(error) { $('status').textContent = error.message || 'No se pudo completar la operación.'; }
+function serial(action) { queue = queue.then(action).catch(report); return queue; }
+async function api(path, method = 'GET', body) {
+  const response = await fetch('/api/v1/playback/' + path, {method,headers:{Authorization:'Bearer '+$('token').value,...(body === undefined ? {} : {'Content-Type':'application/json'})}, ...(body === undefined ? {} : {body:JSON.stringify(body)})});
+  const data = await response.json(); if (!response.ok) throw new Error(data.error.code === 'UNAUTHORIZED' ? 'La sesión de acceso venció. Inicia sesión de nuevo y actualiza el token.' : data.error.code); return data;
+}
+async function source(playback, position, autoPlay) {
+  replacing = true; clearTimeout(refreshTimer);
+  try {
+    video.src = playback.url;
+    await new Promise((resolve,reject) => { video.addEventListener('loadedmetadata',resolve,{once:true}); video.addEventListener('error',()=>reject(new Error('No se pudo abrir el video.')),{once:true}); });
+    video.currentTime = position; if (autoPlay) await video.play();
+    refreshTimer = setTimeout(() => serial(async () => { if (!session || state === 'COMPLETED') return; const position = video.currentTime, playing = !video.paused; const result = await api('sessions/'+session+'/refresh-url','POST'); await source(result.playback,position,playing); }), Math.max(10,playback.expiresIn-60)*1000);
+  } finally { replacing = false; }
+}
+$('start').onclick = () => serial(async () => {
+  const result = await api('sessions','POST',{tituloId:$('title').value.trim()}); session = result.session.sessionId; state = 'ACTIVE';
+  await source(result.playback,result.session.progress.positionSeconds,true); $('status').textContent = 'Reproduciendo. Tu progreso se guarda cada 10 segundos.';
+});
+setInterval(() => { if (session && !video.paused && !replacing) { const position = video.currentTime; serial(() => api('sessions/'+session+'/progress','PATCH',{positionSeconds:position})); } },10000);
+video.addEventListener('pause', () => { if (!session || replacing || video.ended) return; const position = video.currentTime; serial(async () => { await api('sessions/'+session+'/pause','POST',{positionSeconds:position}); state='PAUSED'; }); });
+video.addEventListener('play', () => { if (!session || replacing) return; serial(async () => { if(state==='PAUSED') { await api('sessions/'+session+'/resume','POST'); state='ACTIVE'; } }); });
+video.addEventListener('ended', () => { if (!session || replacing) return; serial(async () => { await api('sessions/'+session+'/complete','POST'); state='COMPLETED'; clearTimeout(refreshTimer); $('status').textContent='Video completado.'; await lists(); }); });
+async function lists() {
+  const [continued,history] = await Promise.all([api('me/continue-watching'),api('me/history')]);
+  for (const [element,data] of [['continuing',continued.data],['history',history.data]]) {
+    $(element).replaceChildren();
+    for (const item of data) { const li=document.createElement('li'), button=document.createElement('button'); li.textContent=item.tituloId+' · '+(item.progress ? Math.round(item.progress.positionSeconds)+' s' : item.completed ? 'Completado' : 'En curso'); button.textContent='Abrir'; button.onclick=()=>{$('title').value=item.tituloId; $('start').click();}; li.append(button); $(element).append(li); }
+    if (!data.length) $(element).textContent='Todavía no hay títulos en esta sección.';
+  }
+}
+$('load').onclick=()=>serial(lists);
+window.addEventListener('pagehide',()=> { if(!session || state==='COMPLETED') return; void fetch('/api/v1/playback/sessions/'+session+'/progress',{method:'PATCH',keepalive:true,headers:{Authorization:'Bearer '+$('token').value,'Content-Type':'application/json'},body:JSON.stringify({positionSeconds:video.currentTime})}).catch(()=>{}); });
+</script></body></html>

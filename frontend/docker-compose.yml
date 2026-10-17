@@ -1,0 +1,44 @@
+services:
+  redis:
+    image: redis:7.4-alpine
+    command: [redis-server, --appendonly, "yes", --maxmemory, 128mb, --maxmemory-policy, noeviction]
+    volumes: [nevaro_sessions:/data]
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    networks: [sessions]
+    restart: unless-stopped
+  frontend:
+    image: nevaro-frontend:local
+    build:
+      context: .
+      args:
+        MEDIA_ORIGIN: ${MEDIA_ORIGIN:-http://localhost:9000}
+    init: true
+    env_file: .env
+    environment:
+      USERS_SERVICE_URL: http://users-service:3001
+      CATALOG_SERVICE_URL: http://catalog-service:3000
+      PLAYBACK_SERVICE_URL: http://playback-service:3002
+      REDIS_URL: redis://redis:6379
+    ports: ["127.0.0.1:3003:3003"]
+    depends_on:
+      redis: { condition: service_healthy }
+    networks: [sessions, users, catalog, playback]
+    restart: unless-stopped
+volumes:
+  nevaro_sessions:
+networks:
+  sessions:
+    internal: true
+  users:
+    external: true
+    name: users-service_default
+  catalog:
+    external: true
+    name: catalog-service_default
+  playback:
+    external: true
+    name: playback-service_default

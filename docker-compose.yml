@@ -1,0 +1,311 @@
+name: ${COMPOSE_PROJECT_NAME:-nevaro}
+
+x-users-environment: &users-environment
+  DATABASE_URL: postgresql://users:${POSTGRES_PASSWORD:?Ejecuta npm run stack:setup}@users-postgres:5432/users_service
+  APP_ENV: development
+  APP_ORIGIN: ${APP_ORIGIN:-http://localhost:8080}
+  JWT_PRIVATE_KEY: ${JWT_PRIVATE_KEY:?Ejecuta npm run stack:setup}
+  JWT_PUBLIC_KEY: ${JWT_PUBLIC_KEY:?Ejecuta npm run stack:setup}
+  JWT_KEY_ID: ${JWT_KEY_ID:-nevaro-local-1}
+  JWT_ISSUER: ${JWT_ISSUER:-users-service}
+  JWT_AUDIENCE: ${JWT_AUDIENCE:-streaming-services}
+  ACCESS_TOKEN_TTL: ${ACCESS_TOKEN_TTL:-900}
+  REFRESH_TOKEN_TTL: ${REFRESH_TOKEN_TTL:-2592000}
+
+x-catalog-environment: &catalog-environment
+  MONGODB_URI: mongodb://catalog-mongodb:27017
+  MONGODB_DATABASE: catalog_service
+  USERS_JWKS_URL: http://users-service:3001/.well-known/jwks.json
+  JWT_ISSUER: ${JWT_ISSUER:-users-service}
+  JWT_AUDIENCE: ${JWT_AUDIENCE:-streaming-services}
+
+x-playback-environment: &playback-environment
+  MONGODB_URI: mongodb://playback-mongodb:27017/?replicaSet=rs0
+  MONGODB_DATABASE: playback_service
+  MINIO_ENDPOINT: minio
+  MINIO_PORT: "9000"
+  MINIO_USE_SSL: "false"
+  MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:?Ejecuta npm run stack:setup}
+  MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:?Ejecuta npm run stack:setup}
+  MINIO_BUCKET: streaming-media
+  MINIO_PUBLIC_URL: ${MEDIA_ORIGIN:-http://localhost:9000}
+  PLAYBACK_URL_TTL: "900"
+  CATALOG_SERVICE_URL: http://catalog-service:3000
+  USERS_JWKS_URL: http://users-service:3001/.well-known/jwks.json
+  JWT_ISSUER: ${JWT_ISSUER:-users-service}
+  JWT_AUDIENCE: ${JWT_AUDIENCE:-streaming-services}
+  APP_ORIGIN: ${APP_ORIGIN:-http://localhost:8080}
+  MAX_UPLOAD_BYTES: "268435456"
+
+services:
+  users-postgres:
+    image: postgres:17-bookworm
+    environment:
+      POSTGRES_USER: users
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Ejecuta npm run stack:setup}
+      POSTGRES_DB: users_service
+    volumes: [users-postgres-data:/var/lib/postgresql/data]
+    networks: [users-data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, pg_isready, -h, "127.0.0.1", -U, users, -d, users_service]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  users-migrate:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-users:local
+    pull_policy: never
+    init: true
+    environment:
+      DATABASE_URL: postgresql://users:${POSTGRES_PASSWORD:?Ejecuta npm run stack:setup}@users-postgres:5432/users_service
+    command: [node, dist/migrate.mjs]
+    networks: [users-data]
+    restart: "no"
+    healthcheck: { disable: true }
+    depends_on:
+      users-postgres: { condition: service_healthy }
+
+  users-seed:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-users:local
+    pull_policy: never
+    init: true
+    environment:
+      DATABASE_URL: postgresql://users:${POSTGRES_PASSWORD:?Ejecuta npm run stack:setup}@users-postgres:5432/users_service
+      APP_ENV: development
+      SEED_PASSWORD: ${SEED_PASSWORD:?Ejecuta npm run stack:setup}
+      DEMO_SEED_ENABLED: ${DEMO_SEED_ENABLED:-true}
+    command:
+      [
+        node,
+        --input-type=module,
+        -e,
+        "if (process.env.DEMO_SEED_ENABLED === 'true') await import('./dist/seed.mjs'); else console.log('Demo Users seed disabled');",
+      ]
+    networks: [users-data]
+    restart: "no"
+    healthcheck: { disable: true }
+    depends_on:
+      users-migrate: { condition: service_completed_successfully }
+
+  users-service:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-users:local
+    build: { context: ./users-service, target: runner }
+    init: true
+    environment: *users-environment
+    ports: ["127.0.0.1:${USERS_PORT:-8081}:3001"]
+    networks: [edge, backplane, users-data]
+    restart: unless-stopped
+    depends_on:
+      users-postgres: { condition: service_healthy }
+      users-migrate: { condition: service_completed_successfully }
+
+  catalog-mongodb:
+    image: mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2
+    volumes: [catalog-mongodb-data:/data/db]
+    networks: [catalog-data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, "quit(db.adminCommand({ping:1}).ok ? 0 : 1)"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  catalog-init:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-catalog:local
+    pull_policy: never
+    init: true
+    environment: *catalog-environment
+    command: [node, init-mongo.mjs]
+    networks: [catalog-data]
+    restart: "no"
+    healthcheck: { disable: true }
+    depends_on:
+      catalog-mongodb: { condition: service_healthy }
+
+  catalog-service:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-catalog:local
+    build: { context: ./catalog-service, target: runner }
+    init: true
+    environment: *catalog-environment
+    ports: ["127.0.0.1:${CATALOG_PORT:-8082}:3000"]
+    networks: [edge, backplane, catalog-data]
+    restart: unless-stopped
+    depends_on:
+      catalog-init: { condition: service_completed_successfully }
+      users-service: { condition: service_healthy }
+
+  playback-mongodb:
+    image: mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2
+    command: [mongod, --replSet, rs0, --bind_ip_all]
+    volumes: [playback-mongodb-data:/data/db]
+    networks: [playback-data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, mongosh, --quiet, --eval, "quit(db.hello().isWritablePrimary ? 0 : 1)"]
+      interval: 5s
+      timeout: 5s
+      start_period: 15s
+      retries: 30
+
+  playback-replica-init:
+    image: mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2
+    entrypoint: [/bin/bash, -ec]
+    command:
+      - |
+        for attempt in {1..60}; do
+          if mongosh --host playback-mongodb --quiet --eval 'quit(db.adminCommand({ping:1}).ok ? 0 : 1)' >/dev/null 2>&1; then
+            exec mongosh --host playback-mongodb --quiet /stack/init-playback-replica.js
+          fi
+          sleep 2
+        done
+        echo 'Playback MongoDB did not accept connections' >&2
+        exit 1
+    volumes: [./scripts/docker/init-playback-replica.js:/stack/init-playback-replica.js:ro]
+    networks: [playback-data]
+    restart: "no"
+    # Primary health depends on this initializer: waiting for healthy here would deadlock.
+    depends_on:
+      playback-mongodb: { condition: service_started }
+
+  minio:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-minio:local
+    build: { context: ./playback-service, dockerfile: docker/minio.Dockerfile }
+    command: [server, /data, --console-address, ":9001"]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:?Ejecuta npm run stack:setup}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:?Ejecuta npm run stack:setup}
+    ports: ["127.0.0.1:${MINIO_API_PORT:-9000}:9000", "127.0.0.1:${MINIO_CONSOLE_PORT:-9001}:9001"]
+    volumes: [minio-data:/data]
+    networks: [edge, backplane, playback-data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, curl, --fail, --silent, http://localhost:9000/minio/health/ready]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  playback-init:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-playback:local
+    pull_policy: never
+    init: true
+    environment: *playback-environment
+    command: [node, dist/init.mjs]
+    networks: [playback-data]
+    restart: "no"
+    healthcheck: { disable: true }
+    depends_on:
+      playback-mongodb: { condition: service_healthy }
+      playback-replica-init: { condition: service_completed_successfully }
+      minio: { condition: service_healthy }
+
+  playback-service:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-playback:local
+    build: { context: ./playback-service, target: runner }
+    init: true
+    environment: *playback-environment
+    ports: ["127.0.0.1:${PLAYBACK_PORT:-8083}:3002"]
+    networks: [edge, backplane, playback-data]
+    restart: unless-stopped
+    depends_on:
+      playback-init: { condition: service_completed_successfully }
+      playback-mongodb: { condition: service_healthy }
+      minio: { condition: service_healthy }
+      users-service: { condition: service_healthy }
+      catalog-service: { condition: service_healthy }
+
+  redis:
+    image: redis:7.4-alpine
+    command: [redis-server, --appendonly, "yes", --maxmemory, 128mb, --maxmemory-policy, noeviction]
+    volumes: [redis-data:/data]
+    networks: [sessions]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, redis-cli, ping]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  stack-seed:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-playback:local
+    pull_policy: never
+    init: true
+    command: [node, /stack-scripts/seed-stack.mjs]
+    environment:
+      DEMO_SEED_ENABLED: ${DEMO_SEED_ENABLED:-true}
+      SEED_PASSWORD: ${SEED_PASSWORD:?Ejecuta npm run stack:setup}
+      USERS_BASE_URL: http://users-service:3001
+      CATALOG_BASE_URL: http://catalog-service:3000
+      PLAYBACK_BASE_URL: http://playback-service:3002
+      SEED_STATE_FILE: /app/public/stack-seed.json
+    volumes:
+      - ./scripts:/stack-scripts:ro
+      # This non-server container reuses the image's node-owned directory for volume copy-up.
+      - seed-state:/app/public
+    networks: [backplane]
+    restart: "no"
+    healthcheck: { disable: true }
+    depends_on:
+      users-seed: { condition: service_completed_successfully }
+      users-service: { condition: service_healthy }
+      catalog-service: { condition: service_healthy }
+      playback-service: { condition: service_healthy }
+
+  frontend:
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-frontend:local
+    build:
+      context: ./frontend
+      args: { MEDIA_ORIGIN: "${MEDIA_ORIGIN:-http://localhost:9000}" }
+    init: true
+    environment:
+      USERS_SERVICE_URL: http://users-service:3001
+      CATALOG_SERVICE_URL: http://catalog-service:3000
+      PLAYBACK_SERVICE_URL: http://playback-service:3002
+      REDIS_URL: redis://redis:6379
+      SESSION_SECRET: ${SESSION_SECRET:?Ejecuta npm run stack:setup}
+      APP_ORIGIN: ${APP_ORIGIN:-http://localhost:8080}
+    ports: ["127.0.0.1:${FRONTEND_PORT:-8080}:3003"]
+    networks: [edge, backplane, sessions]
+    restart: unless-stopped
+    depends_on:
+      redis: { condition: service_healthy }
+      users-service: { condition: service_healthy }
+      catalog-service: { condition: service_healthy }
+      playback-service: { condition: service_healthy }
+      stack-seed: { condition: service_completed_successfully }
+
+  smoke:
+    profiles: [tools]
+    image: ${COMPOSE_PROJECT_NAME:-nevaro}-playback:local
+    pull_policy: never
+    init: true
+    command: [node, /stack-scripts/smoke-test.mjs]
+    environment:
+      USERS_BASE_URL: http://users-service:3001
+      CATALOG_BASE_URL: http://catalog-service:3000
+      PLAYBACK_BASE_URL: http://playback-service:3002
+      FRONTEND_BASE_URL: http://frontend:3003
+      APP_ORIGIN: ${APP_ORIGIN:-http://localhost:8080}
+      MEDIA_ORIGIN: ${MEDIA_ORIGIN:-http://localhost:9000}
+      MINIO_INTERNAL_URL: http://minio:9000
+      DEMO_SEED_ENABLED: ${DEMO_SEED_ENABLED:-true}
+    volumes: [./scripts:/stack-scripts:ro]
+    networks: [backplane]
+    restart: "no"
+    healthcheck: { disable: true }
+
+volumes:
+  users-postgres-data:
+  catalog-mongodb-data:
+  playback-mongodb-data:
+  minio-data:
+  redis-data:
+  seed-state:
+
+networks:
+  edge:
+  backplane: { internal: true }
+  users-data: { internal: true }
+  catalog-data: { internal: true }
+  playback-data: { internal: true }
+  sessions: { internal: true }

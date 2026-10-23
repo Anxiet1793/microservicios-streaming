@@ -1,0 +1,35 @@
+meta {
+  name: 03 Delete completed own asset
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{playbackBaseUrl}}/api/v1/media/assets/{{assetId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminAccessToken}}
+}
+
+script:pre-request {
+  if (!(bru.getVar("adminAccessToken") || bru.getEnvVar("adminAccessToken"))) throw new Error("Login ADMIN first");
+}
+
+tests {
+  test("HTTP 204", function () { expect(res.getStatus()).to.equal(204); });
+  
+  test("Empty response", function () { expect(!res.getBody()).to.equal(true); });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+}
+
+docs {
+  Destructivo para el asset actual. Completar sesiones y retirar título primero. No forma parte del demo predeterminado.
+}
+

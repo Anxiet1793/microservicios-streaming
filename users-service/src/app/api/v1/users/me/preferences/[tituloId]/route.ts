@@ -1,8 +1,14 @@
 import { route } from "../../../../../../../shared/http";
-import { setPreference, removePreference } from "../../../../../../../modules/users/interfaces/http/handlers";
+import {
+  setPreference,
+  removePreference,
+} from "../../../../../../../modules/users/interfaces/http/handlers";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-const endpoint = route("/api/v1/users/me/preferences/{tituloId}", { PUT: setPreference, DELETE: removePreference });
+const endpoint = route("/api/v1/users/me/preferences/{tituloId}", {
+  PUT: setPreference,
+  DELETE: removePreference,
+});
 export const GET = endpoint.GET;
 export const POST = endpoint.POST;
 export const PATCH = endpoint.PATCH;

@@ -2,11 +2,7 @@ import { Brand } from "../../components/ui";
 import s from "../../features/auth/auth.module.css";
 import { currentUser, sessionId } from "../../lib/server/session";
 import { redirect } from "next/navigation";
-export default async function Layout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function Layout({ children }: { children: React.ReactNode }) {
   let authenticated = false;
   if (await sessionId()) {
     try {
@@ -30,10 +26,7 @@ export default async function Layout({
             <br />
             <em>un lugar.</em>
           </h2>
-          <p>
-            Una sala para descubrir nuevos mundos. Y volver a los que dejaste a
-            medias.
-          </p>
+          <p>Una sala para descubrir nuevos mundos. Y volver a los que dejaste a medias.</p>
         </div>
         <small>TU PRÓXIMA HISTORIA EMPIEZA AQUÍ</small>
       </aside>

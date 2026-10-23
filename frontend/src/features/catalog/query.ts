@@ -1,6 +1,4 @@
-export function exploreQuery(
-  query: Record<string, string | string[] | undefined>,
-) {
+export function exploreQuery(query: Record<string, string | string[] | undefined>) {
   const result = new URLSearchParams({ limit: "24" });
   const bounds: Record<string, [number, number]> = {
     type: [1, 2],

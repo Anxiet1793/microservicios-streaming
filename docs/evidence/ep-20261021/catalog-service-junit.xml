@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="103" failures="0" errors="0" time="3.3881609">
+    <testsuite name="tests/api/authorization.test.ts" timestamp="2026-10-21T05:37:59.309Z" hostname="Samuel" tests="25" failures="0" errors="0" skipped="0" time="0.1230507">
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; denies anonymous and USER before parsing or opening MongoDB" time="0.0394775">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; denies anonymous and USER before parsing or opening MongoDB" time="0.0034305">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; denies anonymous and USER before parsing or opening MongoDB" time="0.0023169">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; accepts ADMIN using the public key only and caches the trusted JWKS" time="0.0053769">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;role&quot;:[&quot;ADMIN&quot;]}" time="0.0018322">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;iat&quot;:&quot;invalid&quot;}" time="0.001853">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;iat&quot;:1792561132}" time="0.0015638">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;iat&quot;:1792557472}" time="0.0019173">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;role&quot;:&quot;ROOT&quot;}" time="0.001935">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;role&quot;:null}" time="0.0015861">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;jti&quot;:123}" time="0.0015597">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;jti&quot;:&quot;&quot;}" time="0.0017394">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;sub&quot;:&quot;internal-id&quot;}" time="0.0016412">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;userId&quot;:&quot;another-user&quot;}" time="0.0012793">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;iss&quot;:&quot;evil&quot;}" time="0.0017937">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;aud&quot;:&quot;evil&quot;}" time="0.0015526">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;exp&quot;:1}" time="0.0013832">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {}" time="0.0014621">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {}" time="0.0016613">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {}" time="0.0016789">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects malformed/incompatible claims {&quot;nbf&quot;:1792564672}" time="0.0016022">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects invalid protected headers {&quot;typ&quot;:&quot;NOT-JWT&quot;}" time="0.0014677">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects invalid protected headers {&quot;kid&quot;:&quot;other&quot;}" time="0.0018166">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; rejects bad signatures, unsigned tokens, HS256 and oversized authorization" time="0.0037528">
+        </testcase>
+        <testcase classname="tests/api/authorization.test.ts" name="Catalog authorization with real RSA signatures and HTTP JWKS &gt; fails closed on JWKS outage and refuses credentialed or non-HTTP key URLs" time="0.009134">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/api/routes.test.ts" timestamp="2026-10-21T05:37:59.318Z" hostname="Samuel" tests="17" failures="0" errors="0" skipped="0" time="0.0550323">
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; imports a mixed batch with stable original indices and partial HTTP 207" time="0.0294826">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; accepts the configured maximum exactly and rejects maximum+1 without writes" time="0.0026215">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; does not persist an entirely invalid batch" time="0.0011006">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; maps duplicate retries, conflicting import keys and uncertain outcomes truthfully" time="0.0020179">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; passes filters/search/page through normalization and keeps list metadata minimal" time="0.0043377">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; represents an empty catalog without fictional pages or data" time="0.0006519">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; rejects invalid list input ?limit=101 before persistence" time="0.0006363">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; rejects invalid list input ?page=1&amp;page=2 before persistence" time="0.0004518">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; rejects invalid list input ?status=99 before persistence" time="0.0006469">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; rejects invalid list input ?genre[$ne]=1 before persistence" time="0.0005404">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; rejects invalid list input ?q=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx before persistence" time="0.0006792">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; returns a withdrawn title directly, while consumers must decide visibility" time="0.0009562">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; distinguishes invalid identity from a valid identity that does not exist" time="0.0022809">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; updates only editorial fields and rejects protected fields without persisting" time="0.0017145">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; publishes, withdraws and repeats status idempotently without forbidden transitions" time="0.0018357">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; health and queries fail safely when persistence is unavailable" time="0.0009713">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Catalog HTTP routes with controlled repository boundary &gt; rejects malformed JSON and provides method metadata without leaking internals" time="0.0011878">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/contract/public.test.ts" timestamp="2026-10-21T05:37:59.322Z" hostname="Samuel" tests="3" failures="0" errors="0" skipped="0" time="0.4694593">
+        <testcase classname="tests/contract/public.test.ts" name="preserves the public playback-facing reference and publication contract for all statuses" time="0.3868481">
+        </testcase>
+        <testcase classname="tests/contract/public.test.ts" name="keeps the declared status IDs synchronized with the producer&apos;s domain" time="0.0784229">
+        </testcase>
+        <testcase classname="tests/contract/public.test.ts" name="serializes optional editorial data without losing numeric/name equivalences" time="0.0026003">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/mongodb.test.ts" timestamp="2026-10-21T05:37:59.323Z" hostname="Samuel" tests="7" failures="0" errors="0" skipped="0" time="2.665939">
+        <testcase classname="tests/integration/mongodb.test.ts" name="MongoCatalogRepository con MongoDB real aislado &gt; inicializa validadores e índices de forma idempotente" time="0.0407779">
+        </testcase>
+        <testcase classname="tests/integration/mongodb.test.ts" name="MongoCatalogRepository con MongoDB real aislado &gt; inserta y recupera un agregado sin cambiar su identidad" time="0.0243776">
+        </testcase>
+        <testcase classname="tests/integration/mongodb.test.ts" name="MongoCatalogRepository con MongoDB real aislado &gt; reconoce reintentos y no sobrescribe contenido por conflicto de importKey" time="0.0279186">
+        </testcase>
+        <testcase classname="tests/integration/mongodb.test.ts" name="MongoCatalogRepository con MongoDB real aislado &gt; reconcilia dos importaciones concurrentes con una sola inserción" time="0.0238411">
+        </testcase>
+        <testcase classname="tests/integration/mongodb.test.ts" name="MongoCatalogRepository con MongoDB real aislado &gt; resuelve repetidos del lote y rechaza grupos con contenido contradictorio" time="0.0073767">
+        </testcase>
+        <testcase classname="tests/integration/mongodb.test.ts" name="MongoCatalogRepository con MongoDB real aislado &gt; aplica PATCH real y rechaza una escritura con versión obsoleta" time="0.0288898">
+        </testcase>
+        <testcase classname="tests/integration/mongodb.test.ts" name="MongoCatalogRepository con MongoDB real aislado &gt; filtra por texto/categorías y limita la proyección paginada" time="0.0169246">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/application.test.ts" timestamp="2026-10-21T05:37:59.325Z" hostname="Samuel" tests="9" failures="0" errors="0" skipped="0" time="0.0154516">
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; busca por TituloId y entrega equivalencias sin metadatos internos" time="0.0061439">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; distingue inexistencia de identidad inválida" time="0.0012284">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; filtra y pagina sin exponer ficha completa ni referencia técnica" time="0.0018813">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; importa válidos en una única llamada preservando índices originales" time="0.0011318">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; no escribe lotes vacíos, excesivos ni enteramente inválidos" time="0.00073">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; distingue duplicados, conflictos y resultados indeterminados" time="0.000986">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; no inventa éxito si el repositorio omite resultados" time="0.0004061">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; actualiza la ficha, omite no-op y propaga conflictos concurrentes" time="0.000827">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso sin conexiones externas &gt; delega transiciones en dominio antes de escribir" time="0.0005939">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/boundaries.test.ts" timestamp="2026-10-21T05:37:59.328Z" hostname="Samuel" tests="13" failures="0" errors="0" skipped="0" time="0.0078759">
+        <testcase classname="tests/unit/boundaries.test.ts" name="requires movie duration and media reference independently" time="0.0038049">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects corrupt persisted catalog state {&quot;version&quot;:0}" time="0.0003465">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects corrupt persisted catalog state {&quot;version&quot;:1.5}" time="0.000195">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects corrupt persisted catalog state {&quot;version&quot;:2147483648}" time="0.0001448">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects corrupt persisted catalog state {&quot;updatedAt&quot;:&quot;1970-01-01T00:00:00.000Z&quot;}" time="0.0001265">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects corrupt persisted catalog state {&quot;createdAt&quot;:null}" time="0.0001429">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="prevents version overflow and invalid/regressive modification dates" time="0.000712">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects incompatible playback references {&quot;providerId&quot;:999}" time="0.0001774">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects incompatible playback references {&quot;assetId&quot;:&quot; &quot;}" time="0.0001425">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects incompatible playback references {&quot;manifestKey&quot;:&quot;&quot;}" time="0.0000934">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects incompatible playback references {&quot;assetId&quot;:&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;}" time="0.0000867">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects incompatible playback references {&quot;url&quot;:&quot;https://attacker.test&quot;}" time="0.0000827">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="protects category, text, cast and year boundaries without silently dropping bad data" time="0.0005577">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/domain.test.ts" timestamp="2026-10-21T05:37:59.333Z" hostname="Samuel" tests="21" failures="0" errors="0" skipped="0" time="0.0108234">
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; registra una película y protege los datos frente a mutaciones externas" time="0.0041506">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; acepta series sin duración ni recurso propio" time="0.0010655">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; permite 1→2→3, conserva el agregado previo y hace idempotente repetir estado" time="0.0003802">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza la transición 1→3" time="0.0003997">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza la transición 2→1" time="0.0001969">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza la transición 3→1" time="0.0001348">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza la transición 3→2" time="0.0001068">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; aplica PATCH parcial, limpia opcionales y conserva fechas/identidad" time="0.0010292">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;title&quot;:&quot; &quot;}" time="0.0002449">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;releaseYear&quot;:1887}" time="0.0001233">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;releaseYear&quot;:2025.5}" time="0.0001429">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;genres&quot;:[1,1]}" time="0.0001291">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;genres&quot;:[999]}" time="0.0001125">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;languages&quot;:[&quot;1&quot;]}" time="0.0000823">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;durationMinutes&quot;:0}" time="0.0000839">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;posterUrl&quot;:&quot;javascript:alert(1)&quot;}" time="0.0000985">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;posterUrl&quot;:&quot;https://user:password@example.com/image&quot;}" time="0.0000798">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;title&quot;:&quot;xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&quot;}" time="0.0000623">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza una ficha inválida: {&quot;publicationStatusId&quot;:2}" time="0.0000568">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; cuenta caracteres Unicode y normaliza conjuntos sin alterar el reparto" time="0.0003306">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="TítuloCatalogo y sus invariantes &gt; rechaza ObjectId como identificador público" time="0.00025">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/http.test.ts" timestamp="2026-10-21T05:37:59.338Z" hostname="Samuel" tests="8" failures="0" errors="0" skipped="0" time="0.0405287">
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; rechaza operadores, campos internos e IDs como cadenas" time="0.0264145">
+        </testcase>
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; valida tipo y bytes: text/plain {}" time="0.0035604">
+        </testcase>
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; valida tipo y bytes: application/json {" time="0.0036842">
+        </testcase>
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; valida tipo y bytes: application/json " time="0.0004875">
+        </testcase>
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; valida tipo y bytes: application/json &quot;🌎🌎🌎&quot;" time="0.0003435">
+        </testcase>
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; cuenta bytes reales aunque Content-Length declare menos" time="0.0009412">
+        </testcase>
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; oculta errores internos y correlaciona respuesta y log" time="0.0022476">
+        </testcase>
+        <testcase classname="tests/unit/http.test.ts" name="Contrato HTTP y protección de entradas &gt; elige códigos HTTP según los resultados confirmados del bulk" time="0.0013697">
+        </testcase>
+    </testsuite>
+</testsuites>

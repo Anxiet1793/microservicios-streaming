@@ -1,0 +1,64 @@
+Working directory: users-service
+Command: npm run test:coverage
+Started: 2026-10-21T05:37:42.930Z
+Ended: 2026-10-21T05:38:03.685Z
+Exit code: 0
+Duration: 20.754 seconds
+
+npm notice run users-service@0.1.0 test:coverage
+npm notice run vitest run --config vitest.coverage.config.ts --coverage
+
+ RUN  v5.0.3 C:/Users/Administrador/Desktop/microservicios streaming/users-service
+      Coverage enabled with v8
+
+ ✓ tests/integration/postgres.test.ts (20 tests) 4151ms
+ ✓ tests/contract/public.test.ts (2 tests) 211ms
+ ✓ tests/unit/security.test.ts (6 tests) 371ms
+ ✓ tests/api/routes.test.ts (31 tests) 112ms
+ ✓ tests/unit/boundaries.test.ts (12 tests) 53ms
+ ✓ tests/unit/application.test.ts (13 tests) 28ms
+ ✓ tests/unit/domain.test.ts (12 tests) 14ms
+
+ Test Files  7 passed (7)
+      Tests  96 passed (96)
+   Start at  00:37:45
+   Duration  16.93s (import 63%, tests 33%, transform 3%, worker 1%)
+
+    Isolate  7 workers spawned · ~191ms startup each (spawn + environment, per file)
+             at least ~1.15s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to C:/Users/Administrador/Desktop/microservicios streaming/users-service/coverage/test-results.json
+JUNIT report written to C:/Users/Administrador/Desktop/microservicios streaming/users-service/coverage/junit.xml
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   93.45 |    91.05 |   88.96 |   95.28 |                   
+ ...v1/auth/logout |    90.9 |      100 |       0 |     100 |                   
+  route.ts         |    90.9 |      100 |       0 |     100 |                   
+ bootstrap         |   22.22 |      100 |      25 |   22.22 |                   
+  container.ts     |   22.22 |      100 |      25 |   22.22 | 46-62,68          
+ ...tion/use-cases |   96.92 |    89.47 |     100 |   98.36 |                   
+  ...e-password.ts |    87.5 |       75 |     100 |    87.5 | 14                
+  ...preference.ts |   83.33 |       50 |     100 |     100 | 9                 
+ ...s/users/domain |   97.56 |    97.91 |     100 |     100 |                   
+  user.ts          |   97.05 |    97.87 |     100 |     100 | 25                
+ ...re/persistence |   85.27 |     82.6 |   73.17 |   89.25 |                   
+  connection.ts    |      75 |      100 |      50 |      75 | 12                
+  ...repository.ts |   92.59 |    89.47 |     100 |     100 | 33,70             
+  schema.ts        |   52.38 |      100 |    9.09 |      50 | ...94,108-114,132 
+  ...repository.ts |   88.37 |       80 |     100 |   97.36 | 79                
+  ...repository.ts |   93.33 |       50 |     100 |   93.33 | 20                
+ ...nterfaces/http |   95.76 |       50 |      96 |   96.58 |                   
+  handlers.ts      |   98.96 |       50 |     100 |     100 | 83                
+  schemas.ts       |   80.95 |       50 |      80 |   80.95 | 23-27             
+ shared            |   93.81 |    91.86 |     100 |   96.51 |                   
+  http.ts          |    93.1 |    90.66 |     100 |   96.05 | 33,36,56          
+-------------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 93.45% ( 585/626 )
+Branches     : 91.05% ( 224/246 )
+Functions    : 88.96% ( 129/145 )
+Lines        : 95.28% ( 566/594 )
+================================================================================

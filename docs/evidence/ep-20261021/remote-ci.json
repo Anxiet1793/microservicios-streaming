@@ -1,0 +1,7 @@
+{
+  "command": "gh run list --repo Anxiet1793/microservicios-streaming --limit 10 --json databaseId,displayTitle,status,conclusion,url,createdAt,headSha,workflowName,event",
+  "checkedAt": "2026-10-21T05:37:50.261507+00:00",
+  "exitCode": 0,
+  "runs": [],
+  "interpretation": "No runs returned by this read-only query; no remote success is claimed."
+}

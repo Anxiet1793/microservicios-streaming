@@ -1,0 +1,221 @@
+{
+  "command": "CI=true npm run test:e2e",
+  "runner": "Playwright 1.64.1",
+  "stats": {
+    "startTime": "2026-10-21T05:40:39.560Z",
+    "duration": 64425.202000000005,
+    "expected": 12,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "errors": [],
+  "cases": [
+    {
+      "name": "E2E-01 Register → Login → Home; authentication stays server-side",
+      "file": "nevaro.spec.ts",
+      "line": 99,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 1486,
+          "startTime": "2026-10-21T05:40:40.020Z"
+        }
+      ]
+    },
+    {
+      "name": "E2E-02 Login → filtered catalog → detail → watchlist → My List → remove",
+      "file": "nevaro.spec.ts",
+      "line": 125,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 1904,
+          "startTime": "2026-10-21T05:40:42.748Z"
+        }
+      ]
+    },
+    {
+      "name": "E2E-03 LIKE → DISLIKE persists after navigation",
+      "file": "nevaro.spec.ts",
+      "line": 152,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 838,
+          "startTime": "2026-10-21T05:40:44.661Z"
+        }
+      ]
+    },
+    {
+      "name": "E2E-04 real HTML5 MP4 → seek → pause → home → resume near saved position → complete",
+      "file": "nevaro.spec.ts",
+      "line": 176,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 2040,
+          "startTime": "2026-10-21T05:40:45.508Z"
+        }
+      ]
+    },
+    {
+      "name": "E2E-05 ADMIN uploads a small MP4, verifies asset, publishes and edits a title",
+      "file": "nevaro.spec.ts",
+      "line": 218,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 1053,
+          "startTime": "2026-10-21T05:40:47.556Z"
+        }
+      ]
+    },
+    {
+      "name": "E2E-06 expired signed JWT → concurrent refresh rotates exactly once → navigation continues",
+      "file": "nevaro.spec.ts",
+      "line": 258,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 2366,
+          "startTime": "2026-10-21T05:40:48.617Z"
+        }
+      ]
+    },
+    {
+      "name": "E2E-07 Catalog unavailable shows a controlled error and recovers",
+      "file": "nevaro.spec.ts",
+      "line": 288,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 21391,
+          "startTime": "2026-10-21T05:40:50.991Z"
+        }
+      ]
+    },
+    {
+      "name": "E2E-08 Playback unavailable preserves the application and permits recovery",
+      "file": "nevaro.spec.ts",
+      "line": 309,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 14444,
+          "startTime": "2026-10-21T05:41:12.391Z"
+        }
+      ]
+    },
+    {
+      "name": "USER is denied administration and cross-site writes; expired session returns to login",
+      "file": "nevaro.spec.ts",
+      "line": 328,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 1336,
+          "startTime": "2026-10-21T05:41:26.846Z"
+        }
+      ]
+    },
+    {
+      "name": "automatic signed media URL renewal preserves paused position",
+      "file": "nevaro.spec.ts",
+      "line": 354,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 689,
+          "startTime": "2026-10-21T05:41:28.192Z"
+        }
+      ]
+    },
+    {
+      "name": "profile, password revocation, account isolation and responsive layout",
+      "file": "nevaro.spec.ts",
+      "line": 374,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 3168,
+          "startTime": "2026-10-21T05:41:28.890Z"
+        }
+      ]
+    },
+    {
+      "name": "logout clears browser session during an owned Redis outage",
+      "file": "nevaro.spec.ts",
+      "line": 403,
+      "status": "expected",
+      "expectedStatus": "passed",
+      "projectName": "chromium",
+      "results": [
+        {
+          "status": "passed",
+          "retry": 0,
+          "durationMilliseconds": 11764,
+          "startTime": "2026-10-21T05:41:32.070Z"
+        }
+      ]
+    }
+  ],
+  "sourceReports": [
+    {
+      "path": "frontend/test-results/results.json",
+      "sha256": "a1e7f959fcfc8ee031cb80711ea997206cddaaed79e06f28b20ceeb3636c808e"
+    },
+    {
+      "path": "frontend/test-results/junit.xml",
+      "sha256": "169e403a4bb74465d5f8a5d6a7e404552c611d9f8ba36c96594cc4cd1e09d93f"
+    },
+    {
+      "path": "frontend/playwright-report/index.html",
+      "sha256": "26e1d245810c15ea7c8599e1c6a059df2131595252542a09dd624939eb062a99"
+    }
+  ]
+}

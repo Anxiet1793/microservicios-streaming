@@ -28,18 +28,14 @@ export function Content() {
     setPending(true);
     setError("");
     try {
-      await api(
-        `admin/catalog/${target.tituloId}/publication-status`,
-        "PATCH",
-        { publicationStatusId: target.publicationStatusId === 1 ? 2 : 3 },
-      );
+      await api(`admin/catalog/${target.tituloId}/publication-status`, "PATCH", {
+        publicationStatusId: target.publicationStatusId === 1 ? 2 : 3,
+      });
       await q.refetch();
       dialog.current?.close();
       setTarget(null);
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : "No pudimos actualizar el estado.",
-      );
+      setError(e instanceof Error ? e.message : "No pudimos actualizar el estado.");
     } finally {
       setPending(false);
     }
@@ -90,22 +86,14 @@ export function Content() {
                 <div>
                   <h2>{t.ficha.title}</h2>
                   <span className="hint">
-                    {t.typeId === 1 ? "Película" : "Serie"} ·{" "}
-                    {t.ficha.releaseYear}
+                    {t.typeId === 1 ? "Película" : "Serie"} · {t.ficha.releaseYear}
                   </span>
                 </div>
                 <span className={s.badge}>
-                  {
-                    ["", "Registrado", "Publicado", "Retirado"][
-                      t.publicationStatusId
-                    ]
-                  }
+                  {["", "Registrado", "Publicado", "Retirado"][t.publicationStatusId]}
                 </span>
                 <div className="actions">
-                  <Link
-                    className="button secondary"
-                    href={`/admin/content/${t.tituloId}`}
-                  >
+                  <Link className="button secondary" href={`/admin/content/${t.tituloId}`}>
                     Editar ficha
                   </Link>
                   {t.publicationStatusId !== 3 && (
@@ -133,11 +121,7 @@ export function Content() {
               </article>
             ))}
           </div>
-          <nav
-            className="actions"
-            aria-label="Paginación"
-            style={{ marginTop: 24 }}
-          >
+          <nav className="actions" aria-label="Paginación" style={{ marginTop: 24 }}>
             <button
               className="button secondary"
               disabled={page === 1}
@@ -158,15 +142,9 @@ export function Content() {
           </nav>
         </>
       )}
-      <dialog
-        ref={dialog}
-        className={s.dialog}
-        aria-labelledby="publication-title"
-      >
+      <dialog ref={dialog} className={s.dialog} aria-labelledby="publication-title">
         <h2 id="publication-title">
-          {target?.publicationStatusId === 1
-            ? "Publicar título"
-            : "Retirar título"}
+          {target?.publicationStatusId === 1 ? "Publicar título" : "Retirar título"}
         </h2>
         <p>{target?.ficha.title}</p>
         <p className="muted">

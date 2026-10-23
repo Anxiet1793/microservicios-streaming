@@ -5,13 +5,13 @@ Este estado corresponde al cierre de la fase 5. La entrega posterior se registra
 
 ## Casos de uso implementados
 
-| Clase | Entrada | Resultado y responsabilidad |
-| --- | --- | --- |
-| `BulkCreateCatalogTitles` | `{ items: [...] }` | Valida el lote, crea agregados registrados y coordina una llamada de persistencia masiva. |
-| `GetCatalogTitles` | Filtros y paginación opcionales | Devuelve DTO de listado con nombres derivados y paginación. |
-| `GetCatalogTitleById` | `{ tituloId }` | Devuelve detalle o `CATALOG_TITLE_NOT_FOUND`. |
-| `UpdateCatalogTitle` | `{ tituloId, ficha: { ...cambios } }` | Aplica PATCH editorial mediante el agregado y guarda con versión esperada. |
-| `ChangePublicationStatus` | `{ tituloId, publicationStatusId }` | Delega las transiciones al dominio y persiste un cambio efectivo. |
+| Clase                     | Entrada                               | Resultado y responsabilidad                                                               |
+| ------------------------- | ------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `BulkCreateCatalogTitles` | `{ items: [...] }`                    | Valida el lote, crea agregados registrados y coordina una llamada de persistencia masiva. |
+| `GetCatalogTitles`        | Filtros y paginación opcionales       | Devuelve DTO de listado con nombres derivados y paginación.                               |
+| `GetCatalogTitleById`     | `{ tituloId }`                        | Devuelve detalle o `CATALOG_TITLE_NOT_FOUND`.                                             |
+| `UpdateCatalogTitle`      | `{ tituloId, ficha: { ...cambios } }` | Aplica PATCH editorial mediante el agregado y guarda con versión esperada.                |
+| `ChangePublicationStatus` | `{ tituloId, publicationStatusId }`   | Delega las transiciones al dominio y persiste un cambio efectivo.                         |
 
 Los archivos están en `src/modules/catalog/application/use-cases/`. `load-catalog-title.ts` es un colaborador interno para búsqueda y error de inexistencia, no un sexto caso de uso.
 

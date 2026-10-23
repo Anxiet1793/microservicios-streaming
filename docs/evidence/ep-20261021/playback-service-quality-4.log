@@ -1,0 +1,10 @@
+Working directory: playback-service
+Command: npm run docs:check
+Started: 2026-10-21T05:38:06.791Z
+Ended: 2026-10-21T05:38:10.146Z
+Exit code: 0
+Duration: 3.355 seconds
+
+npm notice run playback-service@0.1.0 docs:check
+npm notice run node --import tsx scripts/verify-openapi.ts
+OpenAPI válido: 12 operaciones.

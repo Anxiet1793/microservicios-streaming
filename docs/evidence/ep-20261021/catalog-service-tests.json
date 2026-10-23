@@ -1,0 +1,652 @@
+{
+  "project": "catalog-service",
+  "runner": "vitest 5.0.3",
+  "command": "npm run test:coverage",
+  "startedAt": "2026-10-21T05:37:43.895Z",
+  "tests": {
+    "total": 103,
+    "passed": 103,
+    "failed": 0,
+    "pending": 0,
+    "success": true
+  },
+  "groups": {
+    "api": {
+      "total": 42,
+      "passed": 42,
+      "failed": 0,
+      "pending": 0
+    },
+    "contract": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "pending": 0
+    },
+    "integration": {
+      "total": 7,
+      "passed": 7,
+      "failed": 0,
+      "pending": 0
+    },
+    "unit": {
+      "total": 51,
+      "passed": 51,
+      "failed": 0,
+      "pending": 0
+    }
+  },
+  "coverage": {
+    "lines": {
+      "total": 658,
+      "covered": 580,
+      "skipped": 0,
+      "pct": 88.14
+    },
+    "statements": {
+      "total": 729,
+      "covered": 633,
+      "skipped": 0,
+      "pct": 86.83
+    },
+    "functions": {
+      "total": 180,
+      "covered": 164,
+      "skipped": 0,
+      "pct": 91.11
+    },
+    "branches": {
+      "total": 541,
+      "covered": 448,
+      "skipped": 0,
+      "pct": 82.8
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "files": [
+    {
+      "file": "catalog-service/tests/api/authorization.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:52.643Z",
+      "endedAt": "2026-10-21T05:37:52.738Z",
+      "tests": [
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS denies anonymous and USER before parsing or opening MongoDB",
+          "status": "passed",
+          "durationMilliseconds": 39.477499999999964
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS denies anonymous and USER before parsing or opening MongoDB",
+          "status": "passed",
+          "durationMilliseconds": 3.430499999999938
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS denies anonymous and USER before parsing or opening MongoDB",
+          "status": "passed",
+          "durationMilliseconds": 2.3169000000002598
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS accepts ADMIN using the public key only and caches the trusted JWKS",
+          "status": "passed",
+          "durationMilliseconds": 5.37689999999975
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"role\":[\"ADMIN\"]}",
+          "status": "passed",
+          "durationMilliseconds": 1.8321999999998297
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"iat\":\"invalid\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.8530000000000655
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"iat\":1792561132}",
+          "status": "passed",
+          "durationMilliseconds": 1.563799999999901
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"iat\":1792557472}",
+          "status": "passed",
+          "durationMilliseconds": 1.9173000000000684
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"role\":\"ROOT\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.9350000000004002
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"role\":null}",
+          "status": "passed",
+          "durationMilliseconds": 1.5860999999999876
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"jti\":123}",
+          "status": "passed",
+          "durationMilliseconds": 1.5596999999997934
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"jti\":\"\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.7393999999999323
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"sub\":\"internal-id\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.6412000000000262
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"userId\":\"another-user\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.2792999999996937
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"iss\":\"evil\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.7937000000001717
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"aud\":\"evil\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.552599999999984
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"exp\":1}",
+          "status": "passed",
+          "durationMilliseconds": 1.3832000000002154
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {}",
+          "status": "passed",
+          "durationMilliseconds": 1.4621000000001914
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {}",
+          "status": "passed",
+          "durationMilliseconds": 1.6613000000002103
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {}",
+          "status": "passed",
+          "durationMilliseconds": 1.678899999999885
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects malformed/incompatible claims {\"nbf\":1792564672}",
+          "status": "passed",
+          "durationMilliseconds": 1.6021999999998116
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects invalid protected headers {\"typ\":\"NOT-JWT\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.4676999999996951
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects invalid protected headers {\"kid\":\"other\"}",
+          "status": "passed",
+          "durationMilliseconds": 1.8166000000001077
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS rejects bad signatures, unsigned tokens, HS256 and oversized authorization",
+          "status": "passed",
+          "durationMilliseconds": 3.7528000000002066
+        },
+        {
+          "name": "Catalog authorization with real RSA signatures and HTTP JWKS fails closed on JWKS outage and refuses credentialed or non-HTTP key URLs",
+          "status": "passed",
+          "durationMilliseconds": 9.134000000000015
+        }
+      ]
+    },
+    {
+      "file": "catalog-service/tests/api/routes.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:57.870Z",
+      "endedAt": "2026-10-21T05:37:57.923Z",
+      "tests": [
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary imports a mixed batch with stable original indices and partial HTTP 207",
+          "status": "passed",
+          "durationMilliseconds": 29.482599999999934
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary accepts the configured maximum exactly and rejects maximum+1 without writes",
+          "status": "passed",
+          "durationMilliseconds": 2.621499999999969
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary does not persist an entirely invalid batch",
+          "status": "passed",
+          "durationMilliseconds": 1.1005999999999858
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary maps duplicate retries, conflicting import keys and uncertain outcomes truthfully",
+          "status": "passed",
+          "durationMilliseconds": 2.017900000000054
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary passes filters/search/page through normalization and keeps list metadata minimal",
+          "status": "passed",
+          "durationMilliseconds": 4.337700000000041
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary represents an empty catalog without fictional pages or data",
+          "status": "passed",
+          "durationMilliseconds": 0.6518999999999551
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary rejects invalid list input ?limit=101 before persistence",
+          "status": "passed",
+          "durationMilliseconds": 0.6363000000000056
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary rejects invalid list input ?page=1&page=2 before persistence",
+          "status": "passed",
+          "durationMilliseconds": 0.4517999999999347
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary rejects invalid list input ?status=99 before persistence",
+          "status": "passed",
+          "durationMilliseconds": 0.6469000000000733
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary rejects invalid list input ?genre[$ne]=1 before persistence",
+          "status": "passed",
+          "durationMilliseconds": 0.5403999999999769
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary rejects invalid list input ?q=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx before persistence",
+          "status": "passed",
+          "durationMilliseconds": 0.6792000000000371
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary returns a withdrawn title directly, while consumers must decide visibility",
+          "status": "passed",
+          "durationMilliseconds": 0.9562000000000808
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary distinguishes invalid identity from a valid identity that does not exist",
+          "status": "passed",
+          "durationMilliseconds": 2.280899999999974
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary updates only editorial fields and rejects protected fields without persisting",
+          "status": "passed",
+          "durationMilliseconds": 1.7145000000000437
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary publishes, withdraws and repeats status idempotently without forbidden transitions",
+          "status": "passed",
+          "durationMilliseconds": 1.8356999999999744
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary health and queries fail safely when persistence is unavailable",
+          "status": "passed",
+          "durationMilliseconds": 0.971300000000042
+        },
+        {
+          "name": "Actual Catalog HTTP routes with controlled repository boundary rejects malformed JSON and provides method metadata without leaking internals",
+          "status": "passed",
+          "durationMilliseconds": 1.1878000000000384
+        }
+      ]
+    },
+    {
+      "file": "catalog-service/tests/contract/public.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:56.599Z",
+      "endedAt": "2026-10-21T05:37:57.066Z",
+      "tests": [
+        {
+          "name": "preserves the public playback-facing reference and publication contract for all statuses",
+          "status": "passed",
+          "durationMilliseconds": 386.84810000000016
+        },
+        {
+          "name": "keeps the declared status IDs synchronized with the producer's domain",
+          "status": "passed",
+          "durationMilliseconds": 78.42290000000048
+        },
+        {
+          "name": "serializes optional editorial data without losing numeric/name equivalences",
+          "status": "passed",
+          "durationMilliseconds": 2.600300000000061
+        }
+      ]
+    },
+    {
+      "file": "catalog-service/tests/integration/mongodb.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:49.498Z",
+      "endedAt": "2026-10-21T05:37:49.667Z",
+      "tests": [
+        {
+          "name": "MongoCatalogRepository con MongoDB real aislado inicializa validadores e índices de forma idempotente",
+          "status": "passed",
+          "durationMilliseconds": 40.777900000000045
+        },
+        {
+          "name": "MongoCatalogRepository con MongoDB real aislado inserta y recupera un agregado sin cambiar su identidad",
+          "status": "passed",
+          "durationMilliseconds": 24.377599999999802
+        },
+        {
+          "name": "MongoCatalogRepository con MongoDB real aislado reconoce reintentos y no sobrescribe contenido por conflicto de importKey",
+          "status": "passed",
+          "durationMilliseconds": 27.91859999999997
+        },
+        {
+          "name": "MongoCatalogRepository con MongoDB real aislado reconcilia dos importaciones concurrentes con una sola inserción",
+          "status": "passed",
+          "durationMilliseconds": 23.84110000000055
+        },
+        {
+          "name": "MongoCatalogRepository con MongoDB real aislado resuelve repetidos del lote y rechaza grupos con contenido contradictorio",
+          "status": "passed",
+          "durationMilliseconds": 7.37670000000071
+        },
+        {
+          "name": "MongoCatalogRepository con MongoDB real aislado aplica PATCH real y rechaza una escritura con versión obsoleta",
+          "status": "passed",
+          "durationMilliseconds": 28.889799999999923
+        },
+        {
+          "name": "MongoCatalogRepository con MongoDB real aislado filtra por texto/categorías y limita la proyección paginada",
+          "status": "passed",
+          "durationMilliseconds": 16.924600000000282
+        }
+      ]
+    },
+    {
+      "file": "catalog-service/tests/unit/application.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:58.730Z",
+      "endedAt": "2026-10-21T05:37:58.744Z",
+      "tests": [
+        {
+          "name": "Casos de uso sin conexiones externas busca por TituloId y entrega equivalencias sin metadatos internos",
+          "status": "passed",
+          "durationMilliseconds": 6.143899999999974
+        },
+        {
+          "name": "Casos de uso sin conexiones externas distingue inexistencia de identidad inválida",
+          "status": "passed",
+          "durationMilliseconds": 1.228399999999965
+        },
+        {
+          "name": "Casos de uso sin conexiones externas filtra y pagina sin exponer ficha completa ni referencia técnica",
+          "status": "passed",
+          "durationMilliseconds": 1.8812999999999533
+        },
+        {
+          "name": "Casos de uso sin conexiones externas importa válidos en una única llamada preservando índices originales",
+          "status": "passed",
+          "durationMilliseconds": 1.1317999999999984
+        },
+        {
+          "name": "Casos de uso sin conexiones externas no escribe lotes vacíos, excesivos ni enteramente inválidos",
+          "status": "passed",
+          "durationMilliseconds": 0.7300000000000182
+        },
+        {
+          "name": "Casos de uso sin conexiones externas distingue duplicados, conflictos y resultados indeterminados",
+          "status": "passed",
+          "durationMilliseconds": 0.98599999999999
+        },
+        {
+          "name": "Casos de uso sin conexiones externas no inventa éxito si el repositorio omite resultados",
+          "status": "passed",
+          "durationMilliseconds": 0.4060999999999808
+        },
+        {
+          "name": "Casos de uso sin conexiones externas actualiza la ficha, omite no-op y propaga conflictos concurrentes",
+          "status": "passed",
+          "durationMilliseconds": 0.8269999999999982
+        },
+        {
+          "name": "Casos de uso sin conexiones externas delega transiciones en dominio antes de escribir",
+          "status": "passed",
+          "durationMilliseconds": 0.5938999999999623
+        }
+      ]
+    },
+    {
+      "file": "catalog-service/tests/unit/boundaries.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:59.146Z",
+      "endedAt": "2026-10-21T05:37:59.152Z",
+      "tests": [
+        {
+          "name": "requires movie duration and media reference independently",
+          "status": "passed",
+          "durationMilliseconds": 3.8049000000000035
+        },
+        {
+          "name": "rejects corrupt persisted catalog state {\"version\":0}",
+          "status": "passed",
+          "durationMilliseconds": 0.34650000000002024
+        },
+        {
+          "name": "rejects corrupt persisted catalog state {\"version\":1.5}",
+          "status": "passed",
+          "durationMilliseconds": 0.19499999999999318
+        },
+        {
+          "name": "rejects corrupt persisted catalog state {\"version\":2147483648}",
+          "status": "passed",
+          "durationMilliseconds": 0.1448000000000036
+        },
+        {
+          "name": "rejects corrupt persisted catalog state {\"updatedAt\":\"1970-01-01T00:00:00.000Z\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.12649999999999295
+        },
+        {
+          "name": "rejects corrupt persisted catalog state {\"createdAt\":null}",
+          "status": "passed",
+          "durationMilliseconds": 0.14289999999999736
+        },
+        {
+          "name": "prevents version overflow and invalid/regressive modification dates",
+          "status": "passed",
+          "durationMilliseconds": 0.7119999999999891
+        },
+        {
+          "name": "rejects incompatible playback references {\"providerId\":999}",
+          "status": "passed",
+          "durationMilliseconds": 0.17740000000000578
+        },
+        {
+          "name": "rejects incompatible playback references {\"assetId\":\" \"}",
+          "status": "passed",
+          "durationMilliseconds": 0.14249999999998408
+        },
+        {
+          "name": "rejects incompatible playback references {\"manifestKey\":\"\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.09340000000000259
+        },
+        {
+          "name": "rejects incompatible playback references {\"assetId\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.08669999999997913
+        },
+        {
+          "name": "rejects incompatible playback references {\"url\":\"https://attacker.test\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.08269999999998845
+        },
+        {
+          "name": "protects category, text, cast and year boundaries without silently dropping bad data",
+          "status": "passed",
+          "durationMilliseconds": 0.5577000000000112
+        }
+      ]
+    },
+    {
+      "file": "catalog-service/tests/unit/domain.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:58.948Z",
+      "endedAt": "2026-10-21T05:37:58.957Z",
+      "tests": [
+        {
+          "name": "TítuloCatalogo y sus invariantes registra una película y protege los datos frente a mutaciones externas",
+          "status": "passed",
+          "durationMilliseconds": 4.150599999999997
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes acepta series sin duración ni recurso propio",
+          "status": "passed",
+          "durationMilliseconds": 1.065499999999986
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes permite 1→2→3, conserva el agregado previo y hace idempotente repetir estado",
+          "status": "passed",
+          "durationMilliseconds": 0.3802000000000021
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza la transición 1→3",
+          "status": "passed",
+          "durationMilliseconds": 0.39970000000002415
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza la transición 2→1",
+          "status": "passed",
+          "durationMilliseconds": 0.1968999999999994
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza la transición 3→1",
+          "status": "passed",
+          "durationMilliseconds": 0.1348000000000127
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza la transición 3→2",
+          "status": "passed",
+          "durationMilliseconds": 0.10679999999999268
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes aplica PATCH parcial, limpia opcionales y conserva fechas/identidad",
+          "status": "passed",
+          "durationMilliseconds": 1.029200000000003
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"title\":\" \"}",
+          "status": "passed",
+          "durationMilliseconds": 0.24490000000000123
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"releaseYear\":1887}",
+          "status": "passed",
+          "durationMilliseconds": 0.12330000000000041
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"releaseYear\":2025.5}",
+          "status": "passed",
+          "durationMilliseconds": 0.14289999999999736
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"genres\":[1,1]}",
+          "status": "passed",
+          "durationMilliseconds": 0.129099999999994
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"genres\":[999]}",
+          "status": "passed",
+          "durationMilliseconds": 0.11250000000001137
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"languages\":[\"1\"]}",
+          "status": "passed",
+          "durationMilliseconds": 0.08230000000000359
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"durationMinutes\":0}",
+          "status": "passed",
+          "durationMilliseconds": 0.08389999999999986
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"posterUrl\":\"javascript:alert(1)\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.09850000000000136
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"posterUrl\":\"https://user:password@example.com/image\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.07980000000000587
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"title\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.06230000000002178
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza una ficha inválida: {\"publicationStatusId\":2}",
+          "status": "passed",
+          "durationMilliseconds": 0.05680000000000973
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes cuenta caracteres Unicode y normaliza conjuntos sin alterar el reparto",
+          "status": "passed",
+          "durationMilliseconds": 0.3305999999999756
+        },
+        {
+          "name": "TítuloCatalogo y sus invariantes rechaza ObjectId como identificador público",
+          "status": "passed",
+          "durationMilliseconds": 0.25
+        }
+      ]
+    },
+    {
+      "file": "catalog-service/tests/unit/http.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:58.237Z",
+      "endedAt": "2026-10-21T05:37:58.276Z",
+      "tests": [
+        {
+          "name": "Contrato HTTP y protección de entradas rechaza operadores, campos internos e IDs como cadenas",
+          "status": "passed",
+          "durationMilliseconds": 26.414499999999975
+        },
+        {
+          "name": "Contrato HTTP y protección de entradas valida tipo y bytes: text/plain {}",
+          "status": "passed",
+          "durationMilliseconds": 3.5604000000000156
+        },
+        {
+          "name": "Contrato HTTP y protección de entradas valida tipo y bytes: application/json {",
+          "status": "passed",
+          "durationMilliseconds": 3.6841999999999757
+        },
+        {
+          "name": "Contrato HTTP y protección de entradas valida tipo y bytes: application/json ",
+          "status": "passed",
+          "durationMilliseconds": 0.4874999999999545
+        },
+        {
+          "name": "Contrato HTTP y protección de entradas valida tipo y bytes: application/json \"🌎🌎🌎\"",
+          "status": "passed",
+          "durationMilliseconds": 0.3435000000000059
+        },
+        {
+          "name": "Contrato HTTP y protección de entradas cuenta bytes reales aunque Content-Length declare menos",
+          "status": "passed",
+          "durationMilliseconds": 0.9411999999999807
+        },
+        {
+          "name": "Contrato HTTP y protección de entradas oculta errores internos y correlaciona respuesta y log",
+          "status": "passed",
+          "durationMilliseconds": 2.247599999999977
+        },
+        {
+          "name": "Contrato HTTP y protección de entradas elige códigos HTTP según los resultados confirmados del bulk",
+          "status": "passed",
+          "durationMilliseconds": 1.3696999999999662
+        }
+      ]
+    }
+  ]
+}

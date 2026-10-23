@@ -1,0 +1,28 @@
+<testsuites id="" name="" tests="12" failures="0" skipped="0" errors="0" time="64.425202">
+<testsuite name="nevaro.spec.ts" timestamp="2026-10-21T05:40:39.627Z" hostname="chromium" tests="12" failures="0" skipped="0" time="62.479" errors="0">
+<testcase name="E2E-01 Register → Login → Home; authentication stays server-side" classname="nevaro.spec.ts" time="1.486">
+</testcase>
+<testcase name="E2E-02 Login → filtered catalog → detail → watchlist → My List → remove" classname="nevaro.spec.ts" time="1.904">
+</testcase>
+<testcase name="E2E-03 LIKE → DISLIKE persists after navigation" classname="nevaro.spec.ts" time="0.838">
+</testcase>
+<testcase name="E2E-04 real HTML5 MP4 → seek → pause → home → resume near saved position → complete" classname="nevaro.spec.ts" time="2.04">
+</testcase>
+<testcase name="E2E-05 ADMIN uploads a small MP4, verifies asset, publishes and edits a title" classname="nevaro.spec.ts" time="1.053">
+</testcase>
+<testcase name="E2E-06 expired signed JWT → concurrent refresh rotates exactly once → navigation continues" classname="nevaro.spec.ts" time="2.366">
+</testcase>
+<testcase name="E2E-07 Catalog unavailable shows a controlled error and recovers" classname="nevaro.spec.ts" time="21.391">
+</testcase>
+<testcase name="E2E-08 Playback unavailable preserves the application and permits recovery" classname="nevaro.spec.ts" time="14.444">
+</testcase>
+<testcase name="USER is denied administration and cross-site writes; expired session returns to login" classname="nevaro.spec.ts" time="1.336">
+</testcase>
+<testcase name="automatic signed media URL renewal preserves paused position" classname="nevaro.spec.ts" time="0.689">
+</testcase>
+<testcase name="profile, password revocation, account isolation and responsive layout" classname="nevaro.spec.ts" time="3.168">
+</testcase>
+<testcase name="logout clears browser session during an owned Redis outage" classname="nevaro.spec.ts" time="11.764">
+</testcase>
+</testsuite>
+</testsuites>

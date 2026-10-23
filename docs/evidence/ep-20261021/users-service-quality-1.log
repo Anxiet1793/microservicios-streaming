@@ -1,0 +1,9 @@
+Working directory: users-service
+Command: npm run lint
+Started: 2026-10-21T05:36:59.712Z
+Ended: 2026-10-21T05:37:23.332Z
+Exit code: 0
+Duration: 23.619 seconds
+
+npm notice run users-service@0.1.0 lint
+npm notice run eslint . --max-warnings=0

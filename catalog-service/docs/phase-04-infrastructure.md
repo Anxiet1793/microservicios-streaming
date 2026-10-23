@@ -27,12 +27,12 @@ No se implementaron casos de uso, rutas HTTP, Dockerfile, Compose ni documentaci
 
 Cada resultado contiene el índice original y uno de estos estados:
 
-| Estado | Significado |
-| --- | --- |
-| `inserted` | Inserción confirmada; incluye TituloId. |
-| `duplicate` | Misma clave y contenido inicial; incluye el TituloId existente. |
-| `rejected` | Conflicto conocido, documento demasiado grande u otro error individual confirmado. |
-| `indeterminate` | No se puede confirmar el resultado; debe reintentarse con las mismas claves. |
+| Estado          | Significado                                                                        |
+| --------------- | ---------------------------------------------------------------------------------- |
+| `inserted`      | Inserción confirmada; incluye TituloId.                                            |
+| `duplicate`     | Misma clave y contenido inicial; incluye el TituloId existente.                    |
+| `rejected`      | Conflicto conocido, documento demasiado grande u otro error individual confirmado. |
+| `indeterminate` | No se puede confirmar el resultado; debe reintentarse con las mismas claves.       |
 
 El agregado normaliza espacios, ordena géneros/idiomas y representa reparto ausente como lista vacía. La huella de importación ignora identidad generada, fechas y estado. Editar el título no cambia esa huella original.
 
@@ -46,15 +46,15 @@ El filtro HTTP se implementará después. El repositorio ya permite únicamente 
 
 ## Archivos de entrada
 
-| Archivo | Responsabilidad |
-| --- | --- |
-| `src/modules/catalog/domain/models.ts` | Equivalencias numéricas comentadas. |
-| `src/modules/catalog/domain/repositories/catalog-repository.ts` | Contrato de persistencia. |
-| `src/modules/catalog/infrastructure/persistence/mongodb/repositories/mongo-catalog-repository.ts` | Implementación MongoDB. |
-| `src/shared/infrastructure/mongodb/connection.ts` | Pool, conexión compartida y ping. |
-| `src/shared/infrastructure/config/environment.ts` | Configuración validada. |
-| `scripts/init-mongo.ts` | Creación de colecciones, validadores e índices. |
-| `scripts/verify-phase4.ts` | Verificación reproducible contra MongoDB temporal. |
+| Archivo                                                                                           | Responsabilidad                                    |
+| ------------------------------------------------------------------------------------------------- | -------------------------------------------------- |
+| `src/modules/catalog/domain/models.ts`                                                            | Equivalencias numéricas comentadas.                |
+| `src/modules/catalog/domain/repositories/catalog-repository.ts`                                   | Contrato de persistencia.                          |
+| `src/modules/catalog/infrastructure/persistence/mongodb/repositories/mongo-catalog-repository.ts` | Implementación MongoDB.                            |
+| `src/shared/infrastructure/mongodb/connection.ts`                                                 | Pool, conexión compartida y ping.                  |
+| `src/shared/infrastructure/config/environment.ts`                                                 | Configuración validada.                            |
+| `scripts/init-mongo.ts`                                                                           | Creación de colecciones, validadores e índices.    |
+| `scripts/verify-phase4.ts`                                                                        | Verificación reproducible contra MongoDB temporal. |
 
 ## Comandos
 

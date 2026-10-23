@@ -1,0 +1,35 @@
+[
+  {
+    "project": "root",
+    "cwd": "root",
+    "command": "docker compose up --build --detach --wait --wait-timeout 300",
+    "startedAt": "2026-10-21T21:03:39.746Z",
+    "endedAt": "2026-10-21T21:03:51.314Z",
+    "durationSeconds": 11.566,
+    "exitCode": 0,
+    "log": "root-stack-1.log",
+    "logSha256": "b4b512298d33770803bcf941a4fbf25bd87ff63d0fd598c2a30a19719e696c67"
+  },
+  {
+    "project": "root",
+    "cwd": "root",
+    "command": "npm run smoke",
+    "startedAt": "2026-10-21T21:03:51.318Z",
+    "endedAt": "2026-10-21T21:03:54.994Z",
+    "durationSeconds": 3.676,
+    "exitCode": 0,
+    "log": "root-stack-2.log",
+    "logSha256": "2664323fd2a3c6a4c9e7e51933e931c14d5a3c61333fa89697d5fa80035578e2"
+  },
+  {
+    "project": "root",
+    "cwd": "root",
+    "command": "npm run api:demo:cleanup",
+    "startedAt": "2026-10-21T21:03:54.997Z",
+    "endedAt": "2026-10-21T21:04:32.106Z",
+    "durationSeconds": 37.109,
+    "exitCode": 0,
+    "log": "root-stack-3.log",
+    "logSha256": "1bbd6a6bfef3350a0de86fbbd89f07e2cacc3c35d7188d8abb6c7ba016bd5145"
+  }
+]

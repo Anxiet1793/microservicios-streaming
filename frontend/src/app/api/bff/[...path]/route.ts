@@ -1,20 +1,14 @@
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { config } from "../../../../lib/server/config";
-import {
-  currentUser,
-  login,
-  logout,
-  authorized,
-} from "../../../../lib/server/session";
+import { currentUser, login, logout, authorized } from "../../../../lib/server/session";
 import { ServiceError, upstream } from "../../../../lib/server/http";
 import { catalog, compose, title } from "../../../../lib/server/catalog";
 import type { Pagination, Reference } from "../../../../lib/models";
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 type Context = { params: Promise<{ path: string[] }> };
-const uuid =
-  "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
+const uuid = "[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}";
 const titleId = new RegExp(`^ttl_${uuid}$`),
   sessionId = new RegExp(`^ses_${uuid}$`),
   assetId = new RegExp(`^ast_${uuid}$`);
@@ -109,18 +103,13 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
         ),
       ),
     );
-  if (path === "auth/logout" && method === "POST")
-    return Response.json(await logout());
+  if (path === "auth/logout" && method === "POST") return Response.json(await logout());
   const user = await currentUser(),
     isAdmin = user.role === "ADMIN";
   if (path === "me" && method === "GET") return Response.json(user);
   if (path === "me" && method === "PATCH")
     return result(
-      await authorized(
-        "USERS",
-        "/api/v1/users/me",
-        jsonInit(method, await json(request)),
-      ),
+      await authorized("USERS", "/api/v1/users/me", jsonInit(method, await json(request))),
     );
   if (path === "me/change-password" && method === "POST") {
     await authorized(
@@ -131,46 +120,29 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
     await logout();
     return new Response(null, { status: 204 });
   }
-  if (path === "catalog" && method === "GET")
-    return Response.json(await catalog(query));
-  if (
-    parts[0] === "catalog" &&
-    parts.length === 2 &&
-    titleId.test(parts[1]!) &&
-    method === "GET"
-  )
+  if (path === "catalog" && method === "GET") return Response.json(await catalog(query));
+  if (parts[0] === "catalog" && parts.length === 2 && titleId.test(parts[1]!) && method === "GET")
     return Response.json(await title(parts[1]!));
   if (
     parts[0] === "library" &&
     parts.length === 2 &&
-    ["watchlist", "preferences", "continue-watching", "history"].includes(
-      parts[1]!,
-    ) &&
+    ["watchlist", "preferences", "continue-watching", "history"].includes(parts[1]!) &&
     method === "GET"
   ) {
     const page = await references(parts[1]!, query.toString());
     return Response.json({ ...page, data: await compose(page.data) });
   }
-  if (
-    parts[0] === "state" &&
-    parts.length === 2 &&
-    titleId.test(parts[1]!) &&
-    method === "GET"
-  ) {
+  if (parts[0] === "state" && parts.length === 2 && titleId.test(parts[1]!) && method === "GET") {
     async function find(kind: string) {
       for (let n = 1; n <= 10; n++) {
         const response = await references(kind, `page=${n}&limit=100`);
         const found = response.data.find((item) => item.tituloId === parts[1]);
         if (found) return { known: true, item: found };
-        if (n >= response.pagination.totalPages)
-          return { known: true, item: null };
+        if (n >= response.pagination.totalPages) return { known: true, item: null };
       }
       return { known: false, item: null };
     }
-    const [watchlist, preference] = await Promise.all([
-      find("watchlist"),
-      find("preferences"),
-    ]);
+    const [watchlist, preference] = await Promise.all([find("watchlist"), find("preferences")]);
     return Response.json({ watchlist, preference });
   }
   if (
@@ -187,9 +159,7 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
         method === "PUT"
           ? jsonInit(
               method,
-              z
-                .strictObject({ value: z.enum(["LIKE", "DISLIKE"]) })
-                .parse(await json(request)),
+              z.strictObject({ value: z.enum(["LIKE", "DISLIKE"]) }).parse(await json(request)),
             )
           : { method },
       ),
@@ -201,9 +171,7 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
         "/api/v1/playback/sessions",
         jsonInit(
           method,
-          z
-            .strictObject({ tituloId: z.string().regex(titleId) })
-            .parse(await json(request)),
+          z.strictObject({ tituloId: z.string().regex(titleId) }).parse(await json(request)),
         ),
       ),
     );
@@ -211,9 +179,7 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
     parts[0] === "sessions" &&
     parts.length === 3 &&
     sessionId.test(parts[1]!) &&
-    ["progress", "pause", "resume", "complete", "refresh-url"].includes(
-      parts[2]!,
-    ) &&
+    ["progress", "pause", "resume", "complete", "refresh-url"].includes(parts[2]!) &&
     method === (parts[2] === "progress" ? "PATCH" : "POST")
   )
     return result(
@@ -232,11 +198,7 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
     if (path === "admin/catalog" && method === "POST") {
       const input = await json(request);
       return result(
-        await upstream(
-          "CATALOG",
-          "/api/v1/catalog/bulk",
-          jsonInit("POST", { items: [input] }),
-        ),
+        await authorized("CATALOG", "/api/v1/catalog/bulk", jsonInit("POST", { items: [input] })),
       );
     }
     if (parts[1] === "catalog" && titleId.test(parts[2] || "")) {
@@ -244,17 +206,13 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
         return Response.json(await title(parts[2]!, true));
       if (parts.length === 3 && method === "PATCH")
         return result(
-          await upstream(
+          await authorized(
             "CATALOG",
             `/api/v1/catalog/${parts[2]}`,
             jsonInit(method, await json(request)),
           ),
         );
-      if (
-        parts.length === 4 &&
-        parts[3] === "publication-status" &&
-        method === "PATCH"
-      ) {
+      if (parts.length === 4 && parts[3] === "publication-status" && method === "PATCH") {
         const input = z
           .strictObject({
             publicationStatusId: z.union([z.literal(2), z.literal(3)]),
@@ -264,17 +222,13 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
           const t = await title(parts[2]!, true);
           if (t.typeId === 1) {
             const a = await (
-              await authorized(
-                "PLAYBACK",
-                `/api/v1/media/assets/${t.playbackReference?.assetId}`,
-              )
+              await authorized("PLAYBACK", `/api/v1/media/assets/${t.playbackReference?.assetId}`)
             ).json();
-            if (a.asset.status !== "READY")
-              throw new ServiceError(409, "MEDIA_ASSET_NOT_FOUND");
+            if (a.asset.status !== "READY") throw new ServiceError(409, "MEDIA_ASSET_NOT_FOUND");
           }
         }
         return result(
-          await upstream(
+          await authorized(
             "CATALOG",
             `/api/v1/catalog/${parts[2]}/publication-status`,
             jsonInit(method, input),
@@ -283,9 +237,7 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
       }
     }
     if (path === "admin/assets" && method === "POST") {
-      if (
-        !request.headers.get("content-type")?.startsWith("multipart/form-data;")
-      )
+      if (!request.headers.get("content-type")?.startsWith("multipart/form-data;"))
         throw new ServiceError(415, "UNSUPPORTED_MEDIA_TYPE");
       if (Number(request.headers.get("content-length") || 0) > 268500992)
         throw new ServiceError(413, "FILE_TOO_LARGE");
@@ -294,8 +246,7 @@ async function dispatch(request: Request, context: Context): Promise<Response> {
         new TransformStream({
           transform(chunk: Uint8Array, controller) {
             bytes += chunk.length;
-            if (bytes > 268500992)
-              throw new ServiceError(413, "FILE_TOO_LARGE");
+            if (bytes > 268500992) throw new ServiceError(413, "FILE_TOO_LARGE");
             controller.enqueue(chunk);
           },
         }),
@@ -331,11 +282,7 @@ async function handle(request: Request, context: Context) {
     response = await dispatch(request, context);
   } catch (error) {
     const status =
-        error instanceof z.ZodError
-          ? 400
-          : error instanceof ServiceError
-            ? error.status
-            : 503,
+        error instanceof z.ZodError ? 400 : error instanceof ServiceError ? error.status : 503,
       code =
         error instanceof z.ZodError
           ? "VALIDATION_ERROR"
@@ -343,11 +290,7 @@ async function handle(request: Request, context: Context) {
             ? error.code
             : "SERVICE_UNAVAILABLE";
     response = Response.json({ error: { code, requestId } }, { status });
-    if (
-      error instanceof ServiceError &&
-      error.retryAfter &&
-      /^\d+$/.test(error.retryAfter)
-    )
+    if (error instanceof ServiceError && error.retryAfter && /^\d+$/.test(error.retryAfter))
       response.headers.set("Retry-After", error.retryAfter);
   }
   response.headers.set("Cache-Control", "no-store");
@@ -363,10 +306,4 @@ async function handle(request: Request, context: Context) {
   );
   return response;
 }
-export {
-  handle as GET,
-  handle as POST,
-  handle as PATCH,
-  handle as PUT,
-  handle as DELETE,
-};
+export { handle as GET, handle as POST, handle as PATCH, handle as PUT, handle as DELETE };

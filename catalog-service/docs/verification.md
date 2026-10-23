@@ -4,18 +4,18 @@ Se revisó el código existente de dominio, infraestructura MongoDB, aplicación
 
 ## Resultados ejecutados
 
-| Comando | Resultado |
-| --- | --- |
-| `npm run check` | Correcto: typecheck, lint sin warnings, tests unitarios, contrato OpenAPI, build Next e inicializador. |
-| `npm test` | 38 pruebas correctas en 3 archivos: dominio, aplicación y HTTP. |
-| `npm run test:integration` | 7 pruebas correctas con MongoDB real desechable. |
-| `npm run docs:check` | OpenAPI 3.0.3 válido; 6 operaciones; diccionarios coherentes con dominio; 5 registros de ejemplo válidos. |
-| `npm run verify:phase4` | 15 grupos correctos: persistencia, índices, validadores, BSON, conflictos, planes de consulta y desconexión. |
-| `npm run verify:phase5` | 14 grupos correctos de regresión de aplicación. |
-| `npm run verify:phase6` | 14 grupos correctos contra Next en producción y MongoDB temporal. |
-| `npm run verify:phase7` | 10 comprobaciones correctas: Compose local, configuración Atlas, imagen, health, bulk, reintento, paginación, no-root, reinicialización y MongoDB privado. |
-| `docker compose -f docker-compose.yml -f compose.dev.yml config --quiet` | Configuración válida para desarrollo en el host. |
-| `docker compose up --build -d --wait` | Entorno local iniciado: API y MongoDB healthy; inicializador terminó con código 0. |
+| Comando                                                                  | Resultado                                                                                                                                                  |
+| ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run check`                                                          | Correcto: typecheck, lint sin warnings, tests unitarios, contrato OpenAPI, build Next e inicializador.                                                     |
+| `npm test`                                                               | 38 pruebas correctas en 3 archivos: dominio, aplicación y HTTP.                                                                                            |
+| `npm run test:integration`                                               | 7 pruebas correctas con MongoDB real desechable.                                                                                                           |
+| `npm run docs:check`                                                     | OpenAPI 3.0.3 válido; 6 operaciones; diccionarios coherentes con dominio; 5 registros de ejemplo válidos.                                                  |
+| `npm run verify:phase4`                                                  | 15 grupos correctos: persistencia, índices, validadores, BSON, conflictos, planes de consulta y desconexión.                                               |
+| `npm run verify:phase5`                                                  | 14 grupos correctos de regresión de aplicación.                                                                                                            |
+| `npm run verify:phase6`                                                  | 14 grupos correctos contra Next en producción y MongoDB temporal.                                                                                          |
+| `npm run verify:phase7`                                                  | 10 comprobaciones correctas: Compose local, configuración Atlas, imagen, health, bulk, reintento, paginación, no-root, reinicialización y MongoDB privado. |
+| `docker compose -f docker-compose.yml -f compose.dev.yml config --quiet` | Configuración válida para desarrollo en el host.                                                                                                           |
+| `docker compose up --build -d --wait`                                    | Entorno local iniciado: API y MongoDB healthy; inicializador terminó con código 0.                                                                         |
 
 Se ejecutó Node.js **24.21.0** para las verificaciones, sin modificar la instalación global Node.js 22 del equipo. La imagen Docker también usa Node.js 24. El usuario puede ejecutar Docker sin cambiar el Node del host; los comandos npm requieren Node 24.x como indica `engines`.
 

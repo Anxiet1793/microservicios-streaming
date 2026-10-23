@@ -1,0 +1,466 @@
+{
+  "project": "frontend",
+  "runner": "vitest 5.0.3",
+  "command": "npm run test:coverage",
+  "startedAt": "2026-10-21T05:37:44.917Z",
+  "tests": {
+    "total": 65,
+    "passed": 65,
+    "failed": 0,
+    "pending": 0,
+    "success": true
+  },
+  "groups": {
+    "unit": {
+      "total": 16,
+      "passed": 16,
+      "failed": 0,
+      "pending": 0
+    },
+    "component": {
+      "total": 49,
+      "passed": 49,
+      "failed": 0,
+      "pending": 0
+    }
+  },
+  "coverage": {
+    "lines": {
+      "total": 570,
+      "covered": 463,
+      "skipped": 0,
+      "pct": 81.22
+    },
+    "statements": {
+      "total": 608,
+      "covered": 484,
+      "skipped": 0,
+      "pct": 79.6
+    },
+    "functions": {
+      "total": 147,
+      "covered": 102,
+      "skipped": 0,
+      "pct": 69.38
+    },
+    "branches": {
+      "total": 600,
+      "covered": 433,
+      "skipped": 0,
+      "pct": 72.16
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "files": [
+    {
+      "file": "frontend/tests/unit/player.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:23.764Z",
+      "endedAt": "2026-10-21T05:38:23.769Z",
+      "tests": [
+        {
+          "name": "ordered playback writes coalesces pending positions without removing intentional backward seeks",
+          "status": "passed",
+          "durationMilliseconds": 2.0087000000000046
+        },
+        {
+          "name": "ordered playback writes finishes progress before pause and completion",
+          "status": "passed",
+          "durationMilliseconds": 0.21019999999998618
+        },
+        {
+          "name": "ordered playback writes does not permanently block the queue after a network error",
+          "status": "passed",
+          "durationMilliseconds": 1.3695999999999913
+        },
+        {
+          "name": "ordered playback writes stops future writes when superseded",
+          "status": "passed",
+          "durationMilliseconds": 0.2634999999999934
+        },
+        {
+          "name": "navigation and display boundaries rejects unsafe return https://evil.example",
+          "status": "passed",
+          "durationMilliseconds": 0.21389999999999532
+        },
+        {
+          "name": "navigation and display boundaries rejects unsafe return //evil.example",
+          "status": "passed",
+          "durationMilliseconds": 0.13859999999999673
+        },
+        {
+          "name": "navigation and display boundaries rejects unsafe return /\\evil",
+          "status": "passed",
+          "durationMilliseconds": 0.05729999999999791
+        },
+        {
+          "name": "navigation and display boundaries rejects unsafe return /api/bff/admin",
+          "status": "passed",
+          "durationMilliseconds": 0.05729999999999791
+        },
+        {
+          "name": "navigation and display boundaries rejects unsafe return /login?next=https://evil.example",
+          "status": "passed",
+          "durationMilliseconds": 0.0630000000000166
+        },
+        {
+          "name": "navigation and display boundaries preserves local title return",
+          "status": "passed",
+          "durationMilliseconds": 0.07429999999999382
+        },
+        {
+          "name": "navigation and display boundaries formats NaN safely",
+          "status": "passed",
+          "durationMilliseconds": 0.13329999999999131
+        },
+        {
+          "name": "navigation and display boundaries formats -3 safely",
+          "status": "passed",
+          "durationMilliseconds": 0.066599999999994
+        },
+        {
+          "name": "navigation and display boundaries formats 65.8 safely",
+          "status": "passed",
+          "durationMilliseconds": 0.09459999999998558
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/unit/query.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:23.946Z",
+      "endedAt": "2026-10-21T05:38:23.949Z",
+      "tests": [
+        {
+          "name": "URL search boundary normalizes hostile or out-of-contract filters before calling Catalog",
+          "status": "passed",
+          "durationMilliseconds": 2.3659000000000106
+        },
+        {
+          "name": "URL search boundary keeps Spanish search and normalizes valid numeric values",
+          "status": "passed",
+          "durationMilliseconds": 0.41499999999999204
+        },
+        {
+          "name": "URL search boundary limits query length without breaking Unicode characters",
+          "status": "passed",
+          "durationMilliseconds": 0.6910000000000025
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/actions.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:23.222Z",
+      "endedAt": "2026-10-21T05:38:23.548Z",
+      "tests": [
+        {
+          "name": "personal state under failure distinguishes a wrong current password from an expired session",
+          "status": "passed",
+          "durationMilliseconds": 9.347399999999993
+        },
+        {
+          "name": "personal state under failure rolls back an optimistic watchlist toggle after a rejected write",
+          "status": "passed",
+          "durationMilliseconds": 272.5697
+        },
+        {
+          "name": "personal state under failure keeps an incomplete paginated state unknown rather than enabling neutral actions",
+          "status": "passed",
+          "durationMilliseconds": 44.77149999999983
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/admin.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:15.468Z",
+      "endedAt": "2026-10-21T05:38:15.904Z",
+      "tests": [
+        {
+          "name": "upload route checks USER before rendering the form",
+          "status": "passed",
+          "durationMilliseconds": 14.106199999999944
+        },
+        {
+          "name": "upload route checks ADMIN before rendering the form",
+          "status": "passed",
+          "durationMilliseconds": 104.96410000000014
+        },
+        {
+          "name": "streams MP4, exposes upload progress and confirms asset metadata",
+          "status": "passed",
+          "durationMilliseconds": 64.07990000000018
+        },
+        {
+          "name": "reports uncertain upload after onerror without automatically retrying",
+          "status": "passed",
+          "durationMilliseconds": 21.504500000000007
+        },
+        {
+          "name": "reports uncertain upload after ontimeout without automatically retrying",
+          "status": "passed",
+          "durationMilliseconds": 17.540700000000015
+        },
+        {
+          "name": "reports uncertain upload after onabort without automatically retrying",
+          "status": "passed",
+          "durationMilliseconds": 23.626400000000103
+        },
+        {
+          "name": "shows a controlled API upload error",
+          "status": "passed",
+          "durationMilliseconds": 21.532600000000002
+        },
+        {
+          "name": "rejects a non MP4 before starting a network transfer",
+          "status": "passed",
+          "durationMilliseconds": 16.324100000000044
+        },
+        {
+          "name": "retains a stable import key after a rejected ficha and publishes without uploading twice",
+          "status": "passed",
+          "durationMilliseconds": 123.81850000000009
+        },
+        {
+          "name": "editor preserves noneditable catalog metadata while clearing blank artwork URLs",
+          "status": "passed",
+          "durationMilliseconds": 28.213900000000194
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/auth.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:13.919Z",
+      "endedAt": "2026-10-21T05:38:14.359Z",
+      "tests": [
+        {
+          "name": "LoginForm submits once, shows loading and returns to a safe destination",
+          "status": "passed",
+          "durationMilliseconds": 177.73970000000008
+        },
+        {
+          "name": "RegisterForm creates an account and never redirects before login",
+          "status": "passed",
+          "durationMilliseconds": 63.58550000000014
+        },
+        {
+          "name": "validates registration and email before calling the API",
+          "status": "passed",
+          "durationMilliseconds": 61.81680000000006
+        },
+        {
+          "name": "shows generic authentication errors and allows another attempt",
+          "status": "passed",
+          "durationMilliseconds": 45.68249999999989
+        },
+        {
+          "name": "honors Retry-After instead of silently retrying credentials",
+          "status": "passed",
+          "durationMilliseconds": 55.49519999999984
+        },
+        {
+          "name": "does not dispatch a session-expiry event for a rejected login",
+          "status": "passed",
+          "durationMilliseconds": 36.736199999999826
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/catalog.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:17.151Z",
+      "endedAt": "2026-10-21T05:38:17.632Z",
+      "tests": [
+        {
+          "name": "MediaCard uses catalog IDs, metadata and an image fallback on load failure",
+          "status": "passed",
+          "durationMilliseconds": 137.44870000000014
+        },
+        {
+          "name": "MediaRow/Section renders its cards and collection link",
+          "status": "passed",
+          "durationMilliseconds": 39.24309999999991
+        },
+        {
+          "name": "detail offers playback only for a published movie with an asset",
+          "status": "passed",
+          "durationMilliseconds": 18.46810000000005
+        },
+        {
+          "name": "debounces search, preserves filters, resets pagination and cancels on unmount",
+          "status": "passed",
+          "durationMilliseconds": 10.505600000000186
+        },
+        {
+          "name": "renders search/filter values, preserves them in pagination and shows empty results",
+          "status": "passed",
+          "durationMilliseconds": 47.57079999999996
+        },
+        {
+          "name": "Continue Watching exposes a percentage and resumes the same title",
+          "status": "passed",
+          "durationMilliseconds": 59.28699999999981
+        },
+        {
+          "name": "watchlist shows a controlled error and retries",
+          "status": "passed",
+          "durationMilliseconds": 45.578199999999924
+        },
+        {
+          "name": "continue-watching shows a controlled error and retries",
+          "status": "passed",
+          "durationMilliseconds": 40.382899999999836
+        },
+        {
+          "name": "preferences shows a controlled error and retries",
+          "status": "passed",
+          "durationMilliseconds": 37.08349999999996
+        },
+        {
+          "name": "history shows a controlled error and retries",
+          "status": "passed",
+          "durationMilliseconds": 45.09190000000012
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/library.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:21.963Z",
+      "endedAt": "2026-10-21T05:38:22.188Z",
+      "tests": [
+        {
+          "name": "loads the full page after visiting a four-item Home preview",
+          "status": "passed",
+          "durationMilliseconds": 225.33230000000003
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/personal.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:18.737Z",
+      "endedAt": "2026-10-21T05:38:19.283Z",
+      "tests": [
+        {
+          "name": "adds and removes a watchlist reference using optimistic state",
+          "status": "passed",
+          "durationMilliseconds": 251.16039999999987
+        },
+        {
+          "name": "restores an existing item when optimistic removal fails",
+          "status": "passed",
+          "durationMilliseconds": 73.21769999999992
+        },
+        {
+          "name": "sets LIKE and removes it when pressed again",
+          "status": "passed",
+          "durationMilliseconds": 71.49440000000004
+        },
+        {
+          "name": "sets DISLIKE and removes it when pressed again",
+          "status": "passed",
+          "durationMilliseconds": 78.03359999999998
+        },
+        {
+          "name": "changes LIKE to DISLIKE without deleting first and rolls back a failed change",
+          "status": "passed",
+          "durationMilliseconds": 72.35609999999997
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/player.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:10.649Z",
+      "endedAt": "2026-10-21T05:38:11.670Z",
+      "tests": [
+        {
+          "name": "creates a single session, exposes loading and restores initial currentTime",
+          "status": "passed",
+          "durationMilliseconds": 333.8561000000009
+        },
+        {
+          "name": "plays, persists a seek, pauses with position and resumes with a new URL",
+          "status": "passed",
+          "durationMilliseconds": 221.72839999999997
+        },
+        {
+          "name": "automatically saves playing progress every ten seconds and stops timers on unmount",
+          "status": "passed",
+          "durationMilliseconds": 130.15470000000278
+        },
+        {
+          "name": "completes once and stops progress after completion",
+          "status": "passed",
+          "durationMilliseconds": 89.49349999999686
+        },
+        {
+          "name": "renews an expiring URL while preserving paused position",
+          "status": "passed",
+          "durationMilliseconds": 75.01469999999972
+        },
+        {
+          "name": "offers recovery after a media error and renews without creating another session",
+          "status": "passed",
+          "durationMilliseconds": 92.40369999999893
+        },
+        {
+          "name": "reports playback service failure and allows opening another session",
+          "status": "passed",
+          "durationMilliseconds": 78.21709999999803
+        }
+      ]
+    },
+    {
+      "file": "frontend/tests/component/session.test.tsx",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:20.397Z",
+      "endedAt": "2026-10-21T05:38:20.872Z",
+      "tests": [
+        {
+          "name": "logout clears private cached data, revoked=true",
+          "status": "passed",
+          "durationMilliseconds": 215.17259999999987
+        },
+        {
+          "name": "logout clears private cached data, revoked=false",
+          "status": "passed",
+          "durationMilliseconds": 90.31930000000011
+        },
+        {
+          "name": "failed logout retains session, reports failure and enables retry",
+          "status": "passed",
+          "durationMilliseconds": 42.718799999999874
+        },
+        {
+          "name": "profile presents administration only to USER when appropriate",
+          "status": "passed",
+          "durationMilliseconds": 30.60479999999984
+        },
+        {
+          "name": "profile presents administration only to ADMIN when appropriate",
+          "status": "passed",
+          "durationMilliseconds": 15.108699999999999
+        },
+        {
+          "name": "profile patches editable fields, exposes loading and reports success",
+          "status": "passed",
+          "durationMilliseconds": 62.68820000000005
+        },
+        {
+          "name": "password change clears cache and returns to login only after confirmation",
+          "status": "passed",
+          "durationMilliseconds": 18.34830000000011
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+meta {
+  name: 03 Duplicate title 409
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{usersBaseUrl}}/api/v1/users/me/watchlist/{{tituloId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+script:pre-request {
+  if (!(bru.getVar("accessToken") || bru.getEnvVar("accessToken"))) throw new Error("Login USER first");
+}
+
+tests {
+  test("HTTP 409", function () { expect(res.getStatus()).to.equal(409); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "error"
+    ],
+    "properties": {
+      "error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message",
+          "requestId"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "requestId": {
+            "type": "string",
+            "format": "uuid"
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Error code WATCHLIST_ITEM_ALREADY_EXISTS", function () { expect(res.getBody().error.code).to.equal("WATCHLIST_ITEM_ALREADY_EXISTS"); });
+}
+
+docs {
+  Servicio: users. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

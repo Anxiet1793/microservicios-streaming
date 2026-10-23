@@ -1,11 +1,5 @@
 import { afterEach, describe, it, expect, vi } from "vitest";
-import {
-  cleanup,
-  fireEvent,
-  render,
-  screen,
-  waitFor,
-} from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PersonalActions } from "../../src/features/library/PersonalActions";
 import { api } from "../../src/lib/api/client";
@@ -30,17 +24,12 @@ describe("personal state under failure", () => {
     try {
       vi.spyOn(globalThis, "fetch")
         .mockResolvedValueOnce(
-          Response.json(
-            { error: { code: "INVALID_CREDENTIALS" } },
-            { status: 401 },
-          ),
+          Response.json({ error: { code: "INVALID_CREDENTIALS" } }, { status: 401 }),
         )
-        .mockResolvedValueOnce(
-          Response.json({ error: { code: "UNAUTHORIZED" } }, { status: 401 }),
-        );
-      await expect(api("me/change-password", "POST", {})).rejects.toMatchObject(
-        { code: "INVALID_CREDENTIALS" },
-      );
+        .mockResolvedValueOnce(Response.json({ error: { code: "UNAUTHORIZED" } }, { status: 401 }));
+      await expect(api("me/change-password", "POST", {})).rejects.toMatchObject({
+        code: "INVALID_CREDENTIALS",
+      });
       expect(expired).not.toHaveBeenCalled();
       await expect(api("me")).rejects.toMatchObject({ code: "UNAUTHORIZED" });
       expect(expired).toHaveBeenCalledOnce();
@@ -54,12 +43,7 @@ describe("personal state under failure", () => {
       if (init?.method === "POST")
         return new Promise<Response>((resolve) => {
           rejectWrite = () =>
-            resolve(
-              Response.json(
-                { error: { code: "SERVICE_UNAVAILABLE" } },
-                { status: 503 },
-              ),
-            );
+            resolve(Response.json({ error: { code: "SERVICE_UNAVAILABLE" } }, { status: 503 }));
         });
       return Response.json({
         watchlist: { known: true, item: null },
@@ -69,24 +53,19 @@ describe("personal state under failure", () => {
     mount();
     const add = await screen.findByRole("button", {
       name: "+ Mi Lista",
-      exact: true,
     });
     await waitFor(() => expect(add.hasAttribute("disabled")).toBe(false));
     fireEvent.click(add);
     await waitFor(() =>
-      expect(
-        screen
-          .getByRole("button", { name: "En Mi Lista", exact: true })
-          .getAttribute("aria-pressed"),
-      ).toBe("true"),
+      expect(screen.getByRole("button", { name: "En Mi Lista" }).getAttribute("aria-pressed")).toBe(
+        "true",
+      ),
     );
     rejectWrite();
     await screen.findByRole("alert");
-    expect(
-      screen
-        .getByRole("button", { name: "+ Mi Lista", exact: true })
-        .getAttribute("aria-pressed"),
-    ).toBe("false");
+    expect(screen.getByRole("button", { name: "+ Mi Lista" }).getAttribute("aria-pressed")).toBe(
+      "false",
+    );
   });
   it("keeps an incomplete paginated state unknown rather than enabling neutral actions", async () => {
     vi.spyOn(globalThis, "fetch").mockResolvedValue(
@@ -98,14 +77,9 @@ describe("personal state under failure", () => {
     mount();
     const add = await screen.findByRole("button", {
       name: "+ Mi Lista",
-      exact: true,
     });
     expect(add.hasAttribute("disabled")).toBe(true);
-    expect(
-      screen
-        .getByRole("button", { name: "Me gusta", exact: true })
-        .hasAttribute("disabled"),
-    ).toBe(true);
+    expect(screen.getByRole("button", { name: "Me gusta" }).hasAttribute("disabled")).toBe(true);
     expect(screen.getByText(/Tu colección es muy extensa/)).toBeTruthy();
   });
 });

@@ -20,13 +20,10 @@ const messages: Record<string, string> = {
   UNSUPPORTED_MEDIA_TYPE: "Usa un MP4 con video H.264 y audio AAC opcional.",
   FILE_TOO_LARGE: "El archivo supera el tamaño permitido de 256 MiB.",
   VALIDATION_ERROR: "Revisa los campos e inténtalo otra vez.",
-  SESSION_UNCERTAIN:
-    "No pudimos confirmar la renovación. Vuelve a iniciar sesión.",
+  SESSION_UNCERTAIN: "No pudimos confirmar la renovación. Vuelve a iniciar sesión.",
 };
 export function errorMessage(code: string) {
-  return (
-    messages[code] || "No pudimos completar la operación. Inténtalo otra vez."
-  );
+  return messages[code] || "No pudimos completar la operación. Inténtalo otra vez.";
 }
 export async function api<T>(
   path: string,
@@ -47,11 +44,7 @@ export async function api<T>(
   if (!response.ok) {
     const value = await response.json().catch(() => ({}));
     const code = value.error?.code || "SERVICE_UNAVAILABLE";
-    if (
-      response.status === 401 &&
-      code === "UNAUTHORIZED" &&
-      !path.startsWith("auth/")
-    )
+    if (response.status === 401 && code === "UNAUTHORIZED" && !path.startsWith("auth/"))
       window.dispatchEvent(new Event("nevaro:expired"));
     throw new ApiError(
       code,
@@ -60,7 +53,5 @@ export async function api<T>(
       Math.min(3600, Number(response.headers.get("retry-after")) || 0),
     );
   }
-  return response.status === 204
-    ? (undefined as T)
-    : (response.json() as Promise<T>);
+  return response.status === 204 ? (undefined as T) : (response.json() as Promise<T>);
 }

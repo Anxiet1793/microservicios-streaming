@@ -15,11 +15,7 @@ const schema = z.object({
   displayName: z.string().optional(),
 });
 type Values = z.infer<typeof schema>;
-export function AuthForm({
-  register: creating = false,
-}: {
-  register?: boolean;
-}) {
+export function AuthForm({ register: creating = false }: { register?: boolean }) {
   const router = useRouter(),
     params = useSearchParams();
   const [error, setError] = useState(""),
@@ -43,9 +39,7 @@ export function AuthForm({
     setError("");
     if (
       creating &&
-      (!values.displayName?.trim() ||
-        values.password.length < 12 ||
-        values.password.length > 128)
+      (!values.displayName?.trim() || values.password.length < 12 || values.password.length > 128)
     ) {
       setError("Escribe tu nombre y una contraseña de 12 a 128 caracteres.");
       return;
@@ -63,11 +57,7 @@ export function AuthForm({
       }
     } catch (e) {
       if (e instanceof ApiError && e.retryAfter) setCooldown(e.retryAfter);
-      setError(
-        e instanceof Error
-          ? e.message
-          : "No pudimos conectar. Inténtalo otra vez.",
-      );
+      setError(e instanceof Error ? e.message : "No pudimos conectar. Inténtalo otra vez.");
     }
   });
   if (done)
@@ -84,9 +74,7 @@ export function AuthForm({
   return (
     <>
       <span className="eyebrow">TU SALA PERSONAL</span>
-      <h1>
-        {creating ? "Empieza una nueva historia." : "Vuelve a tus historias."}
-      </h1>
+      <h1>{creating ? "Empieza una nueva historia." : "Vuelve a tus historias."}</h1>
       <p className={s.intro}>
         {creating
           ? "Crea tu cuenta. El resto empieza con una buena película."
@@ -94,20 +82,14 @@ export function AuthForm({
       </p>
       {params.get("logout") === "local" && (
         <p className="error">
-          Cerramos la sesión en este dispositivo. No pudimos confirmar el cierre
-          remoto.
+          Cerramos la sesión en este dispositivo. No pudimos confirmar el cierre remoto.
         </p>
       )}
       <form onSubmit={submit} noValidate>
         {creating && (
           <label className="field">
             <span>Nombre visible</span>
-            <input
-              {...register("displayName")}
-              autoComplete="nickname"
-              maxLength={100}
-              required
-            />
+            <input {...register("displayName")} autoComplete="nickname" maxLength={100} required />
           </label>
         )}
         <label className="field">

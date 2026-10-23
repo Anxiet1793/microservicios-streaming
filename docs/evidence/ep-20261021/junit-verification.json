@@ -1,0 +1,47 @@
+{
+  "verifiedAt": "2026-10-21T21:07:40.363424+00:00",
+  "reports": [
+    {
+      "file": "catalog-service-junit.xml",
+      "testCases": 103,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "demo-junit.xml",
+      "testCases": 227,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "e2e-junit.xml",
+      "testCases": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "frontend-junit.xml",
+      "testCases": 65,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "playback-service-junit.xml",
+      "testCases": 115,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "file": "users-service-junit.xml",
+      "testCases": 96,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ]
+}

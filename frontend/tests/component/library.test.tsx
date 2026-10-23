@@ -18,9 +18,7 @@ it("loads the full page after visiting a four-item Home preview", async () => {
   }));
   vi.spyOn(globalThis, "fetch").mockImplementation(async (url) => {
     const limit =
-      new URL(String(url), "http://localhost").searchParams.get("limit") === "4"
-        ? 4
-        : 20;
+      new URL(String(url), "http://localhost").searchParams.get("limit") === "4" ? 4 : 20;
     return Response.json({
       data: items.slice(0, limit),
       pagination: {
@@ -40,12 +38,8 @@ it("loads the full page after visiting a four-item Home preview", async () => {
     </QueryClientProvider>
   );
   const rendered = render(view(true));
-  await screen.findByRole("heading", { name: "Historia 4", exact: true });
-  expect(
-    screen.queryByRole("heading", { name: "Historia 6", exact: true }),
-  ).toBeNull();
+  await screen.findByRole("heading", { name: "Historia 4" });
+  expect(screen.queryByRole("heading", { name: "Historia 6" })).toBeNull();
   rendered.rerender(view(false));
-  expect(
-    await screen.findByRole("heading", { name: "Historia 6", exact: true }),
-  ).toBeTruthy();
+  expect(await screen.findByRole("heading", { name: "Historia 6" })).toBeTruthy();
 });

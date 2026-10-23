@@ -24,12 +24,7 @@
   position: absolute;
   z-index: -1;
   inset: 0;
-  background: linear-gradient(
-    90deg,
-    #0b1017f5 0%,
-    #0b1017c9 45%,
-    #0b101755 100%
-  );
+  background: linear-gradient(90deg, #0b1017f5 0%, #0b1017c9 45%, #0b101755 100%);
 }
 .heroContent {
   max-width: 560px;

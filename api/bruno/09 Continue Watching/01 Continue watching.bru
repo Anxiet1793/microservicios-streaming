@@ -1,0 +1,128 @@
+meta {
+  name: 01 Continue watching
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{playbackBaseUrl}}/api/v1/playback/me/continue-watching?page=1&limit=100
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+}
+
+script:pre-request {
+  if (!(bru.getVar("accessToken") || bru.getEnvVar("accessToken"))) throw new Error("Login USER first");
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "data",
+      "pagination"
+    ],
+    "properties": {
+      "data": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "tituloId",
+            "progress",
+            "lastPlayedAt"
+          ],
+          "properties": {
+            "tituloId": {
+              "type": "string",
+              "pattern": "^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+            },
+            "progress": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "positionSeconds",
+                "durationSeconds",
+                "percentage",
+                "updatedAt"
+              ],
+              "properties": {
+                "positionSeconds": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "durationSeconds": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "percentage": {
+                  "type": "number",
+                  "minimum": 0,
+                  "maximum": 100
+                },
+                "updatedAt": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            },
+            "lastPlayedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      },
+      "pagination": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "page",
+          "limit",
+          "total",
+          "totalPages"
+        ],
+        "properties": {
+          "page": {
+            "type": "integer"
+          },
+          "limit": {
+            "type": "integer"
+          },
+          "total": {
+            "type": "integer"
+          },
+          "totalPages": {
+            "type": "integer"
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    const item = res.getBody().data.find(item => item.tituloId === bru.getVar("tituloId"));
+    expect(Boolean(item)).to.equal(true);
+    expect(item.progress.positionSeconds).to.equal(3);
+  });
+}
+
+docs {
+  Servicio: playback. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

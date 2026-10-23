@@ -1,0 +1,126 @@
+meta {
+  name: 01 Upload MP4
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{playbackBaseUrl}}/api/v1/media/assets
+  body: multipartForm
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminAccessToken}}
+}
+
+body:multipart-form {
+  file: @file(fixtures/demo.mp4) @contentType(video/mp4)
+}
+
+script:pre-request {
+  if (!(bru.getVar("adminAccessToken") || bru.getEnvVar("adminAccessToken"))) throw new Error("Login ADMIN first");
+}
+
+script:post-response {
+  if (res.getStatus() === 201) bru.setVar("assetId", res.getBody().asset.assetId);
+}
+
+tests {
+  test("HTTP 201", function () { expect(res.getStatus()).to.equal(201); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "required": [
+      "asset"
+    ],
+    "additionalProperties": false,
+    "properties": {
+      "asset": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetId",
+          "contentType",
+          "originalFilename",
+          "sizeBytes",
+          "durationSeconds",
+          "codec",
+          "width",
+          "height",
+          "status",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string",
+            "pattern": "^ast_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "contentType": {
+            "type": "string",
+            "enum": [
+              "video/mp4"
+            ]
+          },
+          "originalFilename": {
+            "type": "string"
+          },
+          "sizeBytes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "durationSeconds": {
+            "type": "number"
+          },
+          "codec": {
+            "type": "string",
+            "enum": [
+              "h264"
+            ]
+          },
+          "width": {
+            "type": "integer"
+          },
+          "height": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "READY",
+              "DELETED"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().asset.status).to.equal("READY");
+    expect(res.getBody().asset.sizeBytes).to.be.lessThan(1048576);
+    expect(res.getBody().asset.durationSeconds).to.be.greaterThan(10);
+  });
+}
+
+docs {
+  Servicio: playback. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

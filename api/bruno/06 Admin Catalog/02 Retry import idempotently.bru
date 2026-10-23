@@ -1,0 +1,217 @@
+meta {
+  name: 02 Retry import idempotently
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{catalogBaseUrl}}/api/v1/catalog/bulk
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminAccessToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "items": [
+      {
+        "importKey": "{{importKey}}",
+        "typeId": 1,
+        "ficha": {
+          "title": "{{titleName}}",
+          "synopsis": "MP4 sintético de doce segundos creado para la colección Bruno.",
+          "releaseYear": 2026,
+          "durationMinutes": 1,
+          "genres": [
+            10
+          ],
+          "languages": [
+            1
+          ]
+        },
+        "playbackReference": {
+          "providerId": 1,
+          "assetId": "{{assetId}}",
+          "manifestKey": "asset:{{assetId}}"
+        }
+      }
+    ]
+  }
+}
+
+script:pre-request {
+  if (!(bru.getVar("adminAccessToken") || bru.getEnvVar("adminAccessToken"))) throw new Error("Login ADMIN first");
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "success",
+      "summary",
+      "results",
+      "errors"
+    ],
+    "properties": {
+      "success": {
+        "type": "boolean"
+      },
+      "summary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "received",
+          "inserted",
+          "duplicates",
+          "failed",
+          "indeterminate"
+        ],
+        "properties": {
+          "received": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "inserted": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "duplicates": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "failed": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "indeterminate": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "results": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "index",
+                "status",
+                "tituloId"
+              ],
+              "properties": {
+                "index": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "inserted",
+                    "duplicate"
+                  ]
+                },
+                "tituloId": {
+                  "type": "string",
+                  "pattern": "^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+                }
+              }
+            },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "index",
+                "status",
+                "code"
+              ],
+              "properties": {
+                "index": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "rejected",
+                    "indeterminate"
+                  ]
+                },
+                "code": {
+                  "type": "string"
+                },
+                "issues": {
+                  "type": "array",
+                  "maxItems": 20,
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "path",
+                      "code"
+                    ],
+                    "properties": {
+                      "path": {
+                        "type": "string"
+                      },
+                      "code": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      "errors": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "index",
+            "code"
+          ],
+          "properties": {
+            "index": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "code": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().summary.duplicates).to.equal(1);
+    expect(res.getBody().results[0].tituloId).to.equal(bru.getVar("tituloId"));
+  });
+}
+
+docs {
+  Servicio: catalog. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

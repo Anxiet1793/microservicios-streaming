@@ -13,25 +13,89 @@ const temporary = await mkdtemp(join(tmpdir(), "users-e2e-"));
 const envFile = join(temporary, "test.env");
 const password = randomBytes(24).toString("hex");
 const seedPassword = randomBytes(24).toString("hex");
-const { privateKey, publicKey } = generateKeyPairSync("rsa", { modulusLength: 2048, privateKeyEncoding: { type: "pkcs8", format: "pem" }, publicKeyEncoding: { type: "spki", format: "pem" } });
-await writeFile(envFile, ["APP_ENV=development", "APP_ORIGIN=http://127.0.0.1:3001", `POSTGRES_PASSWORD=${password}`, `JWT_PRIVATE_KEY=${JSON.stringify(privateKey)}`, `JWT_PUBLIC_KEY=${JSON.stringify(publicKey)}`, `SEED_PASSWORD=${seedPassword}`, "ACCESS_TOKEN_TTL=900", "REFRESH_TOKEN_TTL=86400", "LOGIN_RATE_LIMIT=10"].join("\n"), { mode: 0o600 });
-const env = { ...process.env, USERS_ENV_FILE: envFile, POSTGRES_PASSWORD: password, USERS_PORT: "0", POSTGRES_PORT: "0", USERS_IMAGE_TAG: project };
-const args = ["compose", "--env-file", envFile, "--project-name", project, "--file", "docker-compose.yml"];
-const compose = (command: string[], timeout = 60000) => exec("docker", [...args, ...command], { env, timeout, windowsHide: true, maxBuffer: 8 * 1024 * 1024 });
+const { privateKey, publicKey } = generateKeyPairSync("rsa", {
+  modulusLength: 2048,
+  privateKeyEncoding: { type: "pkcs8", format: "pem" },
+  publicKeyEncoding: { type: "spki", format: "pem" },
+});
+await writeFile(
+  envFile,
+  [
+    "APP_ENV=development",
+    "APP_ORIGIN=http://127.0.0.1:3001",
+    `POSTGRES_PASSWORD=${password}`,
+    `JWT_PRIVATE_KEY=${JSON.stringify(privateKey)}`,
+    `JWT_PUBLIC_KEY=${JSON.stringify(publicKey)}`,
+    `SEED_PASSWORD=${seedPassword}`,
+    "ACCESS_TOKEN_TTL=900",
+    "REFRESH_TOKEN_TTL=86400",
+    "LOGIN_RATE_LIMIT=10",
+  ].join("\n"),
+  { mode: 0o600 },
+);
+const env = {
+  ...process.env,
+  USERS_ENV_FILE: envFile,
+  POSTGRES_PASSWORD: password,
+  USERS_PORT: "0",
+  POSTGRES_PORT: "0",
+  USERS_IMAGE_TAG: project,
+};
+const args = [
+  "compose",
+  "--env-file",
+  envFile,
+  "--project-name",
+  project,
+  "--file",
+  "docker-compose.yml",
+];
+const compose = (command: string[], timeout = 60000) =>
+  exec("docker", [...args, ...command], {
+    env,
+    timeout,
+    windowsHide: true,
+    maxBuffer: 8 * 1024 * 1024,
+  });
 let resources = false;
 let origin = "";
 let checks = 0;
 const ids: string[] = [];
-const pass = (name: string) => { checks++; console.log(`OK ${name}`); };
+const pass = (name: string) => {
+  checks++;
+  console.log(`OK ${name}`);
+};
 type Session = { accessToken: string; expiresIn: number; user: { userId: string; role: string } };
-async function api<T>(path: string, status: number, method = "GET", body?: unknown, headers: Record<string, string> = {}) {
-  const response = await fetch(`${origin}${path}`, { method, headers: { ...(body !== undefined ? { "content-type": "application/json" } : {}), ...headers }, ...(body !== undefined ? { body: typeof body === "string" ? body : JSON.stringify(body) } : {}), signal: AbortSignal.timeout(15000) });
+async function api<T>(
+  path: string,
+  status: number,
+  method = "GET",
+  body?: unknown,
+  headers: Record<string, string> = {},
+) {
+  const response = await fetch(`${origin}${path}`, {
+    method,
+    headers: { ...(body !== undefined ? { "content-type": "application/json" } : {}), ...headers },
+    ...(body !== undefined ? { body: typeof body === "string" ? body : JSON.stringify(body) } : {}),
+    signal: AbortSignal.timeout(15000),
+  });
   assert.equal(response.status, status, `${method} ${path}: HTTP inesperado`);
   assert.equal(response.headers.get("cache-control"), "no-store");
-  const requestId = response.headers.get("x-request-id"); assert.ok(requestId); ids.push(requestId);
+  const requestId = response.headers.get("x-request-id");
+  assert.ok(requestId);
+  ids.push(requestId);
   const text = await response.text();
-  if (status >= 400) { const data = JSON.parse(text); assert.equal(data.error.requestId, requestId); assert.ok(!text.includes("stack") && !text.includes("passwordHash")); }
-  return { response, data: (text ? JSON.parse(text) : null) as T, raw: text, cookie: response.headers.get("set-cookie")?.split(";")[0] ?? "" };
+  if (status >= 400) {
+    const data = JSON.parse(text);
+    assert.equal(data.error.requestId, requestId);
+    assert.ok(!text.includes("stack") && !text.includes("passwordHash"));
+  }
+  return {
+    response,
+    data: (text ? JSON.parse(text) : null) as T,
+    raw: text,
+    cookie: response.headers.get("set-cookie")?.split(";")[0] ?? "",
+  };
 }
 const csrf = { "x-csrf-protection": "1" };
 const email = "http@example.com";
@@ -42,95 +106,254 @@ try {
   resources = true;
   await compose(["up", "--build", "--detach", "--wait", "--wait-timeout", "180"], 900000);
   const { stdout } = await compose(["port", "users-service", "3001"]);
-  const port = /^127\.0\.0\.1:(\d+)\s*$/.exec(stdout)?.[1]; assert.ok(port); origin = `http://127.0.0.1:${port}`;
-  await api("/api/health", 200); pass("Imagen Docker, migración automática y health PostgreSQL/JWT");
-  const registration = await api<{ user: { userId: string; role: string } }>("/api/v1/auth/register", 201, "POST", { email, password: userPassword, displayName: "HTTP" });
-  assert.equal(registration.data.user.role, "USER"); assert.ok(!registration.raw.includes("password"));
-  await api("/api/v1/auth/register", 409, "POST", { email: email.toUpperCase(), password: userPassword, displayName: "HTTP" });
-  await api("/api/v1/auth/register", 400, "POST", { email: "adminbad@example.com", password: userPassword, displayName: "HTTP", role: "ADMIN" });
+  const port = /^127\.0\.0\.1:(\d+)\s*$/.exec(stdout)?.[1];
+  assert.ok(port);
+  origin = `http://127.0.0.1:${port}`;
+  await api("/api/health", 200);
+  pass("Imagen Docker, migración automática y health PostgreSQL/JWT");
+  const registration = await api<{ user: { userId: string; role: string } }>(
+    "/api/v1/auth/register",
+    201,
+    "POST",
+    { email, password: userPassword, displayName: "HTTP" },
+  );
+  assert.equal(registration.data.user.role, "USER");
+  assert.ok(!registration.raw.includes("password"));
+  await api("/api/v1/auth/register", 409, "POST", {
+    email: email.toUpperCase(),
+    password: userPassword,
+    displayName: "HTTP",
+  });
+  await api("/api/v1/auth/register", 400, "POST", {
+    email: "adminbad@example.com",
+    password: userPassword,
+    displayName: "HTTP",
+    role: "ADMIN",
+  });
   pass("Registro, email duplicado, rol asignado y ausencia de hashes");
   await api("/api/v1/auth/login", 401, "POST", { email, password: "bad" });
-  const session = await api<Session>("/api/v1/auth/login", 200, "POST", { email, password: userPassword });
-  assert.equal(session.data.expiresIn, 900); assert.ok(!session.raw.includes("refreshToken"));
-  const setCookie = session.response.headers.get("set-cookie")!; assert.ok(setCookie.includes("HttpOnly") && setCookie.includes("SameSite=Strict") && setCookie.includes("Path=/api/v1/auth"));
+  const session = await api<Session>("/api/v1/auth/login", 200, "POST", {
+    email,
+    password: userPassword,
+  });
+  assert.equal(session.data.expiresIn, 900);
+  assert.ok(!session.raw.includes("refreshToken"));
+  const setCookie = session.response.headers.get("set-cookie")!;
+  assert.ok(
+    setCookie.includes("HttpOnly") &&
+      setCookie.includes("SameSite=Strict") &&
+      setCookie.includes("Path=/api/v1/auth"),
+  );
   const authorization = { authorization: `Bearer ${session.data.accessToken}` };
   const jwks = await api<JSONWebKeySet>("/.well-known/jwks.json", 200);
   assert.ok(!jwks.raw.includes('"d":'));
-  const verified = await jwtVerify(session.data.accessToken, createLocalJWKSet(jwks.data), { algorithms: ["RS256"], issuer: "users-service", audience: "streaming-services" });
+  const verified = await jwtVerify(session.data.accessToken, createLocalJWKSet(jwks.data), {
+    algorithms: ["RS256"],
+    issuer: "users-service",
+    audience: "streaming-services",
+  });
   assert.equal(verified.payload.sub, registration.data.user.userId);
   pass("Login, cookie HttpOnly y JWT verificable con JWKS público");
   await api("/api/v1/users/me", 401);
-  await api("/api/v1/users/me", 401, "GET", undefined, { authorization: "Bearer invalid.token.value" });
+  await api("/api/v1/users/me", 401, "GET", undefined, {
+    authorization: "Bearer invalid.token.value",
+  });
   await api("/api/v1/users/me", 200, "GET", undefined, authorization);
   await api("/api/v1/users/me", 400, "PATCH", { status: "INACTIVE" }, authorization);
-  const profile = await api<{ profile: { displayName: string; avatarUrl: null } }>("/api/v1/users/me", 200, "PATCH", { displayName: "Nuevo", avatarUrl: null }, authorization);
+  const profile = await api<{ profile: { displayName: string; avatarUrl: null } }>(
+    "/api/v1/users/me",
+    200,
+    "PATCH",
+    { displayName: "Nuevo", avatarUrl: null },
+    authorization,
+  );
   assert.equal(profile.data.profile.displayName, "Nuevo");
   pass("Autenticación, perfil parcial y protección de campos");
   const title = `ttl_${randomUUID()}`;
   await api(`/api/v1/users/me/watchlist/${title}`, 201, "POST", undefined, authorization);
   await api(`/api/v1/users/me/watchlist/${title}`, 409, "POST", undefined, authorization);
-  const list = await api<{ items: { tituloId: string; addedAt: string }[] }>("/api/v1/users/me/watchlist?limit=1", 200, "GET", undefined, authorization);
-  assert.equal(list.data.items[0]!.tituloId, title); assert.deepEqual(Object.keys(list.data.items[0]!).sort(), ["addedAt", "tituloId"]);
+  const list = await api<{ items: { tituloId: string; addedAt: string }[] }>(
+    "/api/v1/users/me/watchlist?limit=1",
+    200,
+    "GET",
+    undefined,
+    authorization,
+  );
+  assert.equal(list.data.items[0]!.tituloId, title);
+  assert.deepEqual(Object.keys(list.data.items[0]!).sort(), ["addedAt", "tituloId"]);
   await api("/api/v1/users/me/watchlist?userId=other", 400, "GET", undefined, authorization);
   await api("/api/v1/users/me/watchlist?limit=101", 400, "GET", undefined, authorization);
   await api("/api/v1/users/me/watchlist?limit=1&limit=2", 400, "GET", undefined, authorization);
   await api(`/api/v1/users/me/watchlist/bad`, 400, "POST", undefined, authorization);
   pass("Mi Lista, duplicados, paginación y referencias sin metadata");
-  await api("/api/v1/auth/register", 201, "POST", { email: "other@example.com", password: userPassword, displayName: "Otro" });
-  const other = await api<Session>("/api/v1/auth/login", 200, "POST", { email: "other@example.com", password: userPassword });
+  await api("/api/v1/auth/register", 201, "POST", {
+    email: "other@example.com",
+    password: userPassword,
+    displayName: "Otro",
+  });
+  const other = await api<Session>("/api/v1/auth/login", 200, "POST", {
+    email: "other@example.com",
+    password: userPassword,
+  });
   const otherAuth = { authorization: `Bearer ${other.data.accessToken}` };
-  assert.deepEqual((await api<{ items: unknown[] }>("/api/v1/users/me/watchlist", 200, "GET", undefined, otherAuth)).data.items, []);
+  assert.deepEqual(
+    (
+      await api<{ items: unknown[] }>(
+        "/api/v1/users/me/watchlist",
+        200,
+        "GET",
+        undefined,
+        otherAuth,
+      )
+    ).data.items,
+    [],
+  );
   await api(`/api/v1/users/me/watchlist/${title}`, 204, "DELETE", undefined, otherAuth);
-  assert.equal((await api<{ items: unknown[] }>("/api/v1/users/me/watchlist", 200, "GET", undefined, authorization)).data.items.length, 1);
+  assert.equal(
+    (
+      await api<{ items: unknown[] }>(
+        "/api/v1/users/me/watchlist",
+        200,
+        "GET",
+        undefined,
+        authorization,
+      )
+    ).data.items.length,
+    1,
+  );
   pass("Aislamiento entre usuarios y DELETE limitado al propietario");
   const prefPath = `/api/v1/users/me/preferences/${title}`;
   const first = await api(prefPath, 200, "PUT", { value: "LIKE" }, authorization);
-  const again = await api(prefPath, 200, "PUT", { value: "LIKE" }, authorization); assert.deepEqual(again.data, first.data);
+  const again = await api(prefPath, 200, "PUT", { value: "LIKE" }, authorization);
+  assert.deepEqual(again.data, first.data);
   await api(prefPath, 200, "PUT", { value: "DISLIKE" }, authorization);
-  const prefs = await api<{ items: { value: string }[] }>("/api/v1/users/me/preferences", 200, "GET", undefined, authorization); assert.equal(prefs.data.items[0]!.value, "DISLIKE");
-  assert.equal((await api<{ items: unknown[] }>("/api/v1/users/me/preferences", 200, "GET", undefined, otherAuth)).data.items.length, 0);
+  const prefs = await api<{ items: { value: string }[] }>(
+    "/api/v1/users/me/preferences",
+    200,
+    "GET",
+    undefined,
+    authorization,
+  );
+  assert.equal(prefs.data.items[0]!.value, "DISLIKE");
+  assert.equal(
+    (
+      await api<{ items: unknown[] }>(
+        "/api/v1/users/me/preferences",
+        200,
+        "GET",
+        undefined,
+        otherAuth,
+      )
+    ).data.items.length,
+    0,
+  );
   await api(prefPath, 400, "PUT", { value: "MAYBE" }, authorization);
-  await api(prefPath, 204, "DELETE", undefined, authorization); await api(`/api/v1/users/me/watchlist/${title}`, 204, "DELETE", undefined, authorization);
+  await api(prefPath, 204, "DELETE", undefined, authorization);
+  await api(`/api/v1/users/me/watchlist/${title}`, 204, "DELETE", undefined, authorization);
   pass("LIKE/DISLIKE, cambio de valor, PUT idempotente y eliminación");
   await api("/api/v1/auth/refresh", 403, "POST", undefined, { cookie: session.cookie });
-  await api("/api/v1/auth/refresh", 403, "POST", undefined, { cookie: session.cookie, origin: "https://evil.example", ...csrf });
-  const refreshed = await api<Session>("/api/v1/auth/refresh", 200, "POST", undefined, { cookie: session.cookie, ...csrf });
+  await api("/api/v1/auth/refresh", 403, "POST", undefined, {
+    cookie: session.cookie,
+    origin: "https://evil.example",
+    ...csrf,
+  });
+  const refreshed = await api<Session>("/api/v1/auth/refresh", 200, "POST", undefined, {
+    cookie: session.cookie,
+    ...csrf,
+  });
   assert.notEqual(refreshed.cookie, session.cookie);
-  const replay = await api("/api/v1/auth/refresh", 401, "POST", undefined, { cookie: session.cookie, ...csrf }); assert.ok(replay.response.headers.get("set-cookie")!.includes("Max-Age=0"));
+  const replay = await api("/api/v1/auth/refresh", 401, "POST", undefined, {
+    cookie: session.cookie,
+    ...csrf,
+  });
+  assert.ok(replay.response.headers.get("set-cookie")!.includes("Max-Age=0"));
   await api("/api/v1/auth/refresh", 401, "POST", undefined, { cookie: refreshed.cookie, ...csrf });
   pass("CSRF, rotación refresh y revocación de familia ante replay");
-  const newSession = await api<Session>("/api/v1/auth/login", 200, "POST", { email, password: userPassword });
+  const newSession = await api<Session>("/api/v1/auth/login", 200, "POST", {
+    email,
+    password: userPassword,
+  });
   await api("/api/v1/auth/logout", 204, "POST", undefined, { cookie: newSession.cookie, ...csrf });
   await api("/api/v1/auth/refresh", 401, "POST", undefined, { cookie: newSession.cookie, ...csrf });
   await api("/api/v1/auth/logout", 204, "POST", undefined, csrf);
   pass("Logout y revocación idempotente");
-  const change = await api<Session>("/api/v1/auth/login", 200, "POST", { email, password: userPassword });
+  const change = await api<Session>("/api/v1/auth/login", 200, "POST", {
+    email,
+    password: userPassword,
+  });
   const changeAuth = { authorization: `Bearer ${change.data.accessToken}` };
-  await api("/api/v1/users/me/change-password", 401, "POST", { currentPassword: "bad", newPassword: "NewHttpPassword456!" }, changeAuth);
-  await api("/api/v1/users/me/change-password", 204, "POST", { currentPassword: userPassword, newPassword: "NewHttpPassword456!" }, changeAuth);
+  await api(
+    "/api/v1/users/me/change-password",
+    401,
+    "POST",
+    { currentPassword: "bad", newPassword: "NewHttpPassword456!" },
+    changeAuth,
+  );
+  await api(
+    "/api/v1/users/me/change-password",
+    204,
+    "POST",
+    { currentPassword: userPassword, newPassword: "NewHttpPassword456!" },
+    changeAuth,
+  );
   await api("/api/v1/users/me", 401, "GET", undefined, changeAuth);
   await api("/api/v1/auth/refresh", 401, "POST", undefined, { cookie: change.cookie, ...csrf });
   await api("/api/v1/auth/login", 401, "POST", { email, password: userPassword });
   await api("/api/v1/auth/login", 200, "POST", { email, password: "NewHttpPassword456!" });
   pass("Cambio de contraseña, revocación global y nuevo inicio de sesión");
-  for (let i = 0; i < 10; i++) await api("/api/v1/auth/login", 401, "POST", { email: "rate@example.com", password: "wrong" });
-  const limited = await api("/api/v1/auth/login", 429, "POST", { email: "RATE@EXAMPLE.COM", password: "wrong" }); assert.ok(Number(limited.response.headers.get("retry-after")) > 0);
-  await api("/api/v1/auth/register", 413, "POST", { email: "big@example.com", password: "x".repeat(20000), displayName: "Big" });
+  for (let i = 0; i < 10; i++)
+    await api("/api/v1/auth/login", 401, "POST", { email: "rate@example.com", password: "wrong" });
+  const limited = await api("/api/v1/auth/login", 429, "POST", {
+    email: "RATE@EXAMPLE.COM",
+    password: "wrong",
+  });
+  assert.ok(Number(limited.response.headers.get("retry-after")) > 0);
+  await api("/api/v1/auth/register", 413, "POST", {
+    email: "big@example.com",
+    password: "x".repeat(20000),
+    displayName: "Big",
+  });
   await api("/api/v1/auth/login", 400, "POST", "{");
   await api("/api/v1/auth/login", 415, "POST", "{}", { "content-type": "text/plain" });
-  await api("/api/v1/users/me", 405, "POST"); await api("/api/v1/users/me", 204, "OPTIONS");
+  await api("/api/v1/users/me", 405, "POST");
+  await api("/api/v1/users/me", 204, "OPTIONS");
   await api("/api/health", 200, "HEAD");
   pass("Rate limit compartido, tamaños, JSON, media type y métodos");
   await compose(["run", "--rm", "--no-deps", "users-migrate"]);
   await compose(["exec", "--no-TTY", "users-service", "node", "dist/seed.mjs"]);
   await compose(["exec", "--no-TTY", "users-service", "node", "dist/seed.mjs"]);
-  const admin = await api<Session>("/api/v1/auth/login", 200, "POST", { email: "admin@streaming.local", password: seedPassword }); assert.equal(admin.data.user.role, "ADMIN");
-  const seedProd = await compose(["exec", "--no-TTY", "--env", "APP_ENV=production", "users-service", "node", "dist/seed.mjs"]).then(() => false, () => true); assert.ok(seedProd);
-  const { stdout: uid } = await compose(["exec", "--no-TTY", "users-service", "id", "-u"]); assert.notEqual(uid.trim(), "0");
+  const admin = await api<Session>("/api/v1/auth/login", 200, "POST", {
+    email: "admin@streaming.local",
+    password: seedPassword,
+  });
+  assert.equal(admin.data.user.role, "ADMIN");
+  const seedProd = await compose([
+    "exec",
+    "--no-TTY",
+    "--env",
+    "APP_ENV=production",
+    "users-service",
+    "node",
+    "dist/seed.mjs",
+  ]).then(
+    () => false,
+    () => true,
+  );
+  assert.ok(seedProd);
+  const { stdout: uid } = await compose(["exec", "--no-TTY", "users-service", "id", "-u"]);
+  assert.notEqual(uid.trim(), "0");
   pass("Migraciones/seed repetibles, seed bloqueado en producción y usuario no root");
   const logs = await compose(["logs", "--no-color", "users-service"]);
   for (const id of ids) assert.ok(logs.stdout.includes(id));
-  for (const value of [userPassword, seedPassword, session.data.accessToken, session.cookie, privateKey, password]) assert.ok(!logs.stdout.includes(value), "Secreto presente en logs");
+  for (const value of [
+    userPassword,
+    seedPassword,
+    session.data.accessToken,
+    session.cookie,
+    privateKey,
+    password,
+  ])
+    assert.ok(!logs.stdout.includes(value), "Secreto presente en logs");
   pass("Logging correlacionado sin passwords, claves ni tokens");
   await compose(["stop", "postgres"]);
   await api("/api/health", 503);
@@ -141,9 +364,29 @@ try {
   const detail = error as { stderr?: string; message?: string };
   const message = detail.stderr?.slice(-3000) ?? detail.message ?? "Verificación fallida";
   console.error(message.replaceAll(password, "[redacted]").replaceAll(seedPassword, "[redacted]"));
-  if (resources) { const logs = await compose(["logs", "--no-color", "--tail", "12", "users-migrate", "users-service"]).catch(() => null); if (logs) console.error(logs.stdout.replaceAll(password, "[redacted]").replaceAll(seedPassword, "[redacted]")); }
+  if (resources) {
+    const logs = await compose([
+      "logs",
+      "--no-color",
+      "--tail",
+      "12",
+      "users-migrate",
+      "users-service",
+    ]).catch(() => null);
+    if (logs)
+      console.error(
+        logs.stdout.replaceAll(password, "[redacted]").replaceAll(seedPassword, "[redacted]"),
+      );
+  }
   process.exitCode = 1;
 } finally {
-  try { if (resources) await compose(["down", "--volumes", "--remove-orphans", "--rmi", "local"], 120000); }
-  finally { const target = resolve(temporary); assert.equal(dirname(target), resolve(tmpdir())); assert.ok(basename(target).startsWith("users-e2e-")); await rm(target, { recursive: true, force: true }); }
+  try {
+    if (resources)
+      await compose(["down", "--volumes", "--remove-orphans", "--rmi", "local"], 120000);
+  } finally {
+    const target = resolve(temporary);
+    assert.equal(dirname(target), resolve(tmpdir()));
+    assert.ok(basename(target).startsWith("users-e2e-"));
+    await rm(target, { recursive: true, force: true });
+  }
 }

@@ -1,0 +1,90 @@
+name: Reusable project quality checks
+
+on:
+  workflow_call:
+    inputs:
+      project:
+        description: Project directory from the fixed caller job list
+        type: string
+        required: true
+      cache-lockfiles:
+        description: Additional producer lockfiles for test-only contract imports
+        type: string
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: quality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+    defaults:
+      run:
+        shell: bash
+        working-directory: ${{ inputs.project }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "24.21.0"
+          cache: npm
+          cache-dependency-path: ${{ inputs.cache-lockfiles || format('{0}/package-lock.json', inputs.project) }}
+      - name: Pin npm
+        run: npm install --global npm@12.2.0
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install same-checkout contract producers
+        if: ${{ inputs.project == 'playback-service' }}
+        working-directory: .
+        run: |
+          npm ci --prefix users-service --no-audit --no-fund
+          npm ci --prefix catalog-service --no-audit --no-fund
+      - name: Check formatting
+        run: npm run format:check
+      - name: Secret scan (values never printed)
+        working-directory: .
+        run: python3 scripts/security/scan_secrets.py
+      - name: Audit critical and high dependency advisories
+        run: npm audit --audit-level=high
+      - name: Lint
+        run: npm run lint
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Check Docker for isolated integration tests
+        if: ${{ inputs.project != 'frontend' }}
+        run: docker info
+      - name: Build test-only MinIO from pinned sources
+        if: ${{ inputs.project == 'playback-service' }}
+        run: docker build --file docker/minio.Dockerfile --tag playback-minio:2025-10-15 .
+      - name: Unit, component, API, contract and integration tests with coverage
+        run: npm run test:coverage
+      - name: Validate OpenAPI
+        if: ${{ inputs.project != 'frontend' }}
+        run: npm run docs:check
+      - name: Production build
+        run: npm run build
+      - name: Build Users migration and seed tools
+        if: ${{ inputs.project == 'users-service' }}
+        run: npm run build:scripts
+      - name: Build Catalog initializer
+        if: ${{ inputs.project == 'catalog-service' }}
+        run: npm run build:init
+      - name: Build Playback initializer
+        if: ${{ inputs.project == 'playback-service' }}
+        run: npm run build:scripts
+      - name: Preserve coverage and test reports on success or failure
+        if: ${{ always() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: quality-${{ inputs.project }}-${{ github.run_attempt }}
+          path: ${{ inputs.project }}/coverage/
+          retention-days: 14
+          if-no-files-found: warn

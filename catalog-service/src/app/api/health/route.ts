@@ -1,5 +1,8 @@
 import { getHealth } from "../../../shared/infrastructure/http/health-handler";
-import { methodNotAllowed, optionsHandler } from "../../../shared/infrastructure/http/method-handlers";
+import {
+  methodNotAllowed,
+  optionsHandler,
+} from "../../../shared/infrastructure/http/method-handlers";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

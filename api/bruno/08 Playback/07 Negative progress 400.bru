@@ -1,0 +1,71 @@
+meta {
+  name: 07 Negative progress 400
+  type: http
+  seq: 7
+}
+
+patch {
+  url: {{playbackBaseUrl}}/api/v1/playback/sessions/{{sessionId}}/progress
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "positionSeconds": -1
+  }
+}
+
+script:pre-request {
+  if (!(bru.getVar("accessToken") || bru.getEnvVar("accessToken"))) throw new Error("Login USER first");
+}
+
+tests {
+  test("HTTP 400", function () { expect(res.getStatus()).to.equal(400); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "error"
+    ],
+    "properties": {
+      "error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Error code VALIDATION_ERROR", function () { expect(res.getBody().error.code).to.equal("VALIDATION_ERROR"); });
+}
+
+docs {
+  Servicio: playback. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

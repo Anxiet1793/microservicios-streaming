@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="96" failures="0" errors="0" time="4.9398917">
+    <testsuite name="tests/api/routes.test.ts" timestamp="2026-10-21T05:38:02.888Z" hostname="Samuel" tests="31" failures="0" errors="0" skipped="0" time="0.1124823">
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects invalid registration (email) without writing" time="0.0407392">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects invalid registration (password) without writing" time="0.001977">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects invalid registration (role injection) without writing" time="0.0017452">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects invalid registration (empty profile) without writing" time="0.0014502">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; registers with 201 without password/hash or a caller-selected role" time="0.0033128">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; login issues valid claims but exposes refresh only via HttpOnly cookie" time="0.0066037">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; returns generic login error for wrong-password" time="0.0019183">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; returns generic login error for missing" time="0.0020239">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; returns generic login error for inactive" time="0.0014827">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0017238">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0014483">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0014614">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0020486">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0014706">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0012765">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0013041">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0014676">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects every personal route without identity" time="0.0013147">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; accepts a genuine USER identity without allowing privilege injection" time="0.0026251">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; accepts a genuine ADMIN identity without allowing privilege injection" time="0.0022425">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects a validly signed token whose user no longer exists" time="0.0017041">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; does not reveal protected profile fields or accept them in PATCH" time="0.0028394">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; lists, adds and idempotently removes references without catalog metadata" time="0.0035396">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; accepts LIKE and deletes a preference" time="0.0031324">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; accepts DISLIKE and deletes a preference" time="0.0029343">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; rejects malformed identifiers, repeated pagination and protected preference fields" time="0.0027445">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; refresh requires CSRF proof, rotates cookie and rejects a reused family" time="0.0036151">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; logout clears the cookie and change-password passes through current-credential checks" time="0.0035445">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; returns a bounded 429 with Retry-After and never invokes credential hashing" time="0.0018653">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; health checks dependencies and JWKS exposes no private key material" time="0.0023449">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Users Route Handlers, crypto real, repository ports controlled &gt; responds safely to malformed bodies, foreign origin and unsupported methods" time="0.0023138">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/contract/public.test.ts" timestamp="2026-10-21T05:38:02.899Z" hostname="Samuel" tests="2" failures="0" errors="0" skipped="0" time="0.2109098">
+        <testcase classname="tests/contract/public.test.ts" name="keeps public profile and auth DTOs compatible without leaking credential/internal state" time="0.173262">
+        </testcase>
+        <testcase classname="tests/contract/public.test.ts" name="publishes stable cross-service RS256 identity, role, audience, TTL and key selection" time="0.0361712">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/postgres.test.ts" timestamp="2026-10-21T05:38:02.900Z" hostname="Samuel" tests="20" failures="0" errors="0" skipped="0" time="4.1507575">
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; repite migración y conserva seis tablas sin metadata de Catálogo" time="0.0202374">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; registro crea usuario y perfil, con hash y rol USER" time="0.0672482">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; hace rollback de usuario si falla la inserción del perfil" time="0.0117708">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; impide emails duplicados incluso con registros concurrentes" time="0.0493659">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; login devuelve JWT y guarda solo hash de refresh" time="0.0787224">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; login incorrecto, ausente o inactivo devuelve el mismo error" time="0.1801247">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; rota sin prolongar caducidad absoluta y revoca familia al reutilizar" time="0.1048089">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; dos refresh simultáneos no dejan una familia utilizable tras detectar replay" time="0.0952954">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; logout con token anterior revoca también la rotación reciente" time="0.1036158">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; rechaza refresh vencido" time="0.0772545">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; actualiza perfil parcialmente y limpia avatar sin cambiar email/rol" time="0.0552636">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; cambio de password revoca sesiones y versión JWT local" time="0.2290124">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; creación de sesión rechaza credenciales obsoletas tras cambio de password" time="0.0746046">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; Mi Lista impide duplicados, pagina, elimina y aísla usuarios" time="0.105204">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; LIKE→DISLIKE conserva createdAt y PUT idéntico no modifica updatedAt" time="0.0657797">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; rate limit comparte contador atómico entre instancias" time="0.0257447">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; revoca únicamente la familia del logout y conserva otra sesión independiente" time="0.1369626">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; aísla LIKE/DISLIKE y su eliminación por usuario incluso para el mismo tituloId" time="0.1028236">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; mantiene UNIQUE de Mi Lista bajo inserciones simultáneas" time="0.049884">
+        </testcase>
+        <testcase classname="tests/integration/postgres.test.ts" name="PostgreSQL real, migraciones, seguridad y repositorios &gt; expira ventanas de cuotas sin permitir que contadores previos bloqueen permanentemente" time="0.015392">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/application.test.ts" timestamp="2026-10-21T05:38:02.905Z" hostname="Samuel" tests="13" failures="0" errors="0" skipped="0" time="0.0282198">
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; registro hashea contraseña y no retorna el hash" time="0.0080129">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; propaga email duplicado sin generar otra sesión" time="0.0022473">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; login guarda solo digest de refresh y retorna JWT" time="0.0014267">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; login ausente ejecuta verificación dummy y devuelve error genérico" time="0.0009869">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; rechaza contraseña incorrecta, usuario inactivo y carrera con cambio de password" time="0.0021078">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; rota refresh y rechaza reutilización" time="0.0010448">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; logout revoca por hash y es idempotente sin cookie" time="0.0008336">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; actualiza perfil solo del usuario autenticado" time="0.0033366">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; cambio de contraseña requiere la actual y compara hash esperado" time="0.0014295">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; watchlist agrega, lista, elimina y propaga duplicados" time="0.0014456">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; almacena LIKE y admite eliminar preferencia" time="0.0011377">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; almacena DISLIKE y admite eliminar preferencia" time="0.000589">
+        </testcase>
+        <testcase classname="tests/unit/application.test.ts" name="Casos de uso aislados &gt; rechaza versiones y roles falsos, usuarios inactivos y paginación excesiva" time="0.0011829">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/boundaries.test.ts" timestamp="2026-10-21T05:38:02.908Z" hostname="Samuel" tests="12" failures="0" errors="0" skipped="0" time="0.052667">
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;authVersion&quot;:0}" time="0.0027722">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;authVersion&quot;:1.1}" time="0.0002398">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;status&quot;:&quot;DELETED&quot;}" time="0.0001453">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;role&quot;:&quot;ROOT&quot;}" time="0.0001318">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;userId&quot;:&quot;internal-id&quot;}" time="0.0001171">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;passwordHash&quot;:&quot;&quot;}" time="0.0001028">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;createdAt&quot;:null}" time="0.0000886">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects invalid restored aggregate {&quot;updatedAt&quot;:&quot;1970-01-01T00:00:00.000Z&quot;}" time="0.0000946">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="validates password boundaries using Unicode code points without trimming" time="0.0005277">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="rejects unsafe avatar/locale values while allowing regional language tags" time="0.000394">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="bounds pagination by the maximum offset, not just page size" time="0.0009224">
+        </testcase>
+        <testcase classname="tests/unit/boundaries.test.ts" name="requires HTTPS in production and rejects malformed or credential-bearing origins" time="0.0459282">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/domain.test.ts" timestamp="2026-10-21T05:38:02.913Z" hostname="Samuel" tests="12" failures="0" errors="0" skipped="0" time="0.0138112">
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; normaliza email y registra USER ACTIVE con identidad independiente" time="0.004725">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza email inválido " time="0.0013192">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza email inválido bad" time="0.0003042">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza email inválido a@" time="0.0002312">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza email inválido a b@example.com" time="0.0002231">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza contraseña inválida" time="0.0004283">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza contraseña inválida" time="0.0002286">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza contraseña inválida" time="0.0002102">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; no modifica contraseñas y admite frases largas" time="0.0002206">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; aplica cambios parciales inmutables y permite quitar avatar" time="0.0021366">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; rechaza campos protegidos, perfil vacío y URLs inseguras" time="0.0009273">
+        </testcase>
+        <testcase classname="tests/unit/domain.test.ts" name="Usuario y value objects &gt; acepta exclusivamente el TituloId público de Catálogo" time="0.000521">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/security.test.ts" timestamp="2026-10-21T05:38:02.917Z" hostname="Samuel" tests="6" failures="0" errors="0" skipped="0" time="0.3710441">
+        <testcase classname="tests/unit/security.test.ts" name="Seguridad &gt; Argon2id usa sal aleatoria y verifica sin exponer contraseña" time="0.1438371">
+        </testcase>
+        <testcase classname="tests/unit/security.test.ts" name="Seguridad &gt; refresh aleatorio almacenable como SHA-256 y rechaza tokens malformados" time="0.001986">
+        </testcase>
+        <testcase classname="tests/unit/security.test.ts" name="Seguridad &gt; JWT RS256 se verifica con JWKS sin clave privada ni acceso a base" time="0.0790484">
+        </testcase>
+        <testcase classname="tests/unit/security.test.ts" name="Seguridad &gt; protege cookie y exige origen o cabecera CSRF para refresh/logout" time="0.1344457">
+        </testcase>
+        <testcase classname="tests/unit/security.test.ts" name="Seguridad &gt; no permite privilegios aportados en registro o perfil" time="0.0021056">
+        </testcase>
+        <testcase classname="tests/unit/security.test.ts" name="Seguridad &gt; limita bytes reales y oculta errores y logs sensibles" time="0.0079729">
+        </testcase>
+    </testsuite>
+</testsuites>

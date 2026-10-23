@@ -1,0 +1,13 @@
+Working directory: catalog-service
+Command: npm run build:init
+Started: 2026-10-21T05:38:56.883Z
+Ended: 2026-10-21T05:38:57.346Z
+Exit code: 0
+Duration: 0.462 seconds
+
+npm notice run catalog-service@0.1.0 build:init
+npm notice run esbuild scripts/init-mongo.ts --bundle --platform=node --target=node24 --format=esm --external:mongodb --outfile=dist/init-mongo.mjs
+
+  dist\init-mongo.mjs  748.0kb
+
+Done in 31ms

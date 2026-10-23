@@ -4,32 +4,16 @@ import Link from "next/link";
 import { api } from "../../lib/api/client";
 import { genres, languages, type Title } from "../../lib/models";
 import s from "./admin.module.css";
-export function TitleFields({
-  title,
-  duration = 1,
-}: {
-  title?: Title;
-  duration?: number;
-}) {
+export function TitleFields({ title, duration = 1 }: { title?: Title; duration?: number }) {
   return (
     <div className={s.fields}>
       <label className={`field ${s.wide}`}>
         <span>Título</span>
-        <input
-          name="title"
-          defaultValue={title?.ficha.title}
-          maxLength={300}
-          required
-        />
+        <input name="title" defaultValue={title?.ficha.title} maxLength={300} required />
       </label>
       <label className={`field ${s.wide}`}>
         <span>Sinopsis</span>
-        <textarea
-          name="synopsis"
-          defaultValue={title?.ficha.synopsis}
-          maxLength={10000}
-          required
-        />
+        <textarea name="synopsis" defaultValue={title?.ficha.synopsis} maxLength={10000} required />
       </label>
       <label className="field">
         <span>Año</span>
@@ -88,12 +72,7 @@ export function TitleFields({
       </label>
       <label className="field">
         <span>URL del póster (opcional)</span>
-        <input
-          name="posterUrl"
-          type="url"
-          defaultValue={title?.ficha.posterUrl}
-          maxLength={2048}
-        />
+        <input name="posterUrl" type="url" defaultValue={title?.ficha.posterUrl} maxLength={2048} />
       </label>
       <label className="field">
         <span>URL de portada (opcional)</span>
@@ -113,15 +92,11 @@ export function ficha(form: HTMLFormElement) {
     title: String(f.get("title") || ""),
     synopsis: String(f.get("synopsis") || ""),
     releaseYear: Number(f.get("releaseYear")),
-    ...(f.has("durationMinutes")
-      ? { durationMinutes: Number(f.get("durationMinutes")) }
-      : {}),
+    ...(f.has("durationMinutes") ? { durationMinutes: Number(f.get("durationMinutes")) } : {}),
     genres: f.getAll("genres").map(Number),
     languages: f.getAll("languages").map(Number),
     ...(f.get("posterUrl") ? { posterUrl: String(f.get("posterUrl")) } : {}),
-    ...(f.get("backdropUrl")
-      ? { backdropUrl: String(f.get("backdropUrl")) }
-      : {}),
+    ...(f.get("backdropUrl") ? { backdropUrl: String(f.get("backdropUrl")) } : {}),
   };
 }
 export function Editor({ title }: { title: Title }) {

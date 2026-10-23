@@ -1,0 +1,704 @@
+{
+  "project": "playback-service",
+  "runner": "vitest 5.0.3",
+  "command": "npm run test:coverage",
+  "startedAt": "2026-10-21T05:37:43.863Z",
+  "tests": {
+    "total": 115,
+    "passed": 115,
+    "failed": 0,
+    "pending": 0,
+    "success": true
+  },
+  "groups": {
+    "api": {
+      "total": 20,
+      "passed": 20,
+      "failed": 0,
+      "pending": 0
+    },
+    "contract": {
+      "total": 37,
+      "passed": 37,
+      "failed": 0,
+      "pending": 0
+    },
+    "integration": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0,
+      "pending": 0
+    },
+    "unit": {
+      "total": 45,
+      "passed": 45,
+      "failed": 0,
+      "pending": 0
+    }
+  },
+  "coverage": {
+    "lines": {
+      "total": 435,
+      "covered": 378,
+      "skipped": 0,
+      "pct": 86.89
+    },
+    "statements": {
+      "total": 485,
+      "covered": 409,
+      "skipped": 0,
+      "pct": 84.32
+    },
+    "functions": {
+      "total": 107,
+      "covered": 93,
+      "skipped": 0,
+      "pct": 86.91
+    },
+    "branches": {
+      "total": 271,
+      "covered": 212,
+      "skipped": 0,
+      "pct": 78.22
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "files": [
+    {
+      "file": "playback-service/tests/api/routes.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:05.012Z",
+      "endedAt": "2026-10-21T05:38:05.066Z",
+      "tests": [
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 6.61990000000003
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.6825999999999794
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.4977999999999838
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.4474999999999909
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.41849999999999454
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.39020000000004984
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.41879999999991924
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.3727000000000089
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.5079999999999245
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.4008000000000038
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports requires identity before personal or ADMIN operations",
+          "status": "passed",
+          "durationMilliseconds": 0.40809999999999036
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports returns real session DTOs through start/progress/pause/resume/complete and history",
+          "status": "passed",
+          "durationMilliseconds": 14.05219999999997
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports rejects caller identity injection, invalid positions and malformed route IDs",
+          "status": "passed",
+          "durationMilliseconds": 3.5371000000000095
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports does not grant ADMIN ownership over another user's session",
+          "status": "passed",
+          "durationMilliseconds": 1.3202999999999747
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports rejects USER asset access and permits ADMIN metadata and soft delete",
+          "status": "passed",
+          "durationMilliseconds": 2.3774000000000797
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports maps missing/unpublished/catalog-down/storage-down start failures safely",
+          "status": "passed",
+          "durationMilliseconds": 2.468099999999936
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports validates the real multipart parser before attempting storage",
+          "status": "passed",
+          "durationMilliseconds": 15.96589999999992
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports sets CORS only for the allowed origin and returns retry metadata on quota exhaustion",
+          "status": "passed",
+          "durationMilliseconds": 1.5050000000001091
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports health reports each actual dependency outcome without credentials",
+          "status": "passed",
+          "durationMilliseconds": 1.005100000000084
+        },
+        {
+          "name": "Actual Playback Route Handlers with controlled identity/repository ports returns a safe JSON failure even when container configuration cannot be constructed",
+          "status": "passed",
+          "durationMilliseconds": 0.5434000000000196
+        }
+      ]
+    },
+    {
+      "file": "playback-service/tests/contract/gateways.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:59.662Z",
+      "endedAt": "2026-10-21T05:38:03.887Z",
+      "tests": [
+        {
+          "name": "Playback → actual Catalog DTO over HTTP interprets publication status 1 from the producer DTO",
+          "status": "passed",
+          "durationMilliseconds": 32.222299999999905
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP interprets publication status 2 from the producer DTO",
+          "status": "passed",
+          "durationMilliseconds": 4.737599999999929
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP interprets publication status 3 from the producer DTO",
+          "status": "passed",
+          "durationMilliseconds": 2.8595000000000255
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP handles a producer series with no media reference",
+          "status": "passed",
+          "durationMilliseconds": 2.699000000000069
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP maps upstream HTTP 404 without exposing the body",
+          "status": "passed",
+          "durationMilliseconds": 3.733099999999922
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP maps upstream HTTP 500 without exposing the body",
+          "status": "passed",
+          "durationMilliseconds": 1.9009000000000924
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP maps upstream HTTP 503 without exposing the body",
+          "status": "passed",
+          "durationMilliseconds": 1.5437999999999192
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP rejects incompatible payload {}",
+          "status": "passed",
+          "durationMilliseconds": 2.265100000000075
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP rejects incompatible payload {\"tituloId\":\"wrong\",\"publicationStatusId\":2,\"playbackReference\":null}",
+          "status": "passed",
+          "durationMilliseconds": 2.2775000000001455
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP rejects incompatible payload {\"tituloId\":\"ttl_b65f67a8-005e-4814-8a01-9daefa233214\",\"publicationStatusId\":\"2\",\"playbackReference\":null}",
+          "status": "passed",
+          "durationMilliseconds": 2.296899999999823
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP does not follow an upstream redirect",
+          "status": "passed",
+          "durationMilliseconds": 6.346900000000005
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP times out a real stalled HTTP connection",
+          "status": "passed",
+          "durationMilliseconds": 4016.0263000000004
+        },
+        {
+          "name": "Playback → actual Catalog DTO over HTTP treats an opaque legacy catalog reference as unavailable media",
+          "status": "passed",
+          "durationMilliseconds": 5.036600000000362
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract accepts a real Users USER access token using public JWKS only",
+          "status": "passed",
+          "durationMilliseconds": 21.22559999999976
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract accepts a real Users ADMIN access token using public JWKS only",
+          "status": "passed",
+          "durationMilliseconds": 4.155499999999847
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"iss\":\"wrong\"}",
+          "status": "passed",
+          "durationMilliseconds": 6.4452000000001135
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"aud\":\"wrong\"}",
+          "status": "passed",
+          "durationMilliseconds": 4.14850000000024
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"exp\":1}",
+          "status": "passed",
+          "durationMilliseconds": 4.628400000000511
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"sub\":\"usr_2dea5896-d56c-40f1-866b-9af8e1e4fc8d\"}",
+          "status": "passed",
+          "durationMilliseconds": 4.538899999999558
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"userId\":\"forged\"}",
+          "status": "passed",
+          "durationMilliseconds": 3.532499999999345
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"role\":\"ROOT\"}",
+          "status": "passed",
+          "durationMilliseconds": 3.906300000000556
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"role\":[\"ADMIN\"]}",
+          "status": "passed",
+          "durationMilliseconds": 3.8969999999999345
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"iat\":\"invalid\"}",
+          "status": "passed",
+          "durationMilliseconds": 3.8201000000008207
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"iat\":1792561139}",
+          "status": "passed",
+          "durationMilliseconds": 3.6845000000002983
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"iat\":1792557479}",
+          "status": "passed",
+          "durationMilliseconds": 3.6218999999991865
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"jti\":42}",
+          "status": "passed",
+          "durationMilliseconds": 3.9072000000005573
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"jti\":\"\"}",
+          "status": "passed",
+          "durationMilliseconds": 3.203500000000531
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {}",
+          "status": "passed",
+          "durationMilliseconds": 3.594699999999648
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {}",
+          "status": "passed",
+          "durationMilliseconds": 3.4192000000002736
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {}",
+          "status": "passed",
+          "durationMilliseconds": 3.219500000000153
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible claims {\"nbf\":1792564679}",
+          "status": "passed",
+          "durationMilliseconds": 3.192699999999604
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible headers {\"kid\":\"unknown-key\"}",
+          "status": "passed",
+          "durationMilliseconds": 2.867699999999786
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects incompatible headers {\"typ\":\"NOT-JWT\"}",
+          "status": "passed",
+          "durationMilliseconds": 3.117500000000291
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects an invalid signature while retaining the advertised kid",
+          "status": "passed",
+          "durationMilliseconds": 37.72980000000007
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects a JWKS with invalid RSA key material",
+          "status": "passed",
+          "durationMilliseconds": 4.153299999999945
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract fails closed when the JWKS endpoint is unavailable",
+          "status": "passed",
+          "durationMilliseconds": 2.5643999999992957
+        },
+        {
+          "name": "Playback → Users signing and JWKS contract rejects unsigned and symmetric algorithm confusion tokens",
+          "status": "passed",
+          "durationMilliseconds": 1.7544000000007145
+        }
+      ]
+    },
+    {
+      "file": "playback-service/tests/integration/persistence.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:54.966Z",
+      "endedAt": "2026-10-21T05:37:55.554Z",
+      "tests": [
+        {
+          "name": "Real MongoDB replica set creates unique and query indexes reproducibly",
+          "status": "passed",
+          "durationMilliseconds": 64.38709999999992
+        },
+        {
+          "name": "Real MongoDB replica set enforces unique assets",
+          "status": "passed",
+          "durationMilliseconds": 19.020199999999022
+        },
+        {
+          "name": "Real MongoDB replica set rolls back all writes when outbox publication fails",
+          "status": "passed",
+          "durationMilliseconds": 40.097499999999854
+        },
+        {
+          "name": "Real MongoDB replica set serializes progress and persists completion only once under concurrency",
+          "status": "passed",
+          "durationMilliseconds": 85.01939999999922
+        },
+        {
+          "name": "Real MongoDB replica set uses the continue-watching index without collection scan",
+          "status": "passed",
+          "durationMilliseconds": 26.170599999999467
+        },
+        {
+          "name": "Real MongoDB replica set starts concurrently with only one current session and rejects the losing player's writes",
+          "status": "passed",
+          "durationMilliseconds": 59.80199999999968
+        },
+        {
+          "name": "Real MongoDB replica set orders, paginates and consolidates history by title without mixing user data",
+          "status": "passed",
+          "durationMilliseconds": 144.3820999999989
+        },
+        {
+          "name": "Real MongoDB replica set writes Started, Paused and Completed transactionally with owned identifiers",
+          "status": "passed",
+          "durationMilliseconds": 66.0593000000008
+        },
+        {
+          "name": "Real MongoDB replica set rolls back progress and pause when outbox fails after a session already exists",
+          "status": "passed",
+          "durationMilliseconds": 47.25890000000072
+        },
+        {
+          "name": "Real MongoDB replica set shares atomic API quotas across concurrent callers and isolates identities",
+          "status": "passed",
+          "durationMilliseconds": 36.45550000000003
+        }
+      ]
+    },
+    {
+      "file": "playback-service/tests/integration/storage.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:58.005Z",
+      "endedAt": "2026-10-21T05:37:58.089Z",
+      "tests": [
+        {
+          "name": "initializes a private bucket repeatedly, stores exact bytes and supports signed Range",
+          "status": "passed",
+          "durationMilliseconds": 48.75369999999998
+        },
+        {
+          "name": "rejects expired signed URLs and recognizes an object that has been removed",
+          "status": "passed",
+          "durationMilliseconds": 19.194999999999936
+        },
+        {
+          "name": "does not treat denied storage credentials as a missing object",
+          "status": "passed",
+          "durationMilliseconds": 16.67360000000008
+        }
+      ]
+    },
+    {
+      "file": "playback-service/tests/unit/config.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:06.184Z",
+      "endedAt": "2026-10-21T05:38:06.191Z",
+      "tests": [
+        {
+          "name": "validates runtime config without leaking invalid secrets",
+          "status": "passed",
+          "durationMilliseconds": 7.1182999999999765
+        }
+      ]
+    },
+    {
+      "file": "playback-service/tests/unit/playback.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:05.621Z",
+      "endedAt": "2026-10-21T05:38:05.640Z",
+      "tests": [
+        {
+          "name": "Progress rejects invalid position -1",
+          "status": "passed",
+          "durationMilliseconds": 2.9783999999999935
+        },
+        {
+          "name": "Progress rejects invalid position NaN",
+          "status": "passed",
+          "durationMilliseconds": 0.3164999999999907
+        },
+        {
+          "name": "Progress rejects invalid position Infinity",
+          "status": "passed",
+          "durationMilliseconds": 0.20549999999997226
+        },
+        {
+          "name": "Progress rejects invalid position 123",
+          "status": "passed",
+          "durationMilliseconds": 0.1741000000000099
+        },
+        {
+          "name": "Progress computes percentage and bounds tolerated overrun",
+          "status": "passed",
+          "durationMilliseconds": 0.41260000000002606
+        },
+        {
+          "name": "Playback aggregate and use cases starts ACTIVE and creates one event",
+          "status": "passed",
+          "durationMilliseconds": 1.450400000000002
+        },
+        {
+          "name": "Playback aggregate and use cases allows REQUESTED -> ACTIVE",
+          "status": "passed",
+          "durationMilliseconds": 0.4077000000000055
+        },
+        {
+          "name": "Playback aggregate and use cases allows ACTIVE -> PAUSED",
+          "status": "passed",
+          "durationMilliseconds": 0.19579999999999131
+        },
+        {
+          "name": "Playback aggregate and use cases allows ACTIVE -> COMPLETED",
+          "status": "passed",
+          "durationMilliseconds": 0.19550000000000978
+        },
+        {
+          "name": "Playback aggregate and use cases allows ACTIVE -> FAILED",
+          "status": "passed",
+          "durationMilliseconds": 0.16220000000001278
+        },
+        {
+          "name": "Playback aggregate and use cases allows PAUSED -> ACTIVE",
+          "status": "passed",
+          "durationMilliseconds": 0.19839999999999236
+        },
+        {
+          "name": "Playback aggregate and use cases allows PAUSED -> COMPLETED",
+          "status": "passed",
+          "durationMilliseconds": 0.19810000000001082
+        },
+        {
+          "name": "Playback aggregate and use cases rejects COMPLETED -> ACTIVE",
+          "status": "passed",
+          "durationMilliseconds": 0.5416000000000167
+        },
+        {
+          "name": "Playback aggregate and use cases rejects FAILED -> ACTIVE",
+          "status": "passed",
+          "durationMilliseconds": 0.3960999999999899
+        },
+        {
+          "name": "Playback aggregate and use cases rejects REQUESTED -> COMPLETED",
+          "status": "passed",
+          "durationMilliseconds": 0.25620000000000687
+        },
+        {
+          "name": "Playback aggregate and use cases rejects PAUSED -> FAILED",
+          "status": "passed",
+          "durationMilliseconds": 0.24780000000001223
+        },
+        {
+          "name": "Playback aggregate and use cases rejects unpublished title",
+          "status": "passed",
+          "durationMilliseconds": 1.3807999999999936
+        },
+        {
+          "name": "Playback aggregate and use cases rejects missing asset",
+          "status": "passed",
+          "durationMilliseconds": 0.37119999999998754
+        },
+        {
+          "name": "Playback aggregate and use cases enforces ownership for progress and URL refresh",
+          "status": "passed",
+          "durationMilliseconds": 1.034400000000005
+        },
+        {
+          "name": "Playback aggregate and use cases updates idempotently and emits only milestones",
+          "status": "passed",
+          "durationMilliseconds": 1.4969000000000108
+        },
+        {
+          "name": "Playback aggregate and use cases pauses, resumes and completes once; restart starts at zero",
+          "status": "passed",
+          "durationMilliseconds": 1.9073000000000206
+        },
+        {
+          "name": "Playback aggregate and use cases continues at persisted position and supersedes old session",
+          "status": "passed",
+          "durationMilliseconds": 0.652799999999985
+        },
+        {
+          "name": "Playback aggregate and use cases excludes >=90 percent and isolates history",
+          "status": "passed",
+          "durationMilliseconds": 0.5996000000000095
+        },
+        {
+          "name": "Playback aggregate and use cases protects assets in use and requires admin",
+          "status": "passed",
+          "durationMilliseconds": 0.7694000000000187
+        },
+        {
+          "name": "Playback aggregate and use cases logical deletion retains bytes and prevents new sessions",
+          "status": "passed",
+          "durationMilliseconds": 1.6632000000000176
+        },
+        {
+          "name": "Playback aggregate and use cases supersedes a paused session without introducing a forbidden state transition",
+          "status": "passed",
+          "durationMilliseconds": 0.8785000000000309
+        }
+      ]
+    },
+    {
+      "file": "playback-service/tests/unit/risks.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:05.311Z",
+      "endedAt": "2026-10-21T05:38:05.332Z",
+      "tests": [
+        {
+          "name": "rejects invalid persisted duration 0",
+          "status": "passed",
+          "durationMilliseconds": 3.8907000000000096
+        },
+        {
+          "name": "rejects invalid persisted duration -1",
+          "status": "passed",
+          "durationMilliseconds": 0.34899999999998954
+        },
+        {
+          "name": "rejects invalid persisted duration NaN",
+          "status": "passed",
+          "durationMilliseconds": 0.2283000000000186
+        },
+        {
+          "name": "rejects invalid persisted duration Infinity",
+          "status": "passed",
+          "durationMilliseconds": 0.16489999999998872
+        },
+        {
+          "name": "computes exact percentage 25 and continue-watching threshold",
+          "status": "passed",
+          "durationMilliseconds": 2.129799999999989
+        },
+        {
+          "name": "computes exact percentage 50 and continue-watching threshold",
+          "status": "passed",
+          "durationMilliseconds": 0.26619999999999777
+        },
+        {
+          "name": "computes exact percentage 75 and continue-watching threshold",
+          "status": "passed",
+          "durationMilliseconds": 0.1640999999999906
+        },
+        {
+          "name": "computes exact percentage 89.99 and continue-watching threshold",
+          "status": "passed",
+          "durationMilliseconds": 0.2510000000000048
+        },
+        {
+          "name": "computes exact percentage 90 and continue-watching threshold",
+          "status": "passed",
+          "durationMilliseconds": 0.28350000000000364
+        },
+        {
+          "name": "computes exact percentage 100 and continue-watching threshold",
+          "status": "passed",
+          "durationMilliseconds": 0.25
+        },
+        {
+          "name": "does not re-emit earlier milestones after a deliberate backward seek",
+          "status": "passed",
+          "durationMilliseconds": 1.6304000000000087
+        },
+        {
+          "name": "refuses start when media bytes or the storage signing operation is unavailable",
+          "status": "passed",
+          "durationMilliseconds": 2.34790000000001
+        },
+        {
+          "name": "compensates successful storage upload when metadata insertion fails",
+          "status": "passed",
+          "durationMilliseconds": 2.156099999999981
+        },
+        {
+          "name": "does not report successful upload when compensation also fails",
+          "status": "passed",
+          "durationMilliseconds": 0.5253999999999905
+        },
+        {
+          "name": "requires ADMIN before upload/storage writes and hides temporary paths in asset DTO",
+          "status": "passed",
+          "durationMilliseconds": 2.710499999999996
+        },
+        {
+          "name": "does not leak assets or sessions that do not exist",
+          "status": "passed",
+          "durationMilliseconds": 0.927800000000019
+        },
+        {
+          "name": "keeps logical deletion idempotent and blocks signing an unavailable asset",
+          "status": "passed",
+          "durationMilliseconds": 1.1717000000000155
+        },
+        {
+          "name": "evaluates every state pair against the documented transition table",
+          "status": "passed",
+          "durationMilliseconds": 1.7218000000000018
+        }
+      ]
+    }
+  ]
+}

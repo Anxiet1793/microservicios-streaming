@@ -46,28 +46,28 @@ npm start
 
 ## Variables
 
-| Variable | Uso / valor predeterminado |
-| --- | --- |
-| `DATABASE_URL` | Conexión exclusiva a Users PostgreSQL. `.env` apunta al puerto local 5433; Compose la reemplaza por `postgres:5432`. |
-| `POSTGRES_PASSWORD` | Secreto aleatorio generado para Compose. |
-| `APP_ENV` | `production` si se omite. `dev:setup` usa `development` para HTTP local y seed. |
-| `APP_ORIGIN` | Origen web permitido, sin slash final. Local `http://127.0.0.1:3001`. Producción exige HTTPS. |
-| `JWT_PRIVATE_KEY` | PEM PKCS8 RSA; solo Users lo recibe. |
-| `JWT_PUBLIC_KEY` | PEM SPKI de la misma clave; se publica como JWKS. |
-| `JWT_KEY_ID` | `users-key-1`; identifica la clave en header/JWKS. |
-| `JWT_ISSUER` | `users-service`. |
-| `JWT_AUDIENCE` | `streaming-services`. |
-| `ACCESS_TOKEN_TTL` | Segundos: 900, rango 60–1800. |
-| `REFRESH_TOKEN_TTL` | Segundos: 2592000 (30 días), rango 3600–2592000; caducidad absoluta, no deslizante. |
-| `REQUEST_MAX_BYTES` | 16384, rango 1024–65536. |
-| `AUTH_RATE_WINDOW` | 900 segundos, rango 60–3600. |
-| `LOGIN_RATE_LIMIT` | 10 intentos por email y ventana. |
-| `REGISTER_RATE_LIMIT` | 5 intentos por email y ventana. |
-| `AUTH_GLOBAL_LIMIT` | 200 por endpoint de autenticación y ventana, compartidos entre instancias. |
-| `USERS_PORT` / `POSTGRES_PORT` | Puertos locales Compose: 3001 / 5433. |
-| `USERS_ENV_FILE` | Archivo de runtime Compose; predeterminado `.env`. |
-| `USERS_IMAGE_TAG` | Tag Compose; predeterminado `local`. |
-| `SEED_PASSWORD` | Contraseña exclusiva de desarrollo para las dos cuentas demo. Se genera aleatoriamente en `.env`. |
+| Variable                       | Uso / valor predeterminado                                                                                           |
+| ------------------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| `DATABASE_URL`                 | Conexión exclusiva a Users PostgreSQL. `.env` apunta al puerto local 5433; Compose la reemplaza por `postgres:5432`. |
+| `POSTGRES_PASSWORD`            | Secreto aleatorio generado para Compose.                                                                             |
+| `APP_ENV`                      | `production` si se omite. `dev:setup` usa `development` para HTTP local y seed.                                      |
+| `APP_ORIGIN`                   | Origen web permitido, sin slash final. Local `http://127.0.0.1:3001`. Producción exige HTTPS.                        |
+| `JWT_PRIVATE_KEY`              | PEM PKCS8 RSA; solo Users lo recibe.                                                                                 |
+| `JWT_PUBLIC_KEY`               | PEM SPKI de la misma clave; se publica como JWKS.                                                                    |
+| `JWT_KEY_ID`                   | `users-key-1`; identifica la clave en header/JWKS.                                                                   |
+| `JWT_ISSUER`                   | `users-service`.                                                                                                     |
+| `JWT_AUDIENCE`                 | `streaming-services`.                                                                                                |
+| `ACCESS_TOKEN_TTL`             | Segundos: 900, rango 60–1800.                                                                                        |
+| `REFRESH_TOKEN_TTL`            | Segundos: 2592000 (30 días), rango 3600–2592000; caducidad absoluta, no deslizante.                                  |
+| `REQUEST_MAX_BYTES`            | 16384, rango 1024–65536.                                                                                             |
+| `AUTH_RATE_WINDOW`             | 900 segundos, rango 60–3600.                                                                                         |
+| `LOGIN_RATE_LIMIT`             | 10 intentos por email y ventana.                                                                                     |
+| `REGISTER_RATE_LIMIT`          | 5 intentos por email y ventana.                                                                                      |
+| `AUTH_GLOBAL_LIMIT`            | 200 por endpoint de autenticación y ventana, compartidos entre instancias.                                           |
+| `USERS_PORT` / `POSTGRES_PORT` | Puertos locales Compose: 3001 / 5433.                                                                                |
+| `USERS_ENV_FILE`               | Archivo de runtime Compose; predeterminado `.env`.                                                                   |
+| `USERS_IMAGE_TAG`              | Tag Compose; predeterminado `local`.                                                                                 |
+| `SEED_PASSWORD`                | Contraseña exclusiva de desarrollo para las dos cuentas demo. Se genera aleatoriamente en `.env`.                    |
 
 Claves PEM entre comillas con saltos `\n`; el script crea el formato correcto. No imprimir ni versionar `.env`, cookies o JWT. Para un despliegue real usar secretos de runtime, APP_ENV=production y HTTPS; no reutilizar la configuración de desarrollo.
 
@@ -95,30 +95,36 @@ Seed crea `admin@streaming.local` (ADMIN) y `demo@streaming.local` (USER), con l
 
 ## Endpoints
 
-| Método | Ruta | Autenticación / resultado |
-| --- | --- | --- |
-| POST | `/api/v1/auth/register` | Pública; crea USER/ACTIVE y perfil, 201. |
-| POST | `/api/v1/auth/login` | Pública; JWT en JSON y refresh en cookie, 200. |
-| POST | `/api/v1/auth/refresh` | Cookie + comprobación CSRF; rota sesión, 200. |
-| POST | `/api/v1/auth/logout` | Cookie opcional + CSRF; revoca familia, 204. |
-| GET | `/api/v1/users/me` | Bearer; perfil del usuario autenticado. |
-| PATCH | `/api/v1/users/me` | Bearer; displayName/avatarUrl/preferredLanguage. |
-| POST | `/api/v1/users/me/change-password` | Bearer + contraseña actual; revoca todas las sesiones, 204. |
-| POST | `/api/v1/users/me/watchlist/{tituloId}` | Bearer; agrega, 201; duplicado 409. |
-| DELETE | `/api/v1/users/me/watchlist/{tituloId}` | Bearer; elimina de forma idempotente, 204. |
-| GET | `/api/v1/users/me/watchlist` | Bearer; referencias paginadas. |
-| PUT | `/api/v1/users/me/preferences/{tituloId}` | Bearer; LIKE/DISLIKE idempotente, 200. |
-| DELETE | `/api/v1/users/me/preferences/{tituloId}` | Bearer; elimina, 204. |
-| GET | `/api/v1/users/me/preferences` | Bearer; señales paginadas. |
-| GET | `/.well-known/jwks.json` | Pública; solo clave pública RSA. |
-| GET | `/api/health` | Pública; PostgreSQL y par de claves, 200/503. |
+| Método | Ruta                                      | Autenticación / resultado                                   |
+| ------ | ----------------------------------------- | ----------------------------------------------------------- |
+| POST   | `/api/v1/auth/register`                   | Pública; crea USER/ACTIVE y perfil, 201.                    |
+| POST   | `/api/v1/auth/login`                      | Pública; JWT en JSON y refresh en cookie, 200.              |
+| POST   | `/api/v1/auth/refresh`                    | Cookie + comprobación CSRF; rota sesión, 200.               |
+| POST   | `/api/v1/auth/logout`                     | Cookie opcional + CSRF; revoca familia, 204.                |
+| GET    | `/api/v1/users/me`                        | Bearer; perfil del usuario autenticado.                     |
+| PATCH  | `/api/v1/users/me`                        | Bearer; displayName/avatarUrl/preferredLanguage.            |
+| POST   | `/api/v1/users/me/change-password`        | Bearer + contraseña actual; revoca todas las sesiones, 204. |
+| POST   | `/api/v1/users/me/watchlist/{tituloId}`   | Bearer; agrega, 201; duplicado 409.                         |
+| DELETE | `/api/v1/users/me/watchlist/{tituloId}`   | Bearer; elimina de forma idempotente, 204.                  |
+| GET    | `/api/v1/users/me/watchlist`              | Bearer; referencias paginadas.                              |
+| PUT    | `/api/v1/users/me/preferences/{tituloId}` | Bearer; LIKE/DISLIKE idempotente, 200.                      |
+| DELETE | `/api/v1/users/me/preferences/{tituloId}` | Bearer; elimina, 204.                                       |
+| GET    | `/api/v1/users/me/preferences`            | Bearer; señales paginadas.                                  |
+| GET    | `/.well-known/jwks.json`                  | Pública; solo clave pública RSA.                            |
+| GET    | `/api/health`                             | Pública; PostgreSQL y par de claves, 200/503.               |
 
 Listados aceptan `page` y `limit`: 1/20 por defecto, máximo 100 filas y offset 10000. Rechazan filtros no soportados/repetidos. Todos los endpoints rechazan métodos no admitidos con JSON 405 y Allow; admiten OPTIONS y GET incluye HEAD.
 
 Errores: `400 VALIDATION_ERROR`, `401 INVALID_CREDENTIALS/UNAUTHORIZED`, `403 FORBIDDEN`, `404 USER_NOT_FOUND`, `409 EMAIL_ALREADY_EXISTS/WATCHLIST_ITEM_ALREADY_EXISTS`, `413 PAYLOAD_TOO_LARGE`, `415 UNSUPPORTED_MEDIA_TYPE`, `429 RATE_LIMIT_EXCEEDED`, `500 INTERNAL_SERVER_ERROR`; health usa 503.
 
 ```json
-{"error":{"code":"EMAIL_ALREADY_EXISTS","message":"Ya existe una cuenta asociada a ese correo.","requestId":"uuid"}}
+{
+  "error": {
+    "code": "EMAIL_ALREADY_EXISTS",
+    "message": "Ya existe una cuenta asociada a ese correo.",
+    "requestId": "uuid"
+  }
+}
 ```
 
 ## Ejemplos PowerShell / curl
@@ -170,12 +176,20 @@ Mi Lista y señales solo guardan `tituloId`. No se valida existencia mediante Ca
 ## Tests y build
 
 ```powershell
-npm run check             # typecheck + lint + unitarios + OpenAPI + builds
+npm test                  # unitarios + API de Route Handlers + contratos, sin DB
+npm run test:unit
+npm run test:api
+npm run test:contract
 npm run test:integration  # PostgreSQL real desechable, requiere Docker
+npm run test:coverage     # todas las suites Vitest, incluida integración; requiere Docker
+npm run test:smoke        # alias de test:e2e, imagen/Compose exclusivos
+npm run check             # tipos + lint + npm test + OpenAPI + builds
 npm run test:e2e          # Construye imagen y verifica los 15 endpoints en Compose aislado
 ```
 
 Los unitarios no abren PostgreSQL. Integración/E2E generan credenciales, contenedores, puertos y volúmenes exclusivos; no cargan `.env` del usuario ni usan su DATABASE_URL. Al terminar eliminan esos recursos temporales. No hay tests apuntando automáticamente a una base productiva.
+
+Coverage V8 incluye todo `src/**/*.ts`, sin exclusiones adicionales. Exige 70 % global y 80 % en Domain/Application, en líneas/sentencias/ramas/funciones. Reportes en `coverage/` (HTML, LCOV, JSON y resultados de tests), ignorados por Git. Los tests API Vitest llaman los Route Handlers reales con puertos de repositorio controlados; `test:e2e` comprueba HTTP contra Next construido y SQL reales. Resultados actuales y límites en [BACKEND_TEST_RESULTS.md](../docs/quality/BACKEND_TEST_RESULTS.md).
 
 `docs/openapi.yaml` se genera con `node --import tsx scripts/generate-openapi.ts`; `docs:check` valida su estructura, las 15 operaciones, patrones de IDs y ejemplos contra Zod. Resultados ejecutados: [verification.md](docs/verification.md).
 
@@ -210,7 +224,7 @@ users-service/
 │   └── shared/{config,http}.ts
 ├── drizzle/                    # SQL inicial, snapshot y journal
 ├── scripts/                    # Setup, migraciones, seed, limpieza y verificación
-├── tests/{unit,integration,helpers}/
+├── tests/{unit,api,contract,integration,helpers}/
 ├── docs/{architecture.md,openapi.yaml,verification.md}
 ├── Dockerfile / docker-compose.yml / .dockerignore
 ├── .env.example
@@ -218,3 +232,16 @@ users-service/
 ├── eslint.config.mjs / vitest*.config.ts
 └── package.json / package-lock.json
 ```
+
+## Hardening de calidad y seguridad
+
+ESLint cubre TS/TSX; TypeScript conserva strict; Prettier comparte la configuración raíz.
+
+```powershell
+npm run format:check
+npm run lint
+npm run typecheck
+npm audit --audit-level=high
+```
+
+`npm run format` aplica el formato. Los gates de CI también escanean secretos y auditan dependencias. Consulte [Security Review](../docs/quality/SECURITY_REVIEW.md) y [Dependency Audit](../docs/quality/DEPENDENCY_AUDIT.md), incluidos los pendientes de rotación de secretos y avisos MEDIUM. No versionar `.env` ni claves privadas.

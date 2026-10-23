@@ -1,0 +1,126 @@
+meta {
+  name: 03 Login ADMIN keep captured IDs
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{usersBaseUrl}}/api/v1/auth/login
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "email": "{{adminEmail}}",
+    "password": "{{adminPassword}}"
+  }
+}
+
+script:pre-request {
+  if (!bru.hasVar("runId")) {
+  const runId = Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 12);
+  bru.setVar("runId", runId);
+  bru.setVar("userEmail", "bruno-" + runId + "@example.test");
+  bru.setVar("titleName", "Bruno Demo " + runId);
+  bru.setVar("importKey", "bruno:" + runId);
+  const initialPassword = bru.getProcessEnv("NEVARO_API_USER_PASSWORD") || bru.getEnvVar("userPassword");
+  if (!initialPassword) throw new Error("Run api:setup or use the API demo wrapper first");
+  bru.setVar("userPassword", initialPassword);
+  bru.setVar("newPassword", initialPassword + "-new");
+  }
+}
+
+script:post-response {
+  if (res.getStatus() === 200) {
+  bru.setVar("adminAccessToken", res.getBody().accessToken);
+  const rawCookie = res.getHeader("set-cookie");
+  const cookies = Array.isArray(rawCookie) ? rawCookie : [rawCookie];
+  const cookie = cookies.find(value => typeof value === "string" && value.startsWith("users_refresh="));
+  if (!cookie) throw new Error("Missing HttpOnly refresh cookie");
+  bru.setVar("adminRefreshCookie", cookie.split(";")[0]);
+  }
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "accessToken",
+      "expiresIn",
+      "user"
+    ],
+    "properties": {
+      "accessToken": {
+        "type": "string"
+      },
+      "expiresIn": {
+        "type": "integer"
+      },
+      "user": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "userId",
+          "email",
+          "displayName",
+          "status",
+          "role"
+        ],
+        "properties": {
+          "userId": {
+            "type": "string",
+            "pattern": "^usr_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "ADMIN"
+            ]
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().user.role).to.equal("ADMIN");
+  });
+}
+
+docs {
+  Servicio: users. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

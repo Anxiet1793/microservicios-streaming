@@ -9,18 +9,22 @@ Ejemplo ejecutable: [public/demo.html](../public/demo.html), servido en http://l
 ```
 
 ```javascript
-const response = await fetch('/api/v1/playback/sessions', {
-  method: 'POST',
-  headers: { Authorization: `Bearer ${accessToken}`, 'Content-Type': 'application/json' },
-  body: JSON.stringify({ tituloId })
+const response = await fetch("/api/v1/playback/sessions", {
+  method: "POST",
+  headers: { Authorization: `Bearer ${accessToken}`, "Content-Type": "application/json" },
+  body: JSON.stringify({ tituloId }),
 });
-if (!response.ok) throw new Error('No se pudo iniciar');
+if (!response.ok) throw new Error("No se pudo iniciar");
 const { session, playback } = await response.json();
-const video = document.querySelector('#player');
+const video = document.querySelector("#player");
 video.src = playback.url;
-video.addEventListener('loadedmetadata', () => {
-  video.currentTime = session.progress.positionSeconds;
-}, { once: true });
+video.addEventListener(
+  "loadedmetadata",
+  () => {
+    video.currentTime = session.progress.positionSeconds;
+  },
+  { once: true },
+);
 // Iniciar play mediante interacción del usuario para respetar políticas de autoplay.
 ```
 

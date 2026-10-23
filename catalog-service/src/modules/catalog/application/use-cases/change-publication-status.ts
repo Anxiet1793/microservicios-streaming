@@ -7,7 +7,10 @@ import { assertFields, readClock } from "../validation/input";
 import { loadCatalogTitle } from "./load-catalog-title";
 
 export class ChangePublicationStatus {
-  constructor(private readonly repository: CatalogRepository, private readonly clock: Clock) {}
+  constructor(
+    private readonly repository: CatalogRepository,
+    private readonly clock: Clock,
+  ) {}
 
   async execute(input: ChangePublicationStatusInput): Promise<CatalogTitleDto> {
     assertFields(input, ["tituloId", "publicationStatusId"], ["tituloId", "publicationStatusId"]);

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="115" failures="0" errors="0" time="10.0191325">
+    <testsuite name="tests/api/routes.test.ts" timestamp="2026-10-21T05:38:06.304Z" hostname="Samuel" tests="20" failures="0" errors="0" skipped="0" time="0.056078">
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0066199">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0006826">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0004978">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0004475">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0004185">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0003902">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0004188">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0003727">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.000508">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0004008">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; requires identity before personal or ADMIN operations" time="0.0004081">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; returns real session DTOs through start/progress/pause/resume/complete and history" time="0.0140522">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; rejects caller identity injection, invalid positions and malformed route IDs" time="0.0035371">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; does not grant ADMIN ownership over another user&apos;s session" time="0.0013203">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; rejects USER asset access and permits ADMIN metadata and soft delete" time="0.0023774">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; maps missing/unpublished/catalog-down/storage-down start failures safely" time="0.0024681">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; validates the real multipart parser before attempting storage" time="0.0159659">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; sets CORS only for the allowed origin and returns retry metadata on quota exhaustion" time="0.001505">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; health reports each actual dependency outcome without credentials" time="0.0010051">
+        </testcase>
+        <testcase classname="tests/api/routes.test.ts" name="Actual Playback Route Handlers with controlled identity/repository ports &gt; returns a safe JSON failure even when container configuration cannot be constructed" time="0.0005434">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/contract/gateways.test.ts" timestamp="2026-10-21T05:38:06.309Z" hostname="Samuel" tests="37" failures="0" errors="0" skipped="0" time="4.2360687">
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; interprets publication status 1 from the producer DTO" time="0.0322223">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; interprets publication status 2 from the producer DTO" time="0.0047376">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; interprets publication status 3 from the producer DTO" time="0.0028595">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; handles a producer series with no media reference" time="0.002699">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; maps upstream HTTP 404 without exposing the body" time="0.0037331">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; maps upstream HTTP 500 without exposing the body" time="0.0019009">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; maps upstream HTTP 503 without exposing the body" time="0.0015438">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; rejects incompatible payload {}" time="0.0022651">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; rejects incompatible payload {&quot;tituloId&quot;:&quot;wrong&quot;,&quot;publicationStatusId&quot;:2,&quot;playbackReference&quot;:null}" time="0.0022775">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; rejects incompatible payload {&quot;tituloId&quot;:&quot;ttl_b65f67a8-005e-4814-8a01-9daefa233214&quot;,&quot;publicationStatusId&quot;:&quot;2&quot;,&quot;playbackReference&quot;:null}" time="0.0022969">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; does not follow an upstream redirect" time="0.0063469">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; times out a real stalled HTTP connection" time="4.0160263">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → actual Catalog DTO over HTTP &gt; treats an opaque legacy catalog reference as unavailable media" time="0.0050366">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; accepts a real Users USER access token using public JWKS only" time="0.0212256">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; accepts a real Users ADMIN access token using public JWKS only" time="0.0041555">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;iss&quot;:&quot;wrong&quot;}" time="0.0064452">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;aud&quot;:&quot;wrong&quot;}" time="0.0041485">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;exp&quot;:1}" time="0.0046284">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;sub&quot;:&quot;usr_2dea5896-d56c-40f1-866b-9af8e1e4fc8d&quot;}" time="0.0045389">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;userId&quot;:&quot;forged&quot;}" time="0.0035325">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;role&quot;:&quot;ROOT&quot;}" time="0.0039063">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;role&quot;:[&quot;ADMIN&quot;]}" time="0.003897">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;iat&quot;:&quot;invalid&quot;}" time="0.0038201">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;iat&quot;:1792561139}" time="0.0036845">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;iat&quot;:1792557479}" time="0.0036219">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;jti&quot;:42}" time="0.0039072">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;jti&quot;:&quot;&quot;}" time="0.0032035">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {}" time="0.0035947">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {}" time="0.0034192">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {}" time="0.0032195">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible claims {&quot;nbf&quot;:1792564679}" time="0.0031927">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible headers {&quot;kid&quot;:&quot;unknown-key&quot;}" time="0.0028677">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects incompatible headers {&quot;typ&quot;:&quot;NOT-JWT&quot;}" time="0.0031175">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects an invalid signature while retaining the advertised kid" time="0.0377298">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects a JWKS with invalid RSA key material" time="0.0041533">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; fails closed when the JWKS endpoint is unavailable" time="0.0025644">
+        </testcase>
+        <testcase classname="tests/contract/gateways.test.ts" name="Playback → Users signing and JWKS contract &gt; rejects unsigned and symmetric algorithm confusion tokens" time="0.0017544">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/persistence.test.ts" timestamp="2026-10-21T05:38:06.315Z" hostname="Samuel" tests="10" failures="0" errors="0" skipped="0" time="3.8589532">
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; creates unique and query indexes reproducibly" time="0.0643871">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; enforces unique assets" time="0.0190202">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; rolls back all writes when outbox publication fails" time="0.0400975">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; serializes progress and persists completion only once under concurrency" time="0.0850194">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; uses the continue-watching index without collection scan" time="0.0261706">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; starts concurrently with only one current session and rejects the losing player&apos;s writes" time="0.059802">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; orders, paginates and consolidates history by title without mixing user data" time="0.1443821">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; writes Started, Paused and Completed transactionally with owned identifiers" time="0.0660593">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; rolls back progress and pause when outbox fails after a session already exists" time="0.0472589">
+        </testcase>
+        <testcase classname="tests/integration/persistence.test.ts" name="Real MongoDB replica set &gt; shares atomic API quotas across concurrent callers and isolates identities" time="0.0364555">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/integration/storage.test.ts" timestamp="2026-10-21T05:38:06.317Z" hostname="Samuel" tests="3" failures="0" errors="0" skipped="0" time="1.8142767">
+        <testcase classname="tests/integration/storage.test.ts" name="initializes a private bucket repeatedly, stores exact bytes and supports signed Range" time="0.0487537">
+        </testcase>
+        <testcase classname="tests/integration/storage.test.ts" name="rejects expired signed URLs and recognizes an object that has been removed" time="0.019195">
+        </testcase>
+        <testcase classname="tests/integration/storage.test.ts" name="does not treat denied storage credentials as a missing object" time="0.0166736">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/config.test.ts" timestamp="2026-10-21T05:38:06.318Z" hostname="Samuel" tests="1" failures="0" errors="0" skipped="0" time="0.0083659">
+        <testcase classname="tests/unit/config.test.ts" name="validates runtime config without leaking invalid secrets" time="0.0071183">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/playback.test.ts" timestamp="2026-10-21T05:38:06.318Z" hostname="Samuel" tests="26" failures="0" errors="0" skipped="0" time="0.0218109">
+        <testcase classname="tests/unit/playback.test.ts" name="Progress &gt; rejects invalid position -1" time="0.0029784">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Progress &gt; rejects invalid position NaN" time="0.0003165">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Progress &gt; rejects invalid position Infinity" time="0.0002055">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Progress &gt; rejects invalid position 123" time="0.0001741">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Progress &gt; computes percentage and bounds tolerated overrun" time="0.0004126">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; starts ACTIVE and creates one event" time="0.0014504">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; allows REQUESTED -&gt; ACTIVE" time="0.0004077">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; allows ACTIVE -&gt; PAUSED" time="0.0001958">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; allows ACTIVE -&gt; COMPLETED" time="0.0001955">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; allows ACTIVE -&gt; FAILED" time="0.0001622">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; allows PAUSED -&gt; ACTIVE" time="0.0001984">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; allows PAUSED -&gt; COMPLETED" time="0.0001981">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; rejects COMPLETED -&gt; ACTIVE" time="0.0005416">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; rejects FAILED -&gt; ACTIVE" time="0.0003961">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; rejects REQUESTED -&gt; COMPLETED" time="0.0002562">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; rejects PAUSED -&gt; FAILED" time="0.0002478">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; rejects unpublished title" time="0.0013808">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; rejects missing asset" time="0.0003712">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; enforces ownership for progress and URL refresh" time="0.0010344">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; updates idempotently and emits only milestones" time="0.0014969">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; pauses, resumes and completes once; restart starts at zero" time="0.0019073">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; continues at persisted position and supersedes old session" time="0.0006528">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; excludes &gt;=90 percent and isolates history" time="0.0005996">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; protects assets in use and requires admin" time="0.0007694">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; logical deletion retains bytes and prevents new sessions" time="0.0016632">
+        </testcase>
+        <testcase classname="tests/unit/playback.test.ts" name="Playback aggregate and use cases &gt; supersedes a paused session without introducing a forbidden state transition" time="0.0008785">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/risks.test.ts" timestamp="2026-10-21T05:38:06.323Z" hostname="Samuel" tests="18" failures="0" errors="0" skipped="0" time="0.0235791">
+        <testcase classname="tests/unit/risks.test.ts" name="rejects invalid persisted duration 0" time="0.0038907">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="rejects invalid persisted duration -1" time="0.000349">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="rejects invalid persisted duration NaN" time="0.0002283">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="rejects invalid persisted duration Infinity" time="0.0001649">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="computes exact percentage 25 and continue-watching threshold" time="0.0021298">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="computes exact percentage 50 and continue-watching threshold" time="0.0002662">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="computes exact percentage 75 and continue-watching threshold" time="0.0001641">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="computes exact percentage 89.99 and continue-watching threshold" time="0.000251">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="computes exact percentage 90 and continue-watching threshold" time="0.0002835">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="computes exact percentage 100 and continue-watching threshold" time="0.00025">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="does not re-emit earlier milestones after a deliberate backward seek" time="0.0016304">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="refuses start when media bytes or the storage signing operation is unavailable" time="0.0023479">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="compensates successful storage upload when metadata insertion fails" time="0.0021561">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="does not report successful upload when compensation also fails" time="0.0005254">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="requires ADMIN before upload/storage writes and hides temporary paths in asset DTO" time="0.0027105">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="does not leak assets or sessions that do not exist" time="0.0009278">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="keeps logical deletion idempotent and blocks signing an unavailable asset" time="0.0011717">
+        </testcase>
+        <testcase classname="tests/unit/risks.test.ts" name="evaluates every state pair against the documented transition table" time="0.0017218">
+        </testcase>
+    </testsuite>
+</testsuites>

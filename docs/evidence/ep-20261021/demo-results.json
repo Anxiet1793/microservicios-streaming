@@ -1,0 +1,1345 @@
+{
+  "command": "npm run api:demo:cleanup",
+  "collectedAt": "2026-10-21T21:04:49.211Z",
+  "totalRequests": 59,
+  "passedRequests": 59,
+  "failedRequests": 0,
+  "errorRequests": 0,
+  "skippedRequests": 0,
+  "skippedByBail": 0,
+  "totalAssertions": 0,
+  "passedAssertions": 0,
+  "failedAssertions": 0,
+  "totalTests": 227,
+  "passedTests": 227,
+  "failedTests": 0,
+  "totalPreRequestTests": 0,
+  "passedPreRequestTests": 0,
+  "failedPreRequestTests": 0,
+  "totalPostResponseTests": 0,
+  "passedPostResponseTests": 0,
+  "failedPostResponseTests": 0,
+  "requests": [
+    {
+      "path": "00 Health\\1 users health",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "00 Health\\2 catalog health",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "00 Health\\3 playback health",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "00 Health\\4 Users JWKS",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\00 ADMIN begin new demo run",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "07 Media Assets\\01 Upload MP4",
+      "status": 201,
+      "tests": [
+        {
+          "name": "HTTP 201",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "07 Media Assets\\02 Asset metadata",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "06 Admin Catalog\\01 Bulk create own title",
+      "status": 201,
+      "tests": [
+        {
+          "name": "HTTP 201",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "06 Admin Catalog\\02 Retry import idempotently",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "06 Admin Catalog\\03 Update editorial data",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "06 Admin Catalog\\04 Publish",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\01 Register",
+      "status": 201,
+      "tests": [
+        {
+          "name": "HTTP 201",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\02 Login USER",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "05 Catalog\\03 Detail",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "03 Watchlist\\01 Add title",
+      "status": 201,
+      "tests": [
+        {
+          "name": "HTTP 201",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "03 Watchlist\\02 List",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "03 Watchlist\\03 Duplicate title 409",
+      "status": 409,
+      "tests": [
+        {
+          "name": "HTTP 409",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code WATCHLIST_ITEM_ALREADY_EXISTS",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "04 Preferences\\01 LIKE",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "04 Preferences\\02 DISLIKE",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "04 Preferences\\03 Change back to LIKE",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "04 Preferences\\06 Invalid preference 400",
+      "status": 400,
+      "tests": [
+        {
+          "name": "HTTP 400",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code VALIDATION_ERROR",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "04 Preferences\\04 List",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\01 Start playback",
+      "status": 201,
+      "tests": [
+        {
+          "name": "HTTP 201",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\02 Progress",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\03 Pause",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "09 Continue Watching\\01 Continue watching",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "07 Media Assets\\04 Cannot delete active asset 409",
+      "status": 409,
+      "tests": [
+        {
+          "name": "HTTP 409",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code MEDIA_ASSET_IN_USE",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\07 Negative progress 400",
+      "status": 400,
+      "tests": [
+        {
+          "name": "HTTP 400",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code VALIDATION_ERROR",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\04 Resume",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\05 Refresh URL",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\06 Complete",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "09 Continue Watching\\02 Completed title is excluded",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "10 History\\01 History completed",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "05 Catalog\\01 List published movies",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "05 Catalog\\02 Search and filters",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "02 User\\01 Me",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "02 User\\02 Update profile",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "02 User\\05 Cannot assign ADMIN 400",
+      "status": 400,
+      "tests": [
+        {
+          "name": "HTTP 400",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code VALIDATION_ERROR",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "02 User\\04 Anonymous me 401",
+      "status": 401,
+      "tests": [
+        {
+          "name": "HTTP 401",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code UNAUTHORIZED",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\09 Duplicate email 409",
+      "status": 409,
+      "tests": [
+        {
+          "name": "HTTP 409",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code EMAIL_ALREADY_EXISTS",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\07 Invalid login 401",
+      "status": 401,
+      "tests": [
+        {
+          "name": "HTTP 401",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code INVALID_CREDENTIALS",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\10 Refresh without CSRF 403",
+      "status": 403,
+      "tests": [
+        {
+          "name": "HTTP 403",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code FORBIDDEN",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "06 Admin Catalog\\06 USER cannot edit 403",
+      "status": 403,
+      "tests": [
+        {
+          "name": "HTTP 403",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code FORBIDDEN",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "06 Admin Catalog\\07 Anonymous cannot import 401",
+      "status": 401,
+      "tests": [
+        {
+          "name": "HTTP 401",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code UNAUTHORIZED",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "07 Media Assets\\06 USER cannot read asset metadata 403",
+      "status": 403,
+      "tests": [
+        {
+          "name": "HTTP 403",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code FORBIDDEN",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "07 Media Assets\\05 MIME spoofing rejected 415",
+      "status": 415,
+      "tests": [
+        {
+          "name": "HTTP 415",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code UNSUPPORTED_MEDIA_TYPE",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "05 Catalog\\04 Missing title 404",
+      "status": 404,
+      "tests": [
+        {
+          "name": "HTTP 404",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code CATALOG_TITLE_NOT_FOUND",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "05 Catalog\\05 NoSQL operator rejected 400",
+      "status": 400,
+      "tests": [
+        {
+          "name": "HTTP 400",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code VALIDATION_ERROR",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "08 Playback\\08 Anonymous history 401",
+      "status": 401,
+      "tests": [
+        {
+          "name": "HTTP 401",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code UNAUTHORIZED",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\04 Refresh USER",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "02 User\\03 Change password own test account",
+      "status": 204,
+      "tests": [
+        {
+          "name": "HTTP 204",
+          "status": "pass"
+        },
+        {
+          "name": "Empty response",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\02 Login USER",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "03 Watchlist\\04 Remove title",
+      "status": 204,
+      "tests": [
+        {
+          "name": "HTTP 204",
+          "status": "pass"
+        },
+        {
+          "name": "Empty response",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "04 Preferences\\05 Remove preference",
+      "status": 204,
+      "tests": [
+        {
+          "name": "HTTP 204",
+          "status": "pass"
+        },
+        {
+          "name": "Empty response",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\05 Logout USER",
+      "status": 204,
+      "tests": [
+        {
+          "name": "HTTP 204",
+          "status": "pass"
+        },
+        {
+          "name": "Empty response",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\08 Revoked refresh 401",
+      "status": 401,
+      "tests": [
+        {
+          "name": "HTTP 401",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Error code UNAUTHORIZED",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "06 Admin Catalog\\05 Withdraw own title",
+      "status": 200,
+      "tests": [
+        {
+          "name": "HTTP 200",
+          "status": "pass"
+        },
+        {
+          "name": "Response JSON Schema from OpenAPI",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        },
+        {
+          "name": "Required fields and behavior",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "07 Media Assets\\03 Delete completed own asset",
+      "status": 204,
+      "tests": [
+        {
+          "name": "HTTP 204",
+          "status": "pass"
+        },
+        {
+          "name": "Empty response",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    },
+    {
+      "path": "01 Auth\\06 Logout ADMIN",
+      "status": 204,
+      "tests": [
+        {
+          "name": "HTTP 204",
+          "status": "pass"
+        },
+        {
+          "name": "Empty response",
+          "status": "pass"
+        },
+        {
+          "name": "No database or password fields",
+          "status": "pass"
+        }
+      ],
+      "error": null
+    }
+  ]
+}

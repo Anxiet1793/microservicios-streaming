@@ -8,11 +8,7 @@ import { genres, languages } from "../../../../lib/models";
 import { Hero } from "../../../../features/catalog/Hero";
 import { PersonalActions } from "../../../../features/library/PersonalActions";
 import s from "../../../../features/catalog/catalog.module.css";
-export default async function Page({
-  params,
-}: {
-  params: Promise<{ tituloId: string }>;
-}) {
+export default async function Page({ params }: { params: Promise<{ tituloId: string }> }) {
   const user = await viewer();
   let data;
   try {

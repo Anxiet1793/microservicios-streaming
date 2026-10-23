@@ -12,7 +12,26 @@ export class LoginUser {
     const now = this.d.now();
     const expiresAt = new Date(now.getTime() + this.d.refreshTtl * 1000);
     const accessToken = await this.d.access.sign(user);
-    if (!await this.d.sessions.create({ id: this.d.uuid(), familyId: this.d.uuid(), userId: user.userId, tokenHash: token.hash, expiresAt, createdAt: now }, user.passwordHash)) invalidCredentials();
-    return { accessToken, expiresIn: this.d.accessTtl, user: authUser(user), refreshToken: token.raw, refreshExpiresAt: expiresAt };
+    if (
+      !(await this.d.sessions.create(
+        {
+          id: this.d.uuid(),
+          familyId: this.d.uuid(),
+          userId: user.userId,
+          tokenHash: token.hash,
+          expiresAt,
+          createdAt: now,
+        },
+        user.passwordHash,
+      ))
+    )
+      invalidCredentials();
+    return {
+      accessToken,
+      expiresIn: this.d.accessTtl,
+      user: authUser(user),
+      refreshToken: token.raw,
+      refreshExpiresAt: expiresAt,
+    };
   }
 }

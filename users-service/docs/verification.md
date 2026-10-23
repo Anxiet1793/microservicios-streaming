@@ -4,20 +4,20 @@ Se completaron las diez fases de Users Service: requisitos/estructura, dominio y
 
 ## Comprobaciones ejecutadas
 
-| Comando | Resultado |
-| --- | --- |
-| `npm run typecheck` | Correcto, incluyendo tipos de rutas Next, scripts y tests. |
-| `npm run lint` | Correcto, sin errores ni warnings de ESLint. |
-| `npm test` | **31 pruebas unitarias correctas**, en dominio, aplicación y seguridad/HTTP. |
-| `npm run test:integration` | **16 pruebas correctas**, con PostgreSQL 17 temporal y credenciales propias. |
-| `npm run docs:check` | OpenAPI 3.0.3 válido, **15 operaciones**, patrones de IDs consistentes y cinco ejemplos validados con Zod. |
-| `npm run build` | Build Next.js 16.3.5 correcto, 12 rutas dinámicas de API/JWKS. |
-| `npm run build:scripts` | Migrador, seed y limpieza compilados correctamente para Node 24. |
-| `npm run check` | Cadena completa correcta: tipos, lint, unitarios, OpenAPI y builds. |
-| `npm run test:e2e` | **14 grupos correctos** contra la imagen real y PostgreSQL en un proyecto Compose temporal. |
-| Generación de `.env` mediante Node 24 en Docker | Correcta; la repetición conserva el archivo existente y no imprime secretos. |
-| `docker compose up --build -d --wait` | Entorno local iniciado: API y PostgreSQL healthy; migrador terminó con código 0. |
-| `docker compose exec -T users-service node dist/seed.mjs` | Cuentas locales admin@streaming.local (ADMIN) y demo@streaming.local (USER), ambas ACTIVE. |
+| Comando                                                   | Resultado                                                                                                  |
+| --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
+| `npm run typecheck`                                       | Correcto, incluyendo tipos de rutas Next, scripts y tests.                                                 |
+| `npm run lint`                                            | Correcto, sin errores ni warnings de ESLint.                                                               |
+| `npm test`                                                | **31 pruebas unitarias correctas**, en dominio, aplicación y seguridad/HTTP.                               |
+| `npm run test:integration`                                | **16 pruebas correctas**, con PostgreSQL 17 temporal y credenciales propias.                               |
+| `npm run docs:check`                                      | OpenAPI 3.0.3 válido, **15 operaciones**, patrones de IDs consistentes y cinco ejemplos validados con Zod. |
+| `npm run build`                                           | Build Next.js 16.3.5 correcto, 12 rutas dinámicas de API/JWKS.                                             |
+| `npm run build:scripts`                                   | Migrador, seed y limpieza compilados correctamente para Node 24.                                           |
+| `npm run check`                                           | Cadena completa correcta: tipos, lint, unitarios, OpenAPI y builds.                                        |
+| `npm run test:e2e`                                        | **14 grupos correctos** contra la imagen real y PostgreSQL en un proyecto Compose temporal.                |
+| Generación de `.env` mediante Node 24 en Docker           | Correcta; la repetición conserva el archivo existente y no imprime secretos.                               |
+| `docker compose up --build -d --wait`                     | Entorno local iniciado: API y PostgreSQL healthy; migrador terminó con código 0.                           |
+| `docker compose exec -T users-service node dist/seed.mjs` | Cuentas locales admin@streaming.local (ADMIN) y demo@streaming.local (USER), ambas ACTIVE.                 |
 
 Entorno usado: Node.js 24.21.0, TypeScript 6.0.3, Docker Desktop con contenedores Linux y PostgreSQL 17. No se sustituyó el Node global del usuario. Docker realizó `npm ci` con el lockfile y compiló sin `.env`, claves ni conexión a PostgreSQL.
 

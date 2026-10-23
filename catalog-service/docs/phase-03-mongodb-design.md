@@ -9,10 +9,10 @@ Revisión solicitada: categorías con IDs numéricos estables. Las equivalencias
 
 ## 1. Colecciones y fronteras
 
-| Colección | Unidad del documento | Motivo |
-| --- | --- | --- |
-| `catalog_titles` | Una película o una serie | Comparten identidad, ficha, publicación y consultas del catálogo. |
-| `catalog_episodes` | Un episodio | Tiene identidad y publicación propias; su cantidad no aumenta el documento de la serie. |
+| Colección          | Unidad del documento     | Motivo                                                                                  |
+| ------------------ | ------------------------ | --------------------------------------------------------------------------------------- |
+| `catalog_titles`   | Una película o una serie | Comparten identidad, ficha, publicación y consultas del catálogo.                       |
+| `catalog_episodes` | Un episodio              | Tiene identidad y publicación propias; su cantidad no aumenta el documento de la serie. |
 
 `FichaContenido`, `EstadoPublicacion` y `ReferenciaReproduccion` se almacenan dentro del documento de su agregado. No se crean colecciones para estos valores. La temporada se representa mediante `seasonNumber`; no tiene todavía ficha ni ciclo editorial independientes.
 
@@ -116,15 +116,15 @@ Orden estable para el listado inicial: `{ updatedAt: -1, tituloId: 1 }`. El segu
 
 Índices propuestos para `catalog_titles`, además del índice automático de `_id`:
 
-| Nombre | Claves | Opciones | Consulta o garantía |
-| --- | --- | --- | --- |
-| `uq_catalog_titles_titulo_id` | `{ tituloId: 1 }` | `unique: true` | Detalle y actualizaciones por identidad. |
-| `uq_catalog_titles_import_key` | `{ importKey: 1 }` | `unique: true` | Impedir registros repetidos de una misma clave de importación. |
-| `ix_catalog_titles_updated` | `{ updatedAt: -1, tituloId: 1 }` | — | Listado general ordenado. |
-| `ix_catalog_titles_status_type_updated` | `{ publicationStatusId: 1, typeId: 1, updatedAt: -1, tituloId: 1 }` | — | Listado por estado y tipo, por ejemplo películas publicadas (`publicationStatusId: 2`, `typeId: 1`). |
-| `ix_catalog_titles_year` | `{ "ficha.releaseYear": 1 }` | — | Filtro por año. |
-| `ix_catalog_titles_genre` | `{ "ficha.genres": 1 }` | — | Filtro por pertenencia a un género. |
-| `tx_catalog_titles_title` | `{ "ficha.title": "text", "ficha.originalTitle": "text" }` | `default_language: "none"` | Búsqueda por palabras en títulos sin depender de Atlas Search. |
+| Nombre                                  | Claves                                                              | Opciones                   | Consulta o garantía                                                                                  |
+| --------------------------------------- | ------------------------------------------------------------------- | -------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `uq_catalog_titles_titulo_id`           | `{ tituloId: 1 }`                                                   | `unique: true`             | Detalle y actualizaciones por identidad.                                                             |
+| `uq_catalog_titles_import_key`          | `{ importKey: 1 }`                                                  | `unique: true`             | Impedir registros repetidos de una misma clave de importación.                                       |
+| `ix_catalog_titles_updated`             | `{ updatedAt: -1, tituloId: 1 }`                                    | —                          | Listado general ordenado.                                                                            |
+| `ix_catalog_titles_status_type_updated` | `{ publicationStatusId: 1, typeId: 1, updatedAt: -1, tituloId: 1 }` | —                          | Listado por estado y tipo, por ejemplo películas publicadas (`publicationStatusId: 2`, `typeId: 1`). |
+| `ix_catalog_titles_year`                | `{ "ficha.releaseYear": 1 }`                                        | —                          | Filtro por año.                                                                                      |
+| `ix_catalog_titles_genre`               | `{ "ficha.genres": 1 }`                                             | —                          | Filtro por pertenencia a un género.                                                                  |
+| `tx_catalog_titles_title`               | `{ "ficha.title": "text", "ficha.originalTitle": "text" }`          | `default_language: "none"` | Búsqueda por palabras en títulos sin depender de Atlas Search.                                       |
 
 No se promete que todos los filtros y ordenaciones se resuelvan exclusivamente desde índices. Año y género pueden requerir ordenación adicional. Un filtro solo por tipo no aprovecha el prefijo del índice estado/tipo; se evaluará con datos representativos antes de añadir otro índice. Tampoco se presupone intersección de índices.
 
@@ -136,10 +136,10 @@ Géneros produce un índice multikey. No se combinará en un mismo índice compu
 
 Índices propuestos para `catalog_episodes`, además de `_id`:
 
-| Nombre | Claves | Opciones | Consulta o garantía |
-| --- | --- | --- | --- |
-| `uq_catalog_episodes_episode_id` | `{ episodeId: 1 }` | `unique: true` | Identidad estable de episodio. |
-| `uq_catalog_episodes_position` | `{ seriesId: 1, seasonNumber: 1, episodeNumber: 1 }` | `unique: true` | Evitar posiciones duplicadas y listar una serie o temporada en orden. |
+| Nombre                           | Claves                                               | Opciones       | Consulta o garantía                                                   |
+| -------------------------------- | ---------------------------------------------------- | -------------- | --------------------------------------------------------------------- |
+| `uq_catalog_episodes_episode_id` | `{ episodeId: 1 }`                                   | `unique: true` | Identidad estable de episodio.                                        |
+| `uq_catalog_episodes_position`   | `{ seriesId: 1, seasonNumber: 1, episodeNumber: 1 }` | `unique: true` | Evitar posiciones duplicadas y listar una serie o temporada en orden. |
 
 No hace falta otro índice únicamente sobre `seriesId`: ya es el prefijo del índice de posición. Las consultas que motivan estos índices quedan diseñadas para la extensión de episodios, no implementadas como endpoints nuevos.
 
@@ -175,9 +175,9 @@ collection.updateOne(
   { tituloId, version: expectedVersion },
   {
     $set: { "ficha.title": nuevoTitulo, updatedAt: ahora },
-    $inc: { version: 1 }
-  }
-)
+    $inc: { version: 1 },
+  },
+);
 ```
 
 Los paths se construyen desde una lista permitida, nunca desde operadores recibidos del cliente. Para limpiar campos opcionales se usa `$unset`. Se validará la ficha resultante completa antes de persistir. No se reemplaza el documento entero.
@@ -202,23 +202,23 @@ La validación de base de datos no sustituye transiciones del dominio, inmutabil
 
 Límites iniciales del contrato que se implementará:
 
-| Elemento | Límite |
-| --- | --- |
-| Lote | 1 a 500 elementos por defecto, configurable con techo operativo de 1000 |
-| Body HTTP | 5 MiB por defecto, configurable con techo operativo de 10 MiB; contar bytes reales leídos |
-| Documento serializado | 100 KiB como presupuesto de aplicación |
-| Título / título original / director | 300 caracteres por campo |
-| Sinopsis | 10 000 caracteres |
-| Géneros / idiomas | Hasta 20 IDs distintos por lista, todos presentes en su diccionario |
-| Reparto | 100 nombres, 200 caracteres cada uno |
-| Clasificación por edad | `ageRatingId` opcional, entero presente en el diccionario |
-| URL de imagen / manifestKey | 2048 caracteres |
-| Provider / assetId | `providerId` entero admitido / `assetId` de hasta 256 caracteres |
-| Año | Entero de 1888 a 9999 |
-| Duración | Entero de 1 a 100 000 minutos |
-| Página / tamaño | Página positiva; tamaño por defecto 20, máximo 100 |
-| Offset | Máximo 10 000 registros, rechazar solicitudes que lo excedan |
-| Búsqueda q | 100 caracteres |
+| Elemento                            | Límite                                                                                    |
+| ----------------------------------- | ----------------------------------------------------------------------------------------- |
+| Lote                                | 1 a 500 elementos por defecto, configurable con techo operativo de 1000                   |
+| Body HTTP                           | 5 MiB por defecto, configurable con techo operativo de 10 MiB; contar bytes reales leídos |
+| Documento serializado               | 100 KiB como presupuesto de aplicación                                                    |
+| Título / título original / director | 300 caracteres por campo                                                                  |
+| Sinopsis                            | 10 000 caracteres                                                                         |
+| Géneros / idiomas                   | Hasta 20 IDs distintos por lista, todos presentes en su diccionario                       |
+| Reparto                             | 100 nombres, 200 caracteres cada uno                                                      |
+| Clasificación por edad              | `ageRatingId` opcional, entero presente en el diccionario                                 |
+| URL de imagen / manifestKey         | 2048 caracteres                                                                           |
+| Provider / assetId                  | `providerId` entero admitido / `assetId` de hasta 256 caracteres                          |
+| Año                                 | Entero de 1888 a 9999                                                                     |
+| Duración                            | Entero de 1 a 100 000 minutos                                                             |
+| Página / tamaño                     | Página positiva; tamaño por defecto 20, máximo 100                                        |
+| Offset                              | Máximo 10 000 registros, rechazar solicitudes que lo excedan                              |
+| Búsqueda q                          | 100 caracteres                                                                            |
 
 JSON malformado, envoltura inválida, lote vacío/excesivo o body excesivo rechazan la petición completa sin escrituras. Se validan todos los elementos antes de persistir; elementos individuales inválidos se reportan como rechazados, permitiendo procesar los válidos. Ningún elemento omite la validación.
 
@@ -255,14 +255,14 @@ Se codifican categorías discretas: tipo, estado, género, idioma, clasificació
 
 La fuente única de equivalencias es `src/modules/catalog/domain/models.ts`, con IDs explícitos y comentarios. Los diccionarios de géneros, idiomas y clasificaciones definen el vocabulario inicial admitido; no pretenden cubrir todos los valores posibles. Ampliarlos requiere IDs nuevos y actualización coordinada de validadores y contratos. La clasificación por edad conserva el vocabulario editorial indicado en el archivo; no se considera universal entre países.
 
-| Campo persistido | Equivalencia inicial | Campo derivado de salida |
-| --- | --- | --- |
-| `typeId` | 1 = MOVIE, 2 = SERIES | `typeName` |
-| `publicationStatusId` | 1 = REGISTRADO, 2 = PUBLICADO, 3 = RETIRADO | `publicationStatusName` |
-| `ficha.genres` | 1 = SCIENCE_FICTION, 2 = DRAMA; resto en models | `ficha.genresName` |
-| `ficha.languages` | 1 = es, 2 = en; resto en models | `ficha.languagesName` |
-| `ficha.ageRatingId` | 4 = PG-13; resto en models | `ficha.ageRatingName` |
-| `playbackReference.providerId` | 1 = CDN | `playbackReference.providerName` |
+| Campo persistido               | Equivalencia inicial                            | Campo derivado de salida         |
+| ------------------------------ | ----------------------------------------------- | -------------------------------- |
+| `typeId`                       | 1 = MOVIE, 2 = SERIES                           | `typeName`                       |
+| `publicationStatusId`          | 1 = REGISTRADO, 2 = PUBLICADO, 3 = RETIRADO     | `publicationStatusName`          |
+| `ficha.genres`                 | 1 = SCIENCE_FICTION, 2 = DRAMA; resto en models | `ficha.genresName`               |
+| `ficha.languages`              | 1 = es, 2 = en; resto en models                 | `ficha.languagesName`            |
+| `ficha.ageRatingId`            | 4 = PG-13; resto en models                      | `ficha.ageRatingName`            |
+| `playbackReference.providerId` | 1 = CDN                                         | `playbackReference.providerName` |
 
 Se usa `typeId` con camelCase consistente. `publicationStatusId` sustituye el antiguo campo `publicationStatus`; `typeId` sustituye `type`. La nueva convención prevalece sobre ejemplos anteriores del prompt y de las fases 1 y 2. Como todavía no hay datos ni API desplegados, no hace falta migración ahora. Una base previamente poblada necesitaría una migración explícita antes de activar el nuevo esquema.
 

@@ -10,7 +10,10 @@ export type CatalogErrorCode =
   | "CONCURRENT_MODIFICATION";
 
 export class CatalogError extends Error {
-  constructor(readonly code: CatalogErrorCode, message: string) {
+  constructor(
+    readonly code: CatalogErrorCode,
+    message: string,
+  ) {
     super(message);
     this.name = "CatalogError";
   }

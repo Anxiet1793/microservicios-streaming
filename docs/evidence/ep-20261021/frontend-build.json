@@ -1,0 +1,13 @@
+[
+  {
+    "project": "frontend",
+    "cwd": "frontend",
+    "command": "npm run build",
+    "startedAt": "2026-10-21T05:39:13.395Z",
+    "endedAt": "2026-10-21T05:39:29.693Z",
+    "durationSeconds": 16.296,
+    "exitCode": 0,
+    "log": "frontend-build-1.log",
+    "logSha256": "40e49e1ec5e63d0e9f509a68e31418e377985c89617db4f3824d5ad28f7c8bf2"
+  }
+]

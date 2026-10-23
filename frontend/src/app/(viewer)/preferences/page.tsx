@@ -8,8 +8,8 @@ export default async function Page() {
       <span className="eyebrow">TU COLECCIÓN PERSONAL</span>
       <h1>Tus gustos</h1>
       <p className="muted">
-        Tus señales quedan guardadas. Las recomendaciones personalizadas
-        llegarán en una próxima etapa.
+        Tus señales quedan guardadas. Las recomendaciones personalizadas llegarán en una próxima
+        etapa.
       </p>
       <Library kind="preferences" userId={user.userId} />
     </>

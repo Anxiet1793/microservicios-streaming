@@ -45,18 +45,14 @@ export async function Explore({
           <Link
             key={label}
             href={href({ type: value!, page: "1" })}
-            aria-current={
-              (params.get("type") || "") === value ? "page" : undefined
-            }
+            aria-current={(params.get("type") || "") === value ? "page" : undefined}
           >
             {label}
           </Link>
         ))}
       </nav>
       <form action={base} className={s.filters}>
-        {params.get("type") && (
-          <input type="hidden" name="type" value={params.get("type")!} />
-        )}
+        {params.get("type") && <input type="hidden" name="type" value={params.get("type")!} />}
         <label>
           Buscar
           <SearchField value={params.get("q") || ""} base={base} />

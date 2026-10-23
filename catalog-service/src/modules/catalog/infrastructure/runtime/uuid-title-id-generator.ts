@@ -3,5 +3,7 @@ import type { TitleIdGenerator } from "../../application/ports/title-id-generato
 import { TituloId } from "../../domain/value-objects/titulo-id";
 
 export class UuidTitleIdGenerator implements TitleIdGenerator {
-  next(): TituloId { return TituloId.from(`ttl_${randomUUID()}`); }
+  next(): TituloId {
+    return TituloId.from(`ttl_${randomUUID()}`);
+  }
 }

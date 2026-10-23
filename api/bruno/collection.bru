@@ -1,0 +1,26 @@
+meta {
+  name: NEVARO Streaming API
+}
+
+script:pre-request {
+  const values = [
+    ["usersBaseUrl", "NEVARO_API_USERS_URL"],
+    ["catalogBaseUrl", "NEVARO_API_CATALOG_URL"],
+    ["playbackBaseUrl", "NEVARO_API_PLAYBACK_URL"],
+    ["adminPassword", "NEVARO_API_ADMIN_PASSWORD"],
+    ["userPassword", "NEVARO_API_USER_PASSWORD"]
+  ];
+  for (const [name, processName] of values) {
+    if (!bru.hasVar(name)) {
+      const value = bru.getProcessEnv(processName) || bru.getEnvVar(name);
+      if (value) bru.setVar(name, value);
+    }
+  }
+  for (const name of ["usersBaseUrl", "catalogBaseUrl", "playbackBaseUrl"]) {
+    const value = bru.getVar(name) || bru.getEnvVar(name);
+    if (!/^https?:\/\/(localhost|127\.0\.0\.1|\[::1\]|users-service|catalog-service|playback-service)(:\d+)?\/?$/.test(value || "")) {
+      throw new Error("Select a local stack environment; this collection creates test data");
+    }
+  }
+  req.setTimeout(30000);
+}

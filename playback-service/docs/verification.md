@@ -2,18 +2,18 @@
 
 Fecha de la tarea: 2026-10-04. Entorno Windows, Node 24.21.0 y Docker Desktop Linux.
 
-| Control ejecutado | Resultado |
-|---|---|
-| npm run typecheck | Correcto, TypeScript estricto y tipos Next |
-| npm run lint | Correcto, cero errores/warnings |
-| npm test | 26 pruebas unitarias correctas |
-| npm run docs:check | OpenAPI 3.0.3 válido, 12 operaciones |
-| npm run build | Build de producción Next correcto |
-| npm run build:scripts | Inicializador compilado correctamente |
-| docker compose up --build -d --wait | Correcto; init termina 0; API, Mongo y MinIO healthy |
-| npm run test:e2e | 11 grupos correctos con contenedores aislados |
-| Integración dentro del E2E | 5 pruebas correctas con MongoDB replica set real |
-| scripts/verify-local-demo.ts | Correcto con Users/Catalog/Playback reales en localhost |
+| Control ejecutado                   | Resultado                                               |
+| ----------------------------------- | ------------------------------------------------------- |
+| npm run typecheck                   | Correcto, TypeScript estricto y tipos Next              |
+| npm run lint                        | Correcto, cero errores/warnings                         |
+| npm test                            | 26 pruebas unitarias correctas                          |
+| npm run docs:check                  | OpenAPI 3.0.3 válido, 12 operaciones                    |
+| npm run build                       | Build de producción Next correcto                       |
+| npm run build:scripts               | Inicializador compilado correctamente                   |
+| docker compose up --build -d --wait | Correcto; init termina 0; API, Mongo y MinIO healthy    |
+| npm run test:e2e                    | 11 grupos correctos con contenedores aislados           |
+| Integración dentro del E2E          | 5 pruebas correctas con MongoDB replica set real        |
+| scripts/verify-local-demo.ts        | Correcto con Users/Catalog/Playback reales en localhost |
 
 ## Cobertura
 

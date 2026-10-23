@@ -15,13 +15,7 @@ export function Brand() {
     </Link>
   );
 }
-export function Message({
-  title,
-  children,
-}: {
-  title: string;
-  children?: React.ReactNode;
-}) {
+export function Message({ title, children }: { title: string; children?: React.ReactNode }) {
   return (
     <div className={s.message}>
       <Film size={28} aria-hidden="true" />
@@ -33,16 +27,8 @@ export function Message({
     </div>
   );
 }
-export function Poster({
-  title,
-  landscape = false,
-}: {
-  title: Title;
-  landscape?: boolean;
-}) {
-  const src = landscape
-    ? title.ficha.backdropUrl || title.ficha.posterUrl
-    : title.ficha.posterUrl;
+export function Poster({ title, landscape = false }: { title: Title; landscape?: boolean }) {
+  const src = landscape ? title.ficha.backdropUrl || title.ficha.posterUrl : title.ficha.posterUrl;
   return (
     <div className={`${s.poster} ${landscape ? s.landscape : ""}`}>
       <Picture src={src}>
@@ -52,9 +38,7 @@ export function Poster({
           <span>{title.ficha.title}</span>
         </div>
       </Picture>
-      <span className={s.corner}>
-        {title.typeId === 1 ? "PELÍCULA" : "SERIE"}
-      </span>
+      <span className={s.corner}>{title.typeId === 1 ? "PELÍCULA" : "SERIE"}</span>
     </div>
   );
 }
@@ -73,11 +57,8 @@ export function Card({
         <Poster title={title} landscape={landscape} />
         <h3>{title.ficha.title}</h3>
         <p>
-          {title.ficha.releaseYear} <span>·</span>{" "}
-          {title.typeId === 1 ? "Película" : "Serie"}
-          {title.ficha.durationMinutes
-            ? ` · ${title.ficha.durationMinutes} min`
-            : ""}
+          {title.ficha.releaseYear} <span>·</span> {title.typeId === 1 ? "Película" : "Serie"}
+          {title.ficha.durationMinutes ? ` · ${title.ficha.durationMinutes} min` : ""}
         </p>
       </Link>
       {reference?.progress && (
@@ -88,8 +69,7 @@ export function Card({
             aria-label={`Progreso de ${title.ficha.title}`}
           />
           <Link className={s.continue} href={`/watch/${title.tituloId}`}>
-            <Play size={15} /> Continuar desde{" "}
-            {time(reference.progress.positionSeconds)}
+            <Play size={15} /> Continuar desde {time(reference.progress.positionSeconds)}
           </Link>
         </>
       )}
@@ -119,13 +99,7 @@ export function Section({
     </section>
   );
 }
-export function Grid({
-  titles,
-  landscape = false,
-}: {
-  titles: Title[];
-  landscape?: boolean;
-}) {
+export function Grid({ titles, landscape = false }: { titles: Title[]; landscape?: boolean }) {
   return (
     <div className={`${s.grid} ${landscape ? s.landscapeGrid : ""}`}>
       {titles.map((title) => (

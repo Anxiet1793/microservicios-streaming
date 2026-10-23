@@ -1,0 +1,137 @@
+{
+  "generatedAtUtc": "2026-10-21T04:48:21.989365+00:00",
+  "environment": {
+    "dockerCompose": "5.6.0",
+    "node": "24.21.0",
+    "os": "Windows + Docker Linux"
+  },
+  "project": "nevaro",
+  "commands": {
+    "docker compose config --quiet": 0,
+    "docker compose up --build --detach --wait --wait-timeout 300": 0,
+    "npm test": 0,
+    "npm run smoke": 0,
+    "docker compose run --rm --no-deps smoke": 0,
+    "npm run stack:seed": 0,
+    "npm run stack:down": 0,
+    "npm run stack:up": 0,
+    "docker-only setup preserving existing ENV": 0,
+    "actionlint": 0
+  },
+  "services": [
+    {
+      "service": "catalog-init",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0
+    },
+    {
+      "service": "catalog-mongodb",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "catalog-service",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "frontend",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "minio",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "playback-init",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0
+    },
+    {
+      "service": "playback-mongodb",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "playback-replica-init",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0
+    },
+    {
+      "service": "playback-service",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "redis",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "stack-seed",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0
+    },
+    {
+      "service": "users-migrate",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0
+    },
+    {
+      "service": "users-postgres",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    },
+    {
+      "service": "users-seed",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0
+    },
+    {
+      "service": "users-service",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0
+    }
+  ],
+  "smoke": {
+    "hostChecks": 10,
+    "containerChecks": 10,
+    "postRestartChecks": 10,
+    "playbackWithMedia": true,
+    "signedMp4RangeStatus": 206,
+    "unitTests": 5
+  },
+  "idempotency": {
+    "seedTitlesAfterRepeat": 1,
+    "mediaAssetsAfterRepeat": 1,
+    "demoAccounts": 2,
+    "seedTituloIdPreserved": true,
+    "volumesPreservedByDown": true
+  },
+  "individualComposeConfigChecks": {
+    "frontend": 0,
+    "users-service": 0,
+    "catalog-service": 0,
+    "playback-service": 0
+  },
+  "secretsFoundInCurrentLogs": 0,
+  "remoteGitHubActionsRun": null,
+  "stackLeftRunning": true
+}

@@ -1,0 +1,20 @@
+Working directory: root
+Command: npm run smoke
+Started: 2026-10-21T21:03:51.318Z
+Ended: 2026-10-21T21:03:54.994Z
+Exit code: 0
+Duration: 3.676 seconds
+
+npm notice run smoke
+npm notice run node --env-file-if-exists=.env scripts/smoke-test.mjs
+OK users-service online
+OK catalog-service online
+OK playback-service online
+OK frontend HTTP 200
+OK Register/Login reales
+OK JWT y autorización USER/ADMIN
+OK Catalog list
+OK Playback autenticado
+OK Playback: sesión, URL firmada MP4 206, progreso y pausa
+OK Sesión BFF/Redis y revocación refresh
+{"result":"passed","checks":10,"playbackWithMedia":true}

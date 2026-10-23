@@ -1,3 +1,10 @@
 services:
   catalog-service:
     ports: !reset []
+    environment:
+      USERS_JWKS_URL: http://users-service:3001/.well-known/jwks.json
+    networks: [default, users]
+networks:
+  users:
+    external: true
+    name: users-service_default

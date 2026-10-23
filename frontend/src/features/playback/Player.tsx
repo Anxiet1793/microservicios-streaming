@@ -1,27 +1,13 @@
 "use client";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import {
-  Play,
-  Pause,
-  ArrowLeft,
-  Volume2,
-  VolumeX,
-  Maximize,
-  RotateCcw,
-} from "lucide-react";
+import { Play, Pause, ArrowLeft, Volume2, VolumeX, Maximize, RotateCcw } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { api, ApiError } from "../../lib/api/client";
 import { time, type Playback } from "../../lib/models";
 import { PlaybackQueue } from "./queue";
 import s from "./player.module.css";
-export function Player({
-  tituloId,
-  title,
-}: {
-  tituloId: string;
-  title: string;
-}) {
+export function Player({ tituloId, title }: { tituloId: string; title: string }) {
   const router = useRouter(),
     cache = useQueryClient();
   const video = useRef<HTMLVideoElement>(null),
@@ -46,15 +32,10 @@ export function Player({
       queue.current.stop();
       video.current?.pause();
       setError(e.message);
-    } else
-      setSync(e instanceof Error ? e.message : "No pudimos guardar tu avance.");
+    } else setSync(e instanceof Error ? e.message : "No pudimos guardar tu avance.");
   }, []);
   const renew = useRef<() => Promise<void>>(async () => {});
-  async function load(
-    source: { url: string; expiresIn: number },
-    at: number,
-    play: boolean,
-  ) {
+  async function load(source: { url: string; expiresIn: number }, at: number, play: boolean) {
     let url: URL;
     try {
       url = new URL(source.url);
@@ -95,10 +76,7 @@ export function Player({
         v.src = source.url;
         v.load();
       });
-      v.currentTime = Math.min(
-        at,
-        Number.isFinite(v.duration) ? v.duration : at,
-      );
+      v.currentTime = Math.min(at, Number.isFinite(v.duration) ? v.duration : at);
       setPosition(v.currentTime);
       setDuration(v.duration);
       setReady(true);
@@ -141,15 +119,9 @@ export function Player({
       backend.current = "ACTIVE";
       setCompleted(false);
       if (!result.playback) throw new Error("El video no está disponible.");
-      await load(
-        result.playback,
-        result.session.progress.positionSeconds,
-        false,
-      );
+      await load(result.playback, result.session.progress.positionSeconds, false);
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : "No pudimos preparar el video.",
-      );
+      setError(e instanceof Error ? e.message : "No pudimos preparar el video.");
     } finally {
       starting.current = false;
       setBusy(false);
@@ -170,11 +142,7 @@ export function Player({
         await api(`sessions/${session.current}/progress`, "PATCH", {
           positionSeconds,
         });
-        setSync(
-          backend.current === "PAUSED"
-            ? "Pausa y avance guardados"
-            : "Avance guardado",
-        );
+        setSync(backend.current === "PAUSED" ? "Pausa y avance guardados" : "Avance guardado");
       })
       .catch(failure);
   }, [failure]);
@@ -193,13 +161,9 @@ export function Player({
     try {
       if (backend.current === "PAUSED") {
         await queue.current.run(async () => {
-          const result = await api<Playback>(
-            `sessions/${session.current}/resume`,
-            "POST",
-          );
+          const result = await api<Playback>(`sessions/${session.current}/resume`, "POST");
           backend.current = "ACTIVE";
-          if (result.playback)
-            await load(result.playback, v.currentTime, false);
+          if (result.playback) await load(result.playback, v.currentTime, false);
         });
       }
       await v.play();
@@ -263,12 +227,7 @@ export function Player({
       if (video.current && !video.current.paused) save();
     }, 10000);
     const hide = () => {
-      if (
-        !session.current ||
-        backend.current === "COMPLETED" ||
-        queue.current.stopped
-      )
-        return;
+      if (!session.current || backend.current === "COMPLETED" || queue.current.stopped) return;
       void fetch(`/api/bff/sessions/${session.current}/progress`, {
         method: "PATCH",
         keepalive: true,
@@ -320,18 +279,14 @@ export function Player({
           onPlaying={() => setSync("")}
           onError={() => {
             if (!replacing.current && session.current)
-              setError(
-                "No pudimos continuar el video. Prueba renovar el acceso.",
-              );
+              setError("No pudimos continuar el video. Prueba renovar el acceso.");
           }}
         />
         {!ready && (
           <div className={s.cover}>
             <span className="eyebrow">TU HISTORIA TE ESPERA</span>
             <h1>{title}</h1>
-            <p>
-              Encuentra tu lugar. La reproducción comienza cuando tú decides.
-            </p>
+            <p>Encuentra tu lugar. La reproducción comienza cuando tú decides.</p>
             <button className="button" onClick={start} disabled={busy}>
               <Play size={19} />
               {busy ? "Preparando video…" : "Preparar reproducción"}
@@ -402,8 +357,7 @@ export function Player({
               step={0.05}
               defaultValue={1}
               onChange={(e) => {
-                if (video.current)
-                  video.current.volume = Number(e.target.value);
+                if (video.current) video.current.volume = Number(e.target.value);
               }}
             />
             <span className={s.time}>
@@ -414,9 +368,7 @@ export function Player({
               onClick={() => {
                 void document.documentElement
                   .requestFullscreen?.()
-                  .catch(() =>
-                    setSync("Usa los controles de pantalla de tu navegador."),
-                  );
+                  .catch(() => setSync("Usa los controles de pantalla de tu navegador."));
               }}
               aria-label="Pantalla completa"
             >
@@ -449,10 +401,7 @@ export function Player({
         ) : (
           <div>
             <p role="status">
-              {sync ||
-                (ready
-                  ? "Tu avance se guarda automáticamente cada 10 segundos."
-                  : "")}
+              {sync || (ready ? "Tu avance se guarda automáticamente cada 10 segundos." : "")}
             </p>
             {sync.includes("No pudimos") && (
               <button className="button secondary" onClick={save}>

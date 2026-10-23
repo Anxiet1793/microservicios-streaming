@@ -1,0 +1,64 @@
+meta {
+  name: 04 Cannot delete active asset 409
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{playbackBaseUrl}}/api/v1/media/assets/{{assetId}}
+  body: none
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminAccessToken}}
+}
+
+script:pre-request {
+  if (!(bru.getVar("adminAccessToken") || bru.getEnvVar("adminAccessToken"))) throw new Error("Login ADMIN first");
+}
+
+tests {
+  test("HTTP 409", function () { expect(res.getStatus()).to.equal(409); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "error"
+    ],
+    "properties": {
+      "error": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Error code MEDIA_ASSET_IN_USE", function () { expect(res.getBody().error.code).to.equal("MEDIA_ASSET_IN_USE"); });
+}
+
+docs {
+  Servicio: playback. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

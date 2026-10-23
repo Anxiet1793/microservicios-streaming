@@ -6,55 +6,55 @@
 
 SHA-256: `db852997cee731fde48d1208613b27b2e55d6ba2029052a192fd9a4c97eaa10f`
 
-| Método | Ruta | operationId |
-|---|---|---|
-| POST | `/api/v1/auth/register` | registerUser |
-| POST | `/api/v1/auth/login` | loginUser |
-| POST | `/api/v1/auth/refresh` | refreshSession |
-| POST | `/api/v1/auth/logout` | logoutUser |
-| GET | `/api/v1/users/me` | getCurrentUser |
-| PATCH | `/api/v1/users/me` | updateProfile |
-| POST | `/api/v1/users/me/change-password` | changePassword |
-| GET | `/api/v1/users/me/watchlist` | getWatchlist |
-| POST | `/api/v1/users/me/watchlist/{tituloId}` | addToWatchlist |
-| DELETE | `/api/v1/users/me/watchlist/{tituloId}` | removeFromWatchlist |
-| GET | `/api/v1/users/me/preferences` | getContentPreferences |
-| PUT | `/api/v1/users/me/preferences/{tituloId}` | setContentPreference |
+| Método | Ruta                                      | operationId             |
+| ------ | ----------------------------------------- | ----------------------- |
+| POST   | `/api/v1/auth/register`                   | registerUser            |
+| POST   | `/api/v1/auth/login`                      | loginUser               |
+| POST   | `/api/v1/auth/refresh`                    | refreshSession          |
+| POST   | `/api/v1/auth/logout`                     | logoutUser              |
+| GET    | `/api/v1/users/me`                        | getCurrentUser          |
+| PATCH  | `/api/v1/users/me`                        | updateProfile           |
+| POST   | `/api/v1/users/me/change-password`        | changePassword          |
+| GET    | `/api/v1/users/me/watchlist`              | getWatchlist            |
+| POST   | `/api/v1/users/me/watchlist/{tituloId}`   | addToWatchlist          |
+| DELETE | `/api/v1/users/me/watchlist/{tituloId}`   | removeFromWatchlist     |
+| GET    | `/api/v1/users/me/preferences`            | getContentPreferences   |
+| PUT    | `/api/v1/users/me/preferences/{tituloId}` | setContentPreference    |
 | DELETE | `/api/v1/users/me/preferences/{tituloId}` | removeContentPreference |
-| GET | `/api/health` | health |
-| GET | `/.well-known/jwks.json` | jwks |
+| GET    | `/api/health`                             | health                  |
+| GET    | `/.well-known/jwks.json`                  | jwks                    |
 
 ## catalog-service
 
 SHA-256: `aa73e94796b38b0be6dd8b1e42145a0c6da62c1572fe782d95232c625a72a8c3`
 
-| Método | Ruta | operationId |
-|---|---|---|
-| GET | `/api/health` | getHealth |
-| GET | `/api/v1/catalog` | getCatalogTitles |
-| POST | `/api/v1/catalog/bulk` | bulkCreateCatalogTitles |
-| GET | `/api/v1/catalog/{tituloId}` | getCatalogTitleById |
-| PATCH | `/api/v1/catalog/{tituloId}` | updateCatalogTitle |
-| PATCH | `/api/v1/catalog/{tituloId}/publication-status` | changePublicationStatus |
+| Método | Ruta                                            | operationId             |
+| ------ | ----------------------------------------------- | ----------------------- |
+| GET    | `/api/health`                                   | getHealth               |
+| GET    | `/api/v1/catalog`                               | getCatalogTitles        |
+| POST   | `/api/v1/catalog/bulk`                          | bulkCreateCatalogTitles |
+| GET    | `/api/v1/catalog/{tituloId}`                    | getCatalogTitleById     |
+| PATCH  | `/api/v1/catalog/{tituloId}`                    | updateCatalogTitle      |
+| PATCH  | `/api/v1/catalog/{tituloId}/publication-status` | changePublicationStatus |
 
 ## playback-service
 
 SHA-256: `c5b1fdbc2c93d6a09fde31d2c9e03fbc5d5861a74112d806f6de7b81f2ee9b0a`
 
-| Método | Ruta | operationId |
-|---|---|---|
-| GET | `/api/health` | health |
-| POST | `/api/v1/media/assets` | uploadAsset |
-| GET | `/api/v1/media/assets/{assetId}` | getAsset |
-| DELETE | `/api/v1/media/assets/{assetId}` | deleteAsset |
-| POST | `/api/v1/playback/sessions` | startSession |
-| PATCH | `/api/v1/playback/sessions/{sessionId}/progress` | updateProgress |
-| POST | `/api/v1/playback/sessions/{sessionId}/pause` | pausePlayback |
-| POST | `/api/v1/playback/sessions/{sessionId}/resume` | resumePlayback |
-| POST | `/api/v1/playback/sessions/{sessionId}/complete` | completePlayback |
-| POST | `/api/v1/playback/sessions/{sessionId}/refresh-url` | refreshPlaybackUrl |
-| GET | `/api/v1/playback/me/continue-watching` | continueWatching |
-| GET | `/api/v1/playback/me/history` | history |
+| Método | Ruta                                                | operationId        |
+| ------ | --------------------------------------------------- | ------------------ |
+| GET    | `/api/health`                                       | health             |
+| POST   | `/api/v1/media/assets`                              | uploadAsset        |
+| GET    | `/api/v1/media/assets/{assetId}`                    | getAsset           |
+| DELETE | `/api/v1/media/assets/{assetId}`                    | deleteAsset        |
+| POST   | `/api/v1/playback/sessions`                         | startSession       |
+| PATCH  | `/api/v1/playback/sessions/{sessionId}/progress`    | updateProgress     |
+| POST   | `/api/v1/playback/sessions/{sessionId}/pause`       | pausePlayback      |
+| POST   | `/api/v1/playback/sessions/{sessionId}/resume`      | resumePlayback     |
+| POST   | `/api/v1/playback/sessions/{sessionId}/complete`    | completePlayback   |
+| POST   | `/api/v1/playback/sessions/{sessionId}/refresh-url` | refreshPlaybackUrl |
+| GET    | `/api/v1/playback/me/continue-watching`             | continueWatching   |
+| GET    | `/api/v1/playback/me/history`                       | history            |
 
 ## Decisiones verificadas
 

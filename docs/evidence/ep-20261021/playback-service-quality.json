@@ -1,0 +1,46 @@
+[
+  {
+    "project": "playback-service",
+    "cwd": "playback-service",
+    "command": "npm run lint",
+    "startedAt": "2026-10-21T05:36:59.737Z",
+    "endedAt": "2026-10-21T05:37:23.282Z",
+    "durationSeconds": 23.544,
+    "exitCode": 0,
+    "log": "playback-service-quality-1.log",
+    "logSha256": "95d56361894c54b8ce81208ab3895bd4c16a07324a6451ee8badc26d172929b1"
+  },
+  {
+    "project": "playback-service",
+    "cwd": "playback-service",
+    "command": "npm run typecheck",
+    "startedAt": "2026-10-21T05:37:23.286Z",
+    "endedAt": "2026-10-21T05:37:39.787Z",
+    "durationSeconds": 16.5,
+    "exitCode": 0,
+    "log": "playback-service-quality-2.log",
+    "logSha256": "0d8381876590831fddf2236cb0bfe433b3095ccd20712ded3a6d3cfbc83f521d"
+  },
+  {
+    "project": "playback-service",
+    "cwd": "playback-service",
+    "command": "npm run test:coverage",
+    "startedAt": "2026-10-21T05:37:39.789Z",
+    "endedAt": "2026-10-21T05:38:06.788Z",
+    "durationSeconds": 27,
+    "exitCode": 0,
+    "log": "playback-service-quality-3.log",
+    "logSha256": "a8a060864a9551c8520e94724fe3d7785e3313fe115cd43efeb8754db1668371"
+  },
+  {
+    "project": "playback-service",
+    "cwd": "playback-service",
+    "command": "npm run docs:check",
+    "startedAt": "2026-10-21T05:38:06.791Z",
+    "endedAt": "2026-10-21T05:38:10.146Z",
+    "durationSeconds": 3.355,
+    "exitCode": 0,
+    "log": "playback-service-quality-4.log",
+    "logSha256": "649bccf815708a214d3a3756fc8e34ab6a5575aaa882f7e4b2b0873da8c55a96"
+  }
+]

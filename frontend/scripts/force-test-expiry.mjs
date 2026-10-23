@@ -1,11 +1,6 @@
 // Test-only helper, piped into the frontend container; never copied into runner.
 import { Redis } from "ioredis";
-import {
-  createHash,
-  createCipheriv,
-  createDecipheriv,
-  randomBytes,
-} from "node:crypto";
+import { createHash, createCipheriv, createDecipheriv, randomBytes } from "node:crypto";
 let input = "";
 for await (const part of process.stdin) input += part;
 const id = input.trim();
@@ -22,16 +17,10 @@ try {
       b.subarray(0, 12),
     );
   dec.setAuthTag(b.subarray(-16));
-  const session = JSON.parse(
-    Buffer.concat([dec.update(b.subarray(12, -16)), dec.final()]),
-  );
+  const session = JSON.parse(Buffer.concat([dec.update(b.subarray(12, -16)), dec.final()]));
   session.accessExpires = 0;
   const iv = randomBytes(12),
-    cipher = createCipheriv(
-      "aes-256-gcm",
-      Buffer.from(process.env.SESSION_SECRET, "hex"),
-      iv,
-    );
+    cipher = createCipheriv("aes-256-gcm", Buffer.from(process.env.SESSION_SECRET, "hex"), iv);
   const sealed = Buffer.concat([
     iv,
     cipher.update(JSON.stringify(session)),

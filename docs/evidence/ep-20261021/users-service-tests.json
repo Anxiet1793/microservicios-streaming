@@ -1,0 +1,609 @@
+{
+  "project": "users-service",
+  "runner": "vitest 5.0.3",
+  "command": "npm run test:coverage",
+  "startedAt": "2026-10-21T05:37:45.939Z",
+  "tests": {
+    "total": 96,
+    "passed": 96,
+    "failed": 0,
+    "pending": 0,
+    "success": true
+  },
+  "groups": {
+    "api": {
+      "total": 31,
+      "passed": 31,
+      "failed": 0,
+      "pending": 0
+    },
+    "contract": {
+      "total": 2,
+      "passed": 2,
+      "failed": 0,
+      "pending": 0
+    },
+    "unit": {
+      "total": 43,
+      "passed": 43,
+      "failed": 0,
+      "pending": 0
+    },
+    "integration": {
+      "total": 20,
+      "passed": 20,
+      "failed": 0,
+      "pending": 0
+    }
+  },
+  "coverage": {
+    "lines": {
+      "total": 594,
+      "covered": 566,
+      "skipped": 0,
+      "pct": 95.28
+    },
+    "statements": {
+      "total": 626,
+      "covered": 585,
+      "skipped": 0,
+      "pct": 93.45
+    },
+    "functions": {
+      "total": 145,
+      "covered": 129,
+      "skipped": 0,
+      "pct": 88.96
+    },
+    "branches": {
+      "total": 246,
+      "covered": 224,
+      "skipped": 0,
+      "pct": 91.05
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "files": [
+    {
+      "file": "users-service/tests/api/routes.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:00.521Z",
+      "endedAt": "2026-10-21T05:38:00.632Z",
+      "tests": [
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects invalid registration (email) without writing",
+          "status": "passed",
+          "durationMilliseconds": 40.73919999999998
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects invalid registration (password) without writing",
+          "status": "passed",
+          "durationMilliseconds": 1.9769999999998618
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects invalid registration (role injection) without writing",
+          "status": "passed",
+          "durationMilliseconds": 1.745200000000068
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects invalid registration (empty profile) without writing",
+          "status": "passed",
+          "durationMilliseconds": 1.4501999999999953
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled registers with 201 without password/hash or a caller-selected role",
+          "status": "passed",
+          "durationMilliseconds": 3.312800000000152
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled login issues valid claims but exposes refresh only via HttpOnly cookie",
+          "status": "passed",
+          "durationMilliseconds": 6.603700000000117
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled returns generic login error for wrong-password",
+          "status": "passed",
+          "durationMilliseconds": 1.9183000000000447
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled returns generic login error for missing",
+          "status": "passed",
+          "durationMilliseconds": 2.0239000000001397
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled returns generic login error for inactive",
+          "status": "passed",
+          "durationMilliseconds": 1.4827000000000226
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.723799999999983
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.4483000000000175
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.4613999999999123
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 2.0486000000000786
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.470600000000104
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.2765000000001692
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.3041000000000622
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.4675999999999476
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects every personal route without identity",
+          "status": "passed",
+          "durationMilliseconds": 1.3147000000001299
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled accepts a genuine USER identity without allowing privilege injection",
+          "status": "passed",
+          "durationMilliseconds": 2.625099999999975
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled accepts a genuine ADMIN identity without allowing privilege injection",
+          "status": "passed",
+          "durationMilliseconds": 2.2424999999998363
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects a validly signed token whose user no longer exists",
+          "status": "passed",
+          "durationMilliseconds": 1.7041000000001532
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled does not reveal protected profile fields or accept them in PATCH",
+          "status": "passed",
+          "durationMilliseconds": 2.8394000000000688
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled lists, adds and idempotently removes references without catalog metadata",
+          "status": "passed",
+          "durationMilliseconds": 3.539600000000064
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled accepts LIKE and deletes a preference",
+          "status": "passed",
+          "durationMilliseconds": 3.1323999999999614
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled accepts DISLIKE and deletes a preference",
+          "status": "passed",
+          "durationMilliseconds": 2.9342999999998938
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled rejects malformed identifiers, repeated pagination and protected preference fields",
+          "status": "passed",
+          "durationMilliseconds": 2.7445000000000164
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled refresh requires CSRF proof, rotates cookie and rejects a reused family",
+          "status": "passed",
+          "durationMilliseconds": 3.615099999999984
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled logout clears the cookie and change-password passes through current-credential checks",
+          "status": "passed",
+          "durationMilliseconds": 3.5445000000001983
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled returns a bounded 429 with Retry-After and never invokes credential hashing",
+          "status": "passed",
+          "durationMilliseconds": 1.8652999999999338
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled health checks dependencies and JWKS exposes no private key material",
+          "status": "passed",
+          "durationMilliseconds": 2.3449000000000524
+        },
+        {
+          "name": "Actual Users Route Handlers, crypto real, repository ports controlled responds safely to malformed bodies, foreign origin and unsupported methods",
+          "status": "passed",
+          "durationMilliseconds": 2.3138000000001284
+        }
+      ]
+    },
+    {
+      "file": "users-service/tests/contract/public.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:57.975Z",
+      "endedAt": "2026-10-21T05:37:58.184Z",
+      "tests": [
+        {
+          "name": "keeps public profile and auth DTOs compatible without leaking credential/internal state",
+          "status": "passed",
+          "durationMilliseconds": 173.26200000000006
+        },
+        {
+          "name": "publishes stable cross-service RS256 identity, role, audience, TTL and key selection",
+          "status": "passed",
+          "durationMilliseconds": 36.1712
+        }
+      ]
+    },
+    {
+      "file": "users-service/tests/unit/application.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:02.176Z",
+      "endedAt": "2026-10-21T05:38:02.202Z",
+      "tests": [
+        {
+          "name": "Casos de uso aislados registro hashea contraseña y no retorna el hash",
+          "status": "passed",
+          "durationMilliseconds": 8.012899999999945
+        },
+        {
+          "name": "Casos de uso aislados propaga email duplicado sin generar otra sesión",
+          "status": "passed",
+          "durationMilliseconds": 2.2472999999999956
+        },
+        {
+          "name": "Casos de uso aislados login guarda solo digest de refresh y retorna JWT",
+          "status": "passed",
+          "durationMilliseconds": 1.4266999999999825
+        },
+        {
+          "name": "Casos de uso aislados login ausente ejecuta verificación dummy y devuelve error genérico",
+          "status": "passed",
+          "durationMilliseconds": 0.9869000000001051
+        },
+        {
+          "name": "Casos de uso aislados rechaza contraseña incorrecta, usuario inactivo y carrera con cambio de password",
+          "status": "passed",
+          "durationMilliseconds": 2.1077999999999975
+        },
+        {
+          "name": "Casos de uso aislados rota refresh y rechaza reutilización",
+          "status": "passed",
+          "durationMilliseconds": 1.044800000000123
+        },
+        {
+          "name": "Casos de uso aislados logout revoca por hash y es idempotente sin cookie",
+          "status": "passed",
+          "durationMilliseconds": 0.8336000000001604
+        },
+        {
+          "name": "Casos de uso aislados actualiza perfil solo del usuario autenticado",
+          "status": "passed",
+          "durationMilliseconds": 3.3366000000000895
+        },
+        {
+          "name": "Casos de uso aislados cambio de contraseña requiere la actual y compara hash esperado",
+          "status": "passed",
+          "durationMilliseconds": 1.4295000000001892
+        },
+        {
+          "name": "Casos de uso aislados watchlist agrega, lista, elimina y propaga duplicados",
+          "status": "passed",
+          "durationMilliseconds": 1.445600000000013
+        },
+        {
+          "name": "Casos de uso aislados almacena LIKE y admite eliminar preferencia",
+          "status": "passed",
+          "durationMilliseconds": 1.1376999999999953
+        },
+        {
+          "name": "Casos de uso aislados almacena DISLIKE y admite eliminar preferencia",
+          "status": "passed",
+          "durationMilliseconds": 0.5890000000001692
+        },
+        {
+          "name": "Casos de uso aislados rechaza versiones y roles falsos, usuarios inactivos y paginación excesiva",
+          "status": "passed",
+          "durationMilliseconds": 1.1829000000000178
+        }
+      ]
+    },
+    {
+      "file": "users-service/tests/unit/boundaries.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:00.954Z",
+      "endedAt": "2026-10-21T05:38:01.005Z",
+      "tests": [
+        {
+          "name": "rejects invalid restored aggregate {\"authVersion\":0}",
+          "status": "passed",
+          "durationMilliseconds": 2.772199999999998
+        },
+        {
+          "name": "rejects invalid restored aggregate {\"authVersion\":1.1}",
+          "status": "passed",
+          "durationMilliseconds": 0.23980000000000246
+        },
+        {
+          "name": "rejects invalid restored aggregate {\"status\":\"DELETED\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.1453000000000202
+        },
+        {
+          "name": "rejects invalid restored aggregate {\"role\":\"ROOT\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.13179999999999836
+        },
+        {
+          "name": "rejects invalid restored aggregate {\"userId\":\"internal-id\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.11710000000002196
+        },
+        {
+          "name": "rejects invalid restored aggregate {\"passwordHash\":\"\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.102800000000002
+        },
+        {
+          "name": "rejects invalid restored aggregate {\"createdAt\":null}",
+          "status": "passed",
+          "durationMilliseconds": 0.08859999999998536
+        },
+        {
+          "name": "rejects invalid restored aggregate {\"updatedAt\":\"1970-01-01T00:00:00.000Z\"}",
+          "status": "passed",
+          "durationMilliseconds": 0.094600000000014
+        },
+        {
+          "name": "validates password boundaries using Unicode code points without trimming",
+          "status": "passed",
+          "durationMilliseconds": 0.52770000000001
+        },
+        {
+          "name": "rejects unsafe avatar/locale values while allowing regional language tags",
+          "status": "passed",
+          "durationMilliseconds": 0.39400000000000546
+        },
+        {
+          "name": "bounds pagination by the maximum offset, not just page size",
+          "status": "passed",
+          "durationMilliseconds": 0.9224000000000387
+        },
+        {
+          "name": "requires HTTPS in production and rejects malformed or credential-bearing origins",
+          "status": "passed",
+          "durationMilliseconds": 45.928200000000004
+        }
+      ]
+    },
+    {
+      "file": "users-service/tests/unit/domain.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:38:02.688Z",
+      "endedAt": "2026-10-21T05:38:02.699Z",
+      "tests": [
+        {
+          "name": "Usuario y value objects normaliza email y registra USER ACTIVE con identidad independiente",
+          "status": "passed",
+          "durationMilliseconds": 4.725000000000023
+        },
+        {
+          "name": "Usuario y value objects rechaza email inválido ",
+          "status": "passed",
+          "durationMilliseconds": 1.3192000000000235
+        },
+        {
+          "name": "Usuario y value objects rechaza email inválido bad",
+          "status": "passed",
+          "durationMilliseconds": 0.30419999999998026
+        },
+        {
+          "name": "Usuario y value objects rechaza email inválido a@",
+          "status": "passed",
+          "durationMilliseconds": 0.23120000000000118
+        },
+        {
+          "name": "Usuario y value objects rechaza email inválido a b@example.com",
+          "status": "passed",
+          "durationMilliseconds": 0.22309999999998809
+        },
+        {
+          "name": "Usuario y value objects rechaza contraseña inválida",
+          "status": "passed",
+          "durationMilliseconds": 0.4282999999999788
+        },
+        {
+          "name": "Usuario y value objects rechaza contraseña inválida",
+          "status": "passed",
+          "durationMilliseconds": 0.22860000000002856
+        },
+        {
+          "name": "Usuario y value objects rechaza contraseña inválida",
+          "status": "passed",
+          "durationMilliseconds": 0.21019999999998618
+        },
+        {
+          "name": "Usuario y value objects no modifica contraseñas y admite frases largas",
+          "status": "passed",
+          "durationMilliseconds": 0.22059999999999036
+        },
+        {
+          "name": "Usuario y value objects aplica cambios parciales inmutables y permite quitar avatar",
+          "status": "passed",
+          "durationMilliseconds": 2.136599999999987
+        },
+        {
+          "name": "Usuario y value objects rechaza campos protegidos, perfil vacío y URLs inseguras",
+          "status": "passed",
+          "durationMilliseconds": 0.9273000000000025
+        },
+        {
+          "name": "Usuario y value objects acepta exclusivamente el TituloId público de Catálogo",
+          "status": "passed",
+          "durationMilliseconds": 0.5209999999999582
+        }
+      ]
+    },
+    {
+      "file": "users-service/tests/unit/security.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:58.760Z",
+      "endedAt": "2026-10-21T05:37:59.128Z",
+      "tests": [
+        {
+          "name": "Seguridad Argon2id usa sal aleatoria y verifica sin exponer contraseña",
+          "status": "passed",
+          "durationMilliseconds": 143.83709999999996
+        },
+        {
+          "name": "Seguridad refresh aleatorio almacenable como SHA-256 y rechaza tokens malformados",
+          "status": "passed",
+          "durationMilliseconds": 1.9860000000001037
+        },
+        {
+          "name": "Seguridad JWT RS256 se verifica con JWKS sin clave privada ni acceso a base",
+          "status": "passed",
+          "durationMilliseconds": 79.04840000000002
+        },
+        {
+          "name": "Seguridad protege cookie y exige origen o cabecera CSRF para refresh/logout",
+          "status": "passed",
+          "durationMilliseconds": 134.4457
+        },
+        {
+          "name": "Seguridad no permite privilegios aportados en registro o perfil",
+          "status": "passed",
+          "durationMilliseconds": 2.1055999999999813
+        },
+        {
+          "name": "Seguridad limita bytes reales y oculta errores y logs sensibles",
+          "status": "passed",
+          "durationMilliseconds": 7.972900000000095
+        }
+      ]
+    },
+    {
+      "file": "users-service/tests/integration/postgres.test.ts",
+      "status": "passed",
+      "startedAt": "2026-10-21T05:37:54.654Z",
+      "endedAt": "2026-10-21T05:37:56.303Z",
+      "tests": [
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios repite migración y conserva seis tablas sin metadata de Catálogo",
+          "status": "passed",
+          "durationMilliseconds": 20.2374000000018
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios registro crea usuario y perfil, con hash y rol USER",
+          "status": "passed",
+          "durationMilliseconds": 67.2482
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios hace rollback de usuario si falla la inserción del perfil",
+          "status": "passed",
+          "durationMilliseconds": 11.770800000000236
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios impide emails duplicados incluso con registros concurrentes",
+          "status": "passed",
+          "durationMilliseconds": 49.36590000000069
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios login devuelve JWT y guarda solo hash de refresh",
+          "status": "passed",
+          "durationMilliseconds": 78.72239999999874
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios login incorrecto, ausente o inactivo devuelve el mismo error",
+          "status": "passed",
+          "durationMilliseconds": 180.12469999999848
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios rota sin prolongar caducidad absoluta y revoca familia al reutilizar",
+          "status": "passed",
+          "durationMilliseconds": 104.8089
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios dos refresh simultáneos no dejan una familia utilizable tras detectar replay",
+          "status": "passed",
+          "durationMilliseconds": 95.29540000000088
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios logout con token anterior revoca también la rotación reciente",
+          "status": "passed",
+          "durationMilliseconds": 103.61579999999958
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios rechaza refresh vencido",
+          "status": "passed",
+          "durationMilliseconds": 77.2544999999991
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios actualiza perfil parcialmente y limpia avatar sin cambiar email/rol",
+          "status": "passed",
+          "durationMilliseconds": 55.263600000000224
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios cambio de password revoca sesiones y versión JWT local",
+          "status": "passed",
+          "durationMilliseconds": 229.01240000000143
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios creación de sesión rechaza credenciales obsoletas tras cambio de password",
+          "status": "passed",
+          "durationMilliseconds": 74.60460000000057
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios Mi Lista impide duplicados, pagina, elimina y aísla usuarios",
+          "status": "passed",
+          "durationMilliseconds": 105.20399999999972
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios LIKE→DISLIKE conserva createdAt y PUT idéntico no modifica updatedAt",
+          "status": "passed",
+          "durationMilliseconds": 65.77970000000096
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios rate limit comparte contador atómico entre instancias",
+          "status": "passed",
+          "durationMilliseconds": 25.744700000001103
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios revoca únicamente la familia del logout y conserva otra sesión independiente",
+          "status": "passed",
+          "durationMilliseconds": 136.96259999999893
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios aísla LIKE/DISLIKE y su eliminación por usuario incluso para el mismo tituloId",
+          "status": "passed",
+          "durationMilliseconds": 102.82359999999971
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios mantiene UNIQUE de Mi Lista bajo inserciones simultáneas",
+          "status": "passed",
+          "durationMilliseconds": 49.884000000000015
+        },
+        {
+          "name": "PostgreSQL real, migraciones, seguridad y repositorios expira ventanas de cuotas sin permitir que contadores previos bloqueen permanentemente",
+          "status": "passed",
+          "durationMilliseconds": 15.391999999999825
+        }
+      ]
+    }
+  ]
+}

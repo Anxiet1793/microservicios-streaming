@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="65" failures="0" errors="0" time="3.973323">
+    <testsuite name="tests/component/actions.test.tsx" timestamp="2026-10-21T05:38:24.081Z" hostname="Samuel" tests="3" failures="0" errors="0" skipped="0" time="0.3281441">
+        <testcase classname="tests/component/actions.test.tsx" name="personal state under failure &gt; distinguishes a wrong current password from an expired session" time="0.0093474">
+        </testcase>
+        <testcase classname="tests/component/actions.test.tsx" name="personal state under failure &gt; rolls back an optimistic watchlist toggle after a rejected write" time="0.2725697">
+        </testcase>
+        <testcase classname="tests/component/actions.test.tsx" name="personal state under failure &gt; keeps an incomplete paginated state unknown rather than enabling neutral actions" time="0.0447715">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/component/admin.test.tsx" timestamp="2026-10-21T05:38:24.083Z" hostname="Samuel" tests="10" failures="0" errors="0" skipped="0" time="0.4368984">
+        <testcase classname="tests/component/admin.test.tsx" name="upload route checks USER before rendering the form" time="0.0141062">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="upload route checks ADMIN before rendering the form" time="0.1049641">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="streams MP4, exposes upload progress and confirms asset metadata" time="0.0640799">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="reports uncertain upload after onerror without automatically retrying" time="0.0215045">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="reports uncertain upload after ontimeout without automatically retrying" time="0.0175407">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="reports uncertain upload after onabort without automatically retrying" time="0.0236264">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="shows a controlled API upload error" time="0.0215326">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="rejects a non MP4 before starting a network transfer" time="0.0163241">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="retains a stable import key after a rejected ficha and publishes without uploading twice" time="0.1238185">
+        </testcase>
+        <testcase classname="tests/component/admin.test.tsx" name="editor preserves noneditable catalog metadata while clearing blank artwork URLs" time="0.0282139">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/component/auth.test.tsx" timestamp="2026-10-21T05:38:24.086Z" hostname="Samuel" tests="6" failures="0" errors="0" skipped="0" time="0.4422686">
+        <testcase classname="tests/component/auth.test.tsx" name="LoginForm submits once, shows loading and returns to a safe destination" time="0.1777397">
+        </testcase>
+        <testcase classname="tests/component/auth.test.tsx" name="RegisterForm creates an account and never redirects before login" time="0.0635855">
+        </testcase>
+        <testcase classname="tests/component/auth.test.tsx" name="validates registration and email before calling the API" time="0.0618168">
+        </testcase>
+        <testcase classname="tests/component/auth.test.tsx" name="shows generic authentication errors and allows another attempt" time="0.0456825">
+        </testcase>
+        <testcase classname="tests/component/auth.test.tsx" name="honors Retry-After instead of silently retrying credentials" time="0.0554952">
+        </testcase>
+        <testcase classname="tests/component/auth.test.tsx" name="does not dispatch a session-expiry event for a rejected login" time="0.0367362">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/component/catalog.test.tsx" timestamp="2026-10-21T05:38:24.088Z" hostname="Samuel" tests="10" failures="0" errors="0" skipped="0" time="0.4819792">
+        <testcase classname="tests/component/catalog.test.tsx" name="MediaCard uses catalog IDs, metadata and an image fallback on load failure" time="0.1374487">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="MediaRow/Section renders its cards and collection link" time="0.0392431">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="detail offers playback only for a published movie with an asset" time="0.0184681">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="debounces search, preserves filters, resets pagination and cancels on unmount" time="0.0105056">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="renders search/filter values, preserves them in pagination and shows empty results" time="0.0475708">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="Continue Watching exposes a percentage and resumes the same title" time="0.059287">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="watchlist shows a controlled error and retries" time="0.0455782">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="continue-watching shows a controlled error and retries" time="0.0403829">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="preferences shows a controlled error and retries" time="0.0370835">
+        </testcase>
+        <testcase classname="tests/component/catalog.test.tsx" name="history shows a controlled error and retries" time="0.0450919">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/component/library.test.tsx" timestamp="2026-10-21T05:38:24.090Z" hostname="Samuel" tests="1" failures="0" errors="0" skipped="0" time="0.2266956">
+        <testcase classname="tests/component/library.test.tsx" name="loads the full page after visiting a four-item Home preview" time="0.2253323">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/component/personal.test.tsx" timestamp="2026-10-21T05:38:24.091Z" hostname="Samuel" tests="5" failures="0" errors="0" skipped="0" time="0.5474836">
+        <testcase classname="tests/component/personal.test.tsx" name="adds and removes a watchlist reference using optimistic state" time="0.2511604">
+        </testcase>
+        <testcase classname="tests/component/personal.test.tsx" name="restores an existing item when optimistic removal fails" time="0.0732177">
+        </testcase>
+        <testcase classname="tests/component/personal.test.tsx" name="sets LIKE and removes it when pressed again" time="0.0714944">
+        </testcase>
+        <testcase classname="tests/component/personal.test.tsx" name="sets DISLIKE and removes it when pressed again" time="0.0780336">
+        </testcase>
+        <testcase classname="tests/component/personal.test.tsx" name="changes LIKE to DISLIKE without deleting first and rolls back a failed change" time="0.0723561">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/component/player.test.tsx" timestamp="2026-10-21T05:38:24.092Z" hostname="Samuel" tests="7" failures="0" errors="0" skipped="0" time="1.0227041">
+        <testcase classname="tests/component/player.test.tsx" name="creates a single session, exposes loading and restores initial currentTime" time="0.3338561">
+        </testcase>
+        <testcase classname="tests/component/player.test.tsx" name="plays, persists a seek, pauses with position and resumes with a new URL" time="0.2217284">
+        </testcase>
+        <testcase classname="tests/component/player.test.tsx" name="automatically saves playing progress every ten seconds and stops timers on unmount" time="0.1301547">
+        </testcase>
+        <testcase classname="tests/component/player.test.tsx" name="completes once and stops progress after completion" time="0.0894935">
+        </testcase>
+        <testcase classname="tests/component/player.test.tsx" name="renews an expiring URL while preserving paused position" time="0.0750147">
+        </testcase>
+        <testcase classname="tests/component/player.test.tsx" name="offers recovery after a media error and renews without creating another session" time="0.0924037">
+        </testcase>
+        <testcase classname="tests/component/player.test.tsx" name="reports playback service failure and allows opening another session" time="0.0782171">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/component/session.test.tsx" timestamp="2026-10-21T05:38:24.095Z" hostname="Samuel" tests="7" failures="0" errors="0" skipped="0" time="0.4761574">
+        <testcase classname="tests/component/session.test.tsx" name="logout clears private cached data, revoked=true" time="0.2151726">
+        </testcase>
+        <testcase classname="tests/component/session.test.tsx" name="logout clears private cached data, revoked=false" time="0.0903193">
+        </testcase>
+        <testcase classname="tests/component/session.test.tsx" name="failed logout retains session, reports failure and enables retry" time="0.0427188">
+        </testcase>
+        <testcase classname="tests/component/session.test.tsx" name="profile presents administration only to USER when appropriate" time="0.0306048">
+        </testcase>
+        <testcase classname="tests/component/session.test.tsx" name="profile presents administration only to ADMIN when appropriate" time="0.0151087">
+        </testcase>
+        <testcase classname="tests/component/session.test.tsx" name="profile patches editable fields, exposes loading and reports success" time="0.0626882">
+        </testcase>
+        <testcase classname="tests/component/session.test.tsx" name="password change clears cache and returns to login only after confirmation" time="0.0183483">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/player.test.ts" timestamp="2026-10-21T05:38:24.096Z" hostname="Samuel" tests="13" failures="0" errors="0" skipped="0" time="0.0061913">
+        <testcase classname="tests/unit/player.test.ts" name="ordered playback writes &gt; coalesces pending positions without removing intentional backward seeks" time="0.0020087">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="ordered playback writes &gt; finishes progress before pause and completion" time="0.0002102">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="ordered playback writes &gt; does not permanently block the queue after a network error" time="0.0013696">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="ordered playback writes &gt; stops future writes when superseded" time="0.0002635">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; rejects unsafe return https://evil.example" time="0.0002139">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; rejects unsafe return //evil.example" time="0.0001386">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; rejects unsafe return /\evil" time="0.0000573">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; rejects unsafe return /api/bff/admin" time="0.0000573">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; rejects unsafe return /login?next=https://evil.example" time="0.000063">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; preserves local title return" time="0.0000743">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; formats NaN safely" time="0.0001333">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; formats -3 safely" time="0.0000666">
+        </testcase>
+        <testcase classname="tests/unit/player.test.ts" name="navigation and display boundaries &gt; formats 65.8 safely" time="0.0000946">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/query.test.ts" timestamp="2026-10-21T05:38:24.098Z" hostname="Samuel" tests="3" failures="0" errors="0" skipped="0" time="0.0048007">
+        <testcase classname="tests/unit/query.test.ts" name="URL search boundary &gt; normalizes hostile or out-of-contract filters before calling Catalog" time="0.0023659">
+        </testcase>
+        <testcase classname="tests/unit/query.test.ts" name="URL search boundary &gt; keeps Spanish search and normalizes valid numeric values" time="0.000415">
+        </testcase>
+        <testcase classname="tests/unit/query.test.ts" name="URL search boundary &gt; limits query length without breaking Unicode characters" time="0.000691">
+        </testcase>
+    </testsuite>
+</testsuites>

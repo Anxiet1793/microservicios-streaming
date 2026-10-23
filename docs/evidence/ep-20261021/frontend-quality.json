@@ -1,0 +1,35 @@
+[
+  {
+    "project": "frontend",
+    "cwd": "frontend",
+    "command": "npm run lint",
+    "startedAt": "2026-10-21T05:36:59.712Z",
+    "endedAt": "2026-10-21T05:37:23.568Z",
+    "durationSeconds": 23.855,
+    "exitCode": 0,
+    "log": "frontend-quality-1.log",
+    "logSha256": "e18c9aae209722a76a0a0d1aaf63d97a7059139dbbd920229d9eb4f2f739472d"
+  },
+  {
+    "project": "frontend",
+    "cwd": "frontend",
+    "command": "npm run typecheck",
+    "startedAt": "2026-10-21T05:37:23.571Z",
+    "endedAt": "2026-10-21T05:37:41.963Z",
+    "durationSeconds": 18.392,
+    "exitCode": 0,
+    "log": "frontend-quality-2.log",
+    "logSha256": "6745bab3a526755b048ddf94bdbad3f14955db756024fff5830e03eba7f81d6e"
+  },
+  {
+    "project": "frontend",
+    "cwd": "frontend",
+    "command": "npm run test:coverage",
+    "startedAt": "2026-10-21T05:37:41.966Z",
+    "endedAt": "2026-10-21T05:38:24.387Z",
+    "durationSeconds": 42.421,
+    "exitCode": 0,
+    "log": "frontend-quality-3.log",
+    "logSha256": "5fd5b40497e43b9220e5f6518a0e814df9205a6882526e18c772e1a184a56a9d"
+  }
+]

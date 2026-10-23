@@ -1,0 +1,24 @@
+[
+  {
+    "project": "playback-service",
+    "cwd": "playback-service",
+    "command": "npm run build",
+    "startedAt": "2026-10-21T05:38:57.642Z",
+    "endedAt": "2026-10-21T05:39:12.525Z",
+    "durationSeconds": 14.881,
+    "exitCode": 0,
+    "log": "playback-service-build-1.log",
+    "logSha256": "937d3ab188e80c1ce9c84f7f11d8e0f2eb3ee1c6528e25d0617a8aad94633837"
+  },
+  {
+    "project": "playback-service",
+    "cwd": "playback-service",
+    "command": "npm run build:scripts",
+    "startedAt": "2026-10-21T05:39:12.528Z",
+    "endedAt": "2026-10-21T05:39:13.072Z",
+    "durationSeconds": 0.544,
+    "exitCode": 0,
+    "log": "playback-service-build-2.log",
+    "logSha256": "37e07b59b803a5ef4c1a4a28b5ebc9ff13993d3fe31e39f5abca7270560476a4"
+  }
+]

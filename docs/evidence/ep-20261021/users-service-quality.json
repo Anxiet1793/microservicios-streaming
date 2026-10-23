@@ -1,0 +1,46 @@
+[
+  {
+    "project": "users-service",
+    "cwd": "users-service",
+    "command": "npm run lint",
+    "startedAt": "2026-10-21T05:36:59.712Z",
+    "endedAt": "2026-10-21T05:37:23.332Z",
+    "durationSeconds": 23.619,
+    "exitCode": 0,
+    "log": "users-service-quality-1.log",
+    "logSha256": "e534a86e5a008075c06b19e8f82a22615cb173f8c9688717a2ce0e46185ff396"
+  },
+  {
+    "project": "users-service",
+    "cwd": "users-service",
+    "command": "npm run typecheck",
+    "startedAt": "2026-10-21T05:37:23.335Z",
+    "endedAt": "2026-10-21T05:37:42.927Z",
+    "durationSeconds": 19.592,
+    "exitCode": 0,
+    "log": "users-service-quality-2.log",
+    "logSha256": "f72115806dd0175dc105bd49dc33d36e81fcc9fbcec228b2d712c955d40800d3"
+  },
+  {
+    "project": "users-service",
+    "cwd": "users-service",
+    "command": "npm run test:coverage",
+    "startedAt": "2026-10-21T05:37:42.930Z",
+    "endedAt": "2026-10-21T05:38:03.685Z",
+    "durationSeconds": 20.754,
+    "exitCode": 0,
+    "log": "users-service-quality-3.log",
+    "logSha256": "d374a7a0103674f5026c56b2357278c06a868347cb2fc7e4c8cda8e98d08b0cf"
+  },
+  {
+    "project": "users-service",
+    "cwd": "users-service",
+    "command": "npm run docs:check",
+    "startedAt": "2026-10-21T05:38:03.687Z",
+    "endedAt": "2026-10-21T05:38:07.512Z",
+    "durationSeconds": 3.826,
+    "exitCode": 0,
+    "log": "users-service-quality-4.log",
+    "logSha256": "4abbffd21bab135972375ece67346bc3cc0258ce743ee8ca2cfd15663ac692e9"
+  }
+]

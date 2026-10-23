@@ -12,5 +12,10 @@ export function methodNotAllowed(endpoint: string, allow: string) {
 }
 
 export function optionsHandler(endpoint: string, allow: string) {
-  return (request: Request) => handleRequest(request, endpoint, async () => new Response(null, { status: 204, headers: { allow } }));
+  return (request: Request) =>
+    handleRequest(
+      request,
+      endpoint,
+      async () => new Response(null, { status: 204, headers: { allow } }),
+    );
 }

@@ -1,0 +1,348 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="1 users health" file="00 Health\1 users health.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.993" hostname="Samuel" time="0.491">
+    <testcase name="HTTP 200" status="pass" classname="00 Health\1 users health" time="0.123"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="00 Health\1 users health" time="0.123"/>
+    <testcase name="No database or password fields" status="pass" classname="00 Health\1 users health" time="0.123"/>
+    <testcase name="Required fields and behavior" status="pass" classname="00 Health\1 users health" time="0.123"/>
+  </testsuite>
+  <testsuite name="2 catalog health" file="00 Health\2 catalog health.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.243">
+    <testcase name="HTTP 200" status="pass" classname="00 Health\2 catalog health" time="0.061"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="00 Health\2 catalog health" time="0.061"/>
+    <testcase name="No database or password fields" status="pass" classname="00 Health\2 catalog health" time="0.061"/>
+    <testcase name="Required fields and behavior" status="pass" classname="00 Health\2 catalog health" time="0.061"/>
+  </testsuite>
+  <testsuite name="3 playback health" file="00 Health\3 playback health.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.220">
+    <testcase name="HTTP 200" status="pass" classname="00 Health\3 playback health" time="0.055"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="00 Health\3 playback health" time="0.055"/>
+    <testcase name="No database or password fields" status="pass" classname="00 Health\3 playback health" time="0.055"/>
+    <testcase name="Required fields and behavior" status="pass" classname="00 Health\3 playback health" time="0.055"/>
+  </testsuite>
+  <testsuite name="4 Users JWKS" file="00 Health\4 Users JWKS.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.207">
+    <testcase name="HTTP 200" status="pass" classname="00 Health\4 Users JWKS" time="0.052"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="00 Health\4 Users JWKS" time="0.052"/>
+    <testcase name="No database or password fields" status="pass" classname="00 Health\4 Users JWKS" time="0.052"/>
+    <testcase name="Required fields and behavior" status="pass" classname="00 Health\4 Users JWKS" time="0.052"/>
+  </testsuite>
+  <testsuite name="00 ADMIN begin new demo run" file="01 Auth\00 ADMIN begin new demo run.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.307">
+    <testcase name="HTTP 200" status="pass" classname="01 Auth\00 ADMIN begin new demo run" time="0.077"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\00 ADMIN begin new demo run" time="0.077"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\00 ADMIN begin new demo run" time="0.077"/>
+    <testcase name="Required fields and behavior" status="pass" classname="01 Auth\00 ADMIN begin new demo run" time="0.077"/>
+  </testsuite>
+  <testsuite name="01 Upload MP4" file="07 Media Assets\01 Upload MP4.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.661">
+    <testcase name="HTTP 201" status="pass" classname="07 Media Assets\01 Upload MP4" time="0.165"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="07 Media Assets\01 Upload MP4" time="0.165"/>
+    <testcase name="No database or password fields" status="pass" classname="07 Media Assets\01 Upload MP4" time="0.165"/>
+    <testcase name="Required fields and behavior" status="pass" classname="07 Media Assets\01 Upload MP4" time="0.165"/>
+  </testsuite>
+  <testsuite name="02 Asset metadata" file="07 Media Assets\02 Asset metadata.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.216">
+    <testcase name="HTTP 200" status="pass" classname="07 Media Assets\02 Asset metadata" time="0.054"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="07 Media Assets\02 Asset metadata" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="07 Media Assets\02 Asset metadata" time="0.054"/>
+    <testcase name="Required fields and behavior" status="pass" classname="07 Media Assets\02 Asset metadata" time="0.054"/>
+  </testsuite>
+  <testsuite name="01 Bulk create own title" file="06 Admin Catalog\01 Bulk create own title.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.310">
+    <testcase name="HTTP 201" status="pass" classname="06 Admin Catalog\01 Bulk create own title" time="0.077"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="06 Admin Catalog\01 Bulk create own title" time="0.077"/>
+    <testcase name="No database or password fields" status="pass" classname="06 Admin Catalog\01 Bulk create own title" time="0.077"/>
+    <testcase name="Required fields and behavior" status="pass" classname="06 Admin Catalog\01 Bulk create own title" time="0.077"/>
+  </testsuite>
+  <testsuite name="02 Retry import idempotently" file="06 Admin Catalog\02 Retry import idempotently.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.214">
+    <testcase name="HTTP 200" status="pass" classname="06 Admin Catalog\02 Retry import idempotently" time="0.054"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="06 Admin Catalog\02 Retry import idempotently" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="06 Admin Catalog\02 Retry import idempotently" time="0.054"/>
+    <testcase name="Required fields and behavior" status="pass" classname="06 Admin Catalog\02 Retry import idempotently" time="0.054"/>
+  </testsuite>
+  <testsuite name="03 Update editorial data" file="06 Admin Catalog\03 Update editorial data.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.215">
+    <testcase name="HTTP 200" status="pass" classname="06 Admin Catalog\03 Update editorial data" time="0.054"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="06 Admin Catalog\03 Update editorial data" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="06 Admin Catalog\03 Update editorial data" time="0.054"/>
+    <testcase name="Required fields and behavior" status="pass" classname="06 Admin Catalog\03 Update editorial data" time="0.054"/>
+  </testsuite>
+  <testsuite name="04 Publish" file="06 Admin Catalog\04 Publish.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.994" hostname="Samuel" time="0.216">
+    <testcase name="HTTP 200" status="pass" classname="06 Admin Catalog\04 Publish" time="0.054"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="06 Admin Catalog\04 Publish" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="06 Admin Catalog\04 Publish" time="0.054"/>
+    <testcase name="Required fields and behavior" status="pass" classname="06 Admin Catalog\04 Publish" time="0.054"/>
+  </testsuite>
+  <testsuite name="01 Register" file="01 Auth\01 Register.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.303">
+    <testcase name="HTTP 201" status="pass" classname="01 Auth\01 Register" time="0.076"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\01 Register" time="0.076"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\01 Register" time="0.076"/>
+    <testcase name="Required fields and behavior" status="pass" classname="01 Auth\01 Register" time="0.076"/>
+  </testsuite>
+  <testsuite name="02 Login USER" file="01 Auth\02 Login USER.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.308">
+    <testcase name="HTTP 200" status="pass" classname="01 Auth\02 Login USER" time="0.077"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\02 Login USER" time="0.077"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\02 Login USER" time="0.077"/>
+    <testcase name="Required fields and behavior" status="pass" classname="01 Auth\02 Login USER" time="0.077"/>
+  </testsuite>
+  <testsuite name="03 Detail" file="05 Catalog\03 Detail.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.214">
+    <testcase name="HTTP 200" status="pass" classname="05 Catalog\03 Detail" time="0.053"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="05 Catalog\03 Detail" time="0.053"/>
+    <testcase name="No database or password fields" status="pass" classname="05 Catalog\03 Detail" time="0.053"/>
+    <testcase name="Required fields and behavior" status="pass" classname="05 Catalog\03 Detail" time="0.053"/>
+  </testsuite>
+  <testsuite name="01 Add title" file="03 Watchlist\01 Add title.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.228">
+    <testcase name="HTTP 201" status="pass" classname="03 Watchlist\01 Add title" time="0.057"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="03 Watchlist\01 Add title" time="0.057"/>
+    <testcase name="No database or password fields" status="pass" classname="03 Watchlist\01 Add title" time="0.057"/>
+    <testcase name="Required fields and behavior" status="pass" classname="03 Watchlist\01 Add title" time="0.057"/>
+  </testsuite>
+  <testsuite name="02 List" file="03 Watchlist\02 List.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.204">
+    <testcase name="HTTP 200" status="pass" classname="03 Watchlist\02 List" time="0.051"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="03 Watchlist\02 List" time="0.051"/>
+    <testcase name="No database or password fields" status="pass" classname="03 Watchlist\02 List" time="0.051"/>
+    <testcase name="Required fields and behavior" status="pass" classname="03 Watchlist\02 List" time="0.051"/>
+  </testsuite>
+  <testsuite name="03 Duplicate title 409" file="03 Watchlist\03 Duplicate title 409.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.189">
+    <testcase name="HTTP 409" status="pass" classname="03 Watchlist\03 Duplicate title 409" time="0.047"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="03 Watchlist\03 Duplicate title 409" time="0.047"/>
+    <testcase name="No database or password fields" status="pass" classname="03 Watchlist\03 Duplicate title 409" time="0.047"/>
+    <testcase name="Error code WATCHLIST_ITEM_ALREADY_EXISTS" status="pass" classname="03 Watchlist\03 Duplicate title 409" time="0.047"/>
+  </testsuite>
+  <testsuite name="01 LIKE" file="04 Preferences\01 LIKE.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.199">
+    <testcase name="HTTP 200" status="pass" classname="04 Preferences\01 LIKE" time="0.050"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="04 Preferences\01 LIKE" time="0.050"/>
+    <testcase name="No database or password fields" status="pass" classname="04 Preferences\01 LIKE" time="0.050"/>
+    <testcase name="Required fields and behavior" status="pass" classname="04 Preferences\01 LIKE" time="0.050"/>
+  </testsuite>
+  <testsuite name="02 DISLIKE" file="04 Preferences\02 DISLIKE.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.199">
+    <testcase name="HTTP 200" status="pass" classname="04 Preferences\02 DISLIKE" time="0.050"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="04 Preferences\02 DISLIKE" time="0.050"/>
+    <testcase name="No database or password fields" status="pass" classname="04 Preferences\02 DISLIKE" time="0.050"/>
+    <testcase name="Required fields and behavior" status="pass" classname="04 Preferences\02 DISLIKE" time="0.050"/>
+  </testsuite>
+  <testsuite name="03 Change back to LIKE" file="04 Preferences\03 Change back to LIKE.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.195">
+    <testcase name="HTTP 200" status="pass" classname="04 Preferences\03 Change back to LIKE" time="0.049"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="04 Preferences\03 Change back to LIKE" time="0.049"/>
+    <testcase name="No database or password fields" status="pass" classname="04 Preferences\03 Change back to LIKE" time="0.049"/>
+    <testcase name="Required fields and behavior" status="pass" classname="04 Preferences\03 Change back to LIKE" time="0.049"/>
+  </testsuite>
+  <testsuite name="06 Invalid preference 400" file="04 Preferences\06 Invalid preference 400.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.206">
+    <testcase name="HTTP 400" status="pass" classname="04 Preferences\06 Invalid preference 400" time="0.052"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="04 Preferences\06 Invalid preference 400" time="0.052"/>
+    <testcase name="No database or password fields" status="pass" classname="04 Preferences\06 Invalid preference 400" time="0.052"/>
+    <testcase name="Error code VALIDATION_ERROR" status="pass" classname="04 Preferences\06 Invalid preference 400" time="0.052"/>
+  </testsuite>
+  <testsuite name="04 List" file="04 Preferences\04 List.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.995" hostname="Samuel" time="0.253">
+    <testcase name="HTTP 200" status="pass" classname="04 Preferences\04 List" time="0.063"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="04 Preferences\04 List" time="0.063"/>
+    <testcase name="No database or password fields" status="pass" classname="04 Preferences\04 List" time="0.063"/>
+    <testcase name="Required fields and behavior" status="pass" classname="04 Preferences\04 List" time="0.063"/>
+  </testsuite>
+  <testsuite name="01 Start playback" file="08 Playback\01 Start playback.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.387">
+    <testcase name="HTTP 201" status="pass" classname="08 Playback\01 Start playback" time="0.097"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\01 Start playback" time="0.097"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\01 Start playback" time="0.097"/>
+    <testcase name="Required fields and behavior" status="pass" classname="08 Playback\01 Start playback" time="0.097"/>
+  </testsuite>
+  <testsuite name="02 Progress" file="08 Playback\02 Progress.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.214">
+    <testcase name="HTTP 200" status="pass" classname="08 Playback\02 Progress" time="0.054"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\02 Progress" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\02 Progress" time="0.054"/>
+    <testcase name="Required fields and behavior" status="pass" classname="08 Playback\02 Progress" time="0.054"/>
+  </testsuite>
+  <testsuite name="03 Pause" file="08 Playback\03 Pause.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.221">
+    <testcase name="HTTP 200" status="pass" classname="08 Playback\03 Pause" time="0.055"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\03 Pause" time="0.055"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\03 Pause" time="0.055"/>
+    <testcase name="Required fields and behavior" status="pass" classname="08 Playback\03 Pause" time="0.055"/>
+  </testsuite>
+  <testsuite name="01 Continue watching" file="09 Continue Watching\01 Continue watching.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.211">
+    <testcase name="HTTP 200" status="pass" classname="09 Continue Watching\01 Continue watching" time="0.053"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="09 Continue Watching\01 Continue watching" time="0.053"/>
+    <testcase name="No database or password fields" status="pass" classname="09 Continue Watching\01 Continue watching" time="0.053"/>
+    <testcase name="Required fields and behavior" status="pass" classname="09 Continue Watching\01 Continue watching" time="0.053"/>
+  </testsuite>
+  <testsuite name="04 Cannot delete active asset 409" file="07 Media Assets\04 Cannot delete active asset 409.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.198">
+    <testcase name="HTTP 409" status="pass" classname="07 Media Assets\04 Cannot delete active asset 409" time="0.050"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="07 Media Assets\04 Cannot delete active asset 409" time="0.050"/>
+    <testcase name="No database or password fields" status="pass" classname="07 Media Assets\04 Cannot delete active asset 409" time="0.050"/>
+    <testcase name="Error code MEDIA_ASSET_IN_USE" status="pass" classname="07 Media Assets\04 Cannot delete active asset 409" time="0.050"/>
+  </testsuite>
+  <testsuite name="07 Negative progress 400" file="08 Playback\07 Negative progress 400.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.200">
+    <testcase name="HTTP 400" status="pass" classname="08 Playback\07 Negative progress 400" time="0.050"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\07 Negative progress 400" time="0.050"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\07 Negative progress 400" time="0.050"/>
+    <testcase name="Error code VALIDATION_ERROR" status="pass" classname="08 Playback\07 Negative progress 400" time="0.050"/>
+  </testsuite>
+  <testsuite name="04 Resume" file="08 Playback\04 Resume.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.215">
+    <testcase name="HTTP 200" status="pass" classname="08 Playback\04 Resume" time="0.054"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\04 Resume" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\04 Resume" time="0.054"/>
+    <testcase name="Required fields and behavior" status="pass" classname="08 Playback\04 Resume" time="0.054"/>
+  </testsuite>
+  <testsuite name="05 Refresh URL" file="08 Playback\05 Refresh URL.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.208">
+    <testcase name="HTTP 200" status="pass" classname="08 Playback\05 Refresh URL" time="0.069"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\05 Refresh URL" time="0.069"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\05 Refresh URL" time="0.069"/>
+  </testsuite>
+  <testsuite name="06 Complete" file="08 Playback\06 Complete.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.261">
+    <testcase name="HTTP 200" status="pass" classname="08 Playback\06 Complete" time="0.065"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\06 Complete" time="0.065"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\06 Complete" time="0.065"/>
+    <testcase name="Required fields and behavior" status="pass" classname="08 Playback\06 Complete" time="0.065"/>
+  </testsuite>
+  <testsuite name="02 Completed title is excluded" file="09 Continue Watching\02 Completed title is excluded.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.258">
+    <testcase name="HTTP 200" status="pass" classname="09 Continue Watching\02 Completed title is excluded" time="0.065"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="09 Continue Watching\02 Completed title is excluded" time="0.065"/>
+    <testcase name="No database or password fields" status="pass" classname="09 Continue Watching\02 Completed title is excluded" time="0.065"/>
+    <testcase name="Required fields and behavior" status="pass" classname="09 Continue Watching\02 Completed title is excluded" time="0.065"/>
+  </testsuite>
+  <testsuite name="01 History completed" file="10 History\01 History completed.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.217">
+    <testcase name="HTTP 200" status="pass" classname="10 History\01 History completed" time="0.054"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="10 History\01 History completed" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="10 History\01 History completed" time="0.054"/>
+    <testcase name="Required fields and behavior" status="pass" classname="10 History\01 History completed" time="0.054"/>
+  </testsuite>
+  <testsuite name="01 List published movies" file="05 Catalog\01 List published movies.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.207">
+    <testcase name="HTTP 200" status="pass" classname="05 Catalog\01 List published movies" time="0.069"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="05 Catalog\01 List published movies" time="0.069"/>
+    <testcase name="No database or password fields" status="pass" classname="05 Catalog\01 List published movies" time="0.069"/>
+  </testsuite>
+  <testsuite name="02 Search and filters" file="05 Catalog\02 Search and filters.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.195">
+    <testcase name="HTTP 200" status="pass" classname="05 Catalog\02 Search and filters" time="0.065"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="05 Catalog\02 Search and filters" time="0.065"/>
+    <testcase name="No database or password fields" status="pass" classname="05 Catalog\02 Search and filters" time="0.065"/>
+  </testsuite>
+  <testsuite name="01 Me" file="02 User\01 Me.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.996" hostname="Samuel" time="0.185">
+    <testcase name="HTTP 200" status="pass" classname="02 User\01 Me" time="0.046"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="02 User\01 Me" time="0.046"/>
+    <testcase name="No database or password fields" status="pass" classname="02 User\01 Me" time="0.046"/>
+    <testcase name="Required fields and behavior" status="pass" classname="02 User\01 Me" time="0.046"/>
+  </testsuite>
+  <testsuite name="02 Update profile" file="02 User\02 Update profile.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.204">
+    <testcase name="HTTP 200" status="pass" classname="02 User\02 Update profile" time="0.051"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="02 User\02 Update profile" time="0.051"/>
+    <testcase name="No database or password fields" status="pass" classname="02 User\02 Update profile" time="0.051"/>
+    <testcase name="Required fields and behavior" status="pass" classname="02 User\02 Update profile" time="0.051"/>
+  </testsuite>
+  <testsuite name="05 Cannot assign ADMIN 400" file="02 User\05 Cannot assign ADMIN 400.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.179">
+    <testcase name="HTTP 400" status="pass" classname="02 User\05 Cannot assign ADMIN 400" time="0.045"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="02 User\05 Cannot assign ADMIN 400" time="0.045"/>
+    <testcase name="No database or password fields" status="pass" classname="02 User\05 Cannot assign ADMIN 400" time="0.045"/>
+    <testcase name="Error code VALIDATION_ERROR" status="pass" classname="02 User\05 Cannot assign ADMIN 400" time="0.045"/>
+  </testsuite>
+  <testsuite name="04 Anonymous me 401" file="02 User\04 Anonymous me 401.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.190">
+    <testcase name="HTTP 401" status="pass" classname="02 User\04 Anonymous me 401" time="0.047"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="02 User\04 Anonymous me 401" time="0.047"/>
+    <testcase name="No database or password fields" status="pass" classname="02 User\04 Anonymous me 401" time="0.047"/>
+    <testcase name="Error code UNAUTHORIZED" status="pass" classname="02 User\04 Anonymous me 401" time="0.047"/>
+  </testsuite>
+  <testsuite name="09 Duplicate email 409" file="01 Auth\09 Duplicate email 409.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.219">
+    <testcase name="HTTP 409" status="pass" classname="01 Auth\09 Duplicate email 409" time="0.055"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\09 Duplicate email 409" time="0.055"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\09 Duplicate email 409" time="0.055"/>
+    <testcase name="Error code EMAIL_ALREADY_EXISTS" status="pass" classname="01 Auth\09 Duplicate email 409" time="0.055"/>
+  </testsuite>
+  <testsuite name="07 Invalid login 401" file="01 Auth\07 Invalid login 401.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.219">
+    <testcase name="HTTP 401" status="pass" classname="01 Auth\07 Invalid login 401" time="0.055"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\07 Invalid login 401" time="0.055"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\07 Invalid login 401" time="0.055"/>
+    <testcase name="Error code INVALID_CREDENTIALS" status="pass" classname="01 Auth\07 Invalid login 401" time="0.055"/>
+  </testsuite>
+  <testsuite name="10 Refresh without CSRF 403" file="01 Auth\10 Refresh without CSRF 403.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.180">
+    <testcase name="HTTP 403" status="pass" classname="01 Auth\10 Refresh without CSRF 403" time="0.045"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\10 Refresh without CSRF 403" time="0.045"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\10 Refresh without CSRF 403" time="0.045"/>
+    <testcase name="Error code FORBIDDEN" status="pass" classname="01 Auth\10 Refresh without CSRF 403" time="0.045"/>
+  </testsuite>
+  <testsuite name="06 USER cannot edit 403" file="06 Admin Catalog\06 USER cannot edit 403.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.209">
+    <testcase name="HTTP 403" status="pass" classname="06 Admin Catalog\06 USER cannot edit 403" time="0.052"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="06 Admin Catalog\06 USER cannot edit 403" time="0.052"/>
+    <testcase name="No database or password fields" status="pass" classname="06 Admin Catalog\06 USER cannot edit 403" time="0.052"/>
+    <testcase name="Error code FORBIDDEN" status="pass" classname="06 Admin Catalog\06 USER cannot edit 403" time="0.052"/>
+  </testsuite>
+  <testsuite name="07 Anonymous cannot import 401" file="06 Admin Catalog\07 Anonymous cannot import 401.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.183">
+    <testcase name="HTTP 401" status="pass" classname="06 Admin Catalog\07 Anonymous cannot import 401" time="0.046"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="06 Admin Catalog\07 Anonymous cannot import 401" time="0.046"/>
+    <testcase name="No database or password fields" status="pass" classname="06 Admin Catalog\07 Anonymous cannot import 401" time="0.046"/>
+    <testcase name="Error code UNAUTHORIZED" status="pass" classname="06 Admin Catalog\07 Anonymous cannot import 401" time="0.046"/>
+  </testsuite>
+  <testsuite name="06 USER cannot read asset metadata 403" file="07 Media Assets\06 USER cannot read asset metadata 403.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.189">
+    <testcase name="HTTP 403" status="pass" classname="07 Media Assets\06 USER cannot read asset metadata 403" time="0.047"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="07 Media Assets\06 USER cannot read asset metadata 403" time="0.047"/>
+    <testcase name="No database or password fields" status="pass" classname="07 Media Assets\06 USER cannot read asset metadata 403" time="0.047"/>
+    <testcase name="Error code FORBIDDEN" status="pass" classname="07 Media Assets\06 USER cannot read asset metadata 403" time="0.047"/>
+  </testsuite>
+  <testsuite name="05 MIME spoofing rejected 415" file="07 Media Assets\05 MIME spoofing rejected 415.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.208">
+    <testcase name="HTTP 415" status="pass" classname="07 Media Assets\05 MIME spoofing rejected 415" time="0.052"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="07 Media Assets\05 MIME spoofing rejected 415" time="0.052"/>
+    <testcase name="No database or password fields" status="pass" classname="07 Media Assets\05 MIME spoofing rejected 415" time="0.052"/>
+    <testcase name="Error code UNSUPPORTED_MEDIA_TYPE" status="pass" classname="07 Media Assets\05 MIME spoofing rejected 415" time="0.052"/>
+  </testsuite>
+  <testsuite name="04 Missing title 404" file="05 Catalog\04 Missing title 404.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.210">
+    <testcase name="HTTP 404" status="pass" classname="05 Catalog\04 Missing title 404" time="0.052"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="05 Catalog\04 Missing title 404" time="0.052"/>
+    <testcase name="No database or password fields" status="pass" classname="05 Catalog\04 Missing title 404" time="0.052"/>
+    <testcase name="Error code CATALOG_TITLE_NOT_FOUND" status="pass" classname="05 Catalog\04 Missing title 404" time="0.052"/>
+  </testsuite>
+  <testsuite name="05 NoSQL operator rejected 400" file="05 Catalog\05 NoSQL operator rejected 400.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.251">
+    <testcase name="HTTP 400" status="pass" classname="05 Catalog\05 NoSQL operator rejected 400" time="0.063"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="05 Catalog\05 NoSQL operator rejected 400" time="0.063"/>
+    <testcase name="No database or password fields" status="pass" classname="05 Catalog\05 NoSQL operator rejected 400" time="0.063"/>
+    <testcase name="Error code VALIDATION_ERROR" status="pass" classname="05 Catalog\05 NoSQL operator rejected 400" time="0.063"/>
+  </testsuite>
+  <testsuite name="08 Anonymous history 401" file="08 Playback\08 Anonymous history 401.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.232">
+    <testcase name="HTTP 401" status="pass" classname="08 Playback\08 Anonymous history 401" time="0.058"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="08 Playback\08 Anonymous history 401" time="0.058"/>
+    <testcase name="No database or password fields" status="pass" classname="08 Playback\08 Anonymous history 401" time="0.058"/>
+    <testcase name="Error code UNAUTHORIZED" status="pass" classname="08 Playback\08 Anonymous history 401" time="0.058"/>
+  </testsuite>
+  <testsuite name="04 Refresh USER" file="01 Auth\04 Refresh USER.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.290">
+    <testcase name="HTTP 200" status="pass" classname="01 Auth\04 Refresh USER" time="0.072"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\04 Refresh USER" time="0.072"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\04 Refresh USER" time="0.072"/>
+    <testcase name="Required fields and behavior" status="pass" classname="01 Auth\04 Refresh USER" time="0.072"/>
+  </testsuite>
+  <testsuite name="03 Change password own test account" file="02 User\03 Change password own test account.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.997" hostname="Samuel" time="0.280">
+    <testcase name="HTTP 204" status="pass" classname="02 User\03 Change password own test account" time="0.093"/>
+    <testcase name="Empty response" status="pass" classname="02 User\03 Change password own test account" time="0.093"/>
+    <testcase name="No database or password fields" status="pass" classname="02 User\03 Change password own test account" time="0.093"/>
+  </testsuite>
+  <testsuite name="02 Login USER" file="01 Auth\02 Login USER.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.304">
+    <testcase name="HTTP 200" status="pass" classname="01 Auth\02 Login USER" time="0.076"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\02 Login USER" time="0.076"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\02 Login USER" time="0.076"/>
+    <testcase name="Required fields and behavior" status="pass" classname="01 Auth\02 Login USER" time="0.076"/>
+  </testsuite>
+  <testsuite name="04 Remove title" file="03 Watchlist\04 Remove title.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.155">
+    <testcase name="HTTP 204" status="pass" classname="03 Watchlist\04 Remove title" time="0.052"/>
+    <testcase name="Empty response" status="pass" classname="03 Watchlist\04 Remove title" time="0.052"/>
+    <testcase name="No database or password fields" status="pass" classname="03 Watchlist\04 Remove title" time="0.052"/>
+  </testsuite>
+  <testsuite name="05 Remove preference" file="04 Preferences\05 Remove preference.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.149">
+    <testcase name="HTTP 204" status="pass" classname="04 Preferences\05 Remove preference" time="0.050"/>
+    <testcase name="Empty response" status="pass" classname="04 Preferences\05 Remove preference" time="0.050"/>
+    <testcase name="No database or password fields" status="pass" classname="04 Preferences\05 Remove preference" time="0.050"/>
+  </testsuite>
+  <testsuite name="05 Logout USER" file="01 Auth\05 Logout USER.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.233">
+    <testcase name="HTTP 204" status="pass" classname="01 Auth\05 Logout USER" time="0.078"/>
+    <testcase name="Empty response" status="pass" classname="01 Auth\05 Logout USER" time="0.078"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\05 Logout USER" time="0.078"/>
+  </testsuite>
+  <testsuite name="08 Revoked refresh 401" file="01 Auth\08 Revoked refresh 401.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.177">
+    <testcase name="HTTP 401" status="pass" classname="01 Auth\08 Revoked refresh 401" time="0.044"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="01 Auth\08 Revoked refresh 401" time="0.044"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\08 Revoked refresh 401" time="0.044"/>
+    <testcase name="Error code UNAUTHORIZED" status="pass" classname="01 Auth\08 Revoked refresh 401" time="0.044"/>
+  </testsuite>
+  <testsuite name="05 Withdraw own title" file="06 Admin Catalog\05 Withdraw own title.bru" errors="0" failures="0" skipped="0" tests="4" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.220">
+    <testcase name="HTTP 200" status="pass" classname="06 Admin Catalog\05 Withdraw own title" time="0.055"/>
+    <testcase name="Response JSON Schema from OpenAPI" status="pass" classname="06 Admin Catalog\05 Withdraw own title" time="0.055"/>
+    <testcase name="No database or password fields" status="pass" classname="06 Admin Catalog\05 Withdraw own title" time="0.055"/>
+    <testcase name="Required fields and behavior" status="pass" classname="06 Admin Catalog\05 Withdraw own title" time="0.055"/>
+  </testsuite>
+  <testsuite name="03 Delete completed own asset" file="07 Media Assets\03 Delete completed own asset.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.161">
+    <testcase name="HTTP 204" status="pass" classname="07 Media Assets\03 Delete completed own asset" time="0.054"/>
+    <testcase name="Empty response" status="pass" classname="07 Media Assets\03 Delete completed own asset" time="0.054"/>
+    <testcase name="No database or password fields" status="pass" classname="07 Media Assets\03 Delete completed own asset" time="0.054"/>
+  </testsuite>
+  <testsuite name="06 Logout ADMIN" file="01 Auth\06 Logout ADMIN.bru" errors="0" failures="0" skipped="0" tests="3" timestamp="2026-10-21T21:04:31.998" hostname="Samuel" time="0.238">
+    <testcase name="HTTP 204" status="pass" classname="01 Auth\06 Logout ADMIN" time="0.079"/>
+    <testcase name="Empty response" status="pass" classname="01 Auth\06 Logout ADMIN" time="0.079"/>
+    <testcase name="No database or password fields" status="pass" classname="01 Auth\06 Logout ADMIN" time="0.079"/>
+  </testsuite>
+</testsuites>

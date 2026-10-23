@@ -1,0 +1,10 @@
+Working directory: catalog-service
+Command: npm run docs:check
+Started: 2026-10-21T05:37:59.807Z
+Ended: 2026-10-21T05:38:04.472Z
+Exit code: 0
+Duration: 4.665 seconds
+
+npm notice run catalog-service@0.1.0 docs:check
+npm notice run node --import tsx scripts/verify-openapi.ts
+{"event":"openapi_validated","operations":6,"exampleItems":5}

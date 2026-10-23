@@ -76,12 +76,8 @@
           "name": "content_preferences_user_id_users_id_fk",
           "tableFrom": "content_preferences",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -89,10 +85,7 @@
       "compositePrimaryKeys": {
         "content_preferences_user_id_title_id_pk": {
           "name": "content_preferences_user_id_title_id_pk",
-          "columns": [
-            "user_id",
-            "title_id"
-          ]
+          "columns": ["user_id", "title_id"]
         }
       },
       "uniqueConstraints": {},
@@ -145,12 +138,8 @@
           "name": "profiles_user_id_users_id_fk",
           "tableFrom": "profiles",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -343,12 +332,8 @@
           "name": "refresh_tokens_user_id_users_id_fk",
           "tableFrom": "refresh_tokens",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -548,12 +533,8 @@
           "name": "watchlist_items_user_id_users_id_fk",
           "tableFrom": "watchlist_items",
           "tableTo": "users",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -561,10 +542,7 @@
       "compositePrimaryKeys": {
         "watchlist_items_user_id_title_id_pk": {
           "name": "watchlist_items_user_id_title_id_pk",
-          "columns": [
-            "user_id",
-            "title_id"
-          ]
+          "columns": ["user_id", "title_id"]
         }
       },
       "uniqueConstraints": {},
@@ -582,26 +560,17 @@
     "public.preference_value": {
       "name": "preference_value",
       "schema": "public",
-      "values": [
-        "LIKE",
-        "DISLIKE"
-      ]
+      "values": ["LIKE", "DISLIKE"]
     },
     "public.user_role": {
       "name": "user_role",
       "schema": "public",
-      "values": [
-        "USER",
-        "ADMIN"
-      ]
+      "values": ["USER", "ADMIN"]
     },
     "public.user_status": {
       "name": "user_status",
       "schema": "public",
-      "values": [
-        "ACTIVE",
-        "INACTIVE"
-      ]
+      "values": ["ACTIVE", "INACTIVE"]
     }
   },
   "schemas": {},

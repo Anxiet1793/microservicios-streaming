@@ -59,15 +59,15 @@ Para desarrollo fuera de Docker, las URLs `.env` deben ser alcanzables desde el 
 
 ## Configuración
 
-| Variable | Uso |
-|---|---|
-| USERS_SERVICE_URL | URL privada de Users |
-| CATALOG_SERVICE_URL | URL privada de Catalog |
-| PLAYBACK_SERVICE_URL | URL privada de Playback |
-| REDIS_URL | Almacén exclusivo de sesiones BFF |
-| APP_ORIGIN | Origen exacto del navegador, por defecto http://localhost:3003 |
-| SESSION_SECRET | 32 bytes hex, generados por setup; no versionar |
-| MEDIA_ORIGIN | Origen público de MinIO para CSP; argumento de build Docker |
+| Variable             | Uso                                                            |
+| -------------------- | -------------------------------------------------------------- |
+| USERS_SERVICE_URL    | URL privada de Users                                           |
+| CATALOG_SERVICE_URL  | URL privada de Catalog                                         |
+| PLAYBACK_SERVICE_URL | URL privada de Playback                                        |
+| REDIS_URL            | Almacén exclusivo de sesiones BFF                              |
+| APP_ORIGIN           | Origen exacto del navegador, por defecto http://localhost:3003 |
+| SESSION_SECRET       | 32 bytes hex, generados por setup; no versionar                |
+| MEDIA_ORIGIN         | Origen público de MinIO para CSP; argumento de build Docker    |
 
 Para otro dominio/dispositivo, configurar APP_ORIGIN y MEDIA_ORIGIN, y el MINIO_PUBLIC_URL de Playback antes de emitir URLs. Reconstruir frontend al cambiar MEDIA_ORIGIN. No editar el host de una URL ya firmada. No hay variables NEXT_PUBLIC con secretos.
 
@@ -76,12 +76,32 @@ Para otro dominio/dispositivo, configurar APP_ORIGIN y MEDIA_ORIGIN, y el MINIO_
 ```powershell
 npm run types:generate
 npm run check
+npm run test:coverage
 npx playwright install chromium
 npm run test:e2e
 ```
 
-Los tipos se generan desde los tres YAML reales y se versionan en `src/types/generated`. Tests unitarios prueban orden/agrupación de progreso y límites de navegación. Playwright utiliza los servicios locales reales y un clip sintético propio; requiere el seed de Users y `playback-service/docs/demo-local.json`. Ver [verificación](docs/verification.md), [arquitectura](docs/architecture.md), [contratos](docs/contracts.md) y [demo](docs/demo.md).
+Los tipos se generan desde los tres YAML reales y se versionan en `src/types/generated`. Vitest y Testing Library verifican formularios, catálogo, búsqueda, bibliotecas, actualizaciones optimistas, preferencias, upload, perfil, cierre de sesión y el reproductor. Los nombres reales son `AuthForm` (login/registro), `Card` y `Section` (tarjeta/fila). Se ejecutan los archivos secuencialmente para evitar contención de workers durante builds Docker; no hay reintentos de tests. TypeScript y ESLint incluyen archivos TSX.
 
-Las cuentas y títulos creados por ensayos se conservan: no existe DELETE de títulos en la API y no se borran bases/volúmenes para limpiar tests. Usar un entorno local dedicado para repetir suites. Traces/videos de tests están deshabilitados para no guardar cookies o credenciales. Las capturas verificadas quedan en `.verification`, ignorado por Git/Docker.
+`npm run test:e2e` requiere Docker Desktop con motor Linux/Compose y Chromium de Playwright. El runner construye las cuatro aplicaciones desde el código actual, ejecuta migraciones/inicializadores y crea un proyecto Compose aleatorio `nevaro-e2e-*`. PostgreSQL, los dos MongoDB, MinIO y Redis pertenecen exclusivamente a esa ejecución. Reserva puertos loopback libres; no lee los `.env` locales ni accede a sus bases. Compila imágenes secuencialmente para reducir el consumo de la VM.
+
+Se generan claves RSA, contraseñas efímeras, las cuentas `demo@streaming.local`/`admin@streaming.local`, dos títulos y un MP4 H.264 sintético de 12 segundos/320×180 (menos de 1 MiB) con ffmpeg dentro de Playback. No necesita cuentas personales, `docs/demo-local.json` ni videos descargados. Al terminar elimina sus contenedores, volúmenes y secretos temporales. Los tests de caída detienen solo servicios del proyecto propio y los recuperan en `finally`. La preparación de expiración JWT se ejecuta por stdin exclusivamente dentro de ese stack, sin endpoint de depuración ni código añadido al runtime.
+
+Reportes conservados: `playwright-report/index.html`, `test-results/results.json`, `test-results/junit.xml`; capturas solo al fallar. Los traces están deshabilitados localmente y se retienen solo al fallar con `CI=true`, sin snapshots ni fuentes; los videos están deshabilitados. El reporter inicial redacta las contraseñas efímeras de prueba en títulos de acciones y errores, ya que el HTML incluye valores de `fill` incluso sin traces. CI sanea también los ZIPs antes de subirlos: ver [pipeline](../docs/quality/CI_PIPELINE.md). Cobertura V8 en `coverage/index.html`, `coverage/coverage-summary.json` y `coverage/lcov.info`. Mide componentes, features, cliente HTTP y utilidades; no instrumenta rutas Next/BFF ni los otros servicios. No se deben sumar porcentajes E2E a esa cobertura.
+
+Los ocho flujos E2E solicitados y las regresiones adicionales (roles/CSRF, sesión revocada, renovación de URL, perfil/password, responsive y Redis caído) se ejecutan con un worker y cero retries. Para filtrar casos conservando aislamiento: `npm run test:e2e -- --grep E2E-04`. Ver [resultados de frontend](../docs/quality/FRONTEND_TEST_RESULTS.md), [verificación histórica](docs/verification.md), [arquitectura](docs/architecture.md) y [contratos](docs/contracts.md).
 
 Licencias de Manrope y Lucide en `docs/licenses`, también incluidas en la imagen runtime.
+
+## Hardening de calidad y seguridad
+
+ESLint cubre TS/TSX; TypeScript conserva strict; Prettier comparte la configuración raíz.
+
+```powershell
+npm run format:check
+npm run lint
+npm run typecheck
+npm audit --audit-level=high
+```
+
+`npm run format` aplica el formato. Los gates de CI también escanean secretos y auditan dependencias. Consulte [Security Review](../docs/quality/SECURITY_REVIEW.md) y [Dependency Audit](../docs/quality/DEPENDENCY_AUDIT.md), incluidos los pendientes de rotación de secretos y avisos MEDIUM. No versionar `.env` ni claves privadas.

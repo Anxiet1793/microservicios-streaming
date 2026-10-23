@@ -1,0 +1,80 @@
+meta {
+  name: 03 Change back to LIKE
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{usersBaseUrl}}/api/v1/users/me/preferences/{{tituloId}}
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "value": "LIKE"
+  }
+}
+
+script:pre-request {
+  if (!(bru.getVar("accessToken") || bru.getEnvVar("accessToken"))) throw new Error("Login USER first");
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "tituloId",
+      "value",
+      "createdAt",
+      "updatedAt"
+    ],
+    "properties": {
+      "tituloId": {
+        "type": "string",
+        "pattern": "^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "value": {
+        "type": "string",
+        "enum": [
+          "LIKE",
+          "DISLIKE"
+        ]
+      },
+      "createdAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "updatedAt": {
+        "type": "string",
+        "format": "date-time"
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().tituloId).to.equal(bru.getVar("tituloId"));
+    expect(res.getBody().value).to.equal("LIKE");
+  });
+}
+
+docs {
+  Servicio: users. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

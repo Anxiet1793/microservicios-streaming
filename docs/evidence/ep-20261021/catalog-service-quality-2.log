@@ -1,0 +1,11 @@
+Working directory: catalog-service
+Command: npm run typecheck
+Started: 2026-10-21T05:37:23.430Z
+Ended: 2026-10-21T05:37:39.824Z
+Exit code: 0
+Duration: 16.393 seconds
+
+npm notice run catalog-service@0.1.0 typecheck
+npm notice run next typegen && tsc --noEmit
+Generating route types...
+✓ Types generated successfully

@@ -1,0 +1,26 @@
+{
+  "project": "catalog-service",
+  "command": "npm audit --prefix catalog-service --audit-level=high --json",
+  "startedAt": "2026-10-21T05:39:58.038Z",
+  "endedAt": "2026-10-21T05:40:00.041Z",
+  "exitCode": 0,
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 32,
+      "dev": 207,
+      "optional": 90,
+      "peer": 33,
+      "peerOptional": 0,
+      "total": 275
+    }
+  },
+  "vulnerabilities": {}
+}

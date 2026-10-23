@@ -1,0 +1,114 @@
+meta {
+  name: 04 Refresh USER
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{usersBaseUrl}}/api/v1/auth/refresh
+  body: none
+  auth: none
+}
+
+headers {
+  Cookie: {{refreshCookie}}
+  X-CSRF-Protection: 1
+}
+
+script:pre-request {
+  if (!bru.getVar("refreshCookie")) throw new Error("Login USER first");
+  bru.setVar("previousRefreshCookie", bru.getVar("refreshCookie"));
+}
+
+script:post-response {
+  const body = res.getBody();
+  if (res.getStatus() === 200) {
+    bru.setVar("accessToken", body.accessToken);
+    bru.setVar("userId", body.user.userId);
+    const rawCookie = res.getHeader("set-cookie");
+  const cookies = Array.isArray(rawCookie) ? rawCookie : [rawCookie];
+  const cookie = cookies.find(value => typeof value === "string" && value.startsWith("users_refresh="));
+  if (!cookie) throw new Error("Missing HttpOnly refresh cookie");
+  bru.setVar("refreshCookie", cookie.split(";")[0]);
+  }
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "accessToken",
+      "expiresIn",
+      "user"
+    ],
+    "properties": {
+      "accessToken": {
+        "type": "string"
+      },
+      "expiresIn": {
+        "type": "integer"
+      },
+      "user": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "userId",
+          "email",
+          "displayName",
+          "status",
+          "role"
+        ],
+        "properties": {
+          "userId": {
+            "type": "string",
+            "pattern": "^usr_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "ADMIN"
+            ]
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(bru.getVar("previousRefreshCookie") !== bru.getVar("refreshCookie")).to.equal(true);
+    expect(res.getHeader("set-cookie").toString().includes("HttpOnly")).to.equal(true);
+  });
+}
+
+docs {
+  Servicio: users. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

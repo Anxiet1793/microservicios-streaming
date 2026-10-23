@@ -5,8 +5,7 @@ export default function ErrorPage({ reset }: { reset: () => void }) {
     <main className="page">
       <h1>No pudimos cargar esta parte.</h1>
       <p className="muted">
-        Tu información sigue guardada. Comprueba la conexión y vuelve a
-        intentarlo.
+        Tu información sigue guardada. Comprueba la conexión y vuelve a intentarlo.
       </p>
       <div className="actions">
         <button className="button" onClick={reset}>

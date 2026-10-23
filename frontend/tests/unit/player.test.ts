@@ -52,9 +52,7 @@ describe("ordered playback writes", () => {
   it("stops future writes when superseded", async () => {
     const q = new PlaybackQueue();
     q.stop();
-    await expect(q.run(async () => "must not run")).rejects.toThrow(
-      "PLAYER_STOPPED",
-    );
+    await expect(q.run(async () => "must not run")).rejects.toThrow("PLAYER_STOPPED");
   });
 });
 describe("navigation and display boundaries", () => {
@@ -71,7 +69,5 @@ describe("navigation and display boundaries", () => {
     [NaN, "0:00"],
     [-3, "0:00"],
     [65.8, "1:05"],
-  ])("formats %s safely", (value, label) =>
-    expect(time(value as number)).toBe(label),
-  );
+  ])("formats %s safely", (value, label) => expect(time(value as number)).toBe(label));
 });

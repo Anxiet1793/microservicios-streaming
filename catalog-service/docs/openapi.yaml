@@ -5,7 +5,7 @@ info:
   description: |
     Contexto Catálogo de una plataforma de streaming académica. IDs de categorías
     numéricos estables; los nombres son derivados y solo de salida. No administra
-    sesiones ni autoriza reproducciones. API interna sin autenticación incorporada.
+    sesiones ni autoriza reproducciones. Lecturas públicas; escrituras requieren ADMIN por JWT RS256/JWKS.
     Cada respuesta incluye x-request-id y Cache-Control no-store.
     GET admite HEAD; las rutas admiten OPTIONS (204) y responden 405 a otros métodos.
     Se rechazan parámetros desconocidos o repetidos. JSON debe ser UTF-8 sin compresión.
@@ -130,6 +130,8 @@ paths:
   /api/v1/catalog/bulk:
     post:
       operationId: bulkCreateCatalogTitles
+      security:
+        - BearerAuth: []
       tags:
         - Catálogo
       summary: Importa títulos mediante INSERT masivo, sin sobrescribir
@@ -179,6 +181,18 @@ paths:
                     assetId: orbita
                     manifestKey: movies/orbita/master.m3u8
       responses:
+        "401":
+          description: JWT ausente, inválido, vencido o JWKS no disponible (fail closed)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Se requiere el rol ADMIN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "200":
           $ref: "#/components/responses/Bulk"
         "201":
@@ -243,6 +257,8 @@ paths:
           $ref: "#/components/responses/Error"
     patch:
       operationId: updateCatalogTitle
+      security:
+        - BearerAuth: []
       tags:
         - Catálogo
       summary: Actualiza únicamente campos editoriales de ficha
@@ -262,6 +278,18 @@ paths:
                 title: Órbita revisada
                 posterUrl: null
       responses:
+        "401":
+          description: JWT ausente, inválido, vencido o JWKS no disponible (fail closed)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Se requiere el rol ADMIN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "200":
           $ref: "#/components/responses/Title"
         "400":
@@ -283,10 +311,13 @@ paths:
       - $ref: "#/components/parameters/TituloId"
     patch:
       operationId: changePublicationStatus
+      security:
+        - BearerAuth: []
       tags:
         - Catálogo
       summary: Cambia el estado editorial por una transición de dominio
-      description: "Ciclo permitido: 1 (REGISTRADO) → 2 (PUBLICADO) → 3 (RETIRADO). Repetir el estado
+      description:
+        "Ciclo permitido: 1 (REGISTRADO) → 2 (PUBLICADO) → 3 (RETIRADO). Repetir el estado
         actual es idempotente."
       requestBody:
         required: true
@@ -303,6 +334,18 @@ paths:
             example:
               publicationStatusId: 2
       responses:
+        "401":
+          description: JWT ausente, inválido, vencido o JWKS no disponible (fail closed)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Se requiere el rol ADMIN
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
         "200":
           $ref: "#/components/responses/Title"
         "400":
@@ -331,6 +374,12 @@ paths:
         default:
           $ref: "#/components/responses/Error"
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Access token RS256 de Users, issuer users-service, audience streaming-services, rol ADMIN.
   headers:
     RequestId:
       description: UUID generado por el servidor para correlación con logs
@@ -355,7 +404,8 @@ components:
           schema:
             $ref: "#/components/schemas/CatalogTitle"
     Bulk:
-      description: 200 solo duplicados; 201 inserciones sin fallos; 207 mezcla de aceptados y rechazos;
+      description:
+        200 solo duplicados; 201 inserciones sin fallos; 207 mezcla de aceptados y rechazos;
         409 solo conflictos.
       headers:
         x-request-id:
@@ -458,7 +508,8 @@ components:
         - 13
         - 14
         - 15
-      description: 1=SCIENCE_FICTION, 2=DRAMA, 3=COMEDY, 4=ACTION, 5=ADVENTURE, 6=THRILLER, 7=HORROR,
+      description:
+        1=SCIENCE_FICTION, 2=DRAMA, 3=COMEDY, 4=ACTION, 5=ADVENTURE, 6=THRILLER, 7=HORROR,
         8=ROMANCE, 9=ANIMATION, 10=DOCUMENTARY, 11=FANTASY, 12=MYSTERY, 13=FAMILY, 14=HISTORY,
         15=MUSIC
     LanguageId:

@@ -1,10 +1,5 @@
 import "server-only";
-import {
-  createCipheriv,
-  createDecipheriv,
-  createHash,
-  randomBytes,
-} from "node:crypto";
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from "node:crypto";
 import { Redis } from "ioredis";
 import { cookies } from "next/headers";
 import { config } from "./config";
@@ -49,19 +44,11 @@ async function client() {
   }
   return r;
 }
-const key = (id: string) =>
-  `nevaro:session:${createHash("sha256").update(id).digest("hex")}`;
+const key = (id: string) => `nevaro:session:${createHash("sha256").update(id).digest("hex")}`;
 function seal(s: Session) {
   const iv = randomBytes(12),
-    cipher = createCipheriv(
-      "aes-256-gcm",
-      Buffer.from(config().SESSION_SECRET, "hex"),
-      iv,
-    );
-  const body = Buffer.concat([
-    cipher.update(JSON.stringify(s)),
-    cipher.final(),
-  ]);
+    cipher = createCipheriv("aes-256-gcm", Buffer.from(config().SESSION_SECRET, "hex"), iv);
+  const body = Buffer.concat([cipher.update(JSON.stringify(s)), cipher.final()]);
   return Buffer.concat([iv, body, cipher.getAuthTag()]).toString("base64");
 }
 function unseal(value: string): Session {
@@ -73,10 +60,7 @@ function unseal(value: string): Session {
     );
   decipher.setAuthTag(b.subarray(-16));
   return JSON.parse(
-    Buffer.concat([
-      decipher.update(b.subarray(12, -16)),
-      decipher.final(),
-    ]).toString(),
+    Buffer.concat([decipher.update(b.subarray(12, -16)), decipher.final()]).toString(),
   ) as Session;
 }
 export async function sessionId() {
@@ -91,17 +75,10 @@ async function read(id: string) {
 async function store(id: string, session: Session) {
   await (
     await client()
-  ).set(
-    key(id),
-    seal(session),
-    "PX",
-    Math.max(1, session.expires - Date.now()),
-  );
+  ).set(key(id), seal(session), "PX", Math.max(1, session.expires - Date.now()));
 }
 export function extractRefresh(response: Response) {
-  const header = response.headers
-    .getSetCookie()
-    .find((c) => c.startsWith("users_refresh="));
+  const header = response.headers.getSetCookie().find((c) => c.startsWith("users_refresh="));
   const token = header?.match(/^users_refresh=([A-Za-z0-9_-]{43});/)?.[1];
   const age = Number(header?.match(/Max-Age=(\d+)/i)?.[1]);
   if (!token || !age) throw new ServiceError(502, "INVALID_AUTH_RESPONSE");
@@ -175,18 +152,11 @@ export async function login(body: unknown) {
 export async function access(id: string, staleAccess?: string) {
   const current = await read(id);
   if (current.uncertain) throw new ServiceError(503, "SESSION_UNCERTAIN");
-  if (
-    current.accessExpires > Date.now() &&
-    (!staleAccess || current.access !== staleAccess)
-  )
+  if (current.accessExpires > Date.now() && (!staleAccess || current.access !== staleAccess))
     return current.access;
   return lock(id, async (s, save) => {
     if (s.uncertain) throw new ServiceError(503, "SESSION_UNCERTAIN");
-    if (
-      s.accessExpires > Date.now() &&
-      (!staleAccess || s.access !== staleAccess)
-    )
-      return s.access;
+    if (s.accessExpires > Date.now() && (!staleAccess || s.access !== staleAccess)) return s.access;
     try {
       const response = await upstream("USERS", "/api/v1/auth/refresh", {
         method: "POST",
@@ -234,11 +204,7 @@ export async function authorized(
   try {
     return await send();
   } catch (e) {
-    if (
-      e instanceof ServiceError &&
-      e.status === 401 &&
-      (!init.method || init.method === "GET")
-    ) {
+    if (e instanceof ServiceError && e.status === 401 && (!init.method || init.method === "GET")) {
       token = await access(id, token);
       return send();
     }

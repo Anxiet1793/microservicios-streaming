@@ -3,10 +3,7 @@ import { readFile, writeFile, mkdir } from "node:fs/promises";
 let output =
   "# Contratos contrastados\n\n17/10/2026. Fuentes: YAML, Route Handlers, validadores y Compose locales. No hay repositorio Git inicializado; se identifica cada YAML mediante SHA-256. Los tipos generados proceden de estos archivos.\n\n";
 for (const service of ["users", "catalog", "playback"]) {
-  const text = await readFile(
-    `../${service}-service/docs/openapi.yaml`,
-    "utf8",
-  );
+  const text = await readFile(`../${service}-service/docs/openapi.yaml`, "utf8");
   output += `## ${service}-service\n\nSHA-256: \`${createHash("sha256").update(text).digest("hex")}\`\n\n| Método | Ruta | operationId |\n|---|---|---|\n`;
   let path = "",
     method = "";

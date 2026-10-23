@@ -1,0 +1,41 @@
+Working directory: users-service
+Command: npm run build
+Started: 2026-10-21T05:38:24.980Z
+Ended: 2026-10-21T05:38:42.385Z
+Exit code: 0
+Duration: 17.404 seconds
+
+npm notice run users-service@0.1.0 build
+npm notice run next build
+▲ Next.js 16.4.2 (Turbopack)
+- Environments: .env
+✓ Running next.config.ts took 59ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 4.5s
+  Running TypeScript ...
+  Finished TypeScript in 2.1s ...
+  Collecting page data using 15 workers ...
+  Generating static pages using 15 workers (0/2) ...
+✓ Generating static pages using 15 workers (2/2) in 488ms
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /_not-found
+├ ƒ /.well-known/jwks.json
+├ ƒ /api/health
+├ ƒ /api/v1/auth/login
+├ ƒ /api/v1/auth/logout
+├ ƒ /api/v1/auth/refresh
+├ ƒ /api/v1/auth/register
+├ ƒ /api/v1/users/me
+├ ƒ /api/v1/users/me/change-password
+├ ƒ /api/v1/users/me/preferences
+├ ƒ /api/v1/users/me/preferences/[tituloId]
+├ ƒ /api/v1/users/me/watchlist
+└ ƒ /api/v1/users/me/watchlist/[tituloId]
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

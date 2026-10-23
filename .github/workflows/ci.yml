@@ -1,0 +1,166 @@
+name: Streaming CI
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: ["**"]
+    paths:
+      - "frontend/**"
+      - "users-service/**"
+      - "catalog-service/**"
+      - "playback-service/**"
+      - ".github/**"
+      - "scripts/**"
+      - "api/**"
+      - "docker-compose.yml"
+      - "package.json"
+      - "package-lock.json"
+      - ".env.example"
+      - "README.md"
+      - ".prettierrc.json"
+      - ".gitattributes"
+      - ".gitignore"
+      - "docs/quality/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: streaming-ci-${{ github.event_name }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: frontend
+    uses: ./.github/workflows/quality.yml
+    with:
+      project: frontend
+
+  users:
+    name: users
+    uses: ./.github/workflows/quality.yml
+    with:
+      project: users-service
+
+  catalog:
+    name: catalog
+    uses: ./.github/workflows/quality.yml
+    with:
+      project: catalog-service
+
+  playback:
+    name: playback
+    uses: ./.github/workflows/quality.yml
+    with:
+      project: playback-service
+      cache-lockfiles: |
+        playback-service/package-lock.json
+        users-service/package-lock.json
+        catalog-service/package-lock.json
+
+  e2e:
+    name: e2e
+    needs: [frontend, users, catalog, playback]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7
+        with:
+          node-version: "24.21.0"
+          cache: npm
+          cache-dependency-path: |
+            frontend/package-lock.json
+            api/bruno/package-lock.json
+      - name: Pin npm
+        run: npm install --global npm@12.2.0
+      - name: Install locked dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Check Docker and Compose
+        run: |
+          docker info
+          docker compose version
+      - name: Test root tooling and validate distributed Compose
+        working-directory: .
+        run: |
+          node --test scripts/tests/*.test.mjs
+          node scripts/setup-stack.mjs
+          docker compose config --quiet
+      - name: Install and validate versioned API collection
+        working-directory: .
+        run: |
+          npm run api:install
+          npm audit --prefix api/bruno --audit-level=moderate
+          npm run api:check
+      - name: Install Chromium and system dependencies
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Verify trace sanitization safety
+        run: python3 ../scripts/ci/test_sanitize_traces.py
+      - name: Test disposable full stack with Playwright
+        id: e2e
+        run: npm run test:e2e
+      - name: Build root Compose stack and run real smoke
+        id: root-stack
+        working-directory: .
+        run: |
+          mkdir -p .verification
+          docker compose up --build --detach --wait --wait-timeout 300 > .verification/stack-up.log 2>&1
+          node --env-file=.env scripts/smoke-test.mjs | tee .verification/stack-smoke.log
+      - name: Run Bruno demo against real root stack and clean its media
+        id: api-demo
+        working-directory: .
+        run: npm run api:demo:cleanup
+      - name: Preserve sanitized API collection reports
+        if: ${{ always() && steps.api-demo.outcome != 'skipped' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: bruno-api-${{ github.run_attempt }}
+          path: api/bruno/reports/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Stop only the CI root stack and remove its disposable volumes
+        if: ${{ always() && steps.root-stack.outcome != 'skipped' }}
+        working-directory: .
+        run: docker compose down --volumes --remove-orphans
+      - name: Preserve root stack smoke and build diagnostics
+        if: ${{ always() && steps.root-stack.outcome != 'skipped' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: root-stack-${{ github.run_attempt }}
+          path: .verification/stack-*.log
+          include-hidden-files: true
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Sanitize failure traces before upload
+        id: sanitize
+        if: ${{ always() && steps.e2e.outcome != 'skipped' }}
+        run: |
+          python3 ../scripts/ci/sanitize-traces.py test-results
+          python3 ../scripts/ci/sanitize-traces.py playwright-report
+      - name: Preserve Playwright report
+        if: ${{ always() && steps.sanitize.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: playwright-report-${{ github.run_attempt }}
+          path: frontend/playwright-report/
+          retention-days: 7
+          if-no-files-found: warn
+      - name: Preserve failure evidence and machine-readable results
+        if: ${{ always() && steps.sanitize.outcome == 'success' }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: e2e-results-${{ github.run_attempt }}
+          path: frontend/test-results/
+          retention-days: 7
+          if-no-files-found: warn

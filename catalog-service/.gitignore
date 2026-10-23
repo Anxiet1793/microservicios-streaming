@@ -5,5 +5,4 @@ coverage/
 *.tsbuildinfo
 .env*
 !.env.example
-!.env.atlas.example
 .verification/

@@ -10,11 +10,7 @@ export class ServiceError extends Error {
   }
 }
 export type Service = "USERS" | "CATALOG" | "PLAYBACK";
-export async function upstream(
-  service: Service,
-  path: string,
-  init: RequestInit = {},
-) {
+export async function upstream(service: Service, path: string, init: RequestInit = {}) {
   const c = config();
   let response: Response;
   try {
@@ -31,9 +27,7 @@ export async function upstream(
     const error = await response.json().catch(() => ({}));
     throw new ServiceError(
       response.status,
-      typeof error.error?.code === "string"
-        ? error.error.code
-        : "SERVICE_UNAVAILABLE",
+      typeof error.error?.code === "string" ? error.error.code : "SERVICE_UNAVAILABLE",
       response.headers.get("retry-after"),
     );
   }

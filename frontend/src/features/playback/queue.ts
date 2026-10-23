@@ -1,8 +1,6 @@
 export class PlaybackQueue {
   private tail: Promise<unknown> = Promise.resolve();
-  private latest:
-    | { position: number; send: (position: number) => Promise<unknown> }
-    | undefined;
+  private latest: { position: number; send: (position: number) => Promise<unknown> } | undefined;
   private progressScheduled = false;
   stopped = false;
   run<T>(action: () => Promise<T>): Promise<T> {

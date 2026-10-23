@@ -1,0 +1,26 @@
+{
+  "project": "frontend",
+  "command": "npm audit --prefix frontend --audit-level=high --json",
+  "startedAt": "2026-10-21T05:39:58.024Z",
+  "endedAt": "2026-10-21T05:40:00.054Z",
+  "exitCode": 0,
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 41,
+      "dev": 274,
+      "optional": 90,
+      "peer": 40,
+      "peerOptional": 0,
+      "total": 351
+    }
+  },
+  "vulnerabilities": {}
+}

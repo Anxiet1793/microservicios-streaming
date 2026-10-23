@@ -40,28 +40,28 @@ Al abrir otra sesión del mismo usuario/título, el dominio marca la anterior co
 
 MongoDB satisface el requisito y encaja con documentos de sesión/progreso/eventos. PostgreSQL también sería viable. El replica set de un nodo habilita transacciones, **no alta disponibilidad**. Datos BSON Date, sin videos/base64 ni metadata editorial.
 
-| Colección | Campos propios |
-|---|---|
-| media_assets | assetId, objectKey, bucket, contentType, originalFilename, sizeBytes, durationSeconds, codec, width, height, status, createdAt, updatedAt, referenceRevision |
-| playback_sessions | sessionId, userId, tituloId, assetId, status, progress, startedAt, lastActivityAt, completedAt, supersededAt, emittedMilestone |
-| playback_progress | userId, tituloId, assetId, progress, status, continueWatching, lastSessionId, lastActivityAt |
-| outbox_events | eventId, eventType, version, occurredAt, userId, tituloId, data, deliveryStatus |
-| rate_limit_buckets | key SHA-256, count, expiresAt; colección técnica |
+| Colección          | Campos propios                                                                                                                                               |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| media_assets       | assetId, objectKey, bucket, contentType, originalFilename, sizeBytes, durationSeconds, codec, width, height, status, createdAt, updatedAt, referenceRevision |
+| playback_sessions  | sessionId, userId, tituloId, assetId, status, progress, startedAt, lastActivityAt, completedAt, supersededAt, emittedMilestone                               |
+| playback_progress  | userId, tituloId, assetId, progress, status, continueWatching, lastSessionId, lastActivityAt                                                                 |
+| outbox_events      | eventId, eventType, version, occurredAt, userId, tituloId, data, deliveryStatus                                                                              |
+| rate_limit_buckets | key SHA-256, count, expiresAt; colección técnica                                                                                                             |
 
 Progress: positionSeconds, durationSeconds, percentage, updatedAt. `scripts/init.ts` crea colecciones, validadores JSON Schema, índices y bucket idempotentemente. Nunca borra datos. Futuros cambios de esquema requieren migración revisada; no es un sistema general de migraciones versionadas.
 
-| Índice | Justificación |
-|---|---|
-| media_assets `{assetId:1}` UNIQUE | Referencia pública |
-| playback_sessions `{sessionId:1}` UNIQUE | Identidad |
-| playback_sessions `{assetId:1,status:1}` | Bloquear eliminación de assets en uso |
-| playback_progress `{userId:1,tituloId:1}` UNIQUE | Progreso único por usuario/título |
-| playback_progress `{userId:1,lastActivityAt:-1,tituloId:1}` | Historial y orden estable |
-| playback_progress `{userId:1,continueWatching:1,lastActivityAt:-1,tituloId:1}` | Continuar viendo sin COLLSCAN |
-| outbox_events `{eventId:1}` UNIQUE | Identidad de evento |
-| outbox_events `{deliveryStatus:1,occurredAt:1}` | Futuro despacho |
-| rate_limit_buckets `{key:1}` UNIQUE | Contador entre instancias |
-| rate_limit_buckets `{expiresAt:1}` TTL 0 | Limpieza de ventanas |
+| Índice                                                                         | Justificación                         |
+| ------------------------------------------------------------------------------ | ------------------------------------- |
+| media_assets `{assetId:1}` UNIQUE                                              | Referencia pública                    |
+| playback_sessions `{sessionId:1}` UNIQUE                                       | Identidad                             |
+| playback_sessions `{assetId:1,status:1}`                                       | Bloquear eliminación de assets en uso |
+| playback_progress `{userId:1,tituloId:1}` UNIQUE                               | Progreso único por usuario/título     |
+| playback_progress `{userId:1,lastActivityAt:-1,tituloId:1}`                    | Historial y orden estable             |
+| playback_progress `{userId:1,continueWatching:1,lastActivityAt:-1,tituloId:1}` | Continuar viendo sin COLLSCAN         |
+| outbox_events `{eventId:1}` UNIQUE                                             | Identidad de evento                   |
+| outbox_events `{deliveryStatus:1,occurredAt:1}`                                | Futuro despacho                       |
+| rate_limit_buckets `{key:1}` UNIQUE                                            | Contador entre instancias             |
+| rate_limit_buckets `{expiresAt:1}` TTL 0                                       | Limpieza de ventanas                  |
 
 No hay índices de sesiones sin consultas que los necesiten. El historial público muestra la última reproducción por título, no cada sesión. Conserva sesiones internamente. Paginación offset, máximo 100 elementos/página y página 10000; evolucionar a cursores cuando el volumen lo requiera.
 
@@ -82,8 +82,12 @@ Eventos PLAYBACK_STARTED, PLAYBACK_PAUSED, PLAYBACK_COMPLETED y PLAYBACK_PROGRES
 
 ```json
 {
-  "eventId": "evt_<UUIDv4>", "eventType": "PLAYBACK_COMPLETED", "version": 1,
-  "occurredAt": "2026-10-04T12:00:00Z", "userId": "usr_<UUIDv4>", "tituloId": "ttl_<UUIDv4>",
+  "eventId": "evt_<UUIDv4>",
+  "eventType": "PLAYBACK_COMPLETED",
+  "version": 1,
+  "occurredAt": "2026-10-04T12:00:00Z",
+  "userId": "usr_<UUIDv4>",
+  "tituloId": "ttl_<UUIDv4>",
   "data": { "sessionId": "ses_<UUIDv4>", "completionPercentage": 100, "watchTimeSeconds": null },
   "deliveryStatus": "PENDING"
 }

@@ -4,19 +4,19 @@
 
 ## Controles ejecutados
 
-| Control | Resultado |
-|---|---|
-| Typecheck | Correcto, TypeScript estricto y tipos Next |
-| ESLint | Correcto, cero errores/warnings |
-| Vitest | 20 pruebas correctas: 16 unitarias y 4 de componentes |
-| Next build | Producción compilada correctamente |
-| Tipos OpenAPI | Generados desde los tres YAML reales |
-| Docker | Imagen multietapa construida; frontend no root; frontend/Redis saludables |
-| Navegador real | Cinco escenarios E2E aprobados |
-| Ensayo base repetido | Cinco ejecuciones consecutivas correctas |
-| Responsive | 1440/1100/820/390/320 px sin overflow horizontal de página |
-| Revisión visual | Capturas de Login e Inicio desktop/móvil inspeccionadas |
-| Aislamiento Catalog | Sin puerto publicado en modo integrado |
+| Control              | Resultado                                                                 |
+| -------------------- | ------------------------------------------------------------------------- |
+| Typecheck            | Correcto, TypeScript estricto y tipos Next                                |
+| ESLint               | Correcto, cero errores/warnings                                           |
+| Vitest               | 20 pruebas correctas: 16 unitarias y 4 de componentes                     |
+| Next build           | Producción compilada correctamente                                        |
+| Tipos OpenAPI        | Generados desde los tres YAML reales                                      |
+| Docker               | Imagen multietapa construida; frontend no root; frontend/Redis saludables |
+| Navegador real       | Cinco escenarios E2E aprobados                                            |
+| Ensayo base repetido | Cinco ejecuciones consecutivas correctas                                  |
+| Responsive           | 1440/1100/820/390/320 px sin overflow horizontal de página                |
+| Revisión visual      | Capturas de Login e Inicio desktop/móvil inspeccionadas                   |
+| Aislamiento Catalog  | Sin puerto publicado en modo integrado                                    |
 
 ## Recorridos comprobados
 

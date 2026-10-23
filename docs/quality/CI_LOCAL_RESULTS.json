@@ -1,0 +1,254 @@
+{
+  "generatedAtUtc": "2026-10-21T02:45:15.401796+00:00",
+  "environment": {
+    "os": "Windows",
+    "dockerEngine": "Linux",
+    "node": "24.21.0",
+    "npm": "12.2.0",
+    "CI": true,
+    "baseCommit": "a20fc9a6bf5af7d68ce1066b6c1b5166d08e94b6",
+    "testedUncommittedWorkingTree": true
+  },
+  "remoteGitHubActionsRun": null,
+  "workflowValidation": {
+    "tool": "actionlint",
+    "version": "1.7.9",
+    "exitCode": 0,
+    "workflows": 2,
+    "shellcheckUsed": false,
+    "pyflakesUsed": false,
+    "pinnedActionReferences": 7
+  },
+  "traceSanitization": {
+    "unitTestsPassed": 3,
+    "realBrowserProbePassed": 1,
+    "realTraceZipValidated": true,
+    "htmlPasswordsRemaining": 0,
+    "e2eTraceArchivesRetained": 0
+  },
+  "projects": [
+    {
+      "project": "frontend",
+      "installation": {
+        "project": "frontend",
+        "command": "npm ci --no-audit --no-fund",
+        "exitCode": 0,
+        "seconds": 208.25
+      },
+      "checks": [
+        {
+          "command": "npm run lint",
+          "exitCode": 0,
+          "seconds": 5.6
+        },
+        {
+          "command": "npm run typecheck",
+          "exitCode": 0,
+          "seconds": 5.11
+        },
+        {
+          "command": "npm run test:coverage",
+          "exitCode": 0,
+          "seconds": 33.41
+        },
+        {
+          "command": "npm run build",
+          "exitCode": 0,
+          "seconds": 14.83
+        }
+      ],
+      "tests": {
+        "numTotalTests": 65,
+        "numPassedTests": 65,
+        "numFailedTests": 0,
+        "numPendingTests": 0
+      },
+      "coverage": {
+        "lines": 81.01,
+        "statements": 79.6,
+        "branches": 72.16,
+        "functions": 69.38
+      },
+      "junitValidated": true
+    },
+    {
+      "project": "users-service",
+      "installation": {
+        "project": "users-service",
+        "command": "npm ci --no-audit --no-fund",
+        "exitCode": 0,
+        "seconds": 188.16
+      },
+      "checks": [
+        {
+          "command": "npm run lint",
+          "exitCode": 0,
+          "seconds": 38.22
+        },
+        {
+          "command": "npm run typecheck",
+          "exitCode": 0,
+          "seconds": 4.05
+        },
+        {
+          "command": "npm run test:coverage",
+          "exitCode": 0,
+          "seconds": 21.63
+        },
+        {
+          "command": "npm run docs:check",
+          "exitCode": 0,
+          "seconds": 1.74
+        },
+        {
+          "command": "npm run build",
+          "exitCode": 0,
+          "seconds": 13.03
+        },
+        {
+          "command": "npm run build:scripts",
+          "exitCode": 0,
+          "seconds": 0.87
+        }
+      ],
+      "tests": {
+        "numTotalTests": 96,
+        "numPassedTests": 96,
+        "numFailedTests": 0,
+        "numPendingTests": 0
+      },
+      "coverage": {
+        "lines": 96.01,
+        "statements": 93.29,
+        "branches": 90.53,
+        "functions": 88.96
+      },
+      "junitValidated": true
+    },
+    {
+      "project": "catalog-service",
+      "installation": {
+        "project": "catalog-service",
+        "command": "npm ci --no-audit --no-fund",
+        "exitCode": 0,
+        "seconds": 175.07
+      },
+      "checks": [
+        {
+          "command": "npm run lint",
+          "exitCode": 0,
+          "seconds": 46.87
+        },
+        {
+          "command": "npm run typecheck",
+          "exitCode": 0,
+          "seconds": 3.36
+        },
+        {
+          "command": "npm run test:coverage",
+          "exitCode": 0,
+          "seconds": 11.66
+        },
+        {
+          "command": "npm run docs:check",
+          "exitCode": 0,
+          "seconds": 1.76
+        },
+        {
+          "command": "npm run build",
+          "exitCode": 0,
+          "seconds": 11.27
+        },
+        {
+          "command": "npm run build:init",
+          "exitCode": 0,
+          "seconds": 0.76
+        }
+      ],
+      "tests": {
+        "numTotalTests": 78,
+        "numPassedTests": 78,
+        "numFailedTests": 0,
+        "numPendingTests": 0
+      },
+      "coverage": {
+        "lines": 88.92,
+        "statements": 85.79,
+        "branches": 81.87,
+        "functions": 90.22
+      },
+      "junitValidated": true
+    },
+    {
+      "project": "playback-service",
+      "installation": {
+        "project": "playback-service",
+        "command": "npm ci --no-audit --no-fund",
+        "exitCode": 0,
+        "seconds": 181.08
+      },
+      "checks": [
+        {
+          "command": "npm run lint",
+          "exitCode": 0,
+          "seconds": 11.3
+        },
+        {
+          "command": "npm run typecheck",
+          "exitCode": 0,
+          "seconds": 2.86
+        },
+        {
+          "command": "npm run test:coverage",
+          "exitCode": 0,
+          "seconds": 17.17
+        },
+        {
+          "command": "npm run docs:check",
+          "exitCode": 0,
+          "seconds": 1.51
+        },
+        {
+          "command": "npm run build",
+          "exitCode": 0,
+          "seconds": 12.78
+        },
+        {
+          "command": "npm run build:scripts",
+          "exitCode": 0,
+          "seconds": 0.81
+        }
+      ],
+      "tests": {
+        "numTotalTests": 109,
+        "numPassedTests": 109,
+        "numFailedTests": 0,
+        "numPendingTests": 0
+      },
+      "coverage": {
+        "lines": 90.71,
+        "statements": 84.32,
+        "branches": 77.98,
+        "functions": 86.91
+      },
+      "junitValidated": true
+    }
+  ],
+  "e2e": {
+    "command": "CI=true npm run test:e2e",
+    "exitCode": 0,
+    "seconds": 174.68,
+    "stats": {
+      "startTime": "2026-10-21T02:43:32.556Z",
+      "duration": 77462.297,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "junitValidated": true,
+    "ownedStackRemoved": true,
+    "ownedNetworkRemoved": true,
+    "ownedApplicationImagesRemoved": true
+  }
+}

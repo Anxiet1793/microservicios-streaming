@@ -1,0 +1,269 @@
+{
+  "generatedAtUtc": "2026-10-21T03:32:54.614497+00:00",
+  "environment": {
+    "os": "Windows",
+    "node": "24.21.0",
+    "npm": "12.2.0",
+    "dockerEngine": "Linux",
+    "baseCommit": "a20fc9a6bf5af7d68ce1066b6c1b5166d08e94b6",
+    "testedUncommittedWorkingTree": true
+  },
+  "remoteGitHubActionsRun": null,
+  "projects": {
+    "frontend": {
+      "next": "16.4.2",
+      "formatCheck": "passed",
+      "lint": "passed",
+      "typecheck": "passed",
+      "strict": true,
+      "build": "passed",
+      "auditHighGate": "passed",
+      "dependencyAudit": {
+        "before": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 1,
+          "total": 1
+        },
+        "after": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "productionAfter": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      },
+      "tests": {
+        "numTotalTests": 65,
+        "numPassedTests": 65,
+        "numFailedTests": 0,
+        "numPendingTests": 0,
+        "success": true
+      },
+      "coverage": {
+        "lines": 81.22,
+        "statements": 79.6,
+        "branches": 72.16,
+        "functions": 69.38
+      },
+      "coverageThresholds": "passed",
+      "testReport": "frontend/coverage/test-results.json",
+      "buildLog": "frontend/.verification/hardening-build.log"
+    },
+    "users-service": {
+      "next": "16.4.2",
+      "formatCheck": "passed",
+      "lint": "passed",
+      "typecheck": "passed",
+      "strict": true,
+      "build": "passed",
+      "auditHighGate": "passed",
+      "dependencyAudit": {
+        "before": {
+          "info": 0,
+          "low": 0,
+          "moderate": 4,
+          "high": 1,
+          "critical": 1,
+          "total": 6
+        },
+        "after": {
+          "info": 0,
+          "low": 0,
+          "moderate": 4,
+          "high": 0,
+          "critical": 0,
+          "total": 4
+        },
+        "productionAfter": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      },
+      "tests": {
+        "numTotalTests": 96,
+        "numPassedTests": 96,
+        "numFailedTests": 0,
+        "numPendingTests": 0,
+        "success": true
+      },
+      "coverage": {
+        "lines": 95.28,
+        "statements": 93.45,
+        "branches": 91.05,
+        "functions": 88.96
+      },
+      "coverageThresholds": "passed",
+      "testReport": "users-service/coverage/test-results.json",
+      "buildLog": "users-service/.verification/hardening-build.log"
+    },
+    "catalog-service": {
+      "next": "16.4.2",
+      "formatCheck": "passed",
+      "lint": "passed",
+      "typecheck": "passed",
+      "strict": true,
+      "build": "passed",
+      "auditHighGate": "passed",
+      "dependencyAudit": {
+        "before": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 3,
+          "critical": 1,
+          "total": 4
+        },
+        "after": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        },
+        "productionAfter": {
+          "info": 0,
+          "low": 0,
+          "moderate": 0,
+          "high": 0,
+          "critical": 0,
+          "total": 0
+        }
+      },
+      "tests": {
+        "numTotalTests": 103,
+        "numPassedTests": 103,
+        "numFailedTests": 0,
+        "numPendingTests": 0,
+        "success": true
+      },
+      "coverage": {
+        "lines": 88.14,
+        "statements": 86.83,
+        "branches": 82.8,
+        "functions": 91.11
+      },
+      "coverageThresholds": "passed",
+      "testReport": "catalog-service/coverage/test-results.json",
+      "buildLog": "catalog-service/.verification/hardening-build.log"
+    },
+    "playback-service": {
+      "next": "16.4.2",
+      "formatCheck": "passed",
+      "lint": "passed",
+      "typecheck": "passed",
+      "strict": true,
+      "build": "passed",
+      "auditHighGate": "passed",
+      "dependencyAudit": {
+        "before": {
+          "info": 0,
+          "low": 0,
+          "moderate": 4,
+          "high": 1,
+          "critical": 1,
+          "total": 6
+        },
+        "after": {
+          "info": 0,
+          "low": 0,
+          "moderate": 4,
+          "high": 0,
+          "critical": 0,
+          "total": 4
+        },
+        "productionAfter": {
+          "info": 0,
+          "low": 0,
+          "moderate": 4,
+          "high": 0,
+          "critical": 0,
+          "total": 4
+        }
+      },
+      "tests": {
+        "numTotalTests": 115,
+        "numPassedTests": 115,
+        "numFailedTests": 0,
+        "numPendingTests": 0,
+        "success": true
+      },
+      "coverage": {
+        "lines": 86.89,
+        "statements": 84.32,
+        "branches": 78.22,
+        "functions": 86.91
+      },
+      "coverageThresholds": "passed",
+      "testReport": "playback-service/coverage/test-results.json",
+      "buildLog": "playback-service/.verification/hardening-build.log"
+    }
+  },
+  "e2e": {
+    "exitCode": 0,
+    "stats": {
+      "startTime": "2026-10-21T03:29:37.647Z",
+      "duration": 78635.134,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "retries": 0,
+    "deployedSecuritySmoke": "passed: anonymous/USER denied on three Catalog writes; CSP/nosniff/referrer/frame headers across four apps",
+    "report": "frontend/playwright-report/index.html",
+    "isolatedOwnedResourcesCleaned": true
+  },
+  "catalogAdditionalChecks": {
+    "openapiOperations": 6,
+    "httpSmokeChecks": 14,
+    "dockerSmokeChecks": [
+      "compose-local",
+      "compose-atlas-config",
+      "image-build",
+      "health",
+      "bulk",
+      "idempotency",
+      "pagination",
+      "non-root",
+      "repeatable-init",
+      "private-mongo"
+    ],
+    "exitCode": 0
+  },
+  "otherTools": {
+    "usersOpenapiOperations": 15,
+    "playbackOpenapiOperations": 12,
+    "usersBuildScripts": "passed",
+    "catalogBuildInit": "passed",
+    "playbackBuildScripts": "passed",
+    "actionlint": "1.7.9 passed; external shellcheck/pyflakes unavailable",
+    "startupPowerShellSyntax": "passed",
+    "scannerUnitTests": 4,
+    "traceSanitizerUnitTests": 3
+  },
+  "secretScan": {
+    "currentFindings": 0,
+    "historicalFindings": 1,
+    "historicalPath": "catalog-service/.env.atlas.example",
+    "credentialRotationVerified": false,
+    "historyRewritten": false,
+    "valuesIncluded": false
+  }
+}

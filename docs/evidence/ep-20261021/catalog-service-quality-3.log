@@ -1,0 +1,83 @@
+Working directory: catalog-service
+Command: npm run test:coverage
+Started: 2026-10-21T05:37:39.826Z
+Ended: 2026-10-21T05:37:59.805Z
+Exit code: 0
+Duration: 19.979 seconds
+
+npm notice run catalog-service@0.1.0 test:coverage
+npm notice run vitest run --config vitest.coverage.config.ts --coverage
+
+ RUN  v5.0.3 C:/Users/Administrador/Desktop/microservicios streaming/catalog-service
+      Coverage enabled with v8
+
+ ✓ tests/integration/mongodb.test.ts (7 tests) 2666ms
+ ✓ tests/api/authorization.test.ts (25 tests) 123ms
+ ✓ tests/contract/public.test.ts (3 tests) 469ms
+   ✓ preserves the public playback-facing reference and publication contract for all statuses 387ms
+ ✓ tests/api/routes.test.ts (17 tests) 55ms
+ ✓ tests/unit/http.test.ts (8 tests) 41ms
+ ✓ tests/unit/application.test.ts (9 tests) 15ms
+ ✓ tests/unit/domain.test.ts (21 tests) 11ms
+ ✓ tests/unit/boundaries.test.ts (13 tests) 8ms
+
+ Test Files  8 passed (8)
+      Tests  103 passed (103)
+   Start at  00:37:43
+   Duration  15.39s (import 69%, tests 25%, transform 4%, worker 1%)
+
+    Isolate  8 workers spawned · ~177ms startup each (spawn + environment, per file)
+             at least ~1.24s faster with isolate: false — reuses workers across files instead of one per file
+
+JSON report written to C:/Users/Administrador/Desktop/microservicios streaming/catalog-service/coverage/test-results.json
+JUNIT report written to C:/Users/Administrador/Desktop/microservicios streaming/catalog-service/coverage/junit.xml
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   86.83 |     82.8 |   91.11 |   88.14 |                   
+ bootstrap         |   33.33 |      100 |   33.33 |   33.33 |                   
+  ...-container.ts |   33.33 |      100 |   33.33 |   33.33 | 17-18,49-50       
+ ...cation/mappers |     100 |    81.81 |     100 |     100 |                   
+  ...dto-mapper.ts |     100 |    77.77 |     100 |     100 | 29,31,51-77       
+ ...tion/use-cases |    92.1 |    83.01 |     100 |   91.42 |                   
+  ...log-titles.ts |   88.88 |    81.81 |     100 |   88.37 | 41,53,69,101,106  
+  ...alog-title.ts |   91.66 |       75 |     100 |      90 | 20                
+ ...ion/validation |    87.5 |    92.85 |     100 |    87.5 |                   
+  input.ts         |    87.5 |    92.85 |     100 |    87.5 | 29                
+ ...n/repositories |   77.77 |    91.11 |     100 |   77.77 |                   
+  catalog-query.ts |   77.77 |    91.11 |     100 |   77.77 | 20,39,45,52       
+ .../value-objects |   96.29 |    95.74 |     100 |    98.5 |                   
+  content-sheet.ts |   96.49 |    95.31 |     100 |     100 | 124-127,129       
+  ...ion-status.ts |    90.9 |    91.66 |     100 |   88.88 | 11                
+ ...stence/mongodb |   43.75 |        0 |      50 |   46.66 |                   
+  ...ze-catalog.ts |   43.75 |        0 |      50 |   46.66 | 9-13,37-38,43-52  
+ ...ongodb/mappers |   94.28 |    93.33 |     100 |   96.15 |                   
+  ...log-mapper.ts |   94.28 |    93.33 |     100 |   96.15 | 83                
+ ...b/repositories |   83.46 |    74.52 |      95 |   88.39 |                   
+  catalog-query.ts |   93.33 |     62.5 |     100 |     100 | 11,15-18          
+  ...repository.ts |   82.14 |    75.51 |   94.73 |   86.86 | ...53,273,292,324 
+ ...ucture/runtime |       0 |      100 |       0 |       0 |                   
+  system-clock.ts  |       0 |      100 |       0 |       0 | 5                 
+  ...-generator.ts |       0 |      100 |       0 |       0 | 7                 
+ .../http/handlers |   97.77 |       95 |     100 |   97.67 |                   
+  ...g-handlers.ts |   97.77 |       95 |     100 |   97.67 | 80                
+ ...ttp/presenters |     100 |    88.23 |     100 |     100 |                   
+  ...-presenter.ts |     100 |    88.23 |     100 |     100 | 9-10              
+ ...s/http/schemas |   96.66 |      100 |     100 |   96.66 |                   
+  ...og-schemas.ts |   96.66 |      100 |     100 |   96.66 | 35                
+ ...ructure/config |      80 |    66.66 |      75 |      80 |                   
+  environment.ts   |      80 |    66.66 |      75 |      80 | 40-41             
+ ...structure/http |   88.88 |    73.07 |   94.11 |   90.32 |                   
+  ...le-request.ts |   84.37 |    69.23 |     100 |   83.33 | 14,17-18,21,24    
+  ...-json-body.ts |   84.61 |    72.72 |      50 |   88.57 | 14,21,23,41       
+ ...ucture/mongodb |   12.12 |        0 |   11.11 |   13.79 |                   
+  connection.ts    |    3.33 |        0 |       0 |    3.84 | 15-75             
+-------------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 86.83% ( 633/729 )
+Branches     : 82.8% ( 448/541 )
+Functions    : 91.11% ( 164/180 )
+Lines        : 88.14% ( 580/658 )
+================================================================================

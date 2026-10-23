@@ -1,0 +1,15 @@
+Working directory: users-service
+Command: npm run build:scripts
+Started: 2026-10-21T05:38:42.389Z
+Ended: 2026-10-21T05:38:42.858Z
+Exit code: 0
+Duration: 0.469 seconds
+
+npm notice run users-service@0.1.0 build:scripts
+npm notice run esbuild scripts/migrate.ts scripts/seed.ts scripts/cleanup.ts --bundle --platform=node --target=node24 --format=esm --external:pg --external:argon2 --outdir=dist --out-extension:.js=.mjs
+
+  dist\seed.mjs     225.7kb
+  dist\migrate.mjs  184.7kb
+  dist\cleanup.mjs  183.1kb
+
+Done in 37ms

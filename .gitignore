@@ -1,0 +1,14 @@
+.env
+.env.*
+!.env.example
+.verification/
+**/node_modules/
+**/.next/
+**/coverage/
+**/dist/
+*.tsbuildinfo
+*.pem
+*.key
+
+__pycache__/
+*.pyc

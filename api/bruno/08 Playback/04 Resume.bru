@@ -1,0 +1,162 @@
+meta {
+  name: 04 Resume
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{playbackBaseUrl}}/api/v1/playback/sessions/{{sessionId}}/resume
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {}
+}
+
+script:pre-request {
+  if (!(bru.getVar("accessToken") || bru.getEnvVar("accessToken"))) throw new Error("Login USER first");
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "session",
+      "playback"
+    ],
+    "properties": {
+      "session": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sessionId",
+          "tituloId",
+          "assetId",
+          "status",
+          "progress",
+          "startedAt",
+          "lastActivityAt",
+          "completedAt"
+        ],
+        "properties": {
+          "sessionId": {
+            "type": "string",
+            "pattern": "^ses_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "tituloId": {
+            "type": "string",
+            "pattern": "^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "assetId": {
+            "type": "string",
+            "pattern": "^ast_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "REQUESTED",
+              "ACTIVE",
+              "PAUSED",
+              "COMPLETED",
+              "FAILED"
+            ]
+          },
+          "progress": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "positionSeconds",
+              "durationSeconds",
+              "percentage",
+              "updatedAt"
+            ],
+            "properties": {
+              "positionSeconds": {
+                "type": "number",
+                "minimum": 0
+              },
+              "durationSeconds": {
+                "type": "number",
+                "exclusiveMinimum": 0
+              },
+              "percentage": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "lastActivityAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completedAt": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "playback": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "url",
+          "expiresIn"
+        ],
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri"
+          },
+          "expiresIn": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 3600
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().session.status).to.equal("ACTIVE");
+    expect(res.getBody().session.progress.positionSeconds).to.equal(3);
+  });
+}
+
+docs {
+  Servicio: playback. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

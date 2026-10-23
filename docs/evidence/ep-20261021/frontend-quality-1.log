@@ -1,0 +1,9 @@
+Working directory: frontend
+Command: npm run lint
+Started: 2026-10-21T05:36:59.712Z
+Ended: 2026-10-21T05:37:23.568Z
+Exit code: 0
+Duration: 23.855 seconds
+
+npm notice run nevaro-frontend@0.1.0 lint
+npm notice run eslint . --max-warnings=0

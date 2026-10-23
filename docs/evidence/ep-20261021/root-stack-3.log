@@ -1,0 +1,373 @@
+Working directory: root
+Command: npm run api:demo:cleanup
+Started: 2026-10-21T21:03:54.997Z
+Ended: 2026-10-21T21:04:32.106Z
+Exit code: 0
+Duration: 37.109 seconds
+
+npm notice run api:demo:cleanup
+npm notice run node scripts/api-collection.mjs demo-cleanup
+00 Health\1 users health (200 OK) - 19 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+00 Health\2 catalog health (200 OK) - 16 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+00 Health\3 playback health (200 OK) - 7 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+00 Health\4 Users JWKS (200 OK) - 5 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+01 Auth\00 ADMIN begin new demo run (200 OK) - 33 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+07 Media Assets\01 Upload MP4 (201 Created) - 366 ms
+Tests
+   ✓ HTTP 201
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+07 Media Assets\02 Asset metadata (200 OK) - 10 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+06 Admin Catalog\01 Bulk create own title (201 Created) - 23 ms
+Tests
+   ✓ HTTP 201
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+06 Admin Catalog\02 Retry import idempotently (200 OK) - 10 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+06 Admin Catalog\03 Update editorial data (200 OK) - 12 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+06 Admin Catalog\04 Publish (200 OK) - 10 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+01 Auth\01 Register (201 Created) - 31 ms
+Tests
+   ✓ HTTP 201
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+01 Auth\02 Login USER (200 OK) - 32 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+05 Catalog\03 Detail (200 OK) - 7 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+03 Watchlist\01 Add title (201 Created) - 14 ms
+Tests
+   ✓ HTTP 201
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+03 Watchlist\02 List (200 OK) - 19 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+03 Watchlist\03 Duplicate title 409 (409 Conflict) - 9 ms
+Tests
+   ✓ HTTP 409
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code WATCHLIST_ITEM_ALREADY_EXISTS
+04 Preferences\01 LIKE (200 OK) - 13 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+04 Preferences\02 DISLIKE (200 OK) - 8 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+04 Preferences\03 Change back to LIKE (200 OK) - 9 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+04 Preferences\06 Invalid preference 400 (400 Bad Request) - 5 ms
+Tests
+   ✓ HTTP 400
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code VALIDATION_ERROR
+04 Preferences\04 List (200 OK) - 17 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+08 Playback\01 Start playback (201 Created) - 43 ms
+Tests
+   ✓ HTTP 201
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+08 Playback\02 Progress (200 OK) - 18 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+08 Playback\03 Pause (200 OK) - 19 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+09 Continue Watching\01 Continue watching (200 OK) - 14 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+07 Media Assets\04 Cannot delete active asset 409 (409 Conflict) - 11 ms
+Tests
+   ✓ HTTP 409
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code MEDIA_ASSET_IN_USE
+08 Playback\07 Negative progress 400 (400 Bad Request) - 8 ms
+Tests
+   ✓ HTTP 400
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code VALIDATION_ERROR
+08 Playback\04 Resume (200 OK) - 24 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+08 Playback\05 Refresh URL (200 OK) - 14 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+08 Playback\06 Complete (200 OK) - 21 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+09 Continue Watching\02 Completed title is excluded (200 OK) - 26 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+10 History\01 History completed (200 OK) - 11 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+05 Catalog\01 List published movies (200 OK) - 7 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+05 Catalog\02 Search and filters (200 OK) - 8 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+02 User\01 Me (200 OK) - 6 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+02 User\02 Update profile (200 OK) - 11 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+02 User\05 Cannot assign ADMIN 400 (400 Bad Request) - 5 ms
+Tests
+   ✓ HTTP 400
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code VALIDATION_ERROR
+02 User\04 Anonymous me 401 (401 Unauthorized) - 4 ms
+Tests
+   ✓ HTTP 401
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code UNAUTHORIZED
+01 Auth\09 Duplicate email 409 (409 Conflict) - 37 ms
+Tests
+   ✓ HTTP 409
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code EMAIL_ALREADY_EXISTS
+01 Auth\07 Invalid login 401 (401 Unauthorized) - 30 ms
+Tests
+   ✓ HTTP 401
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code INVALID_CREDENTIALS
+01 Auth\10 Refresh without CSRF 403 (403 Forbidden) - 5 ms
+Tests
+   ✓ HTTP 403
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code FORBIDDEN
+06 Admin Catalog\06 USER cannot edit 403 (403 Forbidden) - 5 ms
+Tests
+   ✓ HTTP 403
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code FORBIDDEN
+06 Admin Catalog\07 Anonymous cannot import 401 (401 Unauthorized) - 5 ms
+Tests
+   ✓ HTTP 401
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code UNAUTHORIZED
+07 Media Assets\06 USER cannot read asset metadata 403 (403 Forbidden) - 7 ms
+Tests
+   ✓ HTTP 403
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code FORBIDDEN
+07 Media Assets\05 MIME spoofing rejected 415 (415 Unsupported Media Type) - 14 ms
+Tests
+   ✓ HTTP 415
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code UNSUPPORTED_MEDIA_TYPE
+05 Catalog\04 Missing title 404 (404 Not Found) - 7 ms
+Tests
+   ✓ HTTP 404
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code CATALOG_TITLE_NOT_FOUND
+05 Catalog\05 NoSQL operator rejected 400 (400 Bad Request) - 9 ms
+Tests
+   ✓ HTTP 400
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code VALIDATION_ERROR
+08 Playback\08 Anonymous history 401 (401 Unauthorized) - 8 ms
+Tests
+   ✓ HTTP 401
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code UNAUTHORIZED
+01 Auth\04 Refresh USER (200 OK) - 17 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+02 User\03 Change password own test account (204 No Content) - 59 ms
+Tests
+   ✓ HTTP 204
+   ✓ Empty response
+   ✓ No database or password fields
+01 Auth\02 Login USER (200 OK) - 40 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+03 Watchlist\04 Remove title (204 No Content) - 10 ms
+Tests
+   ✓ HTTP 204
+   ✓ Empty response
+   ✓ No database or password fields
+04 Preferences\05 Remove preference (204 No Content) - 8 ms
+Tests
+   ✓ HTTP 204
+   ✓ Empty response
+   ✓ No database or password fields
+01 Auth\05 Logout USER (204 No Content) - 9 ms
+Tests
+   ✓ HTTP 204
+   ✓ Empty response
+   ✓ No database or password fields
+01 Auth\08 Revoked refresh 401 (401 Unauthorized) - 9 ms
+Tests
+   ✓ HTTP 401
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Error code UNAUTHORIZED
+06 Admin Catalog\05 Withdraw own title (200 OK) - 10 ms
+Tests
+   ✓ HTTP 200
+   ✓ Response JSON Schema from OpenAPI
+   ✓ No database or password fields
+   ✓ Required fields and behavior
+07 Media Assets\03 Delete completed own asset (204 No Content) - 15 ms
+Tests
+   ✓ HTTP 204
+   ✓ Empty response
+   ✓ No database or password fields
+01 Auth\06 Logout ADMIN (204 No Content) - 8 ms
+Tests
+   ✓ HTTP 204
+   ✓ Empty response
+   ✓ No database or password fields
+
+📊 Execution Summary
+┌───────────────┬────────────────┐
+│ Metric        │     Result     │
+├───────────────┼────────────────┤
+│ Status        │     ✓ PASS     │
+├───────────────┼────────────────┤
+│ Requests      │ 59 (59 Passed) │
+├───────────────┼────────────────┤
+│ Tests         │    227/227     │
+├───────────────┼────────────────┤
+│ Assertions    │      0/0       │
+├───────────────┼────────────────┤
+│ Duration (ms) │     13854      │
+└───────────────┴────────────────┘
+Wrote json results to C:\Users\Administrador\Desktop\microservicios streaming\api\bruno\.runtime\run-Tmptpy\raw.json
+Wrote junit results to C:\Users\Administrador\Desktop\microservicios streaming\api\bruno\.runtime\run-Tmptpy\raw.xml
+
+Bruno demo-cleanup passed. Sanitized reports: api/bruno/reports/

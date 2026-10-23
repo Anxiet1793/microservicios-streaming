@@ -1,0 +1,13 @@
+[
+  {
+    "project": "frontend",
+    "cwd": "frontend",
+    "command": "CI=true npm run test:e2e",
+    "startedAt": "2026-10-21T05:39:47.931Z",
+    "endedAt": "2026-10-21T05:41:48.072Z",
+    "durationSeconds": 120.139,
+    "exitCode": 0,
+    "log": "frontend-e2e-1.log",
+    "logSha256": "b2d536b328a3455ce7f58871dff36d843470d44c4287c71347ecedff1e0bbb72"
+  }
+]

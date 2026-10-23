@@ -3,12 +3,19 @@ import { sql } from "drizzle-orm";
 import type { Database } from "../persistence/connection";
 import { UsersError } from "../../domain/errors";
 export class RateLimitError extends UsersError {
-  constructor(readonly retryAfter: number) { super("RATE_LIMIT_EXCEEDED", 429, "Demasiados intentos. Intente más tarde."); }
+  constructor(readonly retryAfter: number) {
+    super("RATE_LIMIT_EXCEEDED", 429, "Demasiados intentos. Intente más tarde.");
+  }
 }
 /** Contador atómico compartido por todas las instancias. No confía en X-Forwarded-For. */
 export class PostgresRateLimiter {
   constructor(private readonly db: Database) {}
-  async consume(scope: string, identity: string, limit: number, windowSeconds: number): Promise<void> {
+  async consume(
+    scope: string,
+    identity: string,
+    limit: number,
+    windowSeconds: number,
+  ): Promise<void> {
     const key = `${scope}:${createHash("sha256").update(identity).digest("hex")}`;
     const result = await this.db.execute<{ hits: number; retry_after: number }>(sql`
       insert into rate_limit_buckets (key, hits, expires_at)

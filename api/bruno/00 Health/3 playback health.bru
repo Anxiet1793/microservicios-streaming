@@ -1,0 +1,82 @@
+meta {
+  name: 3 playback health
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{playbackBaseUrl}}/api/health
+  body: none
+  auth: none
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "status",
+      "service",
+      "dependencies"
+    ],
+    "properties": {
+      "status": {
+        "type": "string",
+        "enum": [
+          "ok",
+          "unavailable"
+        ]
+      },
+      "service": {
+        "type": "string",
+        "enum": [
+          "playback-service"
+        ]
+      },
+      "dependencies": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "mongodb",
+          "objectStorage"
+        ],
+        "properties": {
+          "mongodb": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ]
+          },
+          "objectStorage": {
+            "type": "string",
+            "enum": [
+              "up",
+              "down"
+            ]
+          }
+        }
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().status).to.equal("ok");
+    expect(res.getBody().service).to.equal("playback-service");
+  });
+}
+
+docs {
+  Servicio: playback. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

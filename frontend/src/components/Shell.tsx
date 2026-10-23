@@ -1,15 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import {
-  Home,
-  Compass,
-  Bookmark,
-  UserRound,
-  Search,
-  LogOut,
-  ArrowUpRight,
-} from "lucide-react";
+import { Home, Compass, Bookmark, UserRound, Search, LogOut, ArrowUpRight } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { Brand } from "./ui";
@@ -71,17 +63,10 @@ export function Shell({
           <label className="srOnly" htmlFor="global-search">
             Buscar títulos
           </label>
-          <input
-            id="global-search"
-            name="q"
-            maxLength={100}
-            placeholder="Buscar una historia"
-          />
+          <input id="global-search" name="q" maxLength={100} placeholder="Buscar una historia" />
         </form>
         <Link href="/profile" className={s.account}>
-          <span className={s.avatar}>
-            {user.profile.displayName.slice(0, 1).toUpperCase()}
-          </span>
+          <span className={s.avatar}>{user.profile.displayName.slice(0, 1).toUpperCase()}</span>
           <span>{user.profile.displayName}</span>
         </Link>
       </header>
@@ -101,11 +86,7 @@ export function Shell({
           {children}
           {error && <p role="alert">{error}</p>}
           {path === "/profile" && (
-            <button
-              className="button secondary"
-              onClick={leave}
-              disabled={pending}
-            >
+            <button className="button secondary" onClick={leave} disabled={pending}>
               <LogOut size={17} />
               {pending ? "Cerrando sesión…" : "Cerrar sesión"}
             </button>

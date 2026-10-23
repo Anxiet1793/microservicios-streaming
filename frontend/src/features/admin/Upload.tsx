@@ -56,10 +56,7 @@ export function Upload({ userId }: { userId: string }) {
       setError("El archivo supera 256 MiB.");
       return;
     }
-    if (
-      !file.name.toLowerCase().endsWith(".mp4") ||
-      file.type !== "video/mp4"
-    ) {
+    if (!file.name.toLowerCase().endsWith(".mp4") || file.type !== "video/mp4") {
       setError("Selecciona un archivo MP4 H.264 con audio AAC opcional.");
       return;
     }
@@ -73,8 +70,7 @@ export function Upload({ userId }: { userId: string }) {
     xhr.setRequestHeader("X-Nevaro-Request", "1");
     xhr.timeout = 125000;
     xhr.upload.onprogress = (e) => {
-      if (e.lengthComputable)
-        setPercent(Math.round((e.loaded / e.total) * 100));
+      if (e.lengthComputable) setPercent(Math.round((e.loaded / e.total) * 100));
     };
     xhr.upload.onload = () => setPhase("Archivo enviado. Validando el video…");
     xhr.onload = () => {
@@ -87,18 +83,14 @@ export function Upload({ userId }: { userId: string }) {
         persist(result.asset);
         setPhase("Video cargado. Ahora completa su ficha.");
       } catch (e) {
-        setError(
-          e instanceof Error ? e.message : "No pudimos confirmar la carga.",
-        );
+        setError(e instanceof Error ? e.message : "No pudimos confirmar la carga.");
       } finally {
         setPending(false);
       }
     };
     const fail = () => {
       setPending(false);
-      setError(
-        "No pudimos confirmar el resultado. No repitas la carga sin comprobar si terminó.",
-      );
+      setError("No pudimos confirmar el resultado. No repitas la carga sin comprobar si terminó.");
     };
     xhr.onerror = fail;
     xhr.ontimeout = fail;
@@ -158,21 +150,13 @@ export function Upload({ userId }: { userId: string }) {
     <>
       <span className="eyebrow">DEL ARCHIVO A LA PANTALLA</span>
       <h1>Una nueva historia.</h1>
-      <p className="muted">
-        Sube tu video, completa su ficha y compártelo en el catálogo.
-      </p>
+      <p className="muted">Sube tu video, completa su ficha y compártelo en el catálogo.</p>
       <ol className={s.steps}>
         {["Archivo", "Validación", "Ficha", "Publicación"].map((step, i) => (
           <li
             key={step}
             aria-current={
-              (!asset
-                ? phase.includes("Validando")
-                  ? 1
-                  : 0
-                : !titleId
-                  ? 2
-                  : 3) === i
+              (!asset ? (phase.includes("Validando") ? 1 : 0) : !titleId ? 2 : 3) === i
                 ? "step"
                 : undefined
             }
@@ -186,9 +170,7 @@ export function Upload({ userId }: { userId: string }) {
         <div className={s.published}>
           <Check size={36} color="var(--success)" />
           <h2>Tu historia ya está en NÉVARO.</h2>
-          <p className="muted">
-            El título está publicado y disponible para espectadores.
-          </p>
+          <p className="muted">El título está publicado y disponible para espectadores.</p>
           <div className="actions">
             <Link className="button" href={`/title/${titleId}`}>
               Ver la ficha <ArrowRight size={16} />
@@ -229,18 +211,11 @@ export function Upload({ userId }: { userId: string }) {
             </>
           )}
           <div className="actions" style={{ justifyContent: "center" }}>
-            <button
-              className="button"
-              onClick={upload}
-              disabled={!file || pending}
-            >
+            <button className="button" onClick={upload} disabled={!file || pending}>
               {pending ? "Procesando…" : "Subir video"}
             </button>
             {pending && (
-              <button
-                className="button secondary"
-                onClick={() => request.current?.abort()}
-              >
+              <button className="button secondary" onClick={() => request.current?.abort()}>
                 Cancelar transferencia
               </button>
             )}
@@ -251,9 +226,7 @@ export function Upload({ userId }: { userId: string }) {
           {!titleId ? (
             <form onSubmit={create}>
               <h2>Completa la ficha</h2>
-              <TitleFields
-                duration={Math.max(1, Math.ceil(asset.durationSeconds / 60))}
-              />
+              <TitleFields duration={Math.max(1, Math.ceil(asset.durationSeconds / 60))} />
               <button className="button" disabled={pending}>
                 {pending ? "Creando ficha…" : "Crear ficha"}
                 <ArrowRight size={17} />
@@ -263,16 +236,13 @@ export function Upload({ userId }: { userId: string }) {
             <section>
               <h2>Lista para publicar.</h2>
               <p className="muted">
-                La ficha está registrada. Al publicarla aparecerá en el catálogo
-                de espectadores.
+                La ficha está registrada. Al publicarla aparecerá en el catálogo de espectadores.
               </p>
               <button className="button" onClick={publish} disabled={pending}>
                 {pending ? "Comprobando y publicando…" : "Publicar título"}
               </button>
               <p>
-                <Link href={`/admin/content/${titleId}`}>
-                  Revisar ficha antes de publicar →
-                </Link>
+                <Link href={`/admin/content/${titleId}`}>Revisar ficha antes de publicar →</Link>
               </p>
             </section>
           )}
@@ -294,8 +264,8 @@ export function Upload({ userId }: { userId: string }) {
             <p className="hint">Identificador del recurso</p>
             <code>{asset.assetId}</code>
             <p className="hint">
-              Esta carga se conserva en esta pestaña si necesitas retomar la
-              ficha. El video solo se vincula a un título nuevo.
+              Esta carga se conserva en esta pestaña si necesitas retomar la ficha. El video solo se
+              vincula a un título nuevo.
             </p>
           </aside>
         </div>

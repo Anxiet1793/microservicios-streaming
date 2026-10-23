@@ -1,0 +1,1386 @@
+{
+  "total": {
+    "lines": {
+      "total": 658,
+      "covered": 580,
+      "skipped": 0,
+      "pct": 88.14
+    },
+    "statements": {
+      "total": 729,
+      "covered": 633,
+      "skipped": 0,
+      "pct": 86.83
+    },
+    "functions": {
+      "total": 180,
+      "covered": 164,
+      "skipped": 0,
+      "pct": 91.11
+    },
+    "branches": {
+      "total": 541,
+      "covered": 448,
+      "skipped": 0,
+      "pct": 82.8
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\app\\api\\health\\route.ts": {
+    "lines": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\app\\api\\v1\\catalog\\route.ts": {
+    "lines": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\app\\api\\v1\\catalog\\[tituloId]\\route.ts": {
+    "lines": {
+      "total": 7,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 7,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\app\\api\\v1\\catalog\\[tituloId]\\publication-status\\route.ts": {
+    "lines": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\app\\api\\v1\\catalog\\bulk\\route.ts": {
+    "lines": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\bootstrap\\catalog-container.ts": {
+    "lines": {
+      "total": 6,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 33.33
+    },
+    "functions": {
+      "total": 3,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 33.33
+    },
+    "statements": {
+      "total": 6,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 33.33
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\dto\\catalog-dto.ts": {
+    "lines": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\errors\\application-error.ts": {
+    "lines": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\mappers\\bulk-result-mapper.ts": {
+    "lines": {
+      "total": 8,
+      "covered": 8,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 7,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 9,
+      "covered": 9,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\mappers\\catalog-dto-mapper.ts": {
+    "lines": {
+      "total": 9,
+      "covered": 9,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 7,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 9,
+      "covered": 9,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 18,
+      "covered": 14,
+      "skipped": 0,
+      "pct": 77.77
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\ports\\clock.ts": {
+    "lines": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\ports\\title-id-generator.ts": {
+    "lines": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\use-cases\\bulk-create-catalog-titles.ts": {
+    "lines": {
+      "total": 43,
+      "covered": 38,
+      "skipped": 0,
+      "pct": 88.37
+    },
+    "functions": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 45,
+      "covered": 40,
+      "skipped": 0,
+      "pct": 88.88
+    },
+    "branches": {
+      "total": 44,
+      "covered": 36,
+      "skipped": 0,
+      "pct": 81.81
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\use-cases\\change-publication-status.ts": {
+    "lines": {
+      "total": 8,
+      "covered": 8,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 9,
+      "covered": 9,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\use-cases\\get-catalog-title-by-id.ts": {
+    "lines": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\use-cases\\get-catalog-titles.ts": {
+    "lines": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\use-cases\\load-catalog-title.ts": {
+    "lines": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\use-cases\\update-catalog-title.ts": {
+    "lines": {
+      "total": 10,
+      "covered": 9,
+      "skipped": 0,
+      "pct": 90
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 12,
+      "covered": 11,
+      "skipped": 0,
+      "pct": 91.66
+    },
+    "branches": {
+      "total": 4,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 75
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\application\\validation\\input.ts": {
+    "lines": {
+      "total": 8,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 87.5
+    },
+    "functions": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 8,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 87.5
+    },
+    "branches": {
+      "total": 14,
+      "covered": 13,
+      "skipped": 0,
+      "pct": 92.85
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\limits.ts": {
+    "lines": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\models.ts": {
+    "lines": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\entities\\catalog-title.ts": {
+    "lines": {
+      "total": 21,
+      "covered": 21,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 9,
+      "covered": 9,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 23,
+      "covered": 23,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 28,
+      "covered": 28,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\errors\\catalog-error.ts": {
+    "lines": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\repositories\\catalog-query.ts": {
+    "lines": {
+      "total": 18,
+      "covered": 14,
+      "skipped": 0,
+      "pct": 77.77
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 18,
+      "covered": 14,
+      "skipped": 0,
+      "pct": 77.77
+    },
+    "branches": {
+      "total": 45,
+      "covered": 41,
+      "skipped": 0,
+      "pct": 91.11
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\repositories\\catalog-repository.ts": {
+    "lines": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\value-objects\\content-sheet.ts": {
+    "lines": {
+      "total": 45,
+      "covered": 45,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 12,
+      "covered": 12,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 57,
+      "covered": 55,
+      "skipped": 0,
+      "pct": 96.49
+    },
+    "branches": {
+      "total": 64,
+      "covered": 61,
+      "skipped": 0,
+      "pct": 95.31
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\value-objects\\playback-reference.ts": {
+    "lines": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 14,
+      "covered": 14,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\value-objects\\publication-status.ts": {
+    "lines": {
+      "total": 9,
+      "covered": 8,
+      "skipped": 0,
+      "pct": 88.88
+    },
+    "functions": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 11,
+      "covered": 10,
+      "skipped": 0,
+      "pct": 90.9
+    },
+    "branches": {
+      "total": 12,
+      "covered": 11,
+      "skipped": 0,
+      "pct": 91.66
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\domain\\value-objects\\titulo-id.ts": {
+    "lines": {
+      "total": 7,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 7,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\persistence\\mongodb\\initialize-catalog.ts": {
+    "lines": {
+      "total": 15,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 46.66
+    },
+    "functions": {
+      "total": 2,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 50
+    },
+    "statements": {
+      "total": 16,
+      "covered": 7,
+      "skipped": 0,
+      "pct": 43.75
+    },
+    "branches": {
+      "total": 14,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\persistence\\mongodb\\documents\\catalog-document.ts": {
+    "lines": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\persistence\\mongodb\\indexes\\catalog-indexes.ts": {
+    "lines": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\persistence\\mongodb\\mappers\\catalog-mapper.ts": {
+    "lines": {
+      "total": 26,
+      "covered": 25,
+      "skipped": 0,
+      "pct": 96.15
+    },
+    "functions": {
+      "total": 13,
+      "covered": 13,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 35,
+      "covered": 33,
+      "skipped": 0,
+      "pct": 94.28
+    },
+    "branches": {
+      "total": 30,
+      "covered": 28,
+      "skipped": 0,
+      "pct": 93.33
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\persistence\\mongodb\\repositories\\catalog-query.ts": {
+    "lines": {
+      "total": 13,
+      "covered": 13,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 15,
+      "covered": 14,
+      "skipped": 0,
+      "pct": 93.33
+    },
+    "branches": {
+      "total": 8,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 62.5
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\persistence\\mongodb\\repositories\\mongo-catalog-repository.ts": {
+    "lines": {
+      "total": 99,
+      "covered": 86,
+      "skipped": 0,
+      "pct": 86.86
+    },
+    "functions": {
+      "total": 19,
+      "covered": 18,
+      "skipped": 0,
+      "pct": 94.73
+    },
+    "statements": {
+      "total": 112,
+      "covered": 92,
+      "skipped": 0,
+      "pct": 82.14
+    },
+    "branches": {
+      "total": 98,
+      "covered": 74,
+      "skipped": 0,
+      "pct": 75.51
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\persistence\\mongodb\\validators\\catalog-validators.ts": {
+    "lines": {
+      "total": 11,
+      "covered": 11,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 16,
+      "covered": 16,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\runtime\\system-clock.ts": {
+    "lines": {
+      "total": 1,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    },
+    "functions": {
+      "total": 1,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    },
+    "statements": {
+      "total": 1,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\infrastructure\\runtime\\uuid-title-id-generator.ts": {
+    "lines": {
+      "total": 1,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    },
+    "functions": {
+      "total": 1,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    },
+    "statements": {
+      "total": 1,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\interfaces\\http\\handlers\\catalog-handlers.ts": {
+    "lines": {
+      "total": 43,
+      "covered": 42,
+      "skipped": 0,
+      "pct": 97.67
+    },
+    "functions": {
+      "total": 14,
+      "covered": 14,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 45,
+      "covered": 44,
+      "skipped": 0,
+      "pct": 97.77
+    },
+    "branches": {
+      "total": 20,
+      "covered": 19,
+      "skipped": 0,
+      "pct": 95
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\interfaces\\http\\presenters\\bulk-presenter.ts": {
+    "lines": {
+      "total": 10,
+      "covered": 10,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 13,
+      "covered": 13,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 17,
+      "covered": 15,
+      "skipped": 0,
+      "pct": 88.23
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\modules\\catalog\\interfaces\\http\\schemas\\catalog-schemas.ts": {
+    "lines": {
+      "total": 30,
+      "covered": 29,
+      "skipped": 0,
+      "pct": 96.66
+    },
+    "functions": {
+      "total": 12,
+      "covered": 12,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 30,
+      "covered": 29,
+      "skipped": 0,
+      "pct": 96.66
+    },
+    "branches": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\config\\environment.ts": {
+    "lines": {
+      "total": 10,
+      "covered": 8,
+      "skipped": 0,
+      "pct": 80
+    },
+    "functions": {
+      "total": 4,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 75
+    },
+    "statements": {
+      "total": 10,
+      "covered": 8,
+      "skipped": 0,
+      "pct": 80
+    },
+    "branches": {
+      "total": 3,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 66.66
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\http\\handle-request.ts": {
+    "lines": {
+      "total": 30,
+      "covered": 25,
+      "skipped": 0,
+      "pct": 83.33
+    },
+    "functions": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 32,
+      "covered": 27,
+      "skipped": 0,
+      "pct": 84.37
+    },
+    "branches": {
+      "total": 26,
+      "covered": 18,
+      "skipped": 0,
+      "pct": 69.23
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\http\\health-handler.ts": {
+    "lines": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\http\\http-error.ts": {
+    "lines": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 5,
+      "covered": 5,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\http\\method-handlers.ts": {
+    "lines": {
+      "total": 8,
+      "covered": 8,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 8,
+      "covered": 8,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\http\\parse-schema.ts": {
+    "lines": {
+      "total": 12,
+      "covered": 12,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 12,
+      "covered": 12,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 4,
+      "covered": 4,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\http\\read-json-body.ts": {
+    "lines": {
+      "total": 35,
+      "covered": 31,
+      "skipped": 0,
+      "pct": 88.57
+    },
+    "functions": {
+      "total": 2,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 50
+    },
+    "statements": {
+      "total": 39,
+      "covered": 33,
+      "skipped": 0,
+      "pct": 84.61
+    },
+    "branches": {
+      "total": 22,
+      "covered": 16,
+      "skipped": 0,
+      "pct": 72.72
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\logging\\request-logger.ts": {
+    "lines": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 2,
+      "covered": 2,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\mongodb\\connection.ts": {
+    "lines": {
+      "total": 26,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 3.84
+    },
+    "functions": {
+      "total": 8,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    },
+    "statements": {
+      "total": 30,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 3.33
+    },
+    "branches": {
+      "total": 10,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 0
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\mongodb\\persistence-error.ts": {
+    "lines": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 1,
+      "covered": 1,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 3,
+      "covered": 3,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "C:\\Users\\Administrador\\Desktop\\microservicios streaming\\catalog-service\\src\\shared\\infrastructure\\security\\catalog-auth.ts": {
+    "lines": {
+      "total": 24,
+      "covered": 24,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 6,
+      "covered": 6,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 27,
+      "covered": 27,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 26,
+      "covered": 26,
+      "skipped": 0,
+      "pct": 100
+    }
+  }
+}

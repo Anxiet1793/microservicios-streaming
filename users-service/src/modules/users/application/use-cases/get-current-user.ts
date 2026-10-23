@@ -3,5 +3,7 @@ import { currentUser } from "../current-user";
 import { publicUser } from "../dto";
 export class GetCurrentUser {
   constructor(private readonly d: Dependencies) {}
-  async execute(claims: AccessClaims) { return publicUser(await currentUser(this.d, claims)); }
+  async execute(claims: AccessClaims) {
+    return publicUser(await currentUser(this.d, claims));
+  }
 }

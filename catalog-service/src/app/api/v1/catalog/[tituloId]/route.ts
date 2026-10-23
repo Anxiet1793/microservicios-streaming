@@ -1,5 +1,11 @@
-import { getCatalogTitle, updateCatalogTitle } from "../../../../../modules/catalog/interfaces/http/handlers/catalog-handlers";
-import { methodNotAllowed, optionsHandler } from "../../../../../shared/infrastructure/http/method-handlers";
+import {
+  getCatalogTitle,
+  updateCatalogTitle,
+} from "../../../../../modules/catalog/interfaces/http/handlers/catalog-handlers";
+import {
+  methodNotAllowed,
+  optionsHandler,
+} from "../../../../../shared/infrastructure/http/method-handlers";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

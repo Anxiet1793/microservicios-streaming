@@ -1,0 +1,288 @@
+meta {
+  name: 05 Withdraw own title
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{catalogBaseUrl}}/api/v1/catalog/{{tituloId}}/publication-status
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{adminAccessToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "publicationStatusId": 3
+  }
+}
+
+script:pre-request {
+  if (!(bru.getVar("adminAccessToken") || bru.getEnvVar("adminAccessToken"))) throw new Error("Login ADMIN first");
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "tituloId",
+      "typeId",
+      "typeName",
+      "ficha",
+      "publicationStatusId",
+      "publicationStatusName",
+      "playbackReference",
+      "createdAt",
+      "updatedAt"
+    ],
+    "properties": {
+      "tituloId": {
+        "type": "string",
+        "pattern": "^ttl_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "typeId": {
+        "type": "integer",
+        "enum": [
+          1,
+          2
+        ]
+      },
+      "typeName": {
+        "type": "string",
+        "enum": [
+          "MOVIE",
+          "SERIES"
+        ]
+      },
+      "ficha": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "synopsis",
+          "releaseYear",
+          "genres",
+          "genresName",
+          "languages",
+          "languagesName",
+          "cast"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "originalTitle": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "synopsis": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10000
+          },
+          "releaseYear": {
+            "type": "integer",
+            "minimum": 1888,
+            "maximum": 9999
+          },
+          "durationMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100000
+          },
+          "genres": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "uniqueItems": true,
+            "items": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15
+              ]
+            }
+          },
+          "languages": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 20,
+            "uniqueItems": true,
+            "items": {
+              "type": "integer",
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10
+              ]
+            }
+          },
+          "ageRatingId": {
+            "type": "integer",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ]
+          },
+          "posterUrl": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 2048,
+            "pattern": "^https?://"
+          },
+          "backdropUrl": {
+            "type": "string",
+            "format": "uri",
+            "maxLength": 2048,
+            "pattern": "^https?://"
+          },
+          "director": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "cast": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 200
+            }
+          },
+          "genresName": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "languagesName": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ageRatingName": {
+            "type": "string"
+          }
+        }
+      },
+      "publicationStatusId": {
+        "type": "integer",
+        "enum": [
+          1,
+          2,
+          3
+        ]
+      },
+      "publicationStatusName": {
+        "type": "string",
+        "enum": [
+          "REGISTRADO",
+          "PUBLICADO",
+          "RETIRADO"
+        ]
+      },
+      "playbackReference": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "providerId",
+              "providerName",
+              "assetId",
+              "manifestKey"
+            ],
+            "properties": {
+              "providerId": {
+                "type": "integer",
+                "enum": [
+                  1
+                ]
+              },
+              "assetId": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 256
+              },
+              "manifestKey": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 2048
+              },
+              "providerName": {
+                "type": "string",
+                "enum": [
+                  "CDN"
+                ]
+              }
+            }
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "createdAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "updatedAt": {
+        "type": "string",
+        "format": "date-time"
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().publicationStatusId).to.equal(3);
+  });
+}
+
+docs {
+  Servicio: catalog. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

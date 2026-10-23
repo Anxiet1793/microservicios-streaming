@@ -13,13 +13,16 @@
     "typecheck": "next typegen && tsc --noEmit",
     "lint": "eslint . --max-warnings=0",
     "test": "vitest run",
-    "test:e2e": "playwright test",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "node --import tsx scripts/test-e2e.ts",
     "types:generate": "node --import tsx scripts/generate-types.ts",
     "dev:setup": "node scripts/setup.ts",
-    "check": "npm run typecheck && npm run lint && npm test && npm run build"
+    "check": "npm run typecheck && npm run lint && npm test && npm run build",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
-    "next": "16.3.5",
+    "next": "16.4.2",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "zod": "4.6.5",
@@ -41,10 +44,12 @@
     "@eslint/js": "10.0.1",
     "typescript-eslint": "8.71.0",
     "vitest": "5.0.3",
+    "@vitest/coverage-v8": "5.0.3",
     "@playwright/test": "^1.56.0",
     "openapi-typescript": "^7.10.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/jest-dom": "^6.9.1",
-    "jsdom": "^27.0.0"
+    "jsdom": "^27.0.0",
+    "prettier": "3.9.10"
   }
 }

@@ -27,9 +27,9 @@ flowchart TD
 
 La unicidad de email, relaciones internas, creación de usuario/perfil y revocación/rotación de sesiones necesitan restricciones y transacciones coordinadas. PostgreSQL expresa estas garantías con índices únicos, claves foráneas, CHECK, enums y bloqueos de fila.
 
-| Opción | Evaluación para este proyecto |
-| --- | --- |
-| Prisma | Modelo declarativo y cliente generado; sería válido para CRUD y relaciones. |
+| Opción  | Evaluación para este proyecto                                                                                           |
+| ------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Prisma  | Modelo declarativo y cliente generado; sería válido para CRUD y relaciones.                                             |
 | Drizzle | Esquema TypeScript cercano a SQL, migraciones SQL revisables y acceso explícito a transacciones, `FOR UPDATE` y UPSERT. |
 
 Se elige **Drizzle + node-postgres** para mantener visibles las operaciones de concurrencia del MVP y evitar un cliente generado adicional. Las consultas del ORM y los fragmentos `sql` interpolados usan parámetros, nunca concatenan datos de entrada. La arquitectura depende de puertos propios y permite sustituir el ORM. Véanse [transacciones Drizzle](https://orm.drizzle.team/docs/transactions) y [migraciones Drizzle](https://orm.drizzle.team/docs/migrations).

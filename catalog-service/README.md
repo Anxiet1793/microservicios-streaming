@@ -51,26 +51,26 @@ Next carga `.env` al iniciar. El script de inicialización lo carga explícitame
 
 ## Variables de entorno
 
-| Variable | Predeterminado | Límites / propósito |
-| --- | --- | --- |
-| `MONGODB_URI` | Obligatoria en ejecución Node/Atlas | `mongodb://` o `mongodb+srv://`; nunca registrarla en logs. Compose local fija `mongodb://mongo:27017`. |
-| `MONGODB_DATABASE` | `catalog_service` | Nombre de base propio del servicio, 1–63 letras, números, `_` o `-`. |
-| `MONGODB_MAX_POOL_SIZE` | `10` | 1–100 conexiones. |
-| `MONGODB_SERVER_SELECTION_TIMEOUT_MS` | `5000` | 100–120000 ms. |
-| `MONGODB_QUERY_TIMEOUT_MS` | `5000` | 100–120000 ms. |
-| `BULK_MAX_ITEMS` | `500` | 1–1000 elementos. |
-| `REQUEST_MAX_BYTES` | `5242880` | 1024–10485760 bytes; se cuentan bytes reales del stream. |
-| `CATALOG_PORT` | `3000` | Puerto publicado por Compose en loopback. |
-| `CATALOG_IMAGE_TAG` | `local` | Tag de la imagen que construye Compose. |
+| Variable                              | Predeterminado                      | Límites / propósito                                                                                     |
+| ------------------------------------- | ----------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `MONGODB_URI`                         | Obligatoria en ejecución Node/Atlas | `mongodb://` o `mongodb+srv://`; nunca registrarla en logs. Compose local fija `mongodb://mongo:27017`. |
+| `MONGODB_DATABASE`                    | `catalog_service`                   | Nombre de base propio del servicio, 1–63 letras, números, `_` o `-`.                                    |
+| `MONGODB_MAX_POOL_SIZE`               | `10`                                | 1–100 conexiones.                                                                                       |
+| `MONGODB_SERVER_SELECTION_TIMEOUT_MS` | `5000`                              | 100–120000 ms.                                                                                          |
+| `MONGODB_QUERY_TIMEOUT_MS`            | `5000`                              | 100–120000 ms.                                                                                          |
+| `BULK_MAX_ITEMS`                      | `500`                               | 1–1000 elementos.                                                                                       |
+| `REQUEST_MAX_BYTES`                   | `5242880`                           | 1024–10485760 bytes; se cuentan bytes reales del stream.                                                |
+| `CATALOG_PORT`                        | `3000`                              | Puerto publicado por Compose en loopback.                                                               |
+| `CATALOG_IMAGE_TAG`                   | `local`                             | Tag de la imagen que construye Compose.                                                                 |
 
-Ver [.env.example](.env.example) y [.env.atlas.example](.env.atlas.example). No incorporar credenciales al repositorio. El build no necesita conexión ni credenciales MongoDB.
+Ver [.env.example](.env.example). No incorporar credenciales al repositorio. El build no necesita conexión ni credenciales MongoDB.
 
 ## MongoDB Atlas
 
 Usar una base dedicada a Catálogo, un usuario de base de datos con permisos para inicializar sus colecciones/índices/validadores y permitir la IP de salida del equipo en la configuración de red de Atlas. Copiar la URI del clúster y codificar caracteres especiales de sus credenciales según el formato URI.
 
 ```powershell
-if (-not (Test-Path .env.atlas)) { Copy-Item .env.atlas.example .env.atlas }
+if (-not (Test-Path .env.atlas)) { Copy-Item .env.example .env.atlas }
 # Editar .env.atlas con la URI real; no dejar los marcadores <...>.
 docker compose --env-file .env.atlas -f compose.atlas.yml up --build -d --wait
 ```
@@ -81,19 +81,19 @@ Este Compose es independiente: solo ejecuta el inicializador y la aplicación, s
 
 Contrato completo: [docs/openapi.yaml](docs/openapi.yaml), importable en herramientas compatibles con OpenAPI 3.0.3. Los JSON usan **IDs numéricos** para categorías; los nombres se agregan únicamente a la respuesta.
 
-| Método | Ruta | Resultado |
-| --- | --- | --- |
-| `POST` | `/api/v1/catalog/bulk` | Carga masiva INSERT con resultados por índice de entrada. |
-| `GET` | `/api/v1/catalog` | Listado paginado con filtros. |
-| `GET` | `/api/v1/catalog/{tituloId}` | Detalle y referencia técnica. |
-| `PATCH` | `/api/v1/catalog/{tituloId}` | Edición parcial de `ficha`. |
-| `PATCH` | `/api/v1/catalog/{tituloId}/publication-status` | Cambio de estado editorial. |
-| `GET` | `/api/health` | Comprueba MongoDB; 200 o 503. |
+| Método  | Ruta                                            | Resultado                                                 |
+| ------- | ----------------------------------------------- | --------------------------------------------------------- |
+| `POST`  | `/api/v1/catalog/bulk`                          | Carga masiva INSERT con resultados por índice de entrada. |
+| `GET`   | `/api/v1/catalog`                               | Listado paginado con filtros.                             |
+| `GET`   | `/api/v1/catalog/{tituloId}`                    | Detalle y referencia técnica.                             |
+| `PATCH` | `/api/v1/catalog/{tituloId}`                    | Edición parcial de `ficha`.                               |
+| `PATCH` | `/api/v1/catalog/{tituloId}/publication-status` | Cambio de estado editorial.                               |
+| `GET`   | `/api/health`                                   | Comprueba MongoDB; 200 o 503.                             |
 
 Carga de las tres películas y dos series ficticias incluidas:
 
 ```powershell
-curl.exe -X POST "http://127.0.0.1:3000/api/v1/catalog/bulk" -H "Content-Type: application/json" --data-binary "@examples/catalog.bulk.json"
+curl.exe -X POST "http://127.0.0.1:3000/api/v1/catalog/bulk" -H "Authorization: Bearer $env:ACCESS_TOKEN" -H "Content-Type: application/json" --data-binary "@examples/catalog.bulk.json"
 curl.exe "http://127.0.0.1:3000/api/v1/catalog?page=1&limit=20&type=1&status=1&genre=1"
 ```
 
@@ -144,25 +144,31 @@ Se persisten categorías como BSON Int32 y nombres derivados solo en la API. `ti
 
 Índices propios (además de `_id` por colección):
 
-| Colección | Índice / campos | Motivo |
-| --- | --- | --- |
-| titles | UNIQUE `tituloId` | Identidad pública. |
-| titles | UNIQUE `importKey` | Idempotencia incluso bajo concurrencia. |
-| titles | `updatedAt:-1, tituloId:1` | Listado general estable. |
-| titles | `publicationStatusId:1, typeId:1, updatedAt:-1, tituloId:1` | Listado por estado y tipo. |
-| titles | `ficha.releaseYear:1` | Filtro por año. |
-| titles | `ficha.genres:1` | Filtro multikey por género. |
-| titles | TEXT `ficha.title, ficha.originalTitle` | Búsqueda por palabras, idioma none. |
-| episodes | UNIQUE `episodeId` | Identidad de episodio. |
-| episodes | UNIQUE `seriesId, seasonNumber, episodeNumber` | Posición y listado por serie/temporada. |
+| Colección | Índice / campos                                             | Motivo                                  |
+| --------- | ----------------------------------------------------------- | --------------------------------------- |
+| titles    | UNIQUE `tituloId`                                           | Identidad pública.                      |
+| titles    | UNIQUE `importKey`                                          | Idempotencia incluso bajo concurrencia. |
+| titles    | `updatedAt:-1, tituloId:1`                                  | Listado general estable.                |
+| titles    | `publicationStatusId:1, typeId:1, updatedAt:-1, tituloId:1` | Listado por estado y tipo.              |
+| titles    | `ficha.releaseYear:1`                                       | Filtro por año.                         |
+| titles    | `ficha.genres:1`                                            | Filtro multikey por género.             |
+| titles    | TEXT `ficha.title, ficha.originalTitle`                     | Búsqueda por palabras, idioma none.     |
+| episodes  | UNIQUE `episodeId`                                          | Identidad de episodio.                  |
+| episodes  | UNIQUE `seriesId, seasonNumber, episodeNumber`              | Posición y listado por serie/temporada. |
 
 Inicialización repetible: `npm run db:init`, o `docker compose run --rm catalog-init` con MongoDB ya iniciado. Si hay índices incompatibles/datos duplicados, falla sin reconstrucción destructiva. Cambios incompatibles de esquema requieren migración explícita. Diseño ampliado en [docs/architecture.md](docs/architecture.md) y [docs/phase-03-mongodb-design.md](docs/phase-03-mongodb-design.md).
 
 ## Pruebas y validación
 
 ```powershell
-npm run check             # typecheck, lint, tests unitarios, OpenAPI y builds
+npm test                  # unitarios + API de Route Handlers + contratos, sin DB
+npm run test:unit
+npm run test:api
+npm run test:contract
 npm run test:integration  # Vitest con MongoDB real temporal; requiere Docker
+npm run test:coverage     # todas las suites Vitest con Mongo temporal
+npm run test:smoke        # alias de verify:phase7, imagen/Compose exclusivos
+npm run check             # tipos, lint, npm test, OpenAPI y builds
 npm run test:e2e          # build y API HTTP con Next de producción/MongoDB temporal
 npm run verify:phase4     # regresión amplia de persistencia, fallos y concurrencia
 npm run verify:phase5     # regresión de casos de uso
@@ -170,6 +176,8 @@ npm run verify:phase7     # imagen Docker y Compose aislados, requiere Docker
 ```
 
 `npm test` no abre conexiones a MongoDB. Los tests de integración crean sus propios contenedores y no leen la URI del usuario. E2E usa un puerto disponible en loopback. La verificación Docker crea un proyecto/volumen propios y los elimina al finalizar. No ejecutar estas verificaciones contra una base productiva. Los resultados ejecutados y límites de verificación están en [docs/verification.md](docs/verification.md).
+
+Coverage V8 incluye todo `src/**/*.ts`; umbrales: 70 % global y 80 % Domain/Application para líneas, sentencias, ramas y funciones. HTML/LCOV/JSON y resultados quedan en `coverage/`, ignorado por Git. Vitest API llama handlers reales y controla el repositorio; `test:e2e` verifica Next por HTTP con Mongo real. [Resultados backend actuales](../docs/quality/BACKEND_TEST_RESULTS.md). Las escrituras requieren ADMIN validado por RS256/JWKS; las lecturas son públicas en este MVP.
 
 ## Estructura
 
@@ -184,7 +192,7 @@ catalog-service/
 │   │   ├── infrastructure/       # MongoDB, reloj y UUID
 │   │   └── interfaces/http/      # Zod, handlers y presenters
 │   └── shared/infrastructure/    # Configuración, HTTP, conexión y logging
-├── tests/{unit,integration,helpers}/
+├── tests/{unit,api,contract,integration,helpers}/
 ├── scripts/                      # Inicialización y verificaciones
 ├── examples/catalog.bulk.json
 ├── docs/                         # OpenAPI, arquitectura y verificación
@@ -192,7 +200,7 @@ catalog-service/
 ├── docker-compose.yml            # API + inicializador + MongoDB local
 ├── compose.dev.yml               # Puerto MongoDB para Next en el host
 ├── compose.atlas.yml             # API + inicializador, base externa
-├── .env.example / .env.atlas.example
+├── .env.example
 ├── eslint.config.mjs
 ├── vitest.config.ts / vitest.integration.config.ts
 └── package.json / package-lock.json
@@ -200,4 +208,19 @@ catalog-service/
 
 ## Alcance operativo
 
-Esta versión es una API interna académica sin autenticación/autorización ni rate limiting. Los Compose publican la API en loopback. Para exponer operaciones editoriales a otros equipos, la integración deberá definir autenticación, permisos y protección de tráfico. No se ha implementado el servicio Reproducción ni probado Atlas con credenciales reales.
+Las lecturas del catálogo son públicas (incluidos estados editoriales y referencias opacas de assets); no autorizan reproducción. POST bulk y ambos PATCH exigen un Bearer ADMIN emitido por Users, verificado con RS256/JWKS sin consultar su base de datos. La revocación se propaga al vencer el access token. Los Compose publican la API en loopback. Antes de exponerla públicamente se requiere TLS y rate limiting en el gateway; no se ha probado Atlas con credenciales reales.
+
+## Hardening de calidad y seguridad
+
+ESLint cubre TS/TSX; TypeScript conserva strict; Prettier comparte la configuración raíz.
+
+```powershell
+npm run format:check
+npm run lint
+npm run typecheck
+npm audit --audit-level=high
+```
+
+`npm run format` aplica el formato. Los gates de CI también escanean secretos y auditan dependencias. Consulte [Security Review](../docs/quality/SECURITY_REVIEW.md) y [Dependency Audit](../docs/quality/DEPENDENCY_AUDIT.md), incluidos los pendientes de rotación de secretos y avisos MEDIUM. No versionar `.env` ni claves privadas.
+
+Para escrituras directas, obtener un access token ADMIN de Users y enviarlo como `Authorization: Bearer <accessToken>`. `USERS_JWKS_URL` es una URL confiable de configuración: por defecto Node usa localhost:3001 y Compose host.docker.internal:3001; el override integrado del frontend utiliza la red de Users. `JWT_ISSUER=users-service` y `JWT_AUDIENCE=streaming-services` deben coincidir con el firmante. GET permanece público; ningún servicio accede a PostgreSQL de Users para verificar tokens. En Atlas, copiar `.env.example` y editar únicamente el ENV ignorado; nunca guardar credenciales en ejemplos.

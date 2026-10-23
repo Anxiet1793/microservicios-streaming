@@ -22,7 +22,8 @@ paths:
       tags:
         - Auth
       summary: Registra usuario y perfil en una transacción
-      description: Email normalizado con trim/lowercase. Rol USER asignado por servidor. No inicia sesión
+      description:
+        Email normalizado con trim/lowercase. Rol USER asignado por servidor. No inicia sesión
         automáticamente.
       requestBody:
         required: true
@@ -193,7 +194,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -287,7 +289,8 @@ paths:
       tags:
         - Auth
       summary: Rota refresh y emite access token
-      description: Cookie users_refresh requerida. Rotación de un solo uso con caducidad absoluta fija.
+      description:
+        Cookie users_refresh requerida. Rotación de un solo uso con caducidad absoluta fija.
         Reutilizar un token consumido/revocado invalida su familia y responde 401. El frontend debe
         serializar los refresh; dos solicitudes simultáneas se consideran replay. Ante 401 se borra
         la cookie.
@@ -300,7 +303,8 @@ paths:
             type: string
             enum:
               - "1"
-          description: Obligatoria con valor 1 cuando no se envía Origin. Si se envía Origin, debe coincidir
+          description:
+            Obligatoria con valor 1 cuando no se envía Origin. Si se envía Origin, debe coincidir
             exactamente con APP_ORIGIN.
       responses:
         "200":
@@ -333,7 +337,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -412,7 +417,8 @@ paths:
             type: string
             enum:
               - "1"
-          description: Obligatoria con valor 1 cuando no se envía Origin. Si se envía Origin, debe coincidir
+          description:
+            Obligatoria con valor 1 cuando no se envía Origin. Si se envía Origin, debe coincidir
             exactamente con APP_ORIGIN.
       responses:
         "204":
@@ -440,7 +446,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -538,7 +545,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -618,7 +626,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -733,7 +742,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -843,7 +853,8 @@ paths:
             minimum: 1
             maximum: 100
             default: 20
-      description: Orden addedAt descendente, tituloId ascendente. Offset máximo 10000. Conteo y página
+      description:
+        Orden addedAt descendente, tituloId ascendente. Offset máximo 10000. Conteo y página
         son lecturas separadas.
       responses:
         "200":
@@ -871,7 +882,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -947,7 +959,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -1049,7 +1062,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -1159,7 +1173,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -1209,7 +1224,8 @@ paths:
       summary: Crea o cambia LIKE/DISLIKE
       security:
         - bearerAuth: []
-      description: "PUT idempotente: repetir valor conserva updatedAt; cambiarlo conserva createdAt. No
+      description:
+        "PUT idempotente: repetir valor conserva updatedAt; cambiarlo conserva createdAt. No
         admite usuarioId en entrada."
       requestBody:
         required: true
@@ -1245,7 +1261,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -1359,7 +1376,8 @@ paths:
               schema:
                 $ref: "#/components/schemas/Error"
         "401":
-          description: UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
+          description:
+            UNAUTHORIZED o INVALID_CREDENTIALS. No distingue email/contraseña incorrectos, usuario
             inactivo o refresh inválido.
           headers:
             x-request-id:
@@ -1480,7 +1498,8 @@ paths:
       tags:
         - Infrastructure
       summary: Publica solo clave pública RSA
-      description: Consumidores fijan issuer, audience, RS256 y exp y seleccionan kid; no siguen jku del
+      description:
+        Consumidores fijan issuer, audience, RS256 y exp y seleccionan kid; no siguen jku del
         token. En esta versión se publica una única clave activa.
       responses:
         "200":

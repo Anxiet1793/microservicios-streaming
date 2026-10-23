@@ -1,0 +1,128 @@
+meta {
+  name: 02 Update profile
+  type: http
+  seq: 2
+}
+
+patch {
+  url: {{usersBaseUrl}}/api/v1/users/me
+  body: json
+  auth: none
+}
+
+headers {
+  Authorization: Bearer {{accessToken}}
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "displayName": "Bruno QA actualizado",
+    "avatarUrl": null,
+    "preferredLanguage": "es"
+  }
+}
+
+script:pre-request {
+  if (!(bru.getVar("accessToken") || bru.getEnvVar("accessToken"))) throw new Error("Login USER first");
+}
+
+tests {
+  test("HTTP 200", function () { expect(res.getStatus()).to.equal(200); });
+  
+  test("Response JSON Schema from OpenAPI", function () {
+    const schema = {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "userId",
+      "email",
+      "status",
+      "role",
+      "profile",
+      "createdAt",
+      "updatedAt"
+    ],
+    "properties": {
+      "userId": {
+        "type": "string",
+        "pattern": "^usr_[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+      },
+      "email": {
+        "type": "string",
+        "format": "email"
+      },
+      "status": {
+        "type": "string",
+        "enum": [
+          "ACTIVE",
+          "INACTIVE"
+        ]
+      },
+      "role": {
+        "type": "string",
+        "enum": [
+          "USER",
+          "ADMIN"
+        ]
+      },
+      "profile": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "displayName",
+          "avatarUrl",
+          "preferredLanguage"
+        ],
+        "properties": {
+          "displayName": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 100
+          },
+          "avatarUrl": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "uri",
+                "maxLength": 2048,
+                "pattern": "^https?://"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "preferredLanguage": {
+            "type": "string",
+            "pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+          }
+        }
+      },
+      "createdAt": {
+        "type": "string",
+        "format": "date-time"
+      },
+      "updatedAt": {
+        "type": "string",
+        "format": "date-time"
+      }
+    }
+  };
+    expect(res.getBody()).to.have.jsonSchema(schema);
+  });
+  
+  test("No database or password fields", function () {
+    const visit = value => value && typeof value === "object" && Object.entries(value).some(([key, child]) => ["password", "passwordHash", "password_hash", "tokenHash", "_id"].includes(key) || visit(child));
+    expect(Boolean(visit(res.getBody()))).to.equal(false);
+  });
+  
+  test("Required fields and behavior", function () {
+    expect(res.getBody().profile.displayName).to.equal("Bruno QA actualizado");
+  });
+}
+
+docs {
+  Servicio: users. Variables e IDs capturados en memoria. Ejecutar el plan demo para preparar las dependencias de esta petición.
+}
+

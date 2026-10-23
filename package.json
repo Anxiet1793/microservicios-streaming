@@ -1,0 +1,23 @@
+{
+  "name": "nevaro-streaming-stack",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "stack:setup": "node scripts/setup-stack.mjs",
+    "stack:up": "node scripts/stack.mjs up",
+    "stack:down": "node scripts/stack.mjs down",
+    "stack:logs": "node scripts/stack.mjs logs",
+    "stack:seed": "node scripts/stack.mjs seed",
+    "smoke": "node --env-file-if-exists=.env scripts/smoke-test.mjs",
+    "test": "node --test scripts/tests/*.test.mjs",
+    "api:install": "npm ci --prefix api/bruno --no-audit --no-fund",
+    "api:setup": "node scripts/api-collection.mjs setup",
+    "api:health": "node scripts/api-collection.mjs health",
+    "api:demo": "node scripts/api-collection.mjs demo",
+    "api:demo:cleanup": "node scripts/api-collection.mjs demo-cleanup",
+    "api:check": "npm run check --prefix api/bruno"
+  }
+}

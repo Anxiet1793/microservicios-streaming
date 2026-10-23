@@ -1,0 +1,416 @@
+Working directory: root
+Command: docker compose up --build --detach --wait --wait-timeout 300
+Started: 2026-10-21T21:03:39.746Z
+Ended: 2026-10-21T21:03:51.314Z
+Exit code: 0
+Duration: 11.566 seconds
+
+ Image nevaro-catalog:local Building 
+ Image nevaro-playback:local Building 
+ Image nevaro-frontend:local Building 
+ Image nevaro-minio:local Building 
+ Image nevaro-users:local Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.93kB 0.0s done
+#1 DONE 0.0s
+
+#2 [users-service internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.10kB 0.0s done
+#2 DONE 0.0s
+
+#3 [frontend internal] load build definition from Dockerfile
+#3 transferring dockerfile: 1.05kB 0.0s done
+#3 DONE 0.0s
+
+#4 [catalog-service internal] load build definition from Dockerfile
+#4 transferring dockerfile: 1.25kB 0.0s done
+#4 DONE 0.1s
+
+#5 [minio internal] load build definition from minio.Dockerfile
+#5 transferring dockerfile: 844B 0.0s done
+#5 DONE 0.1s
+
+#6 [playback-service internal] load build definition from Dockerfile
+#6 transferring dockerfile: 1.16kB 0.0s done
+#6 DONE 0.1s
+
+#7 [frontend internal] load metadata for docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#7 DONE 0.0s
+
+#8 [frontend internal] load .dockerignore
+#8 transferring context: 153B done
+#8 DONE 0.0s
+
+#9 [playback-service internal] load .dockerignore
+#9 transferring context: 138B 0.0s done
+#9 DONE 0.0s
+
+#10 [frontend dependencies 1/4] FROM docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#10 resolve docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#10 DONE 0.0s
+
+#11 [playback-service internal] load build context
+#11 transferring context: 3.97kB 0.0s done
+#11 DONE 0.0s
+
+#12 [playback-service runner 3/7] RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg && rm -rf /var/lib/apt/lists/*
+#12 CACHED
+
+#13 [playback-service runner 6/7] COPY --from=builder --chown=node:node /app/public ./public
+#13 CACHED
+
+#14 [playback-service runner 5/7] COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+#14 CACHED
+
+#15 [playback-service dependencies 3/4] COPY package*.json ./
+#15 CACHED
+
+#16 [playback-service dependencies 4/4] RUN npm ci --no-audit --no-fund --fetch-timeout=60000 --fetch-retries=2
+#16 CACHED
+
+#17 [playback-service builder 1/2] COPY . .
+#17 CACHED
+
+#18 [playback-service builder 2/2] RUN npm run build && npm run build:scripts
+#18 CACHED
+
+#19 [playback-service runner 4/7] COPY --from=builder --chown=node:node /app/.next/standalone ./
+#19 CACHED
+
+#20 [playback-service runner 7/7] COPY --from=builder --chown=node:node /app/dist ./dist
+#20 CACHED
+
+#21 [frontend internal] load build context
+#21 transferring context: 6.92kB 0.0s done
+#21 DONE 0.0s
+
+#22 [frontend builder 1/2] COPY . .
+#22 CACHED
+
+#23 [frontend stage-2 3/5] COPY --from=builder --chown=node:node /app/.next/standalone ./
+#23 CACHED
+
+#24 [frontend dependencies 2/4] WORKDIR /app
+#24 CACHED
+
+#25 [frontend builder 2/2] RUN npm run build
+#25 CACHED
+
+#26 [frontend stage-2 4/5] COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+#26 CACHED
+
+#27 [frontend dependencies 3/4] COPY package*.json ./
+#27 CACHED
+
+#28 [frontend dependencies 4/4] RUN npm install -g npm@12.2.0 && npm ci --no-audit --no-fund --fetch-timeout=60000 --fetch-retries=2
+#28 CACHED
+
+#29 [frontend stage-2 5/5] COPY --from=builder --chown=node:node /app/docs/licenses ./licenses
+#29 CACHED
+
+#30 [frontend] exporting to image
+#30 exporting layers done
+#30 exporting manifest sha256:[HASH_OR_TOKEN_REDACTED] done
+#30 exporting config sha256:[HASH_OR_TOKEN_REDACTED] done
+#30 exporting attestation manifest sha256:[HASH_OR_TOKEN_REDACTED]
+#30 exporting attestation manifest sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#30 exporting manifest list sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#30 naming to docker.io/library/nevaro-frontend:local done
+#30 unpacking to docker.io/library/nevaro-frontend:local done
+#30 DONE 0.1s
+
+#31 [playback-service] exporting to image
+#31 exporting layers done
+#31 exporting manifest sha256:[HASH_OR_TOKEN_REDACTED] done
+#31 exporting config sha256:[HASH_OR_TOKEN_REDACTED] done
+#31 exporting attestation manifest sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#31 exporting manifest list sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#31 naming to docker.io/library/nevaro-playback:local done
+#31 unpacking to docker.io/library/nevaro-playback:local 0.0s done
+#31 DONE 0.1s
+
+#32 [catalog-service] resolve image config for docker-image://docker.io/docker/dockerfile:1
+#32 ...
+
+#33 [playback-service] resolving provenance for metadata file
+#33 DONE 0.0s
+
+#34 [frontend] resolving provenance for metadata file
+#34 DONE 0.0s
+
+#35 [minio internal] load metadata for docker.io/library/debian:bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#35 ...
+
+#36 [minio internal] load metadata for docker.io/library/golang:1.24.8-bookworm@sha256:[HASH_OR_TOKEN_REDACTED]
+#36 DONE 1.2s
+
+#32 [catalog-service] resolve image config for docker-image://docker.io/docker/dockerfile:1
+#32 DONE 1.3s
+
+#35 [minio internal] load metadata for docker.io/library/debian:bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#35 DONE 1.2s
+
+#9 [minio internal] load .dockerignore
+#9 CACHED
+
+#37 [users-service] docker-image://docker.io/docker/dockerfile:1@sha256:[HASH_OR_TOKEN_REDACTED]
+#37 resolve docker.io/docker/dockerfile:1@sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#37 CACHED
+
+#38 [minio builder 1/4] FROM docker.io/library/golang:1.24.8-bookworm@sha256:[HASH_OR_TOKEN_REDACTED]
+#38 resolve docker.io/library/golang:1.24.8-bookworm@sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#38 DONE 0.0s
+
+#39 [minio stage-1 1/4] FROM docker.io/library/debian:bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#39 resolve docker.io/library/debian:bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#39 DONE 0.0s
+
+#40 [minio stage-1 2/4] RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates curl && rm -rf /var/lib/apt/lists/* && useradd --uid 10001 --create-home minio && mkdir /data && chown minio:minio /data
+#40 CACHED
+
+#41 [minio builder 2/4] RUN git clone https://github.com/minio/minio.git /source && cd /source && git checkout "9e49d5e7a648f00e26f2246f4dc28e6b07f8c84a"
+#41 CACHED
+
+#42 [minio builder 4/4] RUN CGO_ENABLED=0 go build -trimpath -o /minio .
+#42 CACHED
+
+#43 [minio builder 3/4] WORKDIR /source
+#43 CACHED
+
+#44 [minio stage-1 3/4] COPY --from=builder /minio /usr/local/bin/minio
+#44 CACHED
+
+#45 [minio stage-1 4/4] COPY --from=builder /source/LICENSE /usr/share/doc/minio/LICENSE
+#45 CACHED
+
+#46 [minio] exporting to image
+#46 exporting layers done
+#46 exporting manifest sha256:[HASH_OR_TOKEN_REDACTED] done
+#46 exporting config sha256:[HASH_OR_TOKEN_REDACTED] done
+#46 exporting attestation manifest sha256:[HASH_OR_TOKEN_REDACTED]
+#46 exporting attestation manifest sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#46 exporting manifest list sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#46 naming to docker.io/library/nevaro-minio:local done
+#46 unpacking to docker.io/library/nevaro-minio:local 0.0s done
+#46 DONE 0.1s
+
+#7 [users-service internal] load metadata for docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#7 ...
+
+#47 [minio] resolving provenance for metadata file
+#47 DONE 0.0s
+
+#7 [users-service internal] load metadata for docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#7 DONE 0.7s
+
+#48 [catalog-service internal] load .dockerignore
+#48 transferring context: 193B 0.0s done
+#48 DONE 0.0s
+
+#49 [users-service internal] load .dockerignore
+#49 transferring context: 189B 0.0s done
+#49 DONE 0.0s
+
+#50 [users-service internal] load build context
+#50 DONE 0.0s
+
+#51 [catalog-service internal] load build context
+#51 DONE 0.0s
+
+#10 [users-service base 1/2] FROM docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED]
+#10 resolve docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#10 resolve docker.io/library/node:24-bookworm-slim@sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#10 DONE 0.0s
+
+#50 [users-service internal] load build context
+#50 transferring context: 5.52kB 0.0s done
+#50 DONE 0.0s
+
+#51 [catalog-service internal] load build context
+#51 transferring context: 7.12kB 0.0s done
+#51 DONE 0.0s
+
+#52 [users-service runner 3/4] COPY --from=builder --chown=node:node /app/dist ./dist
+#52 CACHED
+
+#53 [users-service builder 2/3] COPY . .
+#53 CACHED
+
+#54 [users-service runner 1/4] COPY --from=builder --chown=node:node /app/.next/standalone ./
+#54 CACHED
+
+#55 [users-service runner 2/4] COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+#55 CACHED
+
+#56 [users-service builder 1/3] COPY --from=dependencies /app/node_modules ./node_modules
+#56 CACHED
+
+#57 [users-service builder 3/3] RUN npm run build && npm run build:scripts
+#57 CACHED
+
+#58 [users-service dependencies 2/2] RUN npm ci --no-audit --no-fund --foreground-scripts --fetch-timeout=60000 --fetch-retries=2
+#58 CACHED
+
+#59 [users-service dependencies 1/2] COPY package.json package-lock.json ./
+#59 CACHED
+
+#60 [users-service runner 4/4] COPY --from=builder --chown=node:node /app/drizzle ./drizzle
+#60 CACHED
+
+#61 [catalog-service runner 2/3] COPY --from=builder --chown=node:node /app/.next/static ./.next/static
+#61 CACHED
+
+#62 [catalog-service runner 1/3] COPY --from=builder --chown=node:node /app/.next/standalone ./
+#62 CACHED
+
+#24 [catalog-service base 2/2] WORKDIR /app
+#24 CACHED
+
+#63 [catalog-service builder 1/3] COPY --from=dependencies /app/node_modules ./node_modules
+#63 CACHED
+
+#64 [catalog-service builder 2/3] COPY . .
+#64 CACHED
+
+#65 [catalog-service dependencies 2/2] RUN npm ci --no-audit --no-fund
+#65 CACHED
+
+#66 [catalog-service builder 3/3] RUN npm run build && npm run build:init
+#66 CACHED
+
+#67 [catalog-service dependencies 1/2] COPY package.json package-lock.json ./
+#67 CACHED
+
+#68 [catalog-service runner 3/3] COPY --from=builder --chown=node:node /app/dist/init-mongo.mjs ./init-mongo.mjs
+#68 CACHED
+
+#69 [catalog-service] exporting to image
+#69 exporting layers done
+#69 exporting manifest sha256:[HASH_OR_TOKEN_REDACTED] done
+#69 exporting config sha256:[HASH_OR_TOKEN_REDACTED] done
+#69 exporting attestation manifest sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#69 exporting manifest list sha256:[HASH_OR_TOKEN_REDACTED]
+#69 exporting manifest list sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#69 naming to docker.io/library/nevaro-catalog:local done
+#69 unpacking to docker.io/library/nevaro-catalog:local 0.0s done
+#69 DONE 0.1s
+
+#70 [users-service] exporting to image
+#70 exporting layers done
+#70 exporting manifest sha256:[HASH_OR_TOKEN_REDACTED] done
+#70 exporting config sha256:[HASH_OR_TOKEN_REDACTED] done
+#70 exporting attestation manifest sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#70 exporting manifest list sha256:[HASH_OR_TOKEN_REDACTED] 0.0s done
+#70 naming to docker.io/library/nevaro-users:local done
+#70 unpacking to docker.io/library/nevaro-users:local 0.0s done
+#70 DONE 0.1s
+
+#71 [catalog-service] resolving provenance for metadata file
+#71 DONE 0.0s
+
+#72 [users-service] resolving provenance for metadata file
+#72 DONE 0.0s
+ Image nevaro-frontend:local Built 
+ Image nevaro-users:local Built 
+ Image nevaro-catalog:local Built 
+ Image nevaro-minio:local Built 
+ Image nevaro-playback:local Built 
+ Container nevaro-redis-1 Running 
+ Container nevaro-playback-service-1 Running 
+ Container nevaro-playback-mongodb-1 Running 
+ Container nevaro-frontend-1 Running 
+ Container nevaro-catalog-service-1 Running 
+ Container nevaro-catalog-mongodb-1 Running 
+ Container nevaro-users-service-1 Running 
+ Container nevaro-minio-1 Running 
+ Container nevaro-users-postgres-1 Running 
+ Container nevaro-playback-replica-init-1 Starting 
+ Container nevaro-playback-replica-init-1 Started 
+ Container nevaro-catalog-mongodb-1 Waiting 
+ Container nevaro-catalog-mongodb-1 Healthy 
+ Container nevaro-catalog-init-1 Starting 
+ Container nevaro-catalog-init-1 Started 
+ Container nevaro-users-postgres-1 Waiting 
+ Container nevaro-users-postgres-1 Healthy 
+ Container nevaro-users-migrate-1 Starting 
+ Container nevaro-users-migrate-1 Started 
+ Container nevaro-playback-replica-init-1 Waiting 
+ Container nevaro-minio-1 Waiting 
+ Container nevaro-playback-mongodb-1 Waiting 
+ Container nevaro-playback-replica-init-1 Exited 
+ Container nevaro-minio-1 Healthy 
+ Container nevaro-playback-mongodb-1 Healthy 
+ Container nevaro-playback-init-1 Starting 
+ Container nevaro-playback-init-1 Started 
+ Container nevaro-users-postgres-1 Waiting 
+ Container nevaro-users-migrate-1 Waiting 
+ Container nevaro-users-migrate-1 Exited 
+ Container nevaro-users-postgres-1 Healthy 
+ Container nevaro-users-migrate-1 Waiting 
+ Container nevaro-users-migrate-1 Exited 
+ Container nevaro-users-seed-1 Starting 
+ Container nevaro-users-seed-1 Started 
+ Container nevaro-users-service-1 Waiting 
+ Container nevaro-catalog-init-1 Waiting 
+ Container nevaro-catalog-init-1 Exited 
+ Container nevaro-users-service-1 Healthy 
+ Container nevaro-catalog-service-1 Waiting 
+ Container nevaro-playback-init-1 Waiting 
+ Container nevaro-playback-mongodb-1 Waiting 
+ Container nevaro-minio-1 Waiting 
+ Container nevaro-users-service-1 Waiting 
+ Container nevaro-playback-init-1 Exited 
+ Container nevaro-playback-mongodb-1 Healthy 
+ Container nevaro-minio-1 Healthy 
+ Container nevaro-catalog-service-1 Healthy 
+ Container nevaro-users-service-1 Healthy 
+ Container nevaro-users-service-1 Waiting 
+ Container nevaro-catalog-service-1 Waiting 
+ Container nevaro-playback-service-1 Waiting 
+ Container nevaro-users-seed-1 Waiting 
+ Container nevaro-users-seed-1 Exited 
+ Container nevaro-catalog-service-1 Healthy 
+ Container nevaro-playback-service-1 Healthy 
+ Container nevaro-users-service-1 Healthy 
+ Container nevaro-stack-seed-1 Starting 
+ Container nevaro-stack-seed-1 Started 
+ Container nevaro-catalog-service-1 Waiting 
+ Container nevaro-playback-service-1 Waiting 
+ Container nevaro-stack-seed-1 Waiting 
+ Container nevaro-redis-1 Waiting 
+ Container nevaro-users-service-1 Waiting 
+ Container nevaro-stack-seed-1 Exited 
+ Container nevaro-playback-service-1 Healthy 
+ Container nevaro-users-service-1 Healthy 
+ Container nevaro-redis-1 Healthy 
+ Container nevaro-catalog-service-1 Healthy 
+ Container nevaro-redis-1 Waiting 
+ Container nevaro-playback-mongodb-1 Waiting 
+ Container nevaro-playback-init-1 Waiting 
+ Container nevaro-catalog-mongodb-1 Waiting 
+ Container nevaro-minio-1 Waiting 
+ Container nevaro-stack-seed-1 Waiting 
+ Container nevaro-users-seed-1 Waiting 
+ Container nevaro-users-postgres-1 Waiting 
+ Container nevaro-users-service-1 Waiting 
+ Container nevaro-users-migrate-1 Waiting 
+ Container nevaro-catalog-init-1 Waiting 
+ Container nevaro-frontend-1 Waiting 
+ Container nevaro-playback-service-1 Waiting 
+ Container nevaro-catalog-service-1 Waiting 
+ Container nevaro-playback-replica-init-1 Waiting 
+ Container nevaro-redis-1 Healthy 
+ Container nevaro-playback-replica-init-1 Exited 
+ Container nevaro-users-postgres-1 Healthy 
+ Container nevaro-stack-seed-1 Exited 
+ Container nevaro-frontend-1 Healthy 
+ Container nevaro-catalog-mongodb-1 Healthy 
+ Container nevaro-catalog-init-1 Exited 
+ Container nevaro-catalog-service-1 Healthy 
+ Container nevaro-playback-service-1 Healthy 
+ Container nevaro-users-seed-1 Exited 
+ Container nevaro-users-migrate-1 Exited 
+ Container nevaro-minio-1 Healthy 
+ Container nevaro-playback-init-1 Exited 
+ Container nevaro-playback-mongodb-1 Healthy 
+ Container nevaro-users-service-1 Healthy 

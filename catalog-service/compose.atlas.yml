@@ -13,6 +13,9 @@ x-catalog-environment: &catalog-environment
   MONGODB_SERVER_SELECTION_TIMEOUT_MS: ${MONGODB_SERVER_SELECTION_TIMEOUT_MS:-5000}
   MONGODB_QUERY_TIMEOUT_MS: ${MONGODB_QUERY_TIMEOUT_MS:-5000}
   BULK_MAX_ITEMS: ${BULK_MAX_ITEMS:-500}
+  USERS_JWKS_URL: ${USERS_JWKS_URL:-http://host.docker.internal:3001/.well-known/jwks.json}
+  JWT_ISSUER: ${JWT_ISSUER:-users-service}
+  JWT_AUDIENCE: ${JWT_AUDIENCE:-streaming-services}
   REQUEST_MAX_BYTES: ${REQUEST_MAX_BYTES:-5242880}
 
 services:
@@ -28,6 +31,8 @@ services:
     <<: *catalog-image
     environment: *catalog-environment
     restart: unless-stopped
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - "127.0.0.1:${CATALOG_PORT:-3000}:3000"
     depends_on:

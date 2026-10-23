@@ -19,9 +19,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const expired = () => {
       client.clear();
-      window.location.assign(
-        `/login?next=${encodeURIComponent(location.pathname)}`,
-      );
+      window.location.assign(`/login?next=${encodeURIComponent(location.pathname)}`);
     };
     window.addEventListener("nevaro:expired", expired);
     return () => window.removeEventListener("nevaro:expired", expired);

@@ -1,0 +1,24 @@
+[
+  {
+    "project": "users-service",
+    "cwd": "users-service",
+    "command": "npm run build",
+    "startedAt": "2026-10-21T05:38:24.980Z",
+    "endedAt": "2026-10-21T05:38:42.385Z",
+    "durationSeconds": 17.404,
+    "exitCode": 0,
+    "log": "users-service-build-1.log",
+    "logSha256": "5986d6d4e78f3f74210deb21d4c401ff05042cd6051f3cad927130556d0a8b13"
+  },
+  {
+    "project": "users-service",
+    "cwd": "users-service",
+    "command": "npm run build:scripts",
+    "startedAt": "2026-10-21T05:38:42.389Z",
+    "endedAt": "2026-10-21T05:38:42.858Z",
+    "durationSeconds": 0.469,
+    "exitCode": 0,
+    "log": "users-service-build-2.log",
+    "logSha256": "5f1ff9cef20f02c38294e2aba3ee0a61b20b7dad0f8b219b158fcf9415918749"
+  }
+]

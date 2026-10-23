@@ -1,0 +1,69 @@
+Working directory: frontend
+Command: npm run test:coverage
+Started: 2026-10-21T05:37:41.966Z
+Ended: 2026-10-21T05:38:24.387Z
+Exit code: 0
+Duration: 42.421 seconds
+
+npm notice run nevaro-frontend@0.1.0 test:coverage
+npm notice run vitest run --coverage
+
+ RUN  v5.0.3 C:/Users/Administrador/Desktop/microservicios streaming/frontend
+      Coverage enabled with v8
+
+ ✓ |components| tests/component/player.test.tsx (7 tests) 1023ms
+   ✓ creates a single session, exposes loading and restores initial currentTime 334ms
+ ✓ |components| tests/component/auth.test.tsx (6 tests) 442ms
+ ✓ |components| tests/component/admin.test.tsx (10 tests) 437ms
+ ✓ |components| tests/component/catalog.test.tsx (10 tests) 482ms
+ ✓ |components| tests/component/personal.test.tsx (5 tests) 547ms
+ ✓ |components| tests/component/session.test.tsx (7 tests) 476ms
+ ✓ |components| tests/component/library.test.tsx (1 test) 227ms
+ ✓ |components| tests/component/actions.test.tsx (3 tests) 328ms
+ ✓ |unit| tests/unit/player.test.ts (13 tests) 6ms
+ ✓ |unit| tests/unit/query.test.ts (3 tests) 5ms
+
+ Test Files  10 passed (10)
+      Tests  65 passed (65)
+   Start at  00:37:44
+   Duration  39.15s (environment 56%, setup 19%, tests 11%, import 9%, transform 4%, worker 1%)
+
+JSON report written to C:/Users/Administrador/Desktop/microservicios streaming/frontend/coverage/test-results.json
+JUNIT report written to C:/Users/Administrador/Desktop/microservicios streaming/frontend/coverage/junit.xml
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |    79.6 |    72.16 |   69.38 |   81.22 |                   
+ components        |   73.17 |     90.9 |   72.22 |      75 |                   
+  Providers.tsx    |       0 |      100 |       0 |       0 | 1-27              
+  Shell.tsx        |     100 |    94.73 |     100 |     100 | 55                
+  ui.tsx           |     100 |    85.71 |     100 |     100 | 41,60,104         
+ features/admin    |   69.01 |    56.52 |      60 |    70.8 |                   
+  Content.tsx      |       0 |        0 |       0 |       0 | 1-163             
+  Editor.tsx       |      95 |    70.73 |     100 |      95 | 126               
+  Upload.tsx       |   86.81 |    75.38 |   85.71 |   89.65 | ...57,121,144,218 
+ features/auth     |   94.11 |    92.06 |   66.66 |   96.55 |                   
+  AuthForm.tsx     |   94.11 |    92.06 |   66.66 |   96.55 | 126               
+ features/catalog  |   97.95 |    75.32 |     100 |   97.67 |                   
+  Explore.tsx      |     100 |    72.41 |     100 |     100 | 17,31-48,58-89    
+  Hero.tsx         |     100 |    71.87 |     100 |     100 | ...21,25-26,37-49 
+  SearchField.tsx  |   95.65 |    83.33 |     100 |   94.73 | 31                
+  query.ts         |     100 |       90 |     100 |     100 | 19                
+ features/library  |   78.57 |    75.53 |   68.75 |      80 |                   
+  Library.tsx      |   66.66 |    60.78 |   55.55 |   66.66 | 35-43,122-147     
+  ...alActions.tsx |   89.65 |    93.02 |   85.71 |   92.85 | 54-57             
+ features/playback |   78.13 |    63.56 |      62 |   80.71 |                   
+  Player.tsx       |   75.52 |    61.78 |   56.81 |    78.4 | ...78-279,323-371 
+ features/profile  |   88.23 |    70.37 |      90 |      88 |                   
+  Profile.tsx      |   88.23 |    70.37 |      90 |      88 | 24-25,30-31,55,71 
+ lib/api           |   93.33 |    95.23 |      75 |     100 |                   
+  client.ts        |   93.33 |    95.23 |      75 |     100 | 46                
+-------------------|---------|----------|---------|---------|-------------------
+
+=============================== Coverage summary ===============================
+Statements   : 79.6% ( 484/608 )
+Branches     : 72.16% ( 433/600 )
+Functions    : 69.38% ( 102/147 )
+Lines        : 81.22% ( 463/570 )
+================================================================================

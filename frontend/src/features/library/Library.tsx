@@ -28,12 +28,7 @@ export function Library({
   const query = useQuery({
     queryKey: [kind, userId, page, limit],
     queryFn: ({ signal }) =>
-      api<Page<Reference>>(
-        `library/${kind}?page=${page}&limit=${limit}`,
-        "GET",
-        undefined,
-        signal,
-      ),
+      api<Page<Reference>>(`library/${kind}?page=${page}&limit=${limit}`, "GET", undefined, signal),
     staleTime: 10000,
   });
   async function remove(item: Reference) {
@@ -45,9 +40,7 @@ export function Library({
         queryKey: ["state", userId, item.tituloId],
       });
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : "No pudimos guardar el cambio.",
-      );
+      setError(e instanceof Error ? e.message : "No pudimos guardar el cambio.");
     }
   }
   if (query.isPending)
@@ -64,10 +57,7 @@ export function Library({
   if (query.isError)
     return (
       <div className="error" role="alert">
-        <p>
-          No pudimos cargar {names[kind]?.toLowerCase()}. Tu información sigue
-          guardada.
-        </p>
+        <p>No pudimos cargar {names[kind]?.toLowerCase()}. Tu información sigue guardada.</p>
         <button className="button secondary" onClick={() => query.refetch()}>
           Reintentar
         </button>
@@ -102,17 +92,11 @@ export function Library({
           {error}
         </p>
       )}
-      <div
-        className={`${s.grid} ${kind !== "watchlist" ? s.landscapeGrid : ""}`}
-      >
+      <div className={`${s.grid} ${kind !== "watchlist" ? s.landscapeGrid : ""}`}>
         {query.data.data.map((item) => (
           <div key={item.tituloId}>
             {item.title ? (
-              <Card
-                title={item.title}
-                reference={item}
-                landscape={kind !== "watchlist"}
-              />
+              <Card title={item.title} reference={item} landscape={kind !== "watchlist"} />
             ) : (
               <div className="error">
                 <p>
@@ -132,9 +116,7 @@ export function Library({
               </p>
             )}
             {kind === "preferences" && (
-              <p className="hint">
-                {item.value === "LIKE" ? "Me gusta" : "No me gusta"}
-              </p>
+              <p className="hint">{item.value === "LIKE" ? "Me gusta" : "No me gusta"}</p>
             )}
             {!compact && ["watchlist", "preferences"].includes(kind) && (
               <button className="button ghost" onClick={() => remove(item)}>
@@ -170,10 +152,7 @@ export function Library({
         </nav>
       )}
       {compact && (
-        <Link
-          href={kind === "watchlist" ? "/my-list" : `/${kind}`}
-          className="srOnly"
-        >
+        <Link href={kind === "watchlist" ? "/my-list" : `/${kind}`} className="srOnly">
           Ver todos
         </Link>
       )}

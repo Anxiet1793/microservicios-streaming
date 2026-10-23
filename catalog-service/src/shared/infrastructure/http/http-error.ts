@@ -9,5 +9,8 @@ export class HttpError extends Error {
     readonly code: string,
     message: string,
     readonly issues?: readonly ValidationIssue[],
-  ) { super(message); this.name = "HttpError"; }
+  ) {
+    super(message);
+    this.name = "HttpError";
+  }
 }

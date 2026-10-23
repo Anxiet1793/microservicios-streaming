@@ -1,0 +1,319 @@
+{
+  "collectedAt": "2026-10-21T05:39:17.118Z",
+  "environment": {
+    "os": "win32",
+    "node": "v24.21.0",
+    "npm": "12.2.0",
+    "docker": "29.8.2",
+    "compose": "Docker Compose version v5.6.0",
+    "baseCommit": "a20fc9a6bf5af7d68ce1066b6c1b5166d08e94b6",
+    "evaluatedWorkingTree": true,
+    "remoteRunVerified": false
+  },
+  "projects": [
+    {
+      "project": "frontend",
+      "tests": {
+        "total": 65,
+        "passed": 65,
+        "failed": 0,
+        "pending": 0,
+        "success": true
+      },
+      "groups": {
+        "unit": {
+          "total": 16,
+          "passed": 16,
+          "failed": 0,
+          "pending": 0
+        },
+        "component": {
+          "total": 49,
+          "passed": 49,
+          "failed": 0,
+          "pending": 0
+        }
+      },
+      "coverage": {
+        "lines": {
+          "total": 570,
+          "covered": 463,
+          "skipped": 0,
+          "pct": 81.22
+        },
+        "statements": {
+          "total": 608,
+          "covered": 484,
+          "skipped": 0,
+          "pct": 79.6
+        },
+        "functions": {
+          "total": 147,
+          "covered": 102,
+          "skipped": 0,
+          "pct": 69.38
+        },
+        "branches": {
+          "total": 600,
+          "covered": 433,
+          "skipped": 0,
+          "pct": 72.16
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "sourceReports": [
+        {
+          "path": "frontend/coverage/test-results.json",
+          "sha256": "e266969a7b976372d8ed34c63857b42997867c11788a5870ed0671e6e53464e2"
+        },
+        {
+          "path": "frontend/coverage/coverage-summary.json",
+          "sha256": "76a4aca5c1caf96bd6aa20ae0e5e04c845cc803940dd33cf2e8446ee8681a157"
+        }
+      ]
+    },
+    {
+      "project": "users-service",
+      "tests": {
+        "total": 96,
+        "passed": 96,
+        "failed": 0,
+        "pending": 0,
+        "success": true
+      },
+      "groups": {
+        "api": {
+          "total": 31,
+          "passed": 31,
+          "failed": 0,
+          "pending": 0
+        },
+        "contract": {
+          "total": 2,
+          "passed": 2,
+          "failed": 0,
+          "pending": 0
+        },
+        "unit": {
+          "total": 43,
+          "passed": 43,
+          "failed": 0,
+          "pending": 0
+        },
+        "integration": {
+          "total": 20,
+          "passed": 20,
+          "failed": 0,
+          "pending": 0
+        }
+      },
+      "coverage": {
+        "lines": {
+          "total": 594,
+          "covered": 566,
+          "skipped": 0,
+          "pct": 95.28
+        },
+        "statements": {
+          "total": 626,
+          "covered": 585,
+          "skipped": 0,
+          "pct": 93.45
+        },
+        "functions": {
+          "total": 145,
+          "covered": 129,
+          "skipped": 0,
+          "pct": 88.96
+        },
+        "branches": {
+          "total": 246,
+          "covered": 224,
+          "skipped": 0,
+          "pct": 91.05
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "sourceReports": [
+        {
+          "path": "users-service/coverage/test-results.json",
+          "sha256": "b8716bd4d01e9a951d830649f4204e21ea804c03b7628797d7f8a3e3bada7dcd"
+        },
+        {
+          "path": "users-service/coverage/coverage-summary.json",
+          "sha256": "a69552168b88b4b7807e9afc43cf07903b759eeb7e24237453cd9ee34197f14d"
+        }
+      ]
+    },
+    {
+      "project": "catalog-service",
+      "tests": {
+        "total": 103,
+        "passed": 103,
+        "failed": 0,
+        "pending": 0,
+        "success": true
+      },
+      "groups": {
+        "api": {
+          "total": 42,
+          "passed": 42,
+          "failed": 0,
+          "pending": 0
+        },
+        "contract": {
+          "total": 3,
+          "passed": 3,
+          "failed": 0,
+          "pending": 0
+        },
+        "integration": {
+          "total": 7,
+          "passed": 7,
+          "failed": 0,
+          "pending": 0
+        },
+        "unit": {
+          "total": 51,
+          "passed": 51,
+          "failed": 0,
+          "pending": 0
+        }
+      },
+      "coverage": {
+        "lines": {
+          "total": 658,
+          "covered": 580,
+          "skipped": 0,
+          "pct": 88.14
+        },
+        "statements": {
+          "total": 729,
+          "covered": 633,
+          "skipped": 0,
+          "pct": 86.83
+        },
+        "functions": {
+          "total": 180,
+          "covered": 164,
+          "skipped": 0,
+          "pct": 91.11
+        },
+        "branches": {
+          "total": 541,
+          "covered": 448,
+          "skipped": 0,
+          "pct": 82.8
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "sourceReports": [
+        {
+          "path": "catalog-service/coverage/test-results.json",
+          "sha256": "5caa7e4bcedfd379876c1bee40eb636a6062da2ee350e2cbf0705995e503bac9"
+        },
+        {
+          "path": "catalog-service/coverage/coverage-summary.json",
+          "sha256": "ce67aeeb0e1e9d2a9e2d1c19a4c5cd5cf2ec790c7ba8fb909713bf374df150f0"
+        }
+      ]
+    },
+    {
+      "project": "playback-service",
+      "tests": {
+        "total": 115,
+        "passed": 115,
+        "failed": 0,
+        "pending": 0,
+        "success": true
+      },
+      "groups": {
+        "api": {
+          "total": 20,
+          "passed": 20,
+          "failed": 0,
+          "pending": 0
+        },
+        "contract": {
+          "total": 37,
+          "passed": 37,
+          "failed": 0,
+          "pending": 0
+        },
+        "integration": {
+          "total": 13,
+          "passed": 13,
+          "failed": 0,
+          "pending": 0
+        },
+        "unit": {
+          "total": 45,
+          "passed": 45,
+          "failed": 0,
+          "pending": 0
+        }
+      },
+      "coverage": {
+        "lines": {
+          "total": 435,
+          "covered": 378,
+          "skipped": 0,
+          "pct": 86.89
+        },
+        "statements": {
+          "total": 485,
+          "covered": 409,
+          "skipped": 0,
+          "pct": 84.32
+        },
+        "functions": {
+          "total": 107,
+          "covered": 93,
+          "skipped": 0,
+          "pct": 86.91
+        },
+        "branches": {
+          "total": 271,
+          "covered": 212,
+          "skipped": 0,
+          "pct": 78.22
+        },
+        "branchesTrue": {
+          "total": 0,
+          "covered": 0,
+          "skipped": 0,
+          "pct": 100
+        }
+      },
+      "sourceReports": [
+        {
+          "path": "playback-service/coverage/test-results.json",
+          "sha256": "202ff4481de8a066a715dc21594f7ab963d7a37a455ed0a7cbc41d6ea917fa01"
+        },
+        {
+          "path": "playback-service/coverage/coverage-summary.json",
+          "sha256": "5604192ced87eb18216f31ee029220717df7791d5ce4064fee3572f8fc43c60a"
+        }
+      ]
+    }
+  ],
+  "totalTests": 379,
+  "totalPassed": 379,
+  "totalFailed": 0,
+  "totalPending": 0
+}

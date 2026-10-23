@@ -7,35 +7,23 @@ interface State {
   watchlist: { known: boolean; item: unknown };
   preference: { known: boolean; item: { value: "LIKE" | "DISLIKE" } | null };
 }
-export function PersonalActions({
-  userId,
-  tituloId,
-}: {
-  userId: string;
-  tituloId: string;
-}) {
+export function PersonalActions({ userId, tituloId }: { userId: string; tituloId: string }) {
   const key = ["state", userId, tituloId],
     client = useQueryClient();
   const q = useQuery({
     queryKey: key,
-    queryFn: ({ signal }) =>
-      api<State>(`state/${tituloId}`, "GET", undefined, signal),
+    queryFn: ({ signal }) => api<State>(`state/${tituloId}`, "GET", undefined, signal),
   });
   const [pending, setPending] = useState(false),
     [error, setError] = useState("");
-  async function change(
-    kind: "watchlist" | "preferences",
-    value?: "LIKE" | "DISLIKE",
-  ) {
+  async function change(kind: "watchlist" | "preferences", value?: "LIKE" | "DISLIKE") {
     if (!q.data || pending) return;
     const old = q.data;
     setError("");
     setPending(true);
     await client.cancelQueries({ queryKey: key });
     const remove =
-      kind === "watchlist"
-        ? !!old.watchlist.item
-        : old.preference.item?.value === value;
+      kind === "watchlist" ? !!old.watchlist.item : old.preference.item?.value === value;
     client.setQueryData<State>(
       key,
       kind === "watchlist"
@@ -57,9 +45,7 @@ export function PersonalActions({
       await client.invalidateQueries({ queryKey: [kind, userId] });
     } catch (e) {
       client.setQueryData(key, old);
-      setError(
-        e instanceof Error ? e.message : "No pudimos guardar el cambio.",
-      );
+      setError(e instanceof Error ? e.message : "No pudimos guardar el cambio.");
     } finally {
       setPending(false);
     }
@@ -83,16 +69,8 @@ export function PersonalActions({
           disabled={!known || pending}
           onClick={() => change("watchlist")}
         >
-          {q.data?.watchlist.item ? (
-            <Check size={17} />
-          ) : (
-            <Bookmark size={17} />
-          )}{" "}
-          {q.isPending
-            ? "Comprobando…"
-            : q.data?.watchlist.item
-              ? "En Mi Lista"
-              : "+ Mi Lista"}
+          {q.data?.watchlist.item ? <Check size={17} /> : <Bookmark size={17} />}{" "}
+          {q.isPending ? "Comprobando…" : q.data?.watchlist.item ? "En Mi Lista" : "+ Mi Lista"}
         </button>
         <button
           className="button secondary"
@@ -115,8 +93,8 @@ export function PersonalActions({
       </div>
       {!known && !q.isPending && (
         <p className="hint">
-          Tu colección es muy extensa para comprobarla aquí. Adminístrala desde
-          Mi Lista o Tus gustos.
+          Tu colección es muy extensa para comprobarla aquí. Adminístrala desde Mi Lista o Tus
+          gustos.
         </p>
       )}
       {error && (

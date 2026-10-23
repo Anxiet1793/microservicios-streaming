@@ -1,0 +1,183 @@
+{
+  "checkedAt": "2026-10-21T21:04:49.208Z",
+  "command": "docker compose ps --all --format json",
+  "containers": [
+    {
+      "service": "catalog-init",
+      "name": "nevaro-catalog-init-1",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0,
+      "image": "sha256:f636967a78a7e5022dcb7825fe4269886905fd76376b7670e982ace62561c7a0",
+      "ports": ""
+    },
+    {
+      "service": "catalog-mongodb",
+      "name": "nevaro-catalog-mongodb-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2",
+      "ports": "27017/tcp"
+    },
+    {
+      "service": "catalog-service",
+      "name": "nevaro-catalog-service-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "sha256:f636967a78a7e5022dcb7825fe4269886905fd76376b7670e982ace62561c7a0",
+      "ports": "127.0.0.1:8082->3000/tcp"
+    },
+    {
+      "service": "frontend",
+      "name": "nevaro-frontend-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "sha256:04c8166f3d3bd9a1b47690aff7587ea901b4f7f1c1d73e0fffdfeedf0f776eaa",
+      "ports": "127.0.0.1:8080->3003/tcp"
+    },
+    {
+      "service": "minio",
+      "name": "nevaro-minio-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "sha256:ca7358bc9cb67efaf056853f72958675997fb0a49240b836596884ca42796e78",
+      "ports": "127.0.0.1:9000-9001->9000-9001/tcp"
+    },
+    {
+      "service": "playback-init",
+      "name": "nevaro-playback-init-1",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0,
+      "image": "sha256:09863c186e8ed0719c67bcdb9609c800ff00b8e4cc1185d45b726be2e79151ae",
+      "ports": ""
+    },
+    {
+      "service": "playback-mongodb",
+      "name": "nevaro-playback-mongodb-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2",
+      "ports": "27017/tcp"
+    },
+    {
+      "service": "playback-replica-init",
+      "name": "nevaro-playback-replica-init-1",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0,
+      "image": "mongo:8.0@sha256:4968f22d0c6c10ef29952f3e807f62872ba22b3312f25803564fbfc08255efc2",
+      "ports": ""
+    },
+    {
+      "service": "playback-service",
+      "name": "nevaro-playback-service-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "sha256:09863c186e8ed0719c67bcdb9609c800ff00b8e4cc1185d45b726be2e79151ae",
+      "ports": "127.0.0.1:8083->3002/tcp"
+    },
+    {
+      "service": "redis",
+      "name": "nevaro-redis-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "redis:7.4-alpine",
+      "ports": "6379/tcp"
+    },
+    {
+      "service": "stack-seed",
+      "name": "nevaro-stack-seed-1",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0,
+      "image": "sha256:09863c186e8ed0719c67bcdb9609c800ff00b8e4cc1185d45b726be2e79151ae",
+      "ports": ""
+    },
+    {
+      "service": "users-migrate",
+      "name": "nevaro-users-migrate-1",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0,
+      "image": "sha256:c3c1393faf7e617883c50e2e2537aedec4e228e867462f8a514fb8a6515ec5fb",
+      "ports": ""
+    },
+    {
+      "service": "users-postgres",
+      "name": "nevaro-users-postgres-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "postgres:17-bookworm",
+      "ports": "5432/tcp"
+    },
+    {
+      "service": "users-seed",
+      "name": "nevaro-users-seed-1",
+      "state": "exited",
+      "health": "",
+      "exitCode": 0,
+      "image": "sha256:c3c1393faf7e617883c50e2e2537aedec4e228e867462f8a514fb8a6515ec5fb",
+      "ports": ""
+    },
+    {
+      "service": "users-service",
+      "name": "nevaro-users-service-1",
+      "state": "running",
+      "health": "healthy",
+      "exitCode": 0,
+      "image": "sha256:c3c1393faf7e617883c50e2e2537aedec4e228e867462f8a514fb8a6515ec5fb",
+      "ports": "127.0.0.1:8081->3001/tcp"
+    }
+  ],
+  "httpHealth": [
+    {
+      "service": "users",
+      "url": "http://localhost:8081/api/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "users-service"
+      }
+    },
+    {
+      "service": "catalog",
+      "url": "http://localhost:8082/api/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "catalog-service"
+      }
+    },
+    {
+      "service": "playback",
+      "url": "http://localhost:8083/api/health",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "service": "playback-service",
+        "dependencies": {
+          "mongodb": "up",
+          "objectStorage": "up"
+        }
+      }
+    },
+    {
+      "service": "frontend",
+      "url": "http://localhost:8080/login",
+      "status": 200,
+      "body": {
+        "html": true
+      }
+    }
+  ],
+  "temporaryTestContainersRemaining": []
+}

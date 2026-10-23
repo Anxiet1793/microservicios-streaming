@@ -19,5 +19,11 @@ MAX_UPLOAD_BYTES=268435456
 UPLOAD_LIMIT_PER_HOUR=10
 FFPROBE_PATH=ffprobe
 `;
-try { await writeFile(".env", values, { flag: "wx", mode: 0o600 }); console.log("Entorno local creado; no se muestran credenciales."); }
-catch (e) { if (e && typeof e === "object" && "code" in e && e.code === "EEXIST") console.log("Se conserva el entorno existente."); else throw e; }
+try {
+  await writeFile(".env", values, { flag: "wx", mode: 0o600 });
+  console.log("Entorno local creado; no se muestran credenciales.");
+} catch (e) {
+  if (e && typeof e === "object" && "code" in e && e.code === "EEXIST")
+    console.log("Se conserva el entorno existente.");
+  else throw e;
+}

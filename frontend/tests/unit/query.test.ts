@@ -24,8 +24,6 @@ describe("URL search boundary", () => {
     expect(q.get("page")).toBe("2");
   });
   it("limits query length without breaking Unicode characters", () => {
-    expect([...exploreQuery({ q: "ñ".repeat(120) }).get("q")!]).toHaveLength(
-      100,
-    );
+    expect([...exploreQuery({ q: "ñ".repeat(120) }).get("q")!]).toHaveLength(100);
   });
 });

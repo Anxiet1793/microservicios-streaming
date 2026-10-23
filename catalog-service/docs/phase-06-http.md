@@ -4,14 +4,14 @@ Estado histórico al cierre de fase 6: implementada y verificada. Las fases post
 
 ## Endpoints implementados
 
-| Método | Ruta | Comportamiento |
-| --- | --- | --- |
-| POST | `/api/v1/catalog/bulk` | Carga masiva INSERT con validación individual e idempotencia por importKey. |
-| GET | `/api/v1/catalog` | Listado paginado, filtrado y con proyección reducida. |
-| GET | `/api/v1/catalog/{tituloId}` | Detalle, equivalencias numéricas y referencia técnica cuando corresponda. |
-| PATCH | `/api/v1/catalog/{tituloId}` | Actualización de campos de ficha; admite limpiar opcionales con null. |
-| PATCH | `/api/v1/catalog/{tituloId}/publication-status` | Transición editorial mediante un ID numérico. |
-| GET | `/api/health` | Estado del servicio tras comprobar MongoDB. |
+| Método | Ruta                                            | Comportamiento                                                              |
+| ------ | ----------------------------------------------- | --------------------------------------------------------------------------- |
+| POST   | `/api/v1/catalog/bulk`                          | Carga masiva INSERT con validación individual e idempotencia por importKey. |
+| GET    | `/api/v1/catalog`                               | Listado paginado, filtrado y con proyección reducida.                       |
+| GET    | `/api/v1/catalog/{tituloId}`                    | Detalle, equivalencias numéricas y referencia técnica cuando corresponda.   |
+| PATCH  | `/api/v1/catalog/{tituloId}`                    | Actualización de campos de ficha; admite limpiar opcionales con null.       |
+| PATCH  | `/api/v1/catalog/{tituloId}/publication-status` | Transición editorial mediante un ID numérico.                               |
+| GET    | `/api/health`                                   | Estado del servicio tras comprobar MongoDB.                                 |
 
 Las rutas usan App Router, runtime Node.js y ejecución dinámica. Los archivos `route.ts` delegan en handlers; la lógica del dominio sigue en sus entidades y casos de uso. Las rutas GET admiten HEAD, y todas las rutas implementan OPTIONS y respuestas JSON 405 con cabecera Allow para métodos no admitidos.
 
@@ -30,20 +30,20 @@ No hay interfaz gráfica ni endpoints de Usuarios, Reproducción, Recomendacione
 
 ## Respuestas HTTP
 
-| Código | Uso |
-| --- | --- |
-| 200 | Consultas, PATCH y carga que solo contiene duplicados equivalentes. |
-| 201 | Carga confirmada con al menos una inserción y sin fallos. |
-| 207 | Carga con éxitos/duplicados y rechazos individuales. |
-| 400 | JSON, envoltura, campos, IDs o filtros inválidos; lote sin registros aceptados por validación. |
-| 404 | Título inexistente. |
-| 405 | Método no admitido. |
-| 409 | Conflicto concurrente o lote rechazado íntegramente por conflictos de identidad/importación. |
-| 413 | Cuerpo demasiado grande. |
-| 415 | Content-Type o Content-Encoding no admitido. |
-| 422 | Transición de publicación inválida. |
-| 500 | Error interno o fallo de persistencia confirmado sin registros aceptados. |
-| 503 | Base no disponible o resultado de escritura indeterminado. |
+| Código | Uso                                                                                            |
+| ------ | ---------------------------------------------------------------------------------------------- |
+| 200    | Consultas, PATCH y carga que solo contiene duplicados equivalentes.                            |
+| 201    | Carga confirmada con al menos una inserción y sin fallos.                                      |
+| 207    | Carga con éxitos/duplicados y rechazos individuales.                                           |
+| 400    | JSON, envoltura, campos, IDs o filtros inválidos; lote sin registros aceptados por validación. |
+| 404    | Título inexistente.                                                                            |
+| 405    | Método no admitido.                                                                            |
+| 409    | Conflicto concurrente o lote rechazado íntegramente por conflictos de identidad/importación.   |
+| 413    | Cuerpo demasiado grande.                                                                       |
+| 415    | Content-Type o Content-Encoding no admitido.                                                   |
+| 422    | Transición de publicación inválida.                                                            |
+| 500    | Error interno o fallo de persistencia confirmado sin registros aceptados.                      |
+| 503    | Base no disponible o resultado de escritura indeterminado.                                     |
 
 Un bulk con resultados indeterminados devuelve 503 conservando su resumen y resultados conocidos. No se afirma que la escritura no se aplicó. Las claves de importación permiten reintentar sin sobrescribir la ficha existente. Un bulk 207 puede contener errores de persistencia individuales: el cliente debe revisar cada resultado.
 

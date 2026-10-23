@@ -15,7 +15,11 @@ import type { TitleIdGenerator } from "../modules/catalog/application/ports/titl
 /** Composición diferida; importar este módulo no abre conexiones. */
 export async function createCatalogRepository(): Promise<CatalogRepository> {
   const config = readEnvironment();
-  return new MongoCatalogRepository(await getMongoDatabase(config), config.MONGODB_QUERY_TIMEOUT_MS, config.BULK_MAX_ITEMS);
+  return new MongoCatalogRepository(
+    await getMongoDatabase(config),
+    config.MONGODB_QUERY_TIMEOUT_MS,
+    config.BULK_MAX_ITEMS,
+  );
 }
 
 export interface CatalogDependencies {
@@ -28,7 +32,12 @@ export interface CatalogDependencies {
 export function composeCatalogUseCases(dependencies: CatalogDependencies) {
   const { repository, clock, idGenerator, maxBulkItems } = dependencies;
   return Object.freeze({
-    bulkCreateCatalogTitles: new BulkCreateCatalogTitles(repository, idGenerator, clock, maxBulkItems),
+    bulkCreateCatalogTitles: new BulkCreateCatalogTitles(
+      repository,
+      idGenerator,
+      clock,
+      maxBulkItems,
+    ),
     getCatalogTitles: new GetCatalogTitles(repository),
     getCatalogTitleById: new GetCatalogTitleById(repository),
     updateCatalogTitle: new UpdateCatalogTitle(repository, clock),
@@ -39,7 +48,13 @@ export function composeCatalogUseCases(dependencies: CatalogDependencies) {
 export async function createCatalogUseCases() {
   const config = readEnvironment();
   return composeCatalogUseCases({
-    repository: new MongoCatalogRepository(await getMongoDatabase(config), config.MONGODB_QUERY_TIMEOUT_MS, config.BULK_MAX_ITEMS),
-    clock: new SystemClock(), idGenerator: new UuidTitleIdGenerator(), maxBulkItems: config.BULK_MAX_ITEMS,
+    repository: new MongoCatalogRepository(
+      await getMongoDatabase(config),
+      config.MONGODB_QUERY_TIMEOUT_MS,
+      config.BULK_MAX_ITEMS,
+    ),
+    clock: new SystemClock(),
+    idGenerator: new UuidTitleIdGenerator(),
+    maxBulkItems: config.BULK_MAX_ITEMS,
   });
 }

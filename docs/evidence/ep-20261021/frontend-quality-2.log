@@ -1,0 +1,11 @@
+Working directory: frontend
+Command: npm run typecheck
+Started: 2026-10-21T05:37:23.571Z
+Ended: 2026-10-21T05:37:41.963Z
+Exit code: 0
+Duration: 18.392 seconds
+
+npm notice run nevaro-frontend@0.1.0 typecheck
+npm notice run next typegen && tsc --noEmit
+Generating route types...
+✓ Types generated successfully

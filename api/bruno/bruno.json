@@ -1,0 +1,6 @@
+{
+  "version": "1",
+  "name": "NEVARO Streaming API",
+  "type": "collection",
+  "ignore": ["node_modules", ".git", ".runtime", "reports", "fixtures", "schemas"]
+}

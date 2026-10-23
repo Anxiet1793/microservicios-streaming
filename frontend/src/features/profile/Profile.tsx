@@ -26,12 +26,7 @@ export function Profile({ user }: { user: User }) {
     };
     const navigate = (event: MouseEvent) => {
       const link = (event.target as Element).closest?.("a[href]");
-      if (
-        link &&
-        !window.confirm(
-          "Tienes cambios sin guardar. ¿Quieres salir de todos modos?",
-        )
-      ) {
+      if (link && !window.confirm("Tienes cambios sin guardar. ¿Quieres salir de todos modos?")) {
         event.preventDefault();
         event.stopPropagation();
       }
@@ -73,9 +68,7 @@ export function Profile({ user }: { user: User }) {
       router.replace("/login");
       router.refresh();
     } catch (e) {
-      setError(
-        e instanceof Error ? e.message : "No pudimos cambiar tu contraseña.",
-      );
+      setError(e instanceof Error ? e.message : "No pudimos cambiar tu contraseña.");
     } finally {
       setPending(false);
     }
@@ -107,10 +100,7 @@ export function Profile({ user }: { user: User }) {
         </label>
         <label className="field">
           <span>Idioma preferido</span>
-          <select
-            value={language}
-            onChange={(e) => setLanguage(e.target.value)}
-          >
+          <select value={language} onChange={(e) => setLanguage(e.target.value)}>
             <option value="es">Español</option>
             <option value="en">Inglés</option>
             <option value="pt">Portugués</option>
@@ -149,12 +139,9 @@ export function Profile({ user }: { user: User }) {
       </div>
       <hr className="divider" />
       <details>
-        <summary style={{ cursor: "pointer", padding: "12px 0" }}>
-          Cambiar contraseña
-        </summary>
+        <summary style={{ cursor: "pointer", padding: "12px 0" }}>Cambiar contraseña</summary>
         <p className="hint">
-          Al cambiarla se revocan tus sesiones y tendrás que iniciar sesión de
-          nuevo.
+          Al cambiarla se revocan tus sesiones y tendrás que iniciar sesión de nuevo.
         </p>
         <form onSubmit={password}>
           <label className="field">

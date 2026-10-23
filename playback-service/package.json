@@ -1,16 +1,58 @@
 {
-  "name": "playback-service", "version": "0.1.0", "private": true, "type": "module",
-  "engines": { "node": ">=24 <25" },
+  "name": "playback-service",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25"
+  },
   "scripts": {
-    "dev": "next dev --hostname 127.0.0.1 --port 3002", "start": "next start --hostname 127.0.0.1 --port 3002",
-    "build": "next build", "typecheck": "next typegen && tsc --noEmit", "lint": "eslint . --max-warnings=0",
-    "test": "vitest run", "test:integration": "vitest run --config vitest.integration.config.ts",
-    "dev:setup": "node --import tsx scripts/setup-dev.ts", "db:init": "node --env-file-if-exists=.env --import tsx scripts/init.ts",
+    "dev": "next dev --hostname 127.0.0.1 --port 3002",
+    "start": "next start --hostname 127.0.0.1 --port 3002",
+    "build": "next build",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint . --max-warnings=0",
+    "test": "vitest run",
+    "test:integration": "vitest run --config vitest.integration.config.ts",
+    "dev:setup": "node --import tsx scripts/setup-dev.ts",
+    "db:init": "node --env-file-if-exists=.env --import tsx scripts/init.ts",
     "build:scripts": "esbuild scripts/init.ts --bundle --platform=node --target=node24 --format=esm --external:mongodb --external:minio --external:busboy --outfile=dist/init.mjs",
     "docs:check": "node --import tsx scripts/verify-openapi.ts",
     "check": "npm run typecheck && npm run lint && npm test && npm run docs:check && npm run build && npm run build:scripts",
-    "test:e2e": "node --import tsx scripts/verify-docker.ts"
+    "test:e2e": "node --import tsx scripts/verify-docker.ts",
+    "test:unit": "vitest run tests/unit",
+    "test:api": "vitest run tests/api",
+    "test:contract": "vitest run tests/contract",
+    "test:coverage": "vitest run --config vitest.coverage.config.ts --coverage",
+    "test:smoke": "npm run test:e2e",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
-  "dependencies": { "next": "16.3.5", "react": "19.3.0", "react-dom": "19.3.0", "zod": "4.6.5", "mongodb": "7.6.0", "jose": "6.2.12", "minio": "^8.0.6", "busboy": "1.6.0" },
-  "devDependencies": { "typescript": "6.0.3", "@types/node": "24.13.6", "@types/react": "19.3.0", "@types/react-dom": "19.3.0", "@types/busboy": "^1.5.4", "tsx": "4.23.13", "esbuild": "0.28.2", "eslint": "10.12.0", "@eslint/js": "10.0.1", "typescript-eslint": "8.71.0", "vitest": "5.0.3", "@apidevtools/swagger-parser": "13.1.0", "yaml": "2.9.1" }
+  "dependencies": {
+    "next": "16.4.2",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5",
+    "mongodb": "7.6.0",
+    "jose": "6.2.12",
+    "minio": "^8.0.6",
+    "busboy": "1.6.0"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "@types/node": "24.13.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@types/busboy": "^1.5.4",
+    "tsx": "4.23.13",
+    "esbuild": "0.28.2",
+    "eslint": "10.12.0",
+    "@eslint/js": "10.0.1",
+    "typescript-eslint": "8.71.0",
+    "vitest": "5.0.3",
+    "@apidevtools/swagger-parser": "13.1.0",
+    "yaml": "2.9.1",
+    "@vitest/coverage-v8": "5.0.3",
+    "prettier": "3.9.10"
+  }
 }
